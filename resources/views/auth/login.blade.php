@@ -13,10 +13,10 @@
 <body>
     <div class="flex flex-col space-y-4 items-center justify-center h-full">
         <h1 class="font-bold text-lg uppercase text-slate-800">K8AIRDROP ADMIN</h1>
-        <form action="{{route('auth.login')}}" method="post" class="bg-white p-10 rounded-2xl shadow-xl shadow-slate-200 w-96 flex flex-col">
+        <form action="{{route('auth.login')}}" method="post" class="bg-white p-10 rounded-2xl shadow-xl shadow-slate-200 w-[480px] flex flex-col">
             @csrf
             <h1 class="font-bold text-2xl pb-1 text-slate-800">Sign in</h1>
-            <p class="pb-4 text-sm text-slate-400">Enter your credentials to access your account.</p>
+            <p class="pb-8 text-sm text-slate-400">Enter your credentials to access your account.</p>
 
             @error('errorMsg')
                 <div class="w-full p-2 rounded-lg mb-4 text-center">
@@ -71,7 +71,7 @@
                     </p>
 
                 </div>
-                <button type="submit" class="flex justify-center items-center space-x-1 bg-indigo-500 px-5 py-2 text-white font-medium rounded-lg w-full hover:bg-indigo-600">
+                <button type="submit" class="flex justify-center items-center space-x-1 bg-indigo-500 px-5 py-3 text-white font-medium rounded-lg w-full hover:bg-indigo-600">
                     <span>
                         Login
                     </span>
@@ -82,7 +82,6 @@
                     </span>
                 </button>
             </div>
-
         </form>
     </div>
 </body>

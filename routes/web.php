@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PlatformController;
+use App\Livewire\Platforms\CreatePlatform;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,11 +25,16 @@ Route::controller(AuthController::class)->group(function() {
 });
 
 
+
 Route::middleware('auth')->group(function() {
     //dashboard controller
     Route::controller(DashboardController::class)->group(function() {
         Route::get('dashboard', 'index')->name('dashboard.index');
     });
+
+    //platforms
+    Route::resource('platforms', PlatformController::class);
+
 });
 
 
