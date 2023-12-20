@@ -25,7 +25,6 @@ Route::controller(AuthController::class)->group(function() {
 });
 
 
-
 Route::middleware('auth')->group(function() {
     //dashboard controller
     Route::controller(DashboardController::class)->group(function() {

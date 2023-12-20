@@ -16,7 +16,9 @@
     @include('layouts.aside')
 
     <div class="p-4 sm:ml-64">
-        @yield('contents')
+        <div class="bg-white mt-20 max-w-screen-xl mx-auto w-full p-10 rounded-xl">
+            @yield('contents')
+        </div>
     </div>
 
     @include('layouts.footer')
