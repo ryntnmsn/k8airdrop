@@ -10,6 +10,6 @@ class Platform extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'slug', 'hex_color'
+        'name', 'slug', 'hex_color', 'is_visible'
     ];
 }

@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('platforms', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->string('hex_color')
-                ->nullable();
-            $table->timestamps();
+        Schema::table('platforms', function (Blueprint $table) {
+            $table->boolean('is_visible')
+                ->default(false)
+                ->after('hex_color');
         });
     }
 
@@ -26,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('platforms');
+        Schema::table('platforms', function (Blueprint $table) {
+            //
+        });
     }
 };

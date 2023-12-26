@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('platforms', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->string('hex_color')
-                ->nullable();
-            $table->timestamps();
+        Schema::table('platforms', function (Blueprint $table) {
+            $table->dropUnique(['slug']);
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('platforms');
+        Schema::table('platforms', function (Blueprint $table) {
+            $table->unique(['slug']);
+        });
     }
 };

@@ -1,1 +1,1 @@
-<input {!! $attributes->merge(['class' => 'w-full p-2 border border-slate-200 rounded-lg mb-5 placeholder-slate-400']) !!} type="text">
+<input {!! $attributes->merge(['class' => 'w-full p-2 border border-slate-200 rounded-lg placeholder-slate-400 focus:border-indigo-500']) !!} type="text">
