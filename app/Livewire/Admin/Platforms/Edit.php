@@ -45,9 +45,9 @@ class Edit extends Component
 
         $this->platform->update($this->validate());
 
-        $this->dispatch('created', [
+        $this->dispatch('updated', [
             'title' => 'Success',
-            'text' => 'Platform created successfully.',
+            'text' => 'Platform updated successfully.',
             'icon' => 'success',
             'iconColor' => 'green',
         ]);

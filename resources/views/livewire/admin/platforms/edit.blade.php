@@ -49,7 +49,7 @@
 
     <script>
         document.addEventListener('livewire:initialized', ()=>{
-            @this.on('created', (event)=>{
+            @this.on('updated', (event)=>{
                 const data=event
                 swal.fire({
                     title:data[0]['title'],
