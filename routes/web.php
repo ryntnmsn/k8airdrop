@@ -16,16 +16,19 @@ Route::controller(AuthController::class)->group(function() {
 });
 
 
-Route::get('platforms', Index::class)->name('platforms.index');
-Route::get('platforms/create', Create::class)->name('platforms.create');
-Route::get('platforms/edit/{platform}', Edit::class)->name('platforms.edit');
-
 
 Route::middleware('auth')->group(function() {
-    //dashboard controller
+
+    //Dashboard Class
     Route::controller(DashboardController::class)->group(function() {
         Route::get('dashboard', 'index')->name('dashboard.index');
     });
+
+    //Platform Class
+    Route::get('platforms', Index::class)->name('platforms.index');
+    Route::get('platforms/create', Create::class)->name('platforms.create');
+    Route::get('platforms/edit/{platform}', Edit::class)->name('platforms.edit');
+
 });
 
 

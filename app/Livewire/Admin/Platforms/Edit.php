@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 
 class Edit extends Component
 {
-    
+
     public $platform;
     public $name;
     public $slug;
@@ -37,13 +37,18 @@ class Edit extends Component
         $this->is_visible = $platform->is_visible;
 
     }
-    
+
     public function updatePlatformn() {
         $this->validate();
-        
-        // $status = (isset($this->is_visible) == '0' ? '0' : '1');
 
-        $this->platform->update($this->validate());
+        $status = (isset($this->is_visible) == '0' ? '0' : '1');
+
+        $this->platform->update([
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'hex_color' => $this->hex_color,
+            'is_visible' => $status
+        ]);
 
         $this->dispatch('updated', [
             'title' => 'Success',
