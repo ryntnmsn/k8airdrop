@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Livewire\Component;
 use Illuminate\Support\Str;
 
-class Create extends Component
+class CreatePlatform extends Component
 {
     public $name;
     public $slug;
@@ -38,7 +38,7 @@ class Create extends Component
         ]);
 
         $this->dispatch('created', [
-            'title' => 'Success',
+            'title' => 'Created',
             'text' => 'Platform created successfully.',
             'icon' => 'success',
             'iconColor' => 'green',
@@ -49,7 +49,7 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.admin.platforms.create')
+        return view('livewire.admin.platforms.create-platform')
             ->extends('layouts.app')
             ->section('contents');
     }

@@ -12,3 +12,10 @@ html, body {
     font-size:16px
 }
 
+.ck.ck-toolbar, .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+    border:1px solid rgb(226 232 240)!important
+}
+
+.ck-editor__editable[role="textbox"] {
+    min-height: 200px;
+}

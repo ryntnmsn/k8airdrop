@@ -7,7 +7,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
-class Edit extends Component
+class EditPlatform extends Component
 {
 
     public $platform;
@@ -41,17 +41,17 @@ class Edit extends Component
     public function updatePlatformn() {
         $this->validate();
 
-        $status = (isset($this->is_visible) == '0' ? '0' : '1');
+        // $status = (isset($this->is_visible) == '1' ? '1' : '0');
 
         $this->platform->update([
             'name' => $this->name,
             'slug' => $this->slug,
             'hex_color' => $this->hex_color,
-            'is_visible' => $status
+            'is_visible' => $this->is_visible
         ]);
 
         $this->dispatch('updated', [
-            'title' => 'Success',
+            'title' => 'Updated',
             'text' => 'Platform updated successfully.',
             'icon' => 'success',
             'iconColor' => 'green',
@@ -61,7 +61,7 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.platforms.edit')
+        return view('livewire.admin.platforms.edit-platform')
         ->extends('layouts.app')
         ->section('contents');
     }

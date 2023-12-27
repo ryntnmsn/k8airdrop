@@ -24,5 +24,17 @@
 
     @include('layouts.footer')
     @livewireScripts
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/super-build/ckeditor.js"></script>
+    
+    <script>
+        CKEDITOR.ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( err => {
+                console.error( err.stack );
+            } );
+    </script>
+    
+    <script src="{{ url("assets/js/ckeditor-config.js") }}"></script>
 </body>
 </html>

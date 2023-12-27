@@ -1,0 +1,1 @@
+<textarea {!! $attributes->merge(['class' => 'border-slate-200 h-96']) !!}>{{ $slot }}</textarea>

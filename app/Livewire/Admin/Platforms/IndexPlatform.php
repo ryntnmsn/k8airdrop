@@ -5,10 +5,25 @@ namespace App\Livewire\Admin\Platforms;
 use App\Models\Platform;
 use Livewire\Component;
 
-class Index extends Component
+class IndexPlatform extends Component
 {
     public $search;
     public $pagination = 10;
+    public $platform_id;
+
+    public function deletePlatform(int $platform_id) {
+        $this->platform_id = $platform_id;
+    }
+
+    public function destroyPlatform() {
+        Platform::find($this->platform_id)->delete();
+
+        $this->dispatch('deleted', [
+            'title' => 'Deleted',
+            'text' => 'Record deleted successfully',
+            'icon' => 'success',
+        ]);
+    }
 
     public function render()
     {
@@ -18,7 +33,7 @@ class Index extends Component
             $platforms = Platform::where('name', 'like' , '%' . $this->search . '%')->paginate($this->pagination);
         }
 
-        return view('livewire.admin.platforms.index', compact('platforms'))
+        return view('livewire.admin.platforms.index-platform', compact('platforms'))
             ->extends('layouts.app')
             ->section('contents');
     }
