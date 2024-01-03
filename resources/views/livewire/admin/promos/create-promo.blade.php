@@ -15,7 +15,7 @@
                             <div class="flex-1 space-y-8">
                                 <div class="mb-2">
                                     <x-label>Name</x-label>
-                                    <x-input-text wire:model='name' name="name" wire:keyup='generateSlug'></x-input-text>
+                                    <x-input-text wire:model='name' name="name" wire:keyup='generateSlug' value="{{ old('name') }}"></x-input-text>
                                     
                                     <div class="flex items-center rounded mt-2">
                                         <span class="flex-none text-sm text-slate-400 ">
@@ -34,7 +34,7 @@
                                 <div class="flex space-x-4">
                                     <div class="flex-1">
                                         <x-label>Prize pool</x-label>
-                                        <x-input-text></x-input-text>
+                                        <x-input-text wire:model='prize_pool' name="prize_pool"></x-input-text>
                                     </div>
                                     <div wire:ignore class="flex-1">
                                         <x-label>Platforms</x-label>
@@ -48,23 +48,30 @@
                              </div>
                              <div class="flex-none w-96">
                                 <div class="flex items-center justify-center w-full">
-                                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-52 border-2 border-slate-300 border-dashed rounded-lg cursor-pointer bg-slate-50">
-                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <svg class="w-8 h-8 mb-4 text-slate-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                                            </svg>
-                                            <p class="mb-2 text-sm text-slate-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                                            <p class="text-xs text-slate-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                    <label for="dropzone-file" class="p-1 overflow-hidden flex flex-col items-center justify-center w-full h-52 border-2 border-slate-300 border-dashed rounded-lg cursor-pointer bg-slate-50">
+                                        <div class="flex flex-col items-center justify-center pt-5 pb-6 relative">
+                                            @if($image)
+                                                <img src="{{ $image->temporaryUrl() }}" class="h-full rounded-xl"/>
+                                            @else
+                                                <svg class="w-8 h-8 mb-4 text-slate-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                                </svg>
+                                                <p class="mb-2 text-sm text-slate-500"><span class="font-semibold">Click to upload</p>
+                                                <p class="text-xs text-slate-500">PNG, JPG or JPEG (1388x750px)</p>
+                                            @endif
                                         </div>
-                                        <input id="dropzone-file" type="file" class="hidden" />
+                                        <input wire:model='image' name='image' type="file" id="dropzone-file" class="hidden" />
                                     </label>
-                                </div> 
+                                </div>
+                                @error('image')
+                                    <span class="text-rose-500">{{ $message }}</span>
+                                @enderror
                              </div>
                         </div>
 
                         <div>
                             <x-label>Language</x-label>
-                            <x-select name="language" class="w-full">
+                            <x-select wire:model='language_id' name="language_id" class="w-full">
                                 @foreach ($languages as $language)
                                     <option class="{{ $language->id }}">{{ $language->name }}</option>                            
                                 @endforeach
@@ -73,7 +80,7 @@
 
                         <div>
                             <x-label>Promo type</x-label>
-                            <x-select name="promo_type" class="w-full" id="promoType">
+                            <x-select wire:model='promo_type' name="promo_type" class="w-full" id="promoType">
                                 <option value="click_to_redirect">Click to Redirect</option>
                                 <option value="click_to_join">Click to Join</option>
                                 <option value="click_to_redeem">Click to Redeem</option>
@@ -82,7 +89,7 @@
 
                         <div id="gameType">
                             <x-label>Game type</x-label>
-                            <x-select name="game_type" class="w-full">
+                            <x-select wire:model='game_type' name="game_type" class="w-full">
                                 <option value="upload_image">Upload Image</option>
                                 <option value="multiple_choice">Multiple Choice</option>
                                 <option value="paste_retweet_url">Paste Retweet URL</option>
@@ -106,8 +113,11 @@
                                             <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                         </svg>
                                     </div>
-                                    <x-input-text name="start" type="text" class="!ps-10" placeholder="Select date"></x-input-text>
+                                    <x-input-text wire:model='start_date' name="start_date" type="text" class="!ps-10" placeholder="Select date"></x-input-text>
                                 </div>
+                                @error('start_date')
+                                    <span class="text-rose-500">{{ $message }}</span>
+                                @enderror
                             </div>
                         
                             <div class="flex-1">
@@ -118,8 +128,11 @@
                                             <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                         </svg>
                                     </div>
-                                    <x-input-text name="end" type="text" class="!ps-10" placeholder="Select date"></x-input-text>
+                                    <x-input-text wire:model='end_date' name="end_date" type="text" class="!ps-10" placeholder="Select date"></x-input-text>
                                 </div>
+                                @error('end_date')
+                                    <span class="text-rose-500">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
     
@@ -139,11 +152,11 @@
                     <div class="space-y-8 mb-20">
                         <div>
                             <x-label>Button name</x-label>
-                            <x-input-text></x-input-text>
+                            <x-input-text wire:model='button_name' name='button_name'></x-input-text>
                         </div>
                         <div>
                             <x-label>Button link</x-label>
-                            <x-input-text></x-input-text>
+                            <x-input-text wire:model='button_link' name='button_link'></x-input-text>
                         </div>
                     </div>
                 </div>
@@ -154,21 +167,21 @@
                         <div wire:ignore>
                             <x-label>Description</x-label>
                             <div id="container">
-                                <x-textarea></x-textarea>
+                                <x-textarea wire:model='description' name='description'></x-textarea>
                             </div>
                         </div>
         
                         <div wire:ignore>
                             <x-label>Terms and Conditions</x-label>
                             <div id="container">
-                                <x-textarea></x-textarea>
+                                <x-textarea wire:model='terms' name='terms'></x-textarea>
                             </div>
                         </div>
         
                         <div wire:ignore>
                             <x-label>Article</x-label>
                             <div id="container">
-                                <x-textarea></x-textarea>
+                                <x-textarea wire:model='article' name='article'></x-textarea>
                             </div>
                         </div>
                     </div>
