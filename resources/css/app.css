@@ -9,7 +9,7 @@ html, body {
     background-color: rgb(247, 247, 247);
     font-family: 'Poppins', sans-serif;
     color:rgb(30 41 59);
-    font-size:16px
+    font-size:15px
 }
 
 .ck.ck-toolbar, .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
@@ -46,4 +46,8 @@ html, body {
 
 .tox-tinymce:focus {
     border:1px solid rgb(104 117 245)!important;
+}
+
+#gameType {
+    display: none;
 }

@@ -73,18 +73,21 @@
 
                         <div>
                             <x-label>Promo type</x-label>
-                            <x-select name="promo_type" class="w-full">
-                                <option class="click_to_redirect">Click to Redirect</option>
-                                <option class="click_to_join">Click to Join</option>
-                                <option class="click_to_redeem">Click to Redeem</option>
+                            <x-select name="promo_type" class="w-full" id="promoType">
+                                <option value="click_to_redirect">Click to Redirect</option>
+                                <option value="click_to_join">Click to Join</option>
+                                <option value="click_to_redeem">Click to Redeem</option>
                             </x-select>
                         </div>
 
-                        <div wire:keyup = 'showGameType'>
-                            <x-select name="promo_type" class="w-full">
-                                <option class="click_to_redirect">Click to Redirect</option>
-                                <option class="click_to_join">Click to Join</option>
-                                <option class="click_to_redeem">Click to Redeem</option>
+                        <div id="gameType">
+                            <x-label>Game type</x-label>
+                            <x-select name="game_type" class="w-full">
+                                <option value="upload_image">Upload Image</option>
+                                <option value="multiple_choice">Multiple Choice</option>
+                                <option value="paste_retweet_url">Paste Retweet URL</option>
+                                <option value="leave_comment">Leave Comment</option>
+                                <option value="subscribe_newsletter">Subscribe Newsletter</option>
                             </x-select>
                         </div>
                     </div>
@@ -195,6 +198,19 @@
     <script>
         $(document).ready(function() {
             $('#platforms_select').select2();
+        });
+    </script>
+
+    <script>
+        const promo_type = document.getElementById('promoType');
+        const game_type = document.getElementById('gameType');
+
+        promo_type.addEventListener('change', function handleChange(event) {
+            if(event.target.value === 'click_to_join') {
+                game_type.style.display = 'block'
+            } else {
+                game_type.style.display = 'none'
+            }
         });
     </script>
 
