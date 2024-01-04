@@ -50,6 +50,10 @@ class CreatePromo extends Component
 
         $status = (isset($this->is_visible) == '0' ? '0' : '1');
 
+        $featured = (isset($this->is_featured) == '0' ? '0' : '1');
+
+        $banner = (isset($this->is_banner) == '0' ? '0' : '1');
+
         Promo::create([
             'name' => $this->name,
             'slug' => $this->slug,
@@ -63,8 +67,8 @@ class CreatePromo extends Component
             'end_date' => $this->end_date,
             'type' => $this->type,
             'game_type' => $this->game_type,
-            'is_banner' => $this->is_banner,
-            'is_featured' => $this->is_featured,
+            'is_banner' => $banner,
+            'is_featured' => $featured,
             'button_name' => $this->button_name,
             'button_link' => $this->button_link,
             'image' => $this->imageName()

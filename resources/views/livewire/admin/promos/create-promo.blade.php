@@ -12,7 +12,7 @@
                 <div class="mb-20">
                     <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Promo details</x-title>
                     <div class="space-y-8">
-                        <div class="flex space-x-8">
+                        <div class="flex flex-col xl:flex-row space-x-0 xl:space-x-8">
                             <div class="flex-1 space-y-8">
                                 <div class="mb-2">
                                     <x-label for="name">Name</x-label>
@@ -32,27 +32,29 @@
                                     @enderror
                                 </div>
                 
-                                <div class="flex space-x-4">
-                                    <div class="flex-1">
-                                        <x-label for="prize_pool">Prize pool</x-label>
-                                        <x-input-text wire:model='prize_pool' id="prize_pool" name="prize_pool"></x-input-text>
-                                    </div>
-                                    <div wire:ignore class="flex-1">
-                                        <x-label for="platforms_select">Platforms</x-label>
-                                        <x-select name="platforms[]" class="w-full" id="platforms_select" multiple>
-                                            @foreach ($platforms as $platform)
-                                                <option value="{{$platform->id}}">{{$platform->name}}</option>
-                                            @endforeach
-                                        </x-select>
+                                <div class="flex-1">
+                                    <div class="flex flex-col xl:flex-row space-x-0 xl:space-x-4">
+                                        <div class="flex-1">
+                                            <x-label for="prize_pool">Prize pool</x-label>
+                                            <x-input-text wire:model='prize_pool' id="prize_pool" name="prize_pool"></x-input-text>
+                                        </div>
+                                        <div wire:ignore class="flex-1 pt-8 xl:pt-0">
+                                            <x-label for="platforms_select">Platforms</x-label>
+                                            <x-select name="platforms[]" class="w-full" id="platforms_select" multiple>
+                                                @foreach ($platforms as $platform)
+                                                    <option value="{{$platform->id}}">{{$platform->name}}</option>
+                                                @endforeach
+                                            </x-select>
+                                        </div>
                                     </div>
                                 </div>
                              </div>
-                             <div class="flex-none w-96">
+                             <div class="flex-none w-96 pt-8 xl:pt-0">
                                 <div class="flex items-center justify-center w-full">
-                                    <label for="dropzone-file" class="p-1 overflow-hidden flex flex-col items-center justify-center w-full h-52 border-2 border-slate-300 border-dashed rounded-lg cursor-pointer bg-slate-50">
+                                    <label for="dropzone-file" class="overflow-hidden flex flex-col items-center justify-center w-full h-52 border-2 border-slate-300 border-dashed cursor-pointer bg-slate-50">
                                         <div class="flex flex-col items-center justify-center pt-5 pb-6 relative">
                                             @if($image)
-                                                <img src="{{ $image->temporaryUrl() }}" class="h-full rounded-xl"/>
+                                                <img src="{{ $image->temporaryUrl() }}" class="w-full rounded-xl"/>
                                             @else
                                                 <svg class="w-8 h-8 mb-4 text-slate-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
@@ -92,6 +94,9 @@
                                 <option value="click_to_redeem">Click to Redeem</option>
                             </x-select>
                         </div>
+                        @error('type')
+                            <span class="text-rose-500">{{ $message }}</span>
+                        @enderror
 
                         <div id="gameType">
                             <x-label for="game_type">Game type</x-label>
@@ -109,7 +114,7 @@
 
 
                 <div>
-                    <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Visibility Status</x-title>
+                    <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Promo Duration</x-title>
                     <div class="space-y-8 mb-20">
                         <div class="grid grid-cols-2 mb-8 gap-4">
                             <div>
@@ -133,50 +138,74 @@
                                 <input type="checkbox" checked name="is_visible" value="0" class="sr-only peer" wire:model='is_visible'>
                                 <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
                             </label>
-                            </div>
-                        <div>
+                        </div>
                     </div>
                 </div>
+
 
                 <div>
-                    <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Button Settings</x-title>
+                    <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Featured and Banner</x-title>
                     <div class="space-y-8 mb-20">
-                        <div>
-                            <x-label for="button_name">Button name</x-label>
-                            <x-input-text wire:model='button_name' id="button_name" name='button_name'></x-input-text>
-                        </div>
-                        <div>
-                            <x-label for="button_link">Button link</x-label>
-                            <x-input-text wire:model='button_link' id="button_link" name='button_link'></x-input-text>
+                        <div class="grid grid-cols-2 mb-8 gap-4">
+                            <div>
+                                <x-label for="is_featured">Is Featured?</x-label>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked name="is_featured" value="0" class="sr-only peer" wire:model='is_featured'>
+                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
+                                </label>
+                                </div>
+                            <div>
+                                <div>
+                                    <x-label for="is_banner">Is Banner?</x-label>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked name="is_banner" value="0" class="sr-only peer" wire:model='is_banner'>
+                                        <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                
 
-                <div class="mb-20">
-                    <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Description, terms and article</x-title>
-                    <div class="space-y-8">
-                        <div>
-                            <x-label for="description">Description</x-label>
-                            <div wire:ignore id="container">
-                                <x-textarea wire:model='description' name='description' id="description"></x-textarea>
+                    <div>
+                        <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Button Settings</x-title>
+                        <div class="space-y-8 mb-20">
+                            <div>
+                                <x-label for="button_name">Button name</x-label>
+                                <x-input-text wire:model='button_name' id="button_name" name='button_name'></x-input-text>
                             </div>
-                        </div>
-        
-                        <div wire:ignore>
-                            <x-label for="terms">Terms and Conditions</x-label>
-                            <div id="container">
-                                <x-textarea wire:model='terms' id="terms" name='terms' id="terms"></x-textarea>
-                            </div>
-                        </div>
-        
-                        <div wire:ignore>
-                            <x-label for="article">Article</x-label>
-                            <div id="container">
-                                <x-textarea wire:model='article' id="article" name='article' id="article"></x-textarea>
+                            <div>
+                                <x-label for="button_link">Button link</x-label>
+                                <x-input-text wire:model='button_link' id="button_link" name='button_link'></x-input-text>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="mb-20">
+                        <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Description, terms and article</x-title>
+                        <div class="space-y-8">
+                            <div>
+                                <x-label for="description">Description</x-label>
+                                <div wire:ignore id="container">
+                                    <x-textarea wire:model='description' name='description' id="description"></x-textarea>
+                                </div>
+                            </div>
+            
+                            <div wire:ignore>
+                                <x-label for="terms">Terms and Conditions</x-label>
+                                <div id="container">
+                                    <x-textarea wire:model='terms' id="terms" name='terms' id="terms"></x-textarea>
+                                </div>
+                            </div>
+            
+                            <div wire:ignore>
+                                <x-label for="article">Article</x-label>
+                                <div id="container">
+                                    <x-textarea wire:model='article' id="article" name='article' id="article"></x-textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 <div>
                     <x-button wire:target='store' type="submit" class="float-left">Save</x-button>
@@ -185,7 +214,6 @@
             </form>
         </div>
     </div>
-
 
 
     <script>
