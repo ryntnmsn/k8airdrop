@@ -15,7 +15,7 @@ class CreatePromo extends Component
 
     use WithFileUploads;
 
-    public $name, $slug, $language_id, $description, $terms, $article, $prize_pool, $is_visible, $start_date, $end_date, $type, $game_type, $is_banner, $is_featured, $button_name, $button_link, $image;
+    public $name, $slug, $language_id, $is_visible, $is_featured, $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
 
     public function generateSlug() {
         $this->slug = Str::slug($this->name);
@@ -32,6 +32,8 @@ class CreatePromo extends Component
     protected $rules = [
         'name' => 'required|max:255|unique:promos,name',
         'slug' => 'required',
+        'type' => 'required',
+        'language_id' => 'required',
         'start_date' => 'required',
         'end_date' => 'required',
         'image' => 'required',
@@ -46,6 +48,8 @@ class CreatePromo extends Component
     public function store() {
         $this->validate();
 
+        $status = (isset($this->is_visible) == '0' ? '0' : '1');
+
         Promo::create([
             'name' => $this->name,
             'slug' => $this->slug,
@@ -54,7 +58,7 @@ class CreatePromo extends Component
             'terms' => $this->terms,
             'article' => $this->article,
             'prize_pool' => $this->prize_pool,
-            'is_visible' => $this->is_visible,
+            'is_visible' => $status,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'type' => $this->type,

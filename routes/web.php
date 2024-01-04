@@ -49,6 +49,11 @@ Route::middleware('auth')->group(function() {
         Route::get('/create', CreatePromo::class)->name('promos.create');
         Route::get('/edit/{promo}', EditPromo::class)->name('promos.edit');
     });
+
+
+    Route::get('/playroom', function () {
+        return view('playroom');
+    });
     
 });
 

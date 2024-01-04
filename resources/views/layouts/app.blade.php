@@ -13,13 +13,11 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
-
     <title>Admin</title>
     @vite(['resources/css/app.css', 'resources/js/app.js']);
     @livewireStyles
     <script>
         tinymce.init({
-          selector: 'textarea', // Replace this CSS selector to match the placeholder element for TinyMCE
           plugins: 'code table lists',
           toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
         });

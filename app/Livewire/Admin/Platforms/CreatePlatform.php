@@ -3,7 +3,6 @@
 namespace App\Livewire\Admin\Platforms;
 
 use App\Models\Platform;
-use Illuminate\Http\Request;
 use Livewire\Component;
 use Illuminate\Support\Str;
 
