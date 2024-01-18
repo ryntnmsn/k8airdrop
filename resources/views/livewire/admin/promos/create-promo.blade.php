@@ -40,11 +40,14 @@
                                         </div>
                                         <div wire:ignore class="flex-1 pt-8 xl:pt-0">
                                             <x-label for="platforms_select">Platforms</x-label>
-                                            <x-select name="platforms[]" class="w-full" id="platforms_select" multiple>
-                                                @foreach ($platforms as $platform)
+                                            <x-select wire:model='platforms' name="platforms[]" class="w-full" id="platforms_select" multiple>
+                                                @foreach ($platformsData as $platform)
                                                     <option value="{{$platform->id}}">{{$platform->name}}</option>
                                                 @endforeach
                                             </x-select>
+                                            @error('platform')
+                                                <span class="text-rose-500">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -109,6 +112,23 @@
                                 <option value="subscribe_newsletter">Subscribe Newsletter</option>
                             </x-select>
                         </div>
+
+                        {{-- CREATE QUESTIONS --}}
+                        <div class="questionGameType">
+                            <div class="border-2 border-dashed p-10 border-slate-300 bg-slate-100">
+                                <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Manage Questions</x-title>
+
+                                <button wire:click.prevent='add({{$i}})'>Add</button>
+                                
+                                @foreach ($inputs as $key => $value)
+                                    <div class="add-input">
+                                        <input type="text" wire:model="title.{{$value}}">
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 

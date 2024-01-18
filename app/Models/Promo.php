@@ -4,12 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Promo extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name', 'slug', 'language_id', 'description', 'terms', 'article', 'prize_pool', 'is_visible', 'start_date', 'end_date', 'image', 'type', 'game_type', 'is_banner', 'is_featured', 'button_name', 'button_link'
+        'name', 'slug', 'platforms', 'language_id', 'description', 'terms', 'article', 'prize_pool', 'is_visible', 'start_date', 'end_date', 'image', 'type', 'game_type', 'is_banner', 'is_featured', 'button_name', 'button_link'
     ];
+
+    public function platforms() {
+        return $this->belongsToMany(Platform::class, 'platform_promo');
+    }
+
 }

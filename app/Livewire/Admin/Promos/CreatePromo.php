@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Promos;
 use App\Models\Language;
 use App\Models\Platform;
 use App\Models\Promo;
+use App\Models\Question;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -16,7 +17,11 @@ class CreatePromo extends Component
     use WithFileUploads;
 
     public $name, $slug, $language_id, $is_visible, $is_featured, $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
-
+    public $platforms = [];
+    public $i = 1;
+    public $title;
+    public $inputs = [];
+    
     public function generateSlug() {
         $this->slug = Str::slug($this->name);
     }
@@ -36,23 +41,40 @@ class CreatePromo extends Component
         'language_id' => 'required',
         'start_date' => 'required',
         'end_date' => 'required',
-        'image' => 'required',
+        'platforms' => 'required',
+        'image' => 'required|image|mimes:jpg,png,jpeg|max:512|dimensions:min_width=1388,min_height=750,max_width=1388,max_height=750',
     ];
 
+
+    public function updated($propertyName){
+        $this->validateOnly($propertyName);
+    }
+
+    //new image name
     public function imageName() {
         $imageName = Carbon::now()->timestamp . '.' . $this->image->extension();
         $image = $this->image->storeAs('image_uploads', $imageName);
         return $image;
     }
 
+    //add new fields
+    public function add($i) {
+        $i = $i + 1;
+        $this->i = $i;
+        array_push($this->inputs, $i);
+    }
+
+    //store data
     public function store() {
-        $this->validate();
+        $validatedData = $this->validate();
 
         $status = (isset($this->is_visible) == '0' ? '0' : '1');
 
         $featured = (isset($this->is_featured) == '0' ? '0' : '1');
 
         $banner = (isset($this->is_banner) == '0' ? '0' : '1');
+
+        $validatedData['platforms'] = json_encode($this->platforms);
 
         Promo::create([
             'name' => $this->name,
@@ -74,6 +96,18 @@ class CreatePromo extends Component
             'image' => $this->imageName()
         ]);
 
+
+        // foreach($this->inputs as $key => $value) {
+        //     Question::create([
+        //         'title' => $this->inputs[$key],
+        //         'type' => $this->inputs[$key],
+        //         'promo_id' => $promo->id,
+        //     ]);
+        // }
+
+        // $this->inputs = [];
+
+
         $this->dispatch('created', [
             'title' => 'Created',
             'text' => 'Promo created successfully.',
@@ -87,7 +121,7 @@ class CreatePromo extends Component
     public function render()
     {
         return view('livewire.admin.promos.create-promo',[
-            'platforms' => $this->getPlatforms(),
+            'platformsData' => $this->getPlatforms(),
             'languages' => $this->getLanguages(),
         ])->extends('layouts.app')->section('contents');
     }
