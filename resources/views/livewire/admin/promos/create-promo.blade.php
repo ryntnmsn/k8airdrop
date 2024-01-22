@@ -40,7 +40,7 @@
                                         </div>
                                         <div wire:ignore class="flex-1 pt-8 xl:pt-0">
                                             <x-label for="platforms_select">Platforms</x-label>
-                                            <x-select wire:model='platforms' name="platforms[]" class="w-full" id="platforms_select" multiple>
+                                            <x-select wire:model='platforms' class="w-full" id="platforms_select" multiple>
                                                 @foreach ($platformsData as $platform)
                                                     <option value="{{$platform->id}}">{{$platform->name}}</option>
                                                 @endforeach

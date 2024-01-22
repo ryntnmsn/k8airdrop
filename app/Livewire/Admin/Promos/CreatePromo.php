@@ -66,7 +66,7 @@ class CreatePromo extends Component
 
     //store data
     public function store() {
-        $validatedData = $this->validate();
+        $this->validate();
 
         $status = (isset($this->is_visible) == '0' ? '0' : '1');
 
@@ -74,7 +74,7 @@ class CreatePromo extends Component
 
         $banner = (isset($this->is_banner) == '0' ? '0' : '1');
 
-        $validatedData['platforms'] = json_encode($this->platforms);
+        // $validatedData['platforms'] = json_encode($this->platforms);
 
         Promo::create([
             'name' => $this->name,
@@ -95,6 +95,11 @@ class CreatePromo extends Component
             'button_link' => $this->button_link,
             'image' => $this->imageName()
         ]);
+
+
+        // foreach($this->platforms as $key => $value) {
+        //     $promo->platforms()->attach($this->platforms[$key]);
+        // }
 
 
         // foreach($this->inputs as $key => $value) {

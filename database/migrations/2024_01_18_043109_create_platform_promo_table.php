@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId('promo_id')
                 ->constrained('promos')
                 ->cascadeOnDelete();
-            $table->timestamps();
         });
     }
 
