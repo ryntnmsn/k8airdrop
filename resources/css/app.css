@@ -55,3 +55,7 @@ html, body {
 #gameType {
     display: none;
 }
+
+#textHelper {
+    display: none;
+}

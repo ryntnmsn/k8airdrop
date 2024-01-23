@@ -18,10 +18,14 @@ class CreatePromo extends Component
 
     public $name, $slug, $language_id, $is_visible, $is_featured, $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
     public $platforms = [];
-    public $i = 1;
-    public $title;
-    public $inputs = [];
     
+    //question public variable
+    public $questionType = []; //default empty array
+    public $questionTitle = []; //default empty array
+    public $i = 1; //for incrementing question field
+    public $questionInputs = [];
+
+
     public function generateSlug() {
         $this->slug = Str::slug($this->name);
     }
@@ -41,10 +45,9 @@ class CreatePromo extends Component
         'language_id' => 'required',
         'start_date' => 'required',
         'end_date' => 'required',
-        'platforms' => 'required',
+        // 'platforms' => 'required',
         'image' => 'required|image|mimes:jpg,png,jpeg|max:512|dimensions:min_width=1388,min_height=750,max_width=1388,max_height=750',
     ];
-
 
     public function updated($propertyName){
         $this->validateOnly($propertyName);
@@ -57,12 +60,17 @@ class CreatePromo extends Component
         return $image;
     }
 
-    //add new fields
+    //add new question fields
     public function add($i) {
         $i = $i + 1;
         $this->i = $i;
-        array_push($this->inputs, $i);
+        array_push($this->questionInputs, $i);
     }
+
+
+    // public function remove($i) {
+    //     unset($this->inputs[$i]);
+    // }
 
     //store data
     public function store() {
@@ -76,7 +84,7 @@ class CreatePromo extends Component
 
         // $validatedData['platforms'] = json_encode($this->platforms);
 
-        Promo::create([
+        $promo = Promo::create([
             'name' => $this->name,
             'slug' => $this->slug,
             'language_id' => $this->language_id,
@@ -85,8 +93,8 @@ class CreatePromo extends Component
             'article' => $this->article,
             'prize_pool' => $this->prize_pool,
             'is_visible' => $status,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
+            'start_date' => date('Y-m-d', strtotime($this->start_date)),
+            'end_date' => date('Y-m-d', strtotime($this->end_date)),
             'type' => $this->type,
             'game_type' => $this->game_type,
             'is_banner' => $banner,
@@ -97,21 +105,21 @@ class CreatePromo extends Component
         ]);
 
 
-        // foreach($this->platforms as $key => $value) {
-        //     $promo->platforms()->attach($this->platforms[$key]);
-        // }
+        foreach($this->platforms as $key => $value) {
+            $promo->platforms()->attach($this->platforms[$key]);
+        }
 
-
-        // foreach($this->inputs as $key => $value) {
+        // foreach($this->questionTitle as $key => $value) {
         //     Question::create([
-        //         'title' => $this->inputs[$key],
-        //         'type' => $this->inputs[$key],
+        //         'title' => $this->questionTitle[$key],
+        //         'type' => $this->questionTitle[$key],
         //         'promo_id' => $promo->id,
         //     ]);
         // }
 
         // $this->inputs = [];
 
+        $this->platforms = [];
 
         $this->dispatch('created', [
             'title' => 'Created',
@@ -125,6 +133,7 @@ class CreatePromo extends Component
 
     public function render()
     {
+        // dump($this->platforms);
         return view('livewire.admin.promos.create-promo',[
             'platformsData' => $this->getPlatforms(),
             'languages' => $this->getLanguages(),
