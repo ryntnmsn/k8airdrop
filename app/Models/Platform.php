@@ -14,6 +14,6 @@ class Platform extends Model
     ];
 
     public function promos() {
-        return $this->belongsToMany(Promo::class, 'platform_promo');
+        return $this->belongsToMany(Promo::class);
     }
 }

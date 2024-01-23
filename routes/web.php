@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/create', CreatePlatform::class)->name('platforms.create');
         Route::get('/edit/{platform}', EditPlatform::class)->name('platforms.edit');
     });
-    
+
     //Languages Class
     Route::group(['prefix' => 'languages', 'namespace' => 'App\Livewire\Admin\Languages'], function () {
         Route::get('/', IndexLanguage::class)->name('languages.index');
@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/playroom', function () {
         return view('playroom');
     });
-    
+
 });
 
 
