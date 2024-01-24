@@ -22,7 +22,7 @@
             </button>
             <ul id="dropdown" class="{{ request()->is('platforms*') || request()->is('promos*') || request()->is('languages*') ? 'block' : 'hidden'}} py-2 space-y-1">
                   <li>
-                     <a href="#" class="flex items-center w-full p-2 text-slate-800 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">All</a>
+                     <a href="{{ route('promos.index') }}" class="{{ request()->is('promos*') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">All</a>
                   </li>
                   <li>
                      <a href="{{ route('platforms.index') }}" class="{{ request()->is('platforms*') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">Platforms</a>
@@ -31,7 +31,7 @@
                      <a href="{{ route('languages.index') }}" class="{{ request()->is('languages*') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800' }} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">Languages</a>
                   </li>
                   <li>
-                     <a href="{{ route('promos.create') }}" class="{{ request()->is('promos/create') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800' }} flex space-x-1 items-center w-full p-2 transition duration-75 rounded-lg pl-5 group hover:bg-indigo-500 hover:text-slate-50">
+                     <a href="{{ route('promos.create') }}" class="text-slate-800 flex space-x-1 items-center w-full p-2 transition duration-75 rounded-lg pl-5 group hover:bg-indigo-500 hover:text-slate-50">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" data-slot="icon" class="w-5 h-5">
                            <path fill-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
                          </svg>

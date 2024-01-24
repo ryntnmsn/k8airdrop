@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
-    <title>Admin</title>
+    <title>K8Airdrop | Admin</title>
     @vite(['resources/css/app.css', 'resources/js/app.js']);
     @livewireStyles
     <script>
@@ -28,7 +28,7 @@
     @include('layouts.aside')
 
     <div class="p-4 sm:ml-64">
-        <div class="bg-white mt-20 max-w-screen-xl shadow-xl shadow-gray-100 mx-auto w-full p-10 rounded-xl">
+        <div class="bg-white mt-20 max-w-screen-2xl shadow-xl shadow-gray-100 mx-auto w-full p-10 rounded-xl">
             <x-alert></x-alert>
             @yield('contents')
         </div>

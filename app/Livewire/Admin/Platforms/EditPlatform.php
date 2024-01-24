@@ -29,7 +29,6 @@ class EditPlatform extends Component
     }
 
     public function mount(Platform $platform) {
-
         $this->platform = $platform;
         $this->name = $platform->name;
         $this->slug = $platform->slug;

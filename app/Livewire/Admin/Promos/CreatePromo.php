@@ -56,7 +56,7 @@ class CreatePromo extends Component
     //new image name
     public function imageName() {
         $imageName = Carbon::now()->timestamp . '.' . $this->image->extension();
-        $image = $this->image->storeAs('image_uploads', $imageName);
+        $image = $this->image->store('/', 'promos');
         return $image;
     }
 
@@ -93,8 +93,8 @@ class CreatePromo extends Component
             'article' => $this->article,
             'prize_pool' => $this->prize_pool,
             'is_visible' => $status,
-            'start_date' => date('Y-m-d', strtotime($this->start_date)),
-            'end_date' => date('Y-m-d', strtotime($this->end_date)),
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
             'type' => $this->type,
             'game_type' => $this->game_type,
             'is_banner' => $banner,

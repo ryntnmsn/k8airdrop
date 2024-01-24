@@ -13,8 +13,6 @@ class IndexPromo extends Component
 
     public function render()
     {
-
-
         if(!$this->search) {
             $promos = Promo::with('platforms', 'language')->orderBy('created_at', 'desc');
         } else {

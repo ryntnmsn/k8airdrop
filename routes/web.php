@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function() {
     Route::group(['prefix' => 'promos', 'namespace' => 'App\Livewire\Admin\Promos'], function () {
         Route::get('/', IndexPromo::class)->name('promos.index');
         Route::get('/create', CreatePromo::class)->name('promos.create');
-        Route::get('/edit/{promo}', EditPromo::class)->name('promos.edit');
+        Route::get('/edit/{id}', EditPromo::class)->name('promos.edit');
     });
 
 

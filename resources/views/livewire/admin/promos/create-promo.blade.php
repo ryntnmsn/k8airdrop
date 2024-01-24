@@ -42,9 +42,6 @@
                                             <x-label for="platforms_select">Platforms</x-label>
                                             <div wire:ignore>
                                                 <x-select wire:model='platforms' class="w-full" id="platforms_select" multiple='multiple'>
-                                                    {{-- <option value="1">Apple</option>
-                                                    <option value="2">Samsung</option>
-                                                    <option value="3">Iphone</option> --}}
                                                     @foreach ($platformsData as $platform)
                                                         <option value="{{$platform->id}}">{{$platform->name}}</option>
                                                     @endforeach
@@ -189,7 +186,7 @@
                                                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                             </svg>
                                         </div>
-                                        <x-input-text datepicker wire:model='start_date' id="start_date" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full ps-10 p-2.5" placeholder="Select start date" ></x-input-text>
+                                        <x-input-text type="date" wire:model='start_date' id="start_date" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full ps-10 p-2.5" placeholder="Select start date" ></x-input-text>
                                     </div>
                                     @error('start_date')
                                         <span class="text-rose-500">{{ $message }}</span>
@@ -205,7 +202,7 @@
                                                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                             </svg>
                                         </div>
-                                        <x-input-text datepicker wire:model='end_date' id="end_date" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full ps-10 p-2.5" placeholder="Select end date" ></x-input-text>
+                                        <x-input-text type="date" wire:model='end_date' id="end_date" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full ps-10 p-2.5" placeholder="Select end date" ></x-input-text>
                                     </div>
                                     @error('end_date')
                                         <span class="text-rose-500">{{ $message }}</span>
