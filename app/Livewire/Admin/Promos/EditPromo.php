@@ -18,7 +18,7 @@ class EditPromo extends Component
     public $platforms = [];
 
     public $platformTest;
-    
+
 
     public function generateSlug() {
         $this->slug = Str::slug($this->name);
@@ -65,9 +65,11 @@ class EditPromo extends Component
         $this->description = $getPromo->description;
         $this->language_id = $getPromo->language_id;
         $this->type = $getPromo->type;
+        $this->game_type = $getPromo->game_type;
         $this->terms = $getPromo->terms;
         $this->article = $getPromo->article;
         $this->image = $getPromo->image;
+
     }
 
     public function updatePromo() {

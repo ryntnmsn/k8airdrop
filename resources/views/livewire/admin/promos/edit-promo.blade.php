@@ -108,11 +108,11 @@
                         <div id="gameType">
                             <x-label for="game_type">Game type</x-label>
                             <x-select wire:model='game_type' name="game_type" id="game_type" class="w-full">
-                                <option value="upload_image">Upload Image</option>
-                                <option value="multiple_choice">Multiple Choice</option>
-                                <option value="paste_retweet_url">Paste Retweet URL</option>
-                                <option value="leave_comment">Leave Comment</option>
-                                <option value="subscribe_newsletter">Subscribe Newsletter</option>
+                                <option value="upload_image" @if($game_type == 'upload_image') selected @endif>Upload Image</option>
+                                <option value="multiple_choice" @if($game_type == 'multiple_choice') selected @endif>Multiple Choice</option>
+                                <option value="paste_retweet_url" @if($game_type == 'paste_retweet_url') selected @endif>Paste Retweet URL</option>
+                                <option value="leave_comment" @if($game_type == 'leave_comment') selected @endif>Leave Comment</option>
+                                <option value="subscribe_newsletter" @if($game_type == 'subscribe_newsletter') selected @endif>Subscribe Newsletter</option>
                             </x-select>
 
                             <div id="textHelper">
@@ -306,6 +306,7 @@
                 });
             });
         </script>
+
     @endscript
 
     {{-- <script> 
@@ -320,7 +321,7 @@
         }); 
     </script> --}}
 
-    <script> 
+    {{-- <script> 
         window.addEventListener("load", function() { 
         elStart = document.getElementById("start_date"); 
         elEnd = document.getElementById("end_date"); 
@@ -331,7 +332,7 @@
                 @this.set('end_date', event.target.value); 
             }); 
         }); 
-    </script>
+    </script> --}}
 
  
 
@@ -348,6 +349,8 @@
             });
         });
 
+
+
         //Show Hide game type
         const promo_type = document.getElementById('promoType');
         const game_type = document.getElementById('gameType');
@@ -359,6 +362,7 @@
                 game_type.style.display = 'none'
             }
         });
+
         game_type.addEventListener('change', function handleChange(event) {
             if(event.target.value === 'multiple_choice') {
                 text_helper.style.display = 'block'
@@ -368,7 +372,18 @@
         });
         
 
-      
+
+        //Show game type on page load
+        window.onload = showGameTypeOnPageLoad();
+        function showGameTypeOnPageLoad() {
+            if(promo_type.value == 'click_to_join') {
+                game_type.style.display = 'block'
+            } else {
+                game_type.style.display = 'none'
+            }
+        }
+
+
         //tinymce editor
         tinymce.init({
             selector: '#description',
