@@ -67,11 +67,6 @@ class CreatePromo extends Component
         array_push($this->questionInputs, $i);
     }
 
-
-    // public function remove($i) {
-    //     unset($this->inputs[$i]);
-    // }
-
     //store data
     public function store() {
         $this->validate();
@@ -81,8 +76,6 @@ class CreatePromo extends Component
         $featured = (isset($this->is_featured) == '0' ? '0' : '1');
 
         $banner = (isset($this->is_banner) == '0' ? '0' : '1');
-
-        // $validatedData['platforms'] = json_encode($this->platforms);
 
         $promo = Promo::create([
             'name' => $this->name,
@@ -116,8 +109,6 @@ class CreatePromo extends Component
         //         'promo_id' => $promo->id,
         //     ]);
         // }
-
-        // $this->inputs = [];
 
         $this->platforms = [];
 

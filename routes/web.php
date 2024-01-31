@@ -50,7 +50,6 @@ Route::middleware('auth')->group(function() {
         Route::get('/edit/{id}', EditPromo::class)->name('promos.edit');
     });
 
-
     Route::get('/playroom', function () {
         return view('playroom');
     });

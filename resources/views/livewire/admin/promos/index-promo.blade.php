@@ -136,7 +136,7 @@
                     </tbody>
                 </table>
                 <x-pagination>
-                    {{ $promos->links('pagination::tailwind') }}
+                    {{ $promos->links() }}
                 </x-pagination>
             </div>
         @else

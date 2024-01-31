@@ -9,16 +9,15 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Livewire\WithPagination;
 
 class EditPromo extends Component
 {
     use WithFileUploads;
 
-    public $promo, $name, $is_visible, $is_featured, $updatedImage, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
+    public $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
     public $platforms = [];
-
-    public $platformTest;
-
+    public $promo;
 
     public function generateSlug() {
         $this->slug = Str::slug($this->name);
@@ -39,6 +38,7 @@ class EditPromo extends Component
     }
 
     public function mount($id) {
+
         $getPromo = Promo::with('platforms', 'language')->find($id);
 
         $this->platforms = $getPromo->platforms->pluck('id');
@@ -57,6 +57,7 @@ class EditPromo extends Component
         
         $this->promo = $getPromo;
         $this->name = $getPromo->name;
+        $this->slug = Str::slug($getPromo->name);
         $this->prize_pool = $getPromo->prize_pool;
         $this->start_date = $getPromo->start_date;
         $this->end_date = $getPromo->end_date;
@@ -72,16 +73,53 @@ class EditPromo extends Component
 
     }
 
+    protected $rules = [
+        'name' => 'required|max:255',
+        'type' => 'required',
+        'language_id' => 'required',
+        'start_date' => 'required',
+        'end_date' => 'required',
+        'platforms' => 'required',
+        // 'image' => 'required|image|mimes:jpg,png,jpeg|max:512|dimensions:min_width=1388,min_height=750,max_width=1388,max_height=750',
+    ];
+
     public function updatePromo() {
+        $this->validate();
+
+        $this->promo->update([
+            'name' => $this->name,
+            'slug' => Str::slug($this->name),
+            'type' => $this->type,
+            'prize_pool' => $this->prize_pool,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'language_id' => $this->language_id,
+            'game_type' => $this->game_type,
+            'description' => $this->description,
+            'terms' => $this->terms,
+            'article' => $this->article,
+            'button_name' => $this->button_name,
+            'button_link' => $this->button_link,
+            'is_visible' => $this->is_visible,
+            'is_featured' => $this->is_featured,
+            'is_banner' => $this->is_banner,
+        ]);
+
+        $this->promo->platforms()->sync($this->platforms);  
+
+        $this->dispatch('updated', [
+            'title' => 'Updated',
+            'text' => 'Promo updated successfully.',
+            'icon' => 'success',
+            'iconColor' => 'green',
+        ]);
+
 
     }
 
 
-
-
     public function render()
     {
-      
         return view('livewire.admin.promos.edit-promo', [
             'platformsData' => $this->getPlatforms(),
             'languages' => $this->getLanguage()

@@ -15,9 +15,9 @@ class Promo extends Model
         'name', 'slug', 'platforms', 'language_id', 'description', 'terms', 'article', 'prize_pool', 'is_visible', 'start_date', 'end_date', 'image', 'type', 'game_type', 'is_banner', 'is_featured', 'button_name', 'button_link'
     ];
 
-    protected $appends = [
-        'image_url',
-    ];
+    // protected $appends = [
+    //     'image_url',
+    // ];
 
     public function platforms() : BelongsToMany {
         return $this->belongsToMany(Platform::class);

@@ -68,12 +68,6 @@
                                         <input wire:model='image' name='image' type="file" class="hidden" />
                                     </label>
 
-                                   @if($updatedImage)
-                                    <img src="{{ $updatedImage->temporaryUrl() }}" alt="" class="absolute top-0">
-                                   @endif
-                                    <input type="file" wire:model='updatedImage' class="mt-3">
-
-
                                 </div>
                                 @error('image')
                                     <span class="text-rose-500">{{ $message }}</span>
@@ -302,11 +296,11 @@
                 $('#platforms_select').select2();
                 $('#platforms_select').on('change', function() {
                     let $data = $(this).val();
+                    console.log($data);
                     $wire.set('platforms', $data);
                 });
             });
         </script>
-
     @endscript
 
     {{-- <script> 
@@ -339,7 +333,7 @@
     <script>
         //Alert
         document.addEventListener('livewire:initialized', ()=>{
-            @this.on('created', (event)=>{
+            @this.on('updated', (event)=>{
                 const data=event
                 swal.fire({
                     title:data[0]['title'],

@@ -4,20 +4,25 @@ namespace App\Livewire\Admin\Promos;
 
 use App\Models\Promo;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class IndexPromo extends Component
 {
+
+    use WithPagination;
+
+    protected $paginationTheme = 'tailwind';
 
     public $search;
     public $pagination = 20;
 
     public function render()
     {
-        
+            
         if(!$this->search) {
             $promos = Promo::with('platforms', 'language')->orderBy('created_at', 'desc');
         } else {
-            $promos = Promo::with('platforms', 'language')->orderBy('created_at', 'desc')->where('name', 'LIKE', '%' . $this->search . '%');
+            $promos = Promo::witxh('platforms', 'language')->orderBy('created_at', 'desc')->where('name', 'LIKE', '%' . $this->search . '%');
         }
 
         return view('livewire.admin.promos.index-promo', [
