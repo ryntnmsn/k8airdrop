@@ -15,14 +15,19 @@ class IndexPromo extends Component
 
     public $search;
     public $pagination = 20;
+    public $sortLanguage = '';
 
     public function render()
     {
             
-        if(!$this->search) {
-            $promos = Promo::with('platforms', 'language')->orderBy('created_at', 'desc');
+        if($this->sortLanguage == 'en') { //English
+            $promos = Promo::with('platforms', 'language')->where('language_id', '1');
+        } elseif($this->sortLanguage == 'jp') { //Japanese
+            $promos = Promo::with('platforms', 'language')->where('language_id', '2');
+        } elseif($this->search) {
+            $promos = Promo::with('platforms', 'language')->orderBy('created_at', 'desc')->where('name', 'LIKE', '%' . $this->search . '%');
         } else {
-            $promos = Promo::witxh('platforms', 'language')->orderBy('created_at', 'desc')->where('name', 'LIKE', '%' . $this->search . '%');
+            $promos = Promo::with('platforms', 'language')->orderBy('created_at', 'desc');
         }
 
         return view('livewire.admin.promos.index-promo', [

@@ -15,7 +15,7 @@ class EditPromo extends Component
 {
     use WithFileUploads;
 
-    public $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
+    public $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $old_image, $new_image;
     public $platforms = [];
     public $promo;
 
@@ -31,11 +31,15 @@ class EditPromo extends Component
         return Language::all();
     }
 
-    public function imageName() {
-        $imageName = Carbon::now()->timestamp . '.' . $this->image->extension();
-        $image = $this->image->storeAs('image_uploads', $imageName);
-        return $image;
+    public function updated($propertyName) {
+        $this->validateOnly($propertyName);
     }
+
+    // public function imageName() {
+    //     $imageName = Carbon::now()->timestamp . '.' . $this->image->extension();
+    //     $image = $this->image->storeAs('image_uploads', $imageName);
+    //     return $image;
+    // }
 
     public function mount($id) {
 
@@ -69,7 +73,7 @@ class EditPromo extends Component
         $this->game_type = $getPromo->game_type;
         $this->terms = $getPromo->terms;
         $this->article = $getPromo->article;
-        $this->image = $getPromo->image;
+        $this->old_image = $getPromo->image;
 
     }
 
@@ -80,11 +84,18 @@ class EditPromo extends Component
         'start_date' => 'required',
         'end_date' => 'required',
         'platforms' => 'required',
-        // 'image' => 'required|image|mimes:jpg,png,jpeg|max:512|dimensions:min_width=1388,min_height=750,max_width=1388,max_height=750',
+        'new_image' => 'nullable|max:512|dimensions:min_width=1388,min_height=750,max_width=1388,max_height=750',
     ];
 
     public function updatePromo() {
         $this->validate();
+
+        $filename = '';
+        if($this->new_image != null){
+            $filename = $this->new_image->store('/', 'promos');
+        } else {
+            $filename = $this->old_image;
+        }
 
         $this->promo->update([
             'name' => $this->name,
@@ -103,17 +114,12 @@ class EditPromo extends Component
             'is_visible' => $this->is_visible,
             'is_featured' => $this->is_featured,
             'is_banner' => $this->is_banner,
+            'image' => $filename,
         ]);
 
         $this->promo->platforms()->sync($this->platforms);  
 
-        $this->dispatch('updated', [
-            'title' => 'Updated',
-            'text' => 'Promo updated successfully.',
-            'icon' => 'success',
-            'iconColor' => 'green',
-        ]);
-
+        $this->dispatch('updated');
 
     }
 

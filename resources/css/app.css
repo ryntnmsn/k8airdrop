@@ -9,7 +9,7 @@ html, body {
     background-color: rgb(241, 241, 241);
     font-family: 'Poppins', sans-serif;
     color:rgb(30 41 59);
-    font-size:15px
+    font-size:14px
 }
 
 .ck.ck-toolbar, .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {

@@ -38,5 +38,10 @@
     @include('layouts.footer')
     @livewireScripts
 
+    <script data-navigate-once>
+        document.addEventListener('livewire:navigated', () => {
+            initFlowbite();
+        });
+    </script>
 </body>
 </html>
