@@ -15,7 +15,7 @@ class EditPromo extends Component
 {
     use WithFileUploads;
 
-    public $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $old_image, $new_image;
+    public $name, $promo_id, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $old_image, $new_image;
     public $platforms = [];
     public $promo;
 
@@ -59,6 +59,7 @@ class EditPromo extends Component
             $this->is_banner = true;
         }
         
+        $this->promo_id = $getPromo->id;
         $this->promo = $getPromo;
         $this->name = $getPromo->name;
         $this->slug = Str::slug($getPromo->name);

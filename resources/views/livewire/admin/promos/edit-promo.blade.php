@@ -2,7 +2,7 @@
     <div class="relative">
         <div class="flex">
             <div class="flex-1 flex flex-col space-y-1">
-                <x-title>Edit Promo</x-title>
+                <x-title>{{ $promo_id }} Edit Promo</x-title>
             </div>
         </div>
     
@@ -330,34 +330,13 @@
             </script>
         @endscript
     
-        {{-- <script> 
-            const start_date = document.getElementById("start_date"); 
-            start_date.addEventListener("click", (event) => { 
-                @this.set('start_date', event.target.value); 
-            });
-    
-            const end_date = document.getElementById("end_date"); 
-            end_date.addEventListener("click", (event) => { 
-                @this.set('end_date', event.target.value); 
-            }); 
-        </script> --}}
-    
-        {{-- <script> 
-            window.addEventListener("load", function() { 
-            elStart = document.getElementById("start_date"); 
-            elEnd = document.getElementById("end_date"); 
-                elStart.addEventListener("blur", (event) => { 
-                    @this.set('start_date', event.target.value); 
-                }); 
-                elEnd.addEventListener("blur", (event) => { 
-                    @this.set('end_date', event.target.value); 
-                }); 
-            }); 
-        </script> --}}
-    
-     
     
         <script>
+
+            // window.addEventListener("popstate", function (event) { 
+            //     window.location.reload(); 
+            // });
+
             //Show Hide game type
             const promo_type = document.getElementById('promoType');
             const game_type = document.getElementById('gameType');
@@ -391,19 +370,22 @@
             }
     
     
+            
             //tinymce editor
             tinymce.init({
                 selector: '#description',
-                forced_root_block: false,
+                allow_conditional_comments: true,
                 setup: function (editor) {
                     editor.on('init change', function () {
                         editor.save();
                     });
                     editor.on('change', function (e) {
-                        @this.set('description', editor.getContent());
+                        var content = tinymce.activeEditor.getContent();
+                        @this.set('description', content);
                     });
                 }
             });
+            
     
             tinymce.init({
                 selector: '#terms',

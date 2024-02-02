@@ -29,7 +29,7 @@
     @include('layouts.aside')
 
     <div class="p-4 sm:ml-64">
-        <div class="bg-white mt-20 max-w-screen-2xl shadow-xl shadow-gray-100 mx-auto w-full p-10 rounded-xl">
+        <div class="bg-white mt-20 {{ request()->is('admin/promos') ? 'max-w-[1920px]' : 'max-w-screen-2xl' }} shadow-xl shadow-gray-100 mx-auto w-full p-10 rounded-xl">
             <x-alert></x-alert>
             @yield('contents')
         </div>
@@ -37,11 +37,5 @@
 
     @include('layouts.footer')
     @livewireScripts
-
-    <script data-navigate-once>
-        document.addEventListener('livewire:navigated', () => {
-            initFlowbite();
-        });
-    </script>
 </body>
 </html>

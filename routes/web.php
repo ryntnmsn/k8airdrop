@@ -25,34 +25,38 @@ Route::controller(AuthController::class)->group(function() {
 
 Route::middleware('auth')->group(function() {
 
-    //Dashboard Class
-    Route::controller(DashboardController::class)->group(function() {
-        Route::get('dashboard', 'index')->name('dashboard.index');
+    Route::group(['prefix' => 'admin'], function() {
+        //Dashboard Class
+        Route::controller(DashboardController::class)->group(function() {
+            Route::get('dashboard', 'index')->name('dashboard.index');
+        });
+
+        //Platforms Class
+        Route::group(['prefix' => 'platforms', 'namespace' => 'App\Livewire\Admin\Platforms'], function () {
+            Route::get('/', IndexPlatform::class)->name('platforms.index');
+            Route::get('/create', CreatePlatform::class)->name('platforms.create');
+            Route::get('/edit/{platform}', EditPlatform::class)->name('platforms.edit');
+        });
+
+        //Languages Class
+        Route::group(['prefix' => 'languages', 'namespace' => 'App\Livewire\Admin\Languages'], function () {
+            Route::get('/', IndexLanguage::class)->name('languages.index');
+            Route::get('/create', CreateLanguage::class)->name('languages.create');
+            Route::get('/edit/{language}', EditLanguage::class)->name('languages.edit');
+        });
+
+        Route::group(['prefix' => 'promos', 'namespace' => 'App\Livewire\Admin\Promos'], function () {
+            Route::get('/', IndexPromo::class)->name('promos.index');
+            Route::get('/create', CreatePromo::class)->name('promos.create');
+            Route::get('/edit/{id}', EditPromo::class)->name('promos.edit');
+        });
+
+        Route::get('/playroom', function () {
+            return view('playroom');
+        });
     });
 
-    //Platforms Class
-    Route::group(['prefix' => 'platforms', 'namespace' => 'App\Livewire\Admin\Platforms'], function () {
-        Route::get('/', IndexPlatform::class)->name('platforms.index');
-        Route::get('/create', CreatePlatform::class)->name('platforms.create');
-        Route::get('/edit/{platform}', EditPlatform::class)->name('platforms.edit');
-    });
-
-    //Languages Class
-    Route::group(['prefix' => 'languages', 'namespace' => 'App\Livewire\Admin\Languages'], function () {
-        Route::get('/', IndexLanguage::class)->name('languages.index');
-        Route::get('/create', CreateLanguage::class)->name('languages.create');
-        Route::get('/edit/{language}', EditLanguage::class)->name('languages.edit');
-    });
-
-    Route::group(['prefix' => 'promos', 'namespace' => 'App\Livewire\Admin\Promos'], function () {
-        Route::get('/', IndexPromo::class)->name('promos.index');
-        Route::get('/create', CreatePromo::class)->name('promos.create');
-        Route::get('/edit/{id}', EditPromo::class)->name('promos.edit');
-    });
-
-    Route::get('/playroom', function () {
-        return view('playroom');
-    });
+   
 
 });
 

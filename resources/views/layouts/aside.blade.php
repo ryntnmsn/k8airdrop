@@ -20,15 +20,15 @@
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                </svg>
             </button>
-            <ul id="dropdown" class="{{ request()->is('platforms*') || request()->is('promos*') || request()->is('languages*') ? 'block' : 'hidden'}} py-2 space-y-1">
+            <ul id="dropdown" class="{{ request()->is('admin/platforms*') || request()->is('admin/promos*') || request()->is('languages*') ? 'block' : 'hidden'}} py-2 space-y-1">
                   <li>
-                     <a href="{{ route('promos.index') }}" class="{{ request()->is('promos*') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">All</a>
+                     <a href="{{ route('promos.index') }}" class="{{ request()->is('admin/promos*') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">All</a>
                   </li>
                   <li>
-                     <a href="{{ route('platforms.index') }}" class="{{ request()->is('platforms*') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">Platforms</a>
+                     <a href="{{ route('platforms.index') }}" class="{{ request()->is('admin/platforms*') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">Platforms</a>
                   </li>
                   <li>
-                     <a href="{{ route('languages.index') }}" class="{{ request()->is('languages*') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800' }} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">Languages</a>
+                     <a href="{{ route('languages.index') }}" class="{{ request()->is('admin/languages*') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800' }} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">Languages</a>
                   </li>
                   <li>
                      <a href="{{ route('promos.create') }}" class="text-slate-800 flex space-x-1 items-center w-full p-2 transition duration-75 rounded-lg pl-5 group hover:bg-indigo-500 hover:text-slate-50">
