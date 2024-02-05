@@ -30,13 +30,20 @@
             </div>
             <div class="flex-1">
                 <div class="flex justify-end gap-4">
-                    {{-- <div>
-                        <select wire:model.live='sortLanguage' class="border-slate-200 rounded-lg">
+                    <div>
+                        <select wire:model.live='lang' class="border-slate-200 rounded-lg">
                             <option value="">All</option>
-                            <option value="en">English</option>
-                            <option value="jp">Japanese</option>
+                            <option value="1">English</option>
+                            <option value="2">Japanese</option>
                         </select>
-                    </div> --}}
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span>Show active</span>
+                        <span>
+                            <input checked type="checkbox" wire:model.live="active" class="w-5 h-5 rounded  text-indigo-500 border-slate-300">
+                        </span>
+                    </div>
+                    
                     <div class="flex items-center float-right space-x-3">
                         <span>
                             Show records:

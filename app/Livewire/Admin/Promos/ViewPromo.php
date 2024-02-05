@@ -14,6 +14,7 @@ class ViewPromo extends Component
         $getPromo = Promo::with('platforms', 'language', 'questions')->find($id);
         $this->promo = $getPromo;
         $this->name = $getPromo->name;
+        $this->slug = env('APP_URL') . '/promos/' . $getPromo->slug;
         $this->image = $getPromo->image;
         $this->language_id = $getPromo->language;
         $this->start_date = $getPromo->start_date;
