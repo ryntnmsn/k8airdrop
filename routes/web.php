@@ -11,6 +11,7 @@ use App\Livewire\Admin\Languages\IndexLanguage;
 use App\Livewire\Admin\Promos\CreatePromo;
 use App\Livewire\Admin\Promos\EditPromo;
 use App\Livewire\Admin\Promos\IndexPromo;
+use App\Livewire\Admin\Promos\ViewPromo;
 use Illuminate\Support\Facades\Route;
 
 
@@ -49,6 +50,7 @@ Route::middleware('auth')->group(function() {
             Route::get('/', IndexPromo::class)->name('promos.index');
             Route::get('/create', CreatePromo::class)->name('promos.create');
             Route::get('/edit/{id}', EditPromo::class)->name('promos.edit');
+            Route::get('/view/{id}', ViewPromo::class)->name('promos.view');
         });
 
         Route::get('/playroom', function () {

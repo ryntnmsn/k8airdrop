@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('type');
-            $table->foreignId('promo_id')
-                ->constrained('promos')
-                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

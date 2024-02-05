@@ -109,14 +109,18 @@
                                 </td>
                                 <td class="px-6 py-3">
                                     @foreach ($promo->platforms as $platform)
-                                        <span class="text-sm bg-slate-100 px-2 rounded-full font-medium">{{$platform->name}}</span>
+                                        <span class="bg-slate-100 px-2 rounded-full font-medium">{{$platform->name}}</span>
                                     @endforeach
                                 </td>
                                 <td class="px-6 py-3 capitalize">
                                     {{ str_replace('_', ' ', $promo->type)}}
                                 </td>
                                 <td class="px-6 py-3">
-                                    {{$promo->language->code}}
+                                    @if($promo->language_id == '1')
+                                        <img src="{{ url('storage/images/en_icon.jpg') }}" loading='lazy' class="border border-slate-200 rounded-sm p-1 overflow-hidden">
+                                    @else
+                                        <img src="{{ url('storage/images/jp_icon.jpg') }}" loading='lazy'  class="border border-slate-200 rounded-sm p-1 overflow-hidden">
+                                    @endif
                                 </td>
                                 <td class="px-6 py-3">
                                     {{$promo->prize_pool}}
@@ -137,7 +141,7 @@
                                             </svg>
                                         </x-href>
                                           
-                                        <x-href href="{{ route('promos.edit', $promo->id) }}" class="!p-1 !bg-transparent !border-0 !text-slate-600 hover:!text-slate-900" >
+                                        <x-href href="{{ route('promos.view', $promo->id) }}" class="!p-1 !bg-transparent !border-0 !text-slate-600 hover:!text-slate-900" >
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -169,7 +173,7 @@
     <div wire:ignore.self id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
             <div class="relative bg-white rounded-lg shadow">
-                <button type="button" class="absolute top-3 end-2.5 text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="popup-modal">
+                <button type="button" class="absolute top-3 end-2.5 text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="popup-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>
@@ -181,10 +185,10 @@
                     </svg>
                     <h3 class="mb-5 text-lg font-normal text-slate-500">Are you sure you want to delete this record?</h3>
                     <form wire:submit.prevent="destroyPromo">
-                        <button data-modal-hide="popup-modal" type="submit" class="text-white bg-rose-600 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                        <button data-modal-hide="popup-modal" type="submit" class="text-white bg-rose-600 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg inline-flex items-center px-5 py-2.5 text-center me-2">
                             Yes, I'm sure
                         </button>
-                        <button data-modal-hide="popup-modal" type="button" class="text-slate-500 bg-white hover:bg-slate-100 focus:ring-4 focus:outline-none focus:ring-slate-200 rounded-lg border border-slate-200 text-sm font-medium px-5 py-2.5 hover:text-slate-900 focus:z-10 ">No, cancel</button>
+                        <button data-modal-hide="popup-modal" type="button" class="text-slate-500 bg-white hover:bg-slate-100 focus:ring-4 focus:outline-none focus:ring-slate-200 rounded-lg border border-slate-200 font-medium px-5 py-2.5 hover:text-slate-900 focus:z-10 ">No, cancel</button>
                     </form>
                 </div>
             </div>

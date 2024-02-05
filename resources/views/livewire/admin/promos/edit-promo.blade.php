@@ -2,7 +2,7 @@
     <div class="relative">
         <div class="flex">
             <div class="flex-1 flex flex-col space-y-1">
-                <x-title>{{ $promo_id }} Edit Promo</x-title>
+                <x-title>Edit Promo</x-title>
             </div>
         </div>
     
@@ -104,6 +104,7 @@
                             <div id="gameType">
                                 <x-label for="game_type">Game type</x-label>
                                 <x-select wire:model='game_type' name="game_type" id="game_type" class="w-full">
+                                    <option value="" class="hidden" @if($game_type == '') selected @endif>Select game type</option>
                                     <option value="upload_image" @if($game_type == 'upload_image') selected @endif>Upload Image</option>
                                     <option value="multiple_choice" @if($game_type == 'multiple_choice') selected @endif>Multiple Choice</option>
                                     <option value="paste_retweet_url" @if($game_type == 'paste_retweet_url') selected @endif>Paste Retweet URL</option>

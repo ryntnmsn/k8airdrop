@@ -18,23 +18,12 @@ class IndexPromo extends Component
 
     public function render()
     {
-        // if($this->sortLanguage) {
-        //     if($this->sortLanguage == '') {
-        //         $promos = Promo::with('platforms', 'language')->orderBy('created_at', 'desc');
-        //     } elseif($this->sortLanguage == 'en') {
-        //         $promos = Promo::with('platforms', 'language')->where('language_id', '1');
-        //     } else {
-        //         $promos = Promo::with('platforms', 'language')->where('language_id', '2');
-        //     }
-        // } 
         if($this->search) {
             $promos = Promo::with('platforms', 'language')->orderBy('created_at', 'desc')->where('name', 'LIKE', '%' . $this->search . '%');
         } else {
             $promos = Promo::with('platforms', 'language')->orderBy('created_at', 'desc');
         }
 
-        
-      
         return view('livewire.admin.promos.index-promo', [
             'promos' => $promos->paginate($this->pagination)
         ])->extends('layouts.app')->section('contents');

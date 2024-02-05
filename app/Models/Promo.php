@@ -27,4 +27,8 @@ class Promo extends Model
         return $this->belongsTo(Language::class);
     }
 
+    public function questions() : BelongsToMany {
+        return $this->belongsToMany(Question::class);
+    }
+
 }
