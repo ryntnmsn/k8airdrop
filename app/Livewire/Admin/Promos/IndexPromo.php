@@ -16,32 +16,50 @@ class IndexPromo extends Component
     public $pagination = 20;
     public $active;
     public $lang;
+    public $sortField = 'created_at';
+    public $sortDirection = 'desc';
 
     protected $queryString = [
         'search' => ['except' => ''], 
         'active' => ['except' => false],
-        'lang' => ['except' => '']
+        'lang' => ['except' => ''],
+        'sortDirection' => ['as' => 'sort'],
     ];
+    
+
+    public function sortBy($field) {
+
+        if($this->sortField == $field ) {
+            $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection == 'asc';
+        }
+
+        $this->sortField = $field;
+    }
+
 
     public function render()
     {
-        // if($this->search) {
-        //     $promos = Promo::with('platforms', 'language')->orderBy('created_at', 'desc')->where('name', 'LIKE', '%' . $this->search . '%');
-        // } else {
-        //     $promos = Promo::with('platforms', 'language')->orderBy('created_at', 'desc');
-        // }
-
-        $promos = Promo::with('platforms', 'language')->orderBy('created_at', 'desc')
+        $promos = Promo::with('platforms', 'language')
             ->when($this->active, function($query) {
-                return $query->where('is_visible', 1); })
+                return $query->where('is_visible', 1);
+            })
             ->when($this->search, function($query) {
-                return $query->where('name', 'LIKE', '%' . $this->search . '%'); })
+                return $query->where('name', 'LIKE', '%' . $this->search . '%'); 
+            })
             ->when($this->lang, function($query) {
                 return $query->where('language_id', $this->lang);
-            });
+            })
+            ->orderBy($this->sortField, $this->sortDirection);
+
+
+        $query = $promos->toSql();
+
 
         return view('livewire.admin.promos.index-promo', [
-            'promos' => $promos->paginate($this->pagination)
+            'promos' => $promos->paginate($this->pagination),
+            'query' => $query
         ])->extends('layouts.app')->section('contents');
     }
 }

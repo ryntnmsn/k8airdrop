@@ -18,6 +18,7 @@
         </div>
     </div>
 
+
     <div class="mt-10">
         <div class="flex space-x-5 mb-5">
             <div class="flex-1 relative">
@@ -50,9 +51,9 @@
                         </span>
                         <span>
                             <select wire:model.live='pagination' class="border-slate-200 rounded-lg">
-                                <option value="10">10</option>
                                 <option value="20">20</option>
-                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="100">100</option>
                             </select>
                         </span>
                     </div>
@@ -66,25 +67,61 @@
                     <thead class="text-xs uppercase bg-slate-100">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                No.
+                               ID
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Promo name
+                                <button wire:click="sortBy('name')" class="uppercase flex items-center space-x-1">
+                                    <span>
+                                        Name
+                                    </span>
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </span>
+                                </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Platforms
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Promo type
+                                <button wire:click="sortBy('type')" class="uppercase flex items-center space-x-1">
+                                    <span>
+                                        Promo type
+                                    </span>
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </span>
+                                </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Language
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Prize pool
+                                <button wire:click="sortBy('prize_pool')" class="uppercase flex items-center space-x-1">
+                                    <span>
+                                        Prize Pool
+                                    </span>
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </span>
+                                </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Status
+                                <button wire:click="sortBy('status')" class="uppercase flex items-center space-x-1">
+                                    <span>
+                                        Status
+                                    </span>
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </span>
+                                </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Action
@@ -175,6 +212,9 @@
             {{ $promos->links() }}
         </x-pagination>
     </div>
+
+
+
 
     {{-- Delete modal confirmation --}}
     <div wire:ignore.self id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">

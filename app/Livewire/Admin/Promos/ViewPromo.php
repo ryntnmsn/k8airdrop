@@ -9,6 +9,14 @@ class ViewPromo extends Component
 {
     public $promo, $questions, $name, $promo_id, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
     public $platforms = [];
+    public $inputs = [];
+    public $i = 1;
+
+    public function add($i) {
+        $i = $i + 1;
+        $this->i = $i;
+        array_push($this->inputs, $i);
+    }
     
     public function mount($id) {
         $getPromo = Promo::with('platforms', 'language', 'questions')->find($id);
