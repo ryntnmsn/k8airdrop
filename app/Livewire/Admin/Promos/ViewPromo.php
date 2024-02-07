@@ -3,24 +3,60 @@
 namespace App\Livewire\Admin\Promos;
 
 use App\Models\Promo;
+use App\Models\Question;
+use Illuminate\Support\Collection;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ViewPromo extends Component
 {
-    public $promo, $questions, $name, $promo_id, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
-    public $platforms = [];
-    public $inputs = [];
-    public $i = 1;
+    use WithPagination;
 
-    public function add($i) {
-        $i = $i + 1;
-        $this->i = $i;
-        array_push($this->inputs, $i);
+    protected $paginationTheme = 'tailwind';
+
+    public $choice, $promo, $questionsCollect, $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image, $question_title, $question_type, $promo_id, $title;
+    public $platforms = [];
+
+    public Collection $inputs;
+
+    public function addInputs(): void {
+        $this->inputs->push(['choice' => null]);
+    }
+
+    public function removeInputs($key): void {
+        $this->inputs->pull($key);
+    }
+
+    public function updated($propertyName){
+        $this->validateOnly($propertyName);
+    }
+
+    protected $rules = [
+        'question_title' => 'required',
+        'question_type' => 'required'
+    ];
+
+    public function storeQuestion() {
+        $this->validate();
+
+        $question = Question::create([
+            'title' => $this->question_title,
+            'type' => $this->question_type
+        ]);
+
+        $question->promo()->attach($this->promo_id);
+
+       session()->flash('statusAdded', 'Question successfully added.');
+
+       $this->render();
     }
     
     public function mount($id) {
+        $this->inputs = collect();
         $getPromo = Promo::with('platforms', 'language', 'questions')->find($id);
         $this->promo = $getPromo;
+        $this->questionsCollect = $getPromo;
+        $this->promo_id = $getPromo->id;
         $this->name = $getPromo->name;
         $this->slug = env('APP_URL') . '/promos/' . $getPromo->slug;
         $this->image = $getPromo->image;
@@ -39,12 +75,15 @@ class ViewPromo extends Component
         $this->terms = $getPromo->terms;
         $this->article = $getPromo->article;
         $this->platforms = $getPromo->platforms->pluck('name');
-        $this->questions = $getPromo->questions;
     }
 
     public function render()
     {
-        return view('livewire.admin.promos.view-promo')
-        ->extends('layouts.app')->section('contents');
+
+        $questions = $this->promo->questions();
+
+        return view('livewire.admin.promos.view-promo', [
+            'questions' => $questions->get()
+        ])->extends('layouts.app')->section('contents');
     }
 }

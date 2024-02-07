@@ -10,6 +10,11 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'type', 'promo_id'
+        'title', 'type'
     ];
+
+    public function promo() {
+        return $this->belongsToMany(Promo::class);
+    }
+
 }

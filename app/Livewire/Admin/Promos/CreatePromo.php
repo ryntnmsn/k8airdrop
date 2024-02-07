@@ -19,12 +19,6 @@ class CreatePromo extends Component
     public $name, $slug, $language_id, $is_visible, $is_featured, $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
     public $platforms = [];
     
-    //question public variable
-    public $questionType = []; //default empty array
-    public $questionTitle = []; //default empty array
-    public $i = 1; //for incrementing question field
-    public $questionInputs = [];
-
 
     public function generateSlug() {
         $this->slug = Str::slug($this->name);
@@ -58,13 +52,6 @@ class CreatePromo extends Component
         $imageName = Carbon::now()->timestamp . '.' . $this->image->extension();
         $image = $this->image->store('/', 'promos');
         return $image;
-    }
-
-    //add new question fields
-    public function add($i) {
-        $i = $i + 1;
-        $this->i = $i;
-        array_push($this->questionInputs, $i);
     }
 
     //store data
