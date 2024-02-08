@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Promos;
 
+use App\Models\Choice;
 use App\Models\Promo;
 use App\Models\Question;
 use Illuminate\Support\Collection;
@@ -14,16 +15,17 @@ class ViewPromo extends Component
 
     protected $paginationTheme = 'tailwind';
 
-    public $choice, $promo, $questionsCollect, $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image, $question_title, $question_type, $promo_id, $title;
+    public $promo, $questionsCollect, $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image, $promo_id, $title;
     public $platforms = [];
+    public $inputs;
+    public $question_title = '';
+    public $question_type = '';
 
-    public Collection $inputs;
-
-    public function addInputs(): void {
-        $this->inputs->push(['choice' => null]);
+    public function addInputs() {
+        $this->inputs->push(['choice' => '']);
     }
 
-    public function removeInputs($key): void {
+    public function removeInputs($key) {
         $this->inputs->pull($key);
     }
 
@@ -31,9 +33,15 @@ class ViewPromo extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function resetFields() {
+        $this->question_title = '';
+        $this->question_type = '';
+        $this->inputs = [];
+    }
+
     protected $rules = [
         'question_title' => 'required',
-        'question_type' => 'required'
+        'question_type' => 'required',
     ];
 
     public function storeQuestion() {
@@ -46,9 +54,19 @@ class ViewPromo extends Component
 
         $question->promo()->attach($this->promo_id);
 
+        foreach($this->inputs as $input) {
+            $choices = Choice::create([
+                'choice' => $input['choice'],
+            ]);
+
+            $question->choices()->attach($choices->id);
+        }
+
        session()->flash('statusAdded', 'Question successfully added.');
 
-       $this->render();
+        $this->resetFields();
+
+        $this->reset();
     }
     
     public function mount($id) {
@@ -83,7 +101,7 @@ class ViewPromo extends Component
         $questions = $this->promo->questions();
 
         return view('livewire.admin.promos.view-promo', [
-            'questions' => $questions->get()
+            'questions' => $questions->paginate(10)
         ])->extends('layouts.app')->section('contents');
     }
 }

@@ -17,4 +17,8 @@ class Question extends Model
         return $this->belongsToMany(Promo::class);
     }
 
+    public function choices() {
+        return $this->belongsToMany(Choice::class);
+    }
+
 }
