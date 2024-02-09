@@ -18,8 +18,9 @@ class ViewPromo extends Component
     public $promo, $questionsCollect, $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image, $promo_id, $title;
     public $platforms = [];
     public $inputs;
-    public $question_title = '';
-    public $question_type = '';
+    public $question_title;
+    public $question_id = '1';
+    public $question_type;
 
     public function addInputs() {
         $this->inputs->push(['choice' => '']);
@@ -58,7 +59,6 @@ class ViewPromo extends Component
             $choices = Choice::create([
                 'choice' => $input['choice'],
             ]);
-
             $question->choices()->attach($choices->id);
         }
 
@@ -66,8 +66,15 @@ class ViewPromo extends Component
 
         $this->resetFields();
 
-        $this->reset();
+        // $this->reset();
     }
+
+
+    public function editQuestion($question_id) {
+        $getQuestion = Question::with('choices')->find($question_id);
+        $this->question_title = $getQuestion->title;
+    }
+
     
     public function mount($id) {
         $this->inputs = collect();
@@ -93,7 +100,11 @@ class ViewPromo extends Component
         $this->terms = $getPromo->terms;
         $this->article = $getPromo->article;
         $this->platforms = $getPromo->platforms->pluck('name');
+
+        $this->question_title = $this->question_title;
+
     }
+    
 
     public function render()
     {
@@ -101,7 +112,7 @@ class ViewPromo extends Component
         $questions = $this->promo->questions();
 
         return view('livewire.admin.promos.view-promo', [
-            'questions' => $questions->paginate(10)
+            'questions' => $questions->get()
         ])->extends('layouts.app')->section('contents');
     }
 }
