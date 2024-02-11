@@ -15,12 +15,15 @@ class ViewPromo extends Component
 
     protected $paginationTheme = 'tailwind';
 
-    public $promo, $questionsCollect, $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image, $promo_id, $title;
+    public $promo, $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image, $promo_id, $title;
     public $platforms = [];
     public $inputs;
-    public $question_title;
-    public $question_id = '1';
+    public $questions;
+    public $choices;
+    public $question_title = '';
+    public $getQuestion;
     public $question_type;
+
 
     public function addInputs() {
         $this->inputs->push(['choice' => '']);
@@ -28,6 +31,10 @@ class ViewPromo extends Component
 
     public function removeInputs($key) {
         $this->inputs->pull($key);
+    }
+
+    public function deleteChoices($key) {
+        unset($this->choices[$key]);
     }
 
     public function updated($propertyName){
@@ -62,7 +69,7 @@ class ViewPromo extends Component
             $question->choices()->attach($choices->id);
         }
 
-       session()->flash('statusAdded', 'Question successfully added.');
+        session()->flash('statusAdded', 'Question successfully added.');
 
         $this->resetFields();
 
@@ -72,15 +79,16 @@ class ViewPromo extends Component
 
     public function editQuestion($question_id) {
         $getQuestion = Question::with('choices')->find($question_id);
+        $this->choices = $getQuestion->choices()->get();
         $this->question_title = $getQuestion->title;
+        $this->question_type = $getQuestion->type;
     }
 
-    
+
     public function mount($id) {
         $this->inputs = collect();
         $getPromo = Promo::with('platforms', 'language', 'questions')->find($id);
         $this->promo = $getPromo;
-        $this->questionsCollect = $getPromo;
         $this->promo_id = $getPromo->id;
         $this->name = $getPromo->name;
         $this->slug = env('APP_URL') . '/promos/' . $getPromo->slug;
@@ -101,18 +109,14 @@ class ViewPromo extends Component
         $this->article = $getPromo->article;
         $this->platforms = $getPromo->platforms->pluck('name');
 
-        $this->question_title = $this->question_title;
+        $this->questions = $this->promo->questions()->get();
 
     }
-    
+
 
     public function render()
     {
 
-        $questions = $this->promo->questions();
-
-        return view('livewire.admin.promos.view-promo', [
-            'questions' => $questions->get()
-        ])->extends('layouts.app')->section('contents');
+        return view('livewire.admin.promos.view-promo')->extends('layouts.app')->section('contents');
     }
 }

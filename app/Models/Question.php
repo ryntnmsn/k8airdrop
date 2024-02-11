@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Question extends Model
 {
@@ -13,11 +14,11 @@ class Question extends Model
         'title', 'type'
     ];
 
-    public function promo() {
+    public function promo() : BelongsToMany{
         return $this->belongsToMany(Promo::class);
     }
 
-    public function choices() {
+    public function choices() : BelongsToMany {
         return $this->belongsToMany(Choice::class);
     }
 
