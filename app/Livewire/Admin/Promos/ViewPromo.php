@@ -21,21 +21,10 @@ class ViewPromo extends Component
     public $questions;
     public $choices;
     public $question_title = '';
+    public $question_id = '';
     public $getQuestion;
     public $question_type;
 
-
-    public function addInputs() {
-        $this->inputs->push(['choice' => '']);
-    }
-
-    public function removeInputs($key) {
-        $this->inputs->pull($key);
-    }
-
-    public function deleteChoices($key) {
-        unset($this->choices[$key]);
-    }
 
     public function updated($propertyName){
         $this->validateOnly($propertyName);
@@ -50,7 +39,22 @@ class ViewPromo extends Component
     protected $rules = [
         'question_title' => 'required',
         'question_type' => 'required',
+        // 'choices.*.choice' => 'required',
     ];
+
+
+
+    public function addInputs() {
+        $this->inputs->push(['choice' => '']);
+    }
+
+    public function removeInputs($key) {
+        $this->inputs->pull($key);
+    }
+
+    public function deleteChoices($key) {
+        unset($this->choices[$key]);
+    }
 
     public function storeQuestion() {
         $this->validate();
@@ -72,16 +76,38 @@ class ViewPromo extends Component
         session()->flash('statusAdded', 'Question successfully added.');
 
         $this->resetFields();
+    }
+    
 
-        // $this->reset();
+    public function updateQuestion() {
+        $this->getQuestion->update([
+            'title' => $this->question_title,
+            'type' => $this->question_type
+        ]);
+    
+        $getChoices = $this->getQuestion->choices()->get();
+
+        foreach($getChoices as $value) {
+            
+        }
+
+        // $getChoiceID = $getChoices->pluck('id');
+
+        // foreach($this->choices as $choice) {
+            
+        // }
+
+        session()->flash('statusUpdated', 'Question updated successfully.');
     }
 
 
+
     public function editQuestion($question_id) {
-        $getQuestion = Question::with('choices')->find($question_id);
-        $this->choices = $getQuestion->choices()->get();
-        $this->question_title = $getQuestion->title;
-        $this->question_type = $getQuestion->type;
+        $this->getQuestion = Question::with('choices')->find($question_id);
+        $this->choices = $this->getQuestion->choices()->get();
+        $this->question_title = $this->getQuestion->title;
+        $this->question_type = $this->getQuestion->type;
+        $this->question_id = $this->getQuestion->id;
     }
 
 
@@ -116,7 +142,6 @@ class ViewPromo extends Component
 
     public function render()
     {
-
         return view('livewire.admin.promos.view-promo')->extends('layouts.app')->section('contents');
     }
 }

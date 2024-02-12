@@ -1,9 +1,4 @@
 <div>
-
-    <div class="py-10">
-       {{$question_title}}
-    </div>
-
     <div class="flex pb-8">
         <div class="flex-1 flex flex-col space-y-1">
             <x-title>View Promo</x-title>
@@ -305,7 +300,7 @@
                                             {{ $question->created_at->diffForHumans() }}
                                         </td>
                                         <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap">
-                                            <x-button wire:click='editQuestion({{ $question->id }})' data-modal-target="addQuestion-modal" data-modal-toggle="addQuestion-modal" >Edit</x-button>
+                                            <x-button wire:click='editQuestion({{ $question->id }})' data-modal-target="editQuestion-modal" data-modal-toggle="editQuestion-modal" >Edit</x-button>
                                         </td>
                                     </tr>
                                 @empty
@@ -321,16 +316,16 @@
     </div>
 
 
-<!-- Add question modal -->
-<div wire:ignore.self id="addQuestion-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<!-- Edit question modal -->
+<div wire:ignore.self id="editQuestion-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-[800px] max-h-full">
 
         <div class="relative bg-white rounded-lg shadow">
             <div class="flex items-center justify-between p-4 md:p-6 border-b rounded-t">
                 <h3 class="text-xl font-semibold text-slate-600">
-                    Add Questions
+                    Edit Questions
                 </h3>
-                <button type="button" class="end-2.5 text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="addQuestion-modal">
+                <button type="button" class="end-2.5 text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="editQuestion-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>
@@ -338,19 +333,24 @@
                 </button>
             </div>
 
-            @if(session('statusAdded'))
+            @if(session('updatedAdded'))
                 <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)" class="p-4 pb-0 md:p-6 md:pb-0">
                     <div class="bg-green-200 text-green-500 rounded flex items-center p-5 space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
-                        <span>{{ session('statusAdded') }}</span>
+                        <span>{{ session('updatedAdded') }}</span>
                     </div>
                 </div>
             @endif
 
-            <form wire:submit.prevent="storeQuestion">
+            <form wire:submit.prevent="updateQuestion">
                 <div class="p-4 md:p-6 space-y-4">
+                    <div>
+                        <x-input-text wire:model.live="question_id" value="{{$question_id}}"></x-input-text>
+                        
+                    </div>
+
                     <div>
                         <x-label for="question_title">Title</x-label>
                         <x-input-text wire:model.live="question_title" id="question_title" value="{{$question_title}}"></x-input-text>
@@ -362,7 +362,6 @@
                     <div>
                         <x-label for="question_type">Type</x-label>
                         <x-select wire:model.live="question_type" id="question_type">
-                            {{-- <option value="" selected class="hidden">Select Type</option> --}}
                             <option value="single_select" @if($question_type == 'single_select') selected @endif>Single select</option>
                             <option value="multiple_select" @if($question_type == 'multiple_select') selected @endif>Multiple select</option>
                             <option value="comment" @if($question_type == 'comment') selected @endif>Comment</option>
@@ -372,19 +371,16 @@
                         @enderror
                     </div>
 
-
-
                     <div>
-
                         @if($choices == true)
                             @foreach ($choices as $key => $value)
                                 <div class="mb-4">
                                     <div class="flex w-full items-center justify-between">
                                         <div class="w-full">
-                                            <x-input-text wire:model="choice.{{ $key }}" value="{{$value->choice}}" class="!w-full"></x-input-text>
+                                            <x-input-text wire:model="choices.{{ $key }}.choice" value="{{ $value->choice }}" class="!w-full"></x-input-text>
                                         </div>
                                         <div>
-                                            <x-href wire:click.prevent="deleteChoices({{$key}})" class="!bg-transparent !text-rose-500 px-3 !border-none">
+                                            <x-href wire:click.prevent="" class="!bg-transparent !text-rose-500 px-3 !border-none">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                                 </svg>
@@ -394,8 +390,7 @@
                                 </div>
                             @endforeach
                         @endif
-
-
+                       
                         @foreach ($inputs as $key => $value)
                             <div class="add-input mb-4">
                                 <div class="flex w-full items-center justify-between">
@@ -413,11 +408,11 @@
                             </div>
                         @endforeach
                     </div>
-
                 </div>
+
                 <div class="flex items-center justify-between border-t p-4 md:p-6">
-                    <x-href class="block !float-none !bg-transparent !text-indigo-500 !hover:text-indigo-600 !border-indigo-500" wire:click="addInputs">Add options</x-href>
-                    <x-button wire:target="storeQuestion" class="block !float-none">Save Question</x-button>
+                    <x-href  wire:click.prevent="add()" class="block !float-none !bg-transparent !text-indigo-500 !hover:text-indigo-600 !border-indigo-500">Add options</x-href>
+                    <x-button wire:target="updateQuestion" class="block !float-none">Save Question</x-button>
                 </div>
 
             </form>
@@ -428,16 +423,16 @@
 
 
 
-<!-- Edit question modal -->
-<div wire:ignore.self id="editQuestion-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<!-- Add question modal -->
+<div wire:ignore.self id="addQuestion-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-[800px] max-h-full">
 
         <div class="relative bg-white rounded-lg shadow">
             <div class="flex items-center justify-between p-4 md:p-6 border-b rounded-t">
                 <h3 class="text-xl font-semibold text-slate-600">
-                    Edit Questions
+                    Add Questions
                 </h3>
-                <button type="button" class="end-2.5 text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="editQuestion-modal">
+                <button type="button" class="end-2.5 text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="addQuestion-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>
