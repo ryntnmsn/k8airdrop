@@ -254,7 +254,7 @@
                         </div>
                         <div>
                             <div class="flex-1">
-                                <x-button data-modal-target="addQuestion-modal" data-modal-toggle="addQuestion-modal" >
+                                <x-button data-modal-target="default-modal" data-modal-toggle="default-modal" >
                                     <span>
                                         Create
                                     </span>
@@ -300,7 +300,7 @@
                                             {{ $question->created_at->diffForHumans() }}
                                         </td>
                                         <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap">
-                                            <x-button wire:click='editQuestion({{ $question->id }})' data-modal-target="editQuestion-modal" data-modal-toggle="editQuestion-modal" >Edit</x-button>
+                                            <x-button wire:click='editQuestion({{ $question->id }})' data-modal-target="edit-default-modal" data-modal-toggle="edit-default-modal" >Edit</x-button>
                                         </td>
                                     </tr>
                                 @empty
@@ -316,7 +316,153 @@
     </div>
 
 
-<!-- Edit question modal -->
+
+
+<!-- add modal -->
+<div wire:ignore.self id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-[820px] max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                <h3 class="text-xl font-semibold text-slate-600 dark:text-white">
+                    Add Question
+                </h3>
+                <button type="button" class="text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="default-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <div>
+                @if(session('statusAdded'))
+                    <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)" class="p-4 pb-0 md:p-6 md:pb-0">
+                        <div class="bg-green-200 text-green-500 rounded flex items-center p-5 space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            <span>{{ session('statusAdded') }}</span>
+                        </div>
+                    </div>
+                @endif
+            </div>
+            <!-- Modal body -->
+            <form wire:submit.prevent='storeQuestion'>
+                <div class="p-4 md:p-5 space-y-4">
+                    <div>
+                        <x-label for="question_title">Title</x-label>
+                        <x-input-text wire:model="question_title" id="question_title"></x-input-text>
+                        @error('question_title')
+                        <span class="text-rose-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <x-label for="question_type">Type</x-label>
+                        <x-select wire:model="question_type" id="question_type">
+                            <option value="single_select">Single select</option>
+                            <option value="multiple_select">Multiple select</option>
+                            <option value="comment">Comment</option>
+                        </x-select>
+                        @error('question_type')
+                        <span class="text-rose-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                  
+                    <div>
+                        @foreach ($inputs as $key => $value)
+                            <div wire:key="{{ $key }}" class="mb-2">
+                                <div class="flex">
+                                    <x-input-text wire:model="choices.{{ $key }}"></x-input-text>
+                                    <x-button wire:click.prevent="deleteRowForChoice({{ $key }})">delete</x-button>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            
+            <!-- Modal footer -->
+            <div class="flex items-center p-4 md:p-5 border-t border-slate-200 rounded-b">
+                <x-button wire:click.prevent="addRowForChoice()">Add</x-button>
+                <x-button wire:target="storeQuestion">Save</x-button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- edit modal -->
+<div wire:ignore.self id="edit-default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-[820px] max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                <h3 class="text-xl font-semibold text-slate-600 dark:text-white">
+                    Edit Question
+                </h3>
+                <button type="button" class="text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="edit-default-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form wire:submit.prevent='updateQuestion'>
+                <div class="p-4 md:p-5 space-y-4">
+                    <div>
+                        <x-label for="question_title">Title</x-label>
+                        <x-input-text wire:model="question_title" value="{{ $question_title }}"></x-input-text>
+                        @error('question_title')
+                        <span class="text-rose-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <x-label for="question_type">Type</x-label>
+                        <x-select wire:model="question_type">
+                            <option value="single_select" @if($question_type == 'single_select') selected @endif>Single select</option>
+                            <option value="multiple_select" @if($question_type == 'multiple_select') selected @endif>Multiple select</option>
+                            <option value="comment" @if($question_type == 'comment') selected @endif>Comment</option>
+                        </x-select>
+                        @error('question_type')
+                        <span class="text-rose-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        @foreach ($inputs as $key => $value)
+                            <div wire:key="{{ $key }}" class="mb-2">
+                                <div class="flex">
+                                    <x-input-text wire:model="choices.{{ $key }}"></x-input-text>
+                                    <x-button wire:click.prevent="deleteRowForChoice({{ $key }})">delete</x-button>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            
+                <!-- Modal footer -->
+                <div class="flex items-center p-4 md:p-5 border-t border-slate-200 rounded-b">
+                    <x-button wire:click.prevent="addRowForChoice()">Add</x-button>
+                    <x-button wire:target="updateQuestion">Save</x-button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{{-- <!-- Edit question modal -->
 <div wire:ignore.self id="editQuestion-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-[800px] max-h-full">
 
@@ -347,13 +493,8 @@
             <form wire:submit.prevent="updateQuestion">
                 <div class="p-4 md:p-6 space-y-4">
                     <div>
-                        <x-input-text wire:model.live="question_id" value="{{$question_id}}"></x-input-text>
-                        
-                    </div>
-
-                    <div>
                         <x-label for="question_title">Title</x-label>
-                        <x-input-text wire:model.live="question_title" id="question_title" value="{{$question_title}}"></x-input-text>
+                        <x-input-text wire:model="question_title" id="question_title" value="{{$question_title}}"></x-input-text>
                         @error('question_title')
                         <span class="text-rose-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -361,7 +502,7 @@
 
                     <div>
                         <x-label for="question_type">Type</x-label>
-                        <x-select wire:model.live="question_type" id="question_type">
+                        <x-select wire:model="question_type" id="question_type">
                             <option value="single_select" @if($question_type == 'single_select') selected @endif>Single select</option>
                             <option value="multiple_select" @if($question_type == 'multiple_select') selected @endif>Multiple select</option>
                             <option value="comment" @if($question_type == 'comment') selected @endif>Comment</option>
@@ -373,22 +514,25 @@
 
                     <div>
                         @if($choices == true)
-                            @foreach ($choices as $key => $value)
-                                <div class="mb-4">
-                                    <div class="flex w-full items-center justify-between">
-                                        <div class="w-full">
-                                            <x-input-text wire:model="choices.{{ $key }}.choice" value="{{ $value->choice }}" class="!w-full"></x-input-text>
-                                        </div>
-                                        <div>
-                                            <x-href wire:click.prevent="" class="!bg-transparent !text-rose-500 px-3 !border-none">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                </svg>
-                                            </x-href>
+                            
+                              
+                                @foreach ($choices as $key => $value)
+                                    <div class="mb-4">
+                                        <div class="flex w-full items-center justify-between">
+                                            <div class="w-full">
+                                                <x-input-text wire:model="choices.{{ $key }}.choice" value="{{ $value->choice }}" class="!w-full"></x-input-text>
+                                            </div>
+                                            <div>
+                                                <x-href wire:click.prevent="" class="!bg-transparent !text-rose-500 px-3 !border-none">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                    </svg>
+                                                </x-href>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            
                         @endif
                        
                         @foreach ($inputs as $key => $value)
@@ -418,12 +562,12 @@
             </form>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 
 
-<!-- Add question modal -->
+{{-- <!-- Add question modal -->
 <div wire:ignore.self id="addQuestion-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-[800px] max-h-full">
 
@@ -463,7 +607,7 @@
 
                     <div>
                         <x-label for="question_type">Type</x-label>
-                        <x-select wire:model.live="question_type" id="question_type">
+                        <x-select wire:model="question_type" id="question_type">
                             <option value="" selected class="hidden">Select Type</option>
                             <option value="single_select">Single select</option>
                             <option value="multiple_select">Multiple select</option>
@@ -502,6 +646,6 @@
             </form>
         </div>
     </div>
-</div>
+</div> --}}
 
 </div>

@@ -17,14 +17,76 @@ class ViewPromo extends Component
 
     public $promo, $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image, $promo_id, $title;
     public $platforms = [];
-    public $inputs;
+    public $inputs = [0];
+    public $choices = [];
     public $questions;
-    public $choices;
     public $question_title = '';
-    public $question_id = '';
-    public $getQuestion;
     public $question_type;
+    public $getQuestion;
 
+    protected $rules = [
+        'question_title' => 'required',
+        'question_type' => 'required'
+    ];
+
+    public function addRowForChoice() {
+        $this->inputs[] = 1;
+    }
+
+    public function deleteRowForChoice($key) {
+        unset($this->inputs[$key]);
+    }
+
+    public function storeQuestion() {
+        $this->validate();
+        $question = Question::create([
+            'title' => $this->question_title,
+            'type' => $this->question_type
+        ]);
+
+        $question->promo()->attach($this->promo_id);
+
+        foreach($this->choices as $key => $choice) {
+            $choiceID = Choice::create([
+                'choice' => $this->choices[$key],
+            ]);
+            $question->choices()->attach($choiceID);
+        }
+
+        session()->flash('statusAdded', 'Question successfully added.');
+    }
+
+    public function editQuestion($id) {
+        $question = Question::with('choices')->findOrFail($id);
+        $this->question_title = $question->title;
+        $this->question_type = $question->type;
+
+        foreach($question->choices as $key => $value) {
+            $this->inputs[$key] = $value; //increment field by default
+            $this->choices[$key] = $value; //get value from the database
+        }
+        
+    }
+    
+    // public function addInputs() {
+    //     $this->inputs->push(['choice' => '']);
+    // }
+
+    // public function removeInputs($key) {
+    //     $this->inputs->pull($key);
+    // }
+
+    // public function deleteChoices($key) {
+    //     unset($this->choices[$key]);
+    // }
+
+    // public function editQuestion($question_id) {
+    //     $this->getQuestion = Question::with('choices')->find($question_id);
+    //     $this->choices = $this->getQuestion->choices()->get();
+    //     $this->question_title = $this->getQuestion->title;
+    //     $this->question_type = $this->getQuestion->type;
+    //     $this->question_id = $this->getQuestion->id;
+    // }
 
     public function updated($propertyName){
         $this->validateOnly($propertyName);
@@ -36,80 +98,32 @@ class ViewPromo extends Component
         $this->inputs = [];
     }
 
-    protected $rules = [
-        'question_title' => 'required',
-        'question_type' => 'required',
-        // 'choices.*.choice' => 'required',
-    ];
+    // protected $rules = [
+    //     'question_title' => 'required',
+    //     'question_type' => 'required',
+    // ];
 
+    // public function storeQuestion() {
+    //     $this->validate();
 
+    //     $question = Question::create([
+    //         'title' => $this->question_title,
+    //         'type' => $this->question_type
+    //     ]);
 
-    public function addInputs() {
-        $this->inputs->push(['choice' => '']);
-    }
+    //     $question->promo()->attach($this->promo_id);
 
-    public function removeInputs($key) {
-        $this->inputs->pull($key);
-    }
+    //     foreach($this->inputs as $input) {
+    //         $choices = Choice::create([
+    //             'choice' => $input['choice'],
+    //         ]);
+    //         $question->choices()->attach($choices->id);
+    //     }
 
-    public function deleteChoices($key) {
-        unset($this->choices[$key]);
-    }
+    //     session()->flash('statusAdded', 'Question successfully added.');
 
-    public function storeQuestion() {
-        $this->validate();
-
-        $question = Question::create([
-            'title' => $this->question_title,
-            'type' => $this->question_type
-        ]);
-
-        $question->promo()->attach($this->promo_id);
-
-        foreach($this->inputs as $input) {
-            $choices = Choice::create([
-                'choice' => $input['choice'],
-            ]);
-            $question->choices()->attach($choices->id);
-        }
-
-        session()->flash('statusAdded', 'Question successfully added.');
-
-        $this->resetFields();
-    }
-    
-
-    public function updateQuestion() {
-        $this->getQuestion->update([
-            'title' => $this->question_title,
-            'type' => $this->question_type
-        ]);
-    
-        $getChoices = $this->getQuestion->choices()->get();
-
-        foreach($getChoices as $value) {
-            
-        }
-
-        // $getChoiceID = $getChoices->pluck('id');
-
-        // foreach($this->choices as $choice) {
-            
-        // }
-
-        session()->flash('statusUpdated', 'Question updated successfully.');
-    }
-
-
-
-    public function editQuestion($question_id) {
-        $this->getQuestion = Question::with('choices')->find($question_id);
-        $this->choices = $this->getQuestion->choices()->get();
-        $this->question_title = $this->getQuestion->title;
-        $this->question_type = $this->getQuestion->type;
-        $this->question_id = $this->getQuestion->id;
-    }
-
+    //     $this->resetFields();
+    // }
 
     public function mount($id) {
         $this->inputs = collect();
@@ -136,9 +150,7 @@ class ViewPromo extends Component
         $this->platforms = $getPromo->platforms->pluck('name');
 
         $this->questions = $this->promo->questions()->get();
-
     }
-
 
     public function render()
     {
