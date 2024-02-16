@@ -34,7 +34,6 @@ class EditPlatform extends Component
         $this->slug = $platform->slug;
         $this->hex_color = $platform->hex_color;
         $this->is_visible = $platform->is_visible;
-
     }
 
     public function updatePlatformn() {

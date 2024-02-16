@@ -5,6 +5,10 @@
         </div>
     </div>
 
+    <div class="py-20">
+        <input wire:model.live='question_title' type="text">
+    </div>
+
     <div class="pb-10">
         <div class="flex flex-col lg:flex-row space-x-0 space-y-5 lg:space-y-0 lg:space-x-5 lg:items-center">
             <div class="p-1 rounded-lg flex-none">
@@ -111,7 +115,7 @@
                 <div class="flex-1 flex flex-col lg:pb-0 pb-6">
                     <x-label class="!text-slate-400 block pb-1">Language</x-label>
                     <x-label class="!font-medium block !mb-0">
-                        <span>{{ $language_id }}</span>
+                        <span>{{ $language_id->name }}</span>
                     </x-label>
                 </div>
                 <div class="flex-1 flex flex-col pt-6 lg:pt-0 lg:border-0 border-t border-slate-200">
@@ -285,7 +289,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($questions as $question)
+                                @forelse ($questions as $question)
                                     <tr class="border-b hover:bg-slate-100 rounded-xl">
                                         <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap w-2">
                                             {{ $loop->iteration }}
@@ -300,10 +304,12 @@
                                             {{ $question->created_at->diffForHumans() }}
                                         </td>
                                         <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap">
-                                            <x-button wire:click="editQuestion({{ $question }})" data-modal-target="edit-default-modal" data-modal-toggle="edit-default-modal" >Edit</x-button>
+                                            <x-button wire:click='editQuestion({{ $question->id }})' data-modal-target="edit-default-modal" data-modal-toggle="edit-default-modal" >Edit</x-button>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -350,7 +356,7 @@
                 <div class="p-4 md:p-5 space-y-4">
                     <div>
                         <x-label for="question_title">Title</x-label>
-                        <x-input-text wire:model.defer="question_title" id="question_title"></x-input-text>
+                        <x-input-text wire:model="question_title" id="question_title"></x-input-text>
                         @error('question_title')
                         <span class="text-rose-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -358,7 +364,7 @@
 
                     <div>
                         <x-label for="question_type">Type</x-label>
-                        <x-select wire:model.defer="question_type" id="question_type">
+                        <x-select wire:model="question_type" id="question_type">
                             <option value="single_select">Single select</option>
                             <option value="multiple_select">Multiple select</option>
                             <option value="comment">Comment</option>
@@ -370,11 +376,11 @@
 
                   
                     <div>
-                        @foreach ($inputs as $key => $value)
-                            <div class="mb-2">
+                        @foreach ($choices as $key => $choice)
+                            <div wire:key="{{ $key }}" class="mb-2">
                                 <div class="flex">
-                                    <x-input-text wire:model="inputs.{{ $key }}.choice"></x-input-text>
-                                    <x-button wire:click.prevent="removeInput({{ $key }})">delete</x-button>
+                                    <x-input-text wire:model="choices.{{ $key }}.choice"></x-input-text>
+                                    <x-button wire:click.prevent="deleteRowForChoice({{ $key }})">delete</x-button>
                                 </div>
                             </div>
                         @endforeach
@@ -383,7 +389,7 @@
             
             <!-- Modal footer -->
             <div class="flex items-center p-4 md:p-5 border-t border-slate-200 rounded-b">
-                <x-button wire:click.prevent="addInput()">Add</x-button>
+                <x-button wire:click.prevent="addRowForChoice()">Add</x-button>
                 <x-button wire:target="storeQuestion">Save</x-button>
             </div>
             </form>
@@ -416,46 +422,44 @@
             <!-- Modal body -->
             <form wire:submit.prevent='updateQuestion'>
                 <div class="p-4 md:p-5 space-y-4">
-                   
                     <div>
                         <x-label for="question_title">Title</x-label>
-                        <x-input-text wire:model="question_title" value="{{ $question_title ?? '' }}" id="question_title"></x-input-text>
+                        
+                        <x-input-text wire:model.defer="question_title" value="{{ $question_title }}" name="question_title"></x-input-text>
+                        
                         @error('question_title')
-                            <span class="text-rose-500 text-sm">{{ $message }}</span>
+                        <span class="text-rose-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div>
                         <x-label for="question_type">Type</x-label>
-                        <x-select wire:model="question_type" id="question_type">
-                            <option wire:key="single_select" value="single_select" @if($question_type == 'single_select') selected @endif>Single select</option>
-                            <option wire:key="multi_select" value="multiple_select" @if($question_type == 'multiple_select') selected @endif>Multiple select</option>
-                            <option wire:key="comment" value="comment" @if($question_type == 'comment') selected @endif>Comment</option>
+                        <x-select wire:model="question_type">
+                            <option value="single_select" @if($question_type == 'single_select') selected @endif>Single select</option>
+                            <option value="multiple_select" @if($question_type == 'multiple_select') selected @endif>Multiple select</option>
+                            <option value="comment" @if($question_type == 'comment') selected @endif>Comment</option>
                         </x-select>
                         @error('question_type')
-                            <span class="text-rose-500 text-sm">{{ $message }}</span>
+                        <span class="text-rose-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
-                   
 
                     <div>
-
-                        @foreach ($inputs as $key => $value)
-                            
+                        @foreach ($choices as $key => $choice)
                             <div wire:key="{{ $key }}" class="mb-2">
                                 <div class="flex">
-                                    <x-input-text wire:model.defer="inputs.{{ $key }}.choice" value=""></x-input-text>
-                                    <x-href wire:click.prevent="removeInput({{ $key }})">delete</x-href>
+                                    <x-input-text wire:model.defer="choices.{{ $key }}.choice"></x-input-text>
+                                    <x-button wire:click.prevent="deleteRowForChoice({{ $key }})">delete</x-button>
                                 </div>
                             </div>
-                            @endforeach
+                        @endforeach
                     </div>
                 </div>
             
                 <!-- Modal footer -->
                 <div class="flex items-center p-4 md:p-5 border-t border-slate-200 rounded-b">
-                    <x-button wire:click.prevent="addInput()">Add</x-button>
-                    <x-button wire:target="updateQuestion()">Save</x-button>
+                    <x-button wire:click.prevent="addRowForChoice()">Add</x-button>
+                    <x-button wire:target="updateQuestion">Save</x-button>
                 </div>
             </form>
         </div>

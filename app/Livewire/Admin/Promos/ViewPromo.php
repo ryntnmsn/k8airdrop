@@ -5,7 +5,6 @@ namespace App\Livewire\Admin\Promos;
 use App\Models\Choice;
 use App\Models\Promo;
 use App\Models\Question;
-use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,59 +14,82 @@ class ViewPromo extends Component
 
     protected $paginationTheme = 'tailwind';
 
-    public $promo, $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image, $promo_id, $title;
+    public $name, $is_visible, $is_featured, $slug, $language_id,  $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image, $promo_id, $title;
+    public $question_title = '', $question_type, $question_id;
     public $platforms = [];
-    public $inputs = [0];
     public $choices = [];
+    public $choice;
     public $questions;
-    public $question_title = '';
-    public $question_type;
-    public $getQuestion;
+    public $inputs;
 
-    protected $rules = [
-        'question_title' => 'required',
-        'question_type' => 'required'
-    ];
+    public Promo $promo;
 
-    public function addRowForChoice() {
-        $this->inputs[] = 1;
+    public function addInput() {
+        $this->inputs->push(['choice' => '']);
     }
 
+    public function removeInput($key) {
+        $this->inputs->pull($key);
+    }
+
+    protected $rules = [
+        // 'question.question' => 'required',
+        'question_title' => 'required',
+        'question_type' => 'required',
+        'inputs.*.choice' => 'required'
+    ];
+
+
+    // public function addRowForChoice() {
+    //     $this->choices[] = 1;
+    // }
+
     public function deleteRowForChoice($key) {
-        unset($this->inputs[$key]);
+        unset($this->choices[$key]);
+        // $this->choices->pull($key);
     }
 
     public function storeQuestion() {
         $this->validate();
         $question = Question::create([
-            'title' => $this->question_title,
-            'type' => $this->question_type
+            'question_title' => $this->question_title,
+            'question_type' => $this->question_type
         ]);
 
         $question->promo()->attach($this->promo_id);
 
-        foreach($this->choices as $key => $choice) {
-            $choiceID = Choice::create([
-                'choice' => $this->choices[$key],
+        foreach($this->inputs as $input) {
+            $choice = Choice::create([
+                'choice' => $input['choice']
             ]);
-            $question->choices()->attach($choiceID);
+            $question->choices()->attach($choice->id);
         }
+
+       
 
         session()->flash('statusAdded', 'Question successfully added.');
     }
 
-    public function editQuestion($id) {
-        $question = Question::with('choices')->findOrFail($id);
-        $this->question_title = $question->title;
-        $this->question_type = $question->type;
+    // public function close() {
+    //     $this->reset();
+    // }
 
-        foreach($question->choices as $key => $value) {
-            $this->inputs[$key] = $value; //increment field by default
-            $this->choices[$key] = $value; //get value from the database
+    public function editQuestion(Question $question) {
+        $this->question_id = $question->id;
+        $this->question_title = $question->question_title;
+        $this->question_type = $question->question_type;
+
+        $this->choices = $question->choices()->get();
+
+        foreach($question->choices as $input) {
+            $this->inputs->push(['choice' => $input]); //increment field by default
+            
+            // $this->choices[$key] = $input; //get value from the database
         }
         
+        // dd($this->choices);
     }
-    
+
     // public function addInputs() {
     //     $this->inputs->push(['choice' => '']);
     // }
@@ -88,14 +110,14 @@ class ViewPromo extends Component
     //     $this->question_id = $this->getQuestion->id;
     // }
 
-    public function updated($propertyName){
-        $this->validateOnly($propertyName);
-    }
+    // public function updated($propertyName){
+    //     $this->validateOnly($propertyName);
+    // }
 
     public function resetFields() {
-        $this->question_title = '';
-        $this->question_type = '';
-        $this->inputs = [];
+        // $this->question_title = '';
+        // $this->question_type = '';
+        // $this->inputs = [];
     }
 
     // protected $rules = [
@@ -125,31 +147,35 @@ class ViewPromo extends Component
     //     $this->resetFields();
     // }
 
-    public function mount($id) {
-        $this->inputs = collect();
-        $getPromo = Promo::with('platforms', 'language', 'questions')->find($id);
-        $this->promo = $getPromo;
-        $this->promo_id = $getPromo->id;
-        $this->name = $getPromo->name;
-        $this->slug = env('APP_URL') . '/promos/' . $getPromo->slug;
-        $this->image = $getPromo->image;
-        $this->language_id = $getPromo->language;
-        $this->start_date = $getPromo->start_date;
-        $this->end_date = $getPromo->end_date;
-        $this->is_visible = $getPromo->is_visible;
-        $this->is_featured = $getPromo->is_featured;
-        $this->is_banner = $getPromo->is_banner;
-        $this->prize_pool = $getPromo->prize_pool;
-        $this->type = $getPromo->type;
-        $this->game_type = $getPromo->game_type;
-        $this->button_name = $getPromo->button_name;
-        $this->button_link = $getPromo->button_link;
-        $this->description = $getPromo->description;
-        $this->terms = $getPromo->terms;
-        $this->article = $getPromo->article;
-        $this->platforms = $getPromo->platforms->pluck('name');
+    public function mount(Promo $promo) {
+        $this->promo_id = $promo->id;
+        $this->name = $promo->name;
+
+        $this->slug = env('APP_URL') . '/promos/' . $promo->slug;
+        $this->image = $promo->image;
+        $this->language_id = $promo->language->name;
+        $this->start_date = $promo->start_date;
+        $this->end_date = $promo->end_date;
+        $this->is_visible = $promo->is_visible;
+        $this->is_featured = $promo->is_featured;
+        $this->is_banner = $promo->is_banner;
+        $this->prize_pool = $promo->prize_pool;
+        $this->type = $promo->type;
+        $this->game_type = $promo->game_type;
+        $this->button_name = $promo->button_name;
+        $this->button_link = $promo->button_link;
+        $this->description = $promo->description;
+        $this->terms = $promo->terms;
+        $this->article = $promo->article;
+        $this->platforms = $promo->platforms->pluck('name');
 
         $this->questions = $this->promo->questions()->get();
+
+        $this->fill([
+            'inputs' => collect([['choice' => '']])
+        ]);
+        // $this->inputs = collect();
+
     }
 
     public function render()

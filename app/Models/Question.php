@@ -11,7 +11,7 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'type'
+        'question_title', 'question_type'
     ];
 
     public function promo() : BelongsToMany{
