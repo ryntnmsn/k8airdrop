@@ -4,7 +4,7 @@
             <x-title>View Promo</x-title>
         </div>
     </div>
-    {{$is_visible}}
+
     <div class="pb-10">
         <div class="flex flex-col lg:flex-row space-x-0 space-y-5 lg:space-y-0 lg:space-x-5 lg:items-center">
             <div class="p-1 rounded-lg flex-none">
@@ -257,11 +257,11 @@
                         </div>
                         <div>
                             <div class="flex-1">
-                                <x-button data-modal-target="default-modal" data-modal-toggle="default-modal" >
+                                <x-href href="{{route('question.create', $promo_id)}}">
                                     <span>
                                         Create
                                     </span>
-                                </x-button>
+                                </x-href>
                             </div>
                         </div>
                     </div>

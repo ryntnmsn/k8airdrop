@@ -65,17 +65,22 @@ html, body {
 .tab {
     overflow: hidden;
   }
-  
+
   .tab button.active {
     background-color: rgb(226 232 240 );
     color:rgb(15 23 42);
     font-weight: 600;
   }
-  
+
   .tabContents div.active {
     display: block!important;
   }
-  
+
   .tabContent {
     display: none;
+  }
+
+  #choiceContainer {
+    display: none;
+    margin-top:16px;
   }

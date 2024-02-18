@@ -12,6 +12,7 @@ use App\Livewire\Admin\Promos\CreatePromo;
 use App\Livewire\Admin\Promos\EditPromo;
 use App\Livewire\Admin\Promos\IndexPromo;
 use App\Livewire\Admin\Promos\ViewPromo;
+use App\Livewire\Admin\Question\CreateQuestion;
 use Illuminate\Support\Facades\Route;
 
 
@@ -46,12 +47,15 @@ Route::middleware('auth')->group(function() {
             Route::get('/edit/{language}', EditLanguage::class)->name('languages.edit');
         });
 
-        Route::group(['prefix' => 'promos', 'namespace' => 'App\Livewire\Admin\Promos'], function () {
+        //Promos Class
+        Route::group(['prefix' => 'promos'], function () {
             Route::get('/', IndexPromo::class)->name('promos.index');
             Route::get('/create', CreatePromo::class)->name('promos.create');
             Route::get('/edit/{id}', EditPromo::class)->name('promos.edit');
             Route::get('/view/{id}', ViewPromo::class)->name('promos.view');
+            Route::get('/{promo}/question/create', CreateQuestion::class)->name('question.create');
         });
+
 
         Route::get('/playroom', function () {
             return view('playroom');
