@@ -65,7 +65,7 @@ class ViewPromo extends Component
             $question->choices()->attach($choice->id);
         }
 
-       
+
 
         session()->flash('statusAdded', 'Question successfully added.');
     }
@@ -83,10 +83,10 @@ class ViewPromo extends Component
 
         foreach($question->choices as $input) {
             $this->inputs->push(['choice' => $input]); //increment field by default
-            
+
             // $this->choices[$key] = $input; //get value from the database
         }
-        
+
         // dd($this->choices);
     }
 
@@ -147,13 +147,15 @@ class ViewPromo extends Component
     //     $this->resetFields();
     // }
 
-    public function mount(Promo $promo) {
+    public function mount($id) {
+
+        $promo = Promo::with('language', 'platforms', 'questions')->find($id);
+
         $this->promo_id = $promo->id;
         $this->name = $promo->name;
-
         $this->slug = env('APP_URL') . '/promos/' . $promo->slug;
         $this->image = $promo->image;
-        $this->language_id = $promo->language->name;
+        $this->language_id = $promo->language->name ?? 'No language';
         $this->start_date = $promo->start_date;
         $this->end_date = $promo->end_date;
         $this->is_visible = $promo->is_visible;
@@ -169,7 +171,7 @@ class ViewPromo extends Component
         $this->article = $promo->article;
         $this->platforms = $promo->platforms->pluck('name');
 
-        $this->questions = $this->promo->questions()->get();
+        $this->questions = $promo->questions()->get();
 
         $this->fill([
             'inputs' => collect([['choice' => '']])

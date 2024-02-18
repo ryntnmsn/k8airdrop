@@ -4,7 +4,7 @@
             <x-title>View Promo</x-title>
         </div>
     </div>
-
+    {{$is_visible}}
     <div class="pb-10">
         <div class="flex flex-col lg:flex-row space-x-0 space-y-5 lg:space-y-0 lg:space-x-5 lg:items-center">
             <div class="p-1 rounded-lg flex-none">
@@ -14,6 +14,7 @@
                 <x-label class="!font-medium block !text-xl">{{ $name }}</x-label>
                 <x-label class="!text-slate-400">{{ $slug }}</x-label>
                 <x-label class="!text-slate-400 block">
+
                     @if($is_visible == '1')
                         <span class="bg-green-100 text-green-500 font-medium px-2 rounded-full">Active</span>
                     @else
@@ -54,18 +55,20 @@
           >Participants</a
         >
       </li>
-      <li role="presentation">
-        <a
-          href="#manage-question"
-          class="block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 font-medium leading-tight text-slate-500 hover:isolate hover:border-transparent hover:bg-slate-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-indigo-500 data-[te-nav-active]:text-indigo-500 "
-          data-te-toggle="pill"
-          data-te-target="#manage-question"
-          role="tab"
-          aria-controls="manage-question"
-          aria-selected="false"
-          >Manage Questions</a
-        >
-      </li>
+      @if($type == 'click_to_join' && $game_type == 'multiple_choice')
+        <li role="presentation">
+            <a
+            href="#manage-question"
+            class="block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 font-medium leading-tight text-slate-500 hover:isolate hover:border-transparent hover:bg-slate-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-indigo-500 data-[te-nav-active]:text-indigo-500 "
+            data-te-toggle="pill"
+            data-te-target="#manage-question"
+            role="tab"
+            aria-controls="manage-question"
+            aria-selected="false"
+            >Manage Questions</a
+            >
+        </li>
+    @endif
     </ul>
 
     <!--Tabs content-->
@@ -81,7 +84,7 @@
                 <div class="flex-1 flex flex-col lg:pb-0 pb-6">
                     <x-label class="!text-slate-400 block pb-1">Duration</x-label>
                     <x-label class="!font-medium block !mb-0">
-                        {{date('F j', strtotime($promo->start_date))}} - {{date('F j, Y', strtotime($promo->end_date))}}
+                        {{date('F j', strtotime($start_date))}} - {{date('F j, Y', strtotime($end_date))}}
                     </x-label>
                 </div>
                 <div class="flex-1 flex flex-col pt-6 lg:pt-0 lg:border-0 border-t border-slate-200">
@@ -368,7 +371,7 @@
                         @enderror
                     </div>
 
-                  
+
                     <div>
                         @foreach ($inputs as $key => $value)
                             <div class="mb-2">
@@ -378,9 +381,9 @@
                                 </div>
                             </div>
                         @endforeach
-                    </div> 
+                    </div>
                 </div>
-            
+
             <!-- Modal footer -->
             <div class="flex items-center p-4 md:p-5 border-t border-slate-200 rounded-b">
                 <x-button wire:click.prevent="addInput()">Add</x-button>
@@ -416,7 +419,7 @@
             <!-- Modal body -->
             <form wire:submit.prevent='updateQuestion'>
                 <div class="p-4 md:p-5 space-y-4">
-                   
+
                     <div>
                         <x-label for="question_title">Title</x-label>
                         <x-input-text wire:model="question_title" value="{{ $question_title ?? '' }}" id="question_title"></x-input-text>
@@ -436,12 +439,12 @@
                             <span class="text-rose-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
-                   
+
 
                     <div>
 
                         @foreach ($inputs as $key => $value)
-                            
+
                             <div wire:key="{{ $key }}" class="mb-2">
                                 <div class="flex">
                                     <x-input-text wire:model.defer="inputs.{{ $key }}.choice" value=""></x-input-text>
@@ -451,7 +454,7 @@
                             @endforeach
                     </div>
                 </div>
-            
+
                 <!-- Modal footer -->
                 <div class="flex items-center p-4 md:p-5 border-t border-slate-200 rounded-b">
                     <x-button wire:click.prevent="addInput()">Add</x-button>
@@ -519,8 +522,8 @@
 
                     <div>
                         @if($choices == true)
-                            
-                              
+
+
                                 @foreach ($choices as $key => $value)
                                     <div class="mb-4">
                                         <div class="flex w-full items-center justify-between">
@@ -537,9 +540,9 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            
+
                         @endif
-                       
+
                         @foreach ($inputs as $key => $value)
                             <div class="add-input mb-4">
                                 <div class="flex w-full items-center justify-between">

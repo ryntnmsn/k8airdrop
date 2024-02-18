@@ -18,7 +18,7 @@ class CreatePromo extends Component
 
     public $name, $slug, $language_id, $is_visible, $is_featured, $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
     public $platforms = [];
-    
+
 
     public function generateSlug() {
         $this->slug = Str::slug($this->name);

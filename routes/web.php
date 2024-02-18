@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function() {
             Route::get('/', IndexPromo::class)->name('promos.index');
             Route::get('/create', CreatePromo::class)->name('promos.create');
             Route::get('/edit/{id}', EditPromo::class)->name('promos.edit');
-            Route::get('/view/{promo}', ViewPromo::class)->name('promos.view');
+            Route::get('/view/{id}', ViewPromo::class)->name('promos.view');
         });
 
         Route::get('/playroom', function () {
@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function() {
         });
     });
 
-   
+
 
 });
 
