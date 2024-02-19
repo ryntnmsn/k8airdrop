@@ -12,7 +12,7 @@ class CreateQuestion extends Component
     public $promo_id;
     public $question_title;
     public $question_type;
-    public $choices = [];
+    public $choices;
 
     public Promo $promo;
 
@@ -22,11 +22,19 @@ class CreateQuestion extends Component
     ];
 
     public function addInputRow() {
-        $this->choices[] = 1;
+        // $this->choices[] = 1;
+        $this->choices->push(['choice' => '']);
     }
 
     public function removeInputRow($key) {
-        unset($this->choices[$key]);
+        // unset($this->choices[$key]);
+        $this->choices->pull($key);
+    }
+
+    public function resetFields() {
+        $this->question_title = '';
+        $this->question_title = '';
+        $this->choices[] = '';
     }
 
     public function storeQuestion() {
@@ -38,15 +46,30 @@ class CreateQuestion extends Component
 
         $question->promo()->attach($this->promo_id);
 
-        foreach($this->choices as $key => $choice) {
-            $choices[] = $this->choices[$key];
+        if($this->question_type != 'comment') {
+            foreach($this->choices as $choice) {
+                // $choices[] = $this->choices[$key];
+                $choices = Choice::create([
+                    'choice' => $choice['choice']
+                ]);
+                $question->choices()->attach($choices->id);
+            }
         }
-        dd($choices);
+       
+        $this->dispatch('created', [
+            'title' => 'Created',
+            'text' => 'Question created successfully.',
+            'icon' => 'success',
+            'iconColor' => 'green',
+        ]);
+
+        $this->resetFields();
     }
 
 
     public function mount(Promo $promo) {
         $this->promo_id = $promo->id;
+        $this->choices = collect();
     }
 
 

@@ -18,7 +18,6 @@
         </div>
     </div>
 
-
     <div class="mt-10">
         <div class="flex space-x-5 mb-5">
             <div class="flex-1 relative">
@@ -44,7 +43,6 @@
                             <input checked type="checkbox" wire:model.live="active" class="w-5 h-5 rounded  text-indigo-500 border-slate-300">
                         </span>
                     </div>
-
                     <div class="flex items-center float-right space-x-3">
                         <span>
                             Show records:

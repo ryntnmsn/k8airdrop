@@ -13,6 +13,7 @@ use App\Livewire\Admin\Promos\EditPromo;
 use App\Livewire\Admin\Promos\IndexPromo;
 use App\Livewire\Admin\Promos\ViewPromo;
 use App\Livewire\Admin\Question\CreateQuestion;
+use App\Livewire\Admin\Question\EditQuestion;
 use Illuminate\Support\Facades\Route;
 
 
@@ -54,6 +55,7 @@ Route::middleware('auth')->group(function() {
             Route::get('/edit/{id}', EditPromo::class)->name('promos.edit');
             Route::get('/view/{id}', ViewPromo::class)->name('promos.view');
             Route::get('/{promo}/question/create', CreateQuestion::class)->name('question.create');
+            Route::get('/{promo}/question/edit/{question}', EditQuestion::class)->name('question.edit');
         });
 
 

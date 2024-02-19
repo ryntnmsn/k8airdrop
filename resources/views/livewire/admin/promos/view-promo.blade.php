@@ -303,7 +303,7 @@
                                             {{ $question->created_at->diffForHumans() }}
                                         </td>
                                         <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap">
-                                            <x-button wire:click="editQuestion({{ $question }})" data-modal-target="edit-default-modal" data-modal-toggle="edit-default-modal" >Edit</x-button>
+                                            <x-href href="{{route('question.edit', ['promo' => $promo_id, 'question' => $question->id])}}">Edit</x-href>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -442,7 +442,6 @@
 
 
                     <div>
-
                         @foreach ($inputs as $key => $value)
 
                             <div wire:key="{{ $key }}" class="mb-2">
@@ -451,7 +450,7 @@
                                     <x-href wire:click.prevent="removeInput({{ $key }})">delete</x-href>
                                 </div>
                             </div>
-                            @endforeach
+                        @endforeach
                     </div>
                 </div>
 

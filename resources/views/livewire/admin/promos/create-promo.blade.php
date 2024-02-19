@@ -332,7 +332,6 @@
                 @this.set('end_date', event.target.value); 
             }); 
             }); 
-            
         </script>
     
      
