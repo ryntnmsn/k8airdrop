@@ -36,6 +36,8 @@ class EditQuestion extends Component
 
         $this->choices = collect();
 
+       
+
         $this->question_title = $questionGet->question_title;
         $this->question_type = $questionGet->question_type;
 
