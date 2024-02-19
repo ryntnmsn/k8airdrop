@@ -29,17 +29,7 @@
                     @enderror
                 </div>
 
-                <div wire:ignore.self class="space-y-5" id="choiceContainer">
-                        <div class="flex justify-between items-center relative">
-                            <x-input-text wire:model="choices.0.choice" class="overflow-hidden"></x-input-text>
-                            <div class="absolute right-0 flex justify-between">
-                                <x-button wire:ignore.self wire:click.prevent="addInputRow" class="!bg-blue-500 !border-0 !px-2 !rounded-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                    </svg>
-                                </x-button>
-                            </div>
-                        </div>
+                <div wire:ignore.self class="space-y-5">
                     @foreach ($choices as $key => $item)
                         <div wire:key="{{$key}}" class="flex justify-between items-center relative">
                             <x-input-text wire:model="choices.{{$key}}.choice" class="overflow-hidden"></x-input-text>
@@ -59,7 +49,8 @@
                     @endforeach
                 </div>
 
-                <div>
+                <div class="flex justify-between">
+                    <x-button wire:click.prevent="addInputRow" id="btnChoice" class="!float-none">Add Choices</x-button>
                     <x-button wire:target="storeQuestion" class="!float-none">Save</x-button>
                 </div>
             </div>
@@ -70,10 +61,10 @@
 
 <script>
     const select_type = document.getElementById('selectType');
-    const choice_container = document.getElementById('choiceContainer');
+    const btn_choice = document.getElementById('btnChoice');
     select_type.addEventListener('change', function handleChange(event) {
         if(event.target.value == 'single_select' || event.target.value == 'multiple_select') {
-            choice_container.style.display = 'block'
+            btn_choice.style.display = 'block'
         }
     });
 </script>

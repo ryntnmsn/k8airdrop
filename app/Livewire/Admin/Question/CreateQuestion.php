@@ -18,7 +18,7 @@ class CreateQuestion extends Component
 
     protected $rules = [
         'question_title' => 'required',
-        'question_type' => 'required'
+        'question_type' => 'required',
     ];
 
     public function addInputRow() {
@@ -39,9 +39,7 @@ class CreateQuestion extends Component
         $question->promo()->attach($this->promo_id);
 
         foreach($this->choices as $key => $choice) {
-            $choices = Choice::create([
-                'choice' => $this->choices[$key]
-            ]);
+            $choices[] = $this->choices[$key];
         }
         dd($choices);
     }
