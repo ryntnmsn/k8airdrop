@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 //auth controller
 Route::controller(AuthController::class)->group(function() {
-    Route::get('/', 'index')->name('auth.index');
-    Route::post('login', 'login')->name('auth.login');
-    Route::post('logout', 'logout')->middleware('auth')->name('auth.logout');
+    Route::get('/admin', 'index')->name('auth.index');
+    Route::post('admin/login', 'login')->name('auth.login');
+    Route::post('admin/logout', 'logout')->middleware('auth')->name('auth.logout');
 });
 
 
@@ -63,8 +63,6 @@ Route::middleware('auth')->group(function() {
             return view('playroom');
         });
     });
-
-
 
 });
 
