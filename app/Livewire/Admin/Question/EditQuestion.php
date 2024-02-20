@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Question;
 
+use App\Models\Choice;
 use App\Models\Promo;
 use App\Models\Question;
 use Livewire\Component;
@@ -13,20 +14,39 @@ class EditQuestion extends Component
     public $question_title;
     public $question_type;
     public $choices;
+    public $choice_id;
 
     public Promo $promo;
     public Question $question;
 
     protected $rules = [
-        'choices.*.choice' => 'required'
+        'question_title' => 'required',
+        'question_type' => 'required'
+        // 'choices.*.choice' => 'required'
     ];
 
     public function updateQuestion() {
+        $this->validate();
+        // dd($this->question_id);
+        $question = Question::where('id', $this->question_id);
+        $question->update([
+            'question_title' => $this->question_title,
+            'question_type' => $this->question_type
+        ]);
 
+        foreach($this->choices as $choice) {
+            $choices = Choice::where('id', 28);
+            $choices->update([
+                'choice' => $choice['choice']
+            ]);
+        }
+    }
+
+    public function removeInputRow($key) {
+        $this->choices->pull($key);
     }
 
     public function addInputRow() {
-        // $this->choices[] = 1;
         $this->choices->push(['choice' => '']);
     }
 
@@ -36,16 +56,14 @@ class EditQuestion extends Component
 
         $this->choices = collect();
 
-       
-
+        $this->question_id = $questionGet->id;
         $this->question_title = $questionGet->question_title;
         $this->question_type = $questionGet->question_type;
 
         foreach($questionGet->choices as $choice) {
-            $this->choices->push(['choice' => $choice]);
+            $this->choices->push(['choice' => $choice->choice, 'id' => $choice->id]);
         }
 
-        // dd($questionGet->choices);
     }
 
     public function render()
