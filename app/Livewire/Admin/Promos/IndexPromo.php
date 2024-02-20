@@ -18,6 +18,7 @@ class IndexPromo extends Component
     public $lang;
     public $sortField = 'created_at';
     public $sortDirection = 'desc';
+    public $promo_id;
 
     protected $queryString = [
         'search' => ['except' => ''], 
@@ -36,6 +37,16 @@ class IndexPromo extends Component
         }
 
         $this->sortField = $field;
+    }
+    
+
+    public function deletePromo(int $id) {
+        $this->promo_id = $id;
+    }
+
+    public function destroyPromo() {
+        $promo = Promo::findOrFail($this->promo_id);
+        $promo->delete();
     }
 
 

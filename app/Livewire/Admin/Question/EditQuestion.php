@@ -34,16 +34,23 @@ class EditQuestion extends Component
             'question_type' => $this->question_type
         ]);
 
-        foreach($this->choices as $choice) {
-            $choices = Choice::where('id', 28);
-            $choices->update([
-                'choice' => $choice['choice']
+        foreach($this->choices as $key => $choice) {
+            $ids = $this->choices[$key]['id'] ?? false;
+           Choice::findOrFail($ids)->update([
+                'choice' => $this->choices[$key]['choice']
             ]);
         }
+        // dd($choiceValues);
     }
 
     public function removeInputRow($key) {
         $this->choices->pull($key);
+    }
+
+    public function removeChoiceRow($id) {
+        $choice = Choice::findOrFail($id);
+        $choice->delete();
+        $this->dispatch('refresh-page');
     }
 
     public function addInputRow() {

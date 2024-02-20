@@ -4,9 +4,14 @@ namespace App\Livewire\Admin\Platforms;
 
 use App\Models\Platform;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class IndexPlatform extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'tailwind';
+
     public $search;
     public $pagination = 10;
     public $platform_id;
