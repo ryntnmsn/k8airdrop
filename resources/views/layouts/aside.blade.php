@@ -47,15 +47,38 @@
             </ul>
          </li>
          <li class="border-b border-slate-100">
-            <a wire:navigate href="#" class="flex items-center p-2 text-slate-800 rounded-lg hover:bg-indigo-500 hover:text-slate-50 group">
+            <button type="button" class="flex items-center w-full p-2 text-slate-800 transition duration-75 rounded-lg group hover:bg-indigo-500 hover:text-slate-50" aria-controls="dropdown-articles" data-collapse-toggle="dropdown-articles">
                <div class="w-6">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
                    </svg>
                </div>
-               <span class="flex-1 ms-2 whitespace-nowrap">Articles</span>
-            </a>
+               <span class="flex-1 ms-2 text-left rtl:text-right whitespace-nowrap">Articles</span>
+               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+               </svg>
+            </button>
+            <ul id="dropdown-articles" class="{{ request()->is('admin/articles*') || request()->is('admin/articles/categories*') || request()->is('admin/articles/tags*') ? 'block' : 'hidden'}} py-2 space-y-1">
+                  <li>
+                     <a wire:navigate href="{{ route('articles.index') }}" class="{{ request()->is('admin/articles') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">All</a>
+                  </li>
+                  <li>
+                     <a wire:navigate href="{{ route('articles.categories.index') }}" class="{{ request()->is('admin/articles/categories*') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">Categories</a>
+                  </li>
+                  <li>
+                     <a wire:navigate href="{{ route('articles.tags.index') }}" class="{{ request()->is('admin/articles/tags*') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800' }} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">Tags</a>
+                  </li>
+                  <li>
+                     <a wire:navigate href="{{ route('articles.create') }}" class="text-slate-800 flex space-x-1 items-center w-full p-2 transition duration-75 rounded-lg pl-5 group hover:bg-indigo-500 hover:text-slate-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" data-slot="icon" class="w-5 h-5">
+                           <path fill-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
+                         </svg>
+                        <span>Create Article</span>
+                     </a>
+                  </li>
+            </ul>
          </li>
+        
          <li class="border-b border-slate-100">
             <a wire:navigate href="#" class="flex items-center p-2 text-slate-800 rounded-lg hover:bg-indigo-500 hover:text-slate-50 group">
                <div class="w-6">

@@ -2,6 +2,13 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Livewire\Admin\Article\CreateArticle;
+use App\Livewire\Admin\Article\EditArticle;
+use App\Livewire\Admin\Article\IndexArticle;
+use App\Livewire\Admin\Articlecategory\CreateArticleCategory;
+use App\Livewire\Admin\Articlecategory\EditArticleCategory;
+use App\Livewire\Admin\Articlecategory\IndexArticleCategory;
+use App\Livewire\Admin\Articletag\IndexArticleTag;
 use App\Livewire\Admin\Platforms\CreatePlatform;
 use App\Livewire\Admin\Platforms\EditPlatform;
 use App\Livewire\Admin\Platforms\IndexPlatform;
@@ -16,14 +23,12 @@ use App\Livewire\Admin\Question\CreateQuestion;
 use App\Livewire\Admin\Question\EditQuestion;
 use Illuminate\Support\Facades\Route;
 
-
 //auth controller
 Route::controller(AuthController::class)->group(function() {
     Route::get('/admin', 'index')->name('auth.index');
     Route::post('admin/login', 'login')->name('auth.login');
     Route::post('admin/logout', 'logout')->middleware('auth')->name('auth.logout');
 });
-
 
 
 Route::middleware('auth')->group(function() {
@@ -56,6 +61,22 @@ Route::middleware('auth')->group(function() {
             Route::get('/view/{id}', ViewPromo::class)->name('promos.view');
             Route::get('/{promo}/question/create', CreateQuestion::class)->name('question.create');
             Route::get('/{promo}/question/edit/{question}', EditQuestion::class)->name('question.edit');
+        });
+
+        //Articles Class
+        Route::group(['prefix' => 'articles'], function () {
+            Route::get('/', IndexArticle::class)->name('articles.index');
+            Route::get('/create', CreateArticle::class)->name('articles.create');
+        });
+
+        //Article Categories Class
+        Route::group(['prefix' => 'articles/categories'], function () {
+            Route::get('/', IndexArticleCategory::class)->name('articles.categories.index');
+        });
+
+        //Article Tags Class
+        Route::group(['prefix' => 'articles/tags'], function () {
+            Route::get('/', IndexArticleTag::class)->name('articles.tags.index');
         });
 
 
