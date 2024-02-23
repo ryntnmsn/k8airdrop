@@ -64,7 +64,7 @@
                                                 @if($new_image)
                                                     <img src="{{ $new_image->temporaryUrl() }}" alt="" class="rounded-xl">
                                                 @else
-                                                    <img src="{{ url('storage/promos/', $old_image) }}" alt="" class="rounded-xl">
+                                                    <img src="{{ url('storage/promo/', $old_image) }}" alt="" class="rounded-xl">
                                                 @endif
                                             </div>
                                         </label>

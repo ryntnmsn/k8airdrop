@@ -12,17 +12,17 @@ html, body {
     font-size:14px
 }
 
-.ck.ck-toolbar, .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+/* .ck.ck-toolbar, .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
     border:1px solid rgb(226 232 240)!important
 }
 
 .ck-editor__editable[role="textbox"] {
     min-height: 200px;
-}
+} */
 
-.select2-container {
+/* .select2-container {
     width:100%!important
-}
+} */
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
     background-color: rgb(241 245 249)!important;

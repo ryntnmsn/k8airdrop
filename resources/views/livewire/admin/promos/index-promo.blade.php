@@ -137,9 +137,9 @@
                                         <div class="w-20">
                                             <div class="p-[2px] border border-slate-200 rounded-md">
                                                 @if($promo->image == null)
-                                                    <img src="{{ url('storage/promos/default-image.jpg') }}" alt="" class="w-20 rounded-md">
+                                                    <img src="{{ url('storage/promo/default-image.jpg') }}" alt="" class="w-20 rounded-md">
                                                 @else
-                                                    <img src="{{ url('storage/promos/' . $promo->image) }}" alt="" class="w-20 rounded-md">
+                                                    <img src="{{ url('storage/promo/' . $promo->image) }}" alt="" class="w-20 rounded-md">
                                                 @endif
                                             </div>
                                         </div>
@@ -161,9 +161,9 @@
                                 </td>
                                 <td class="px-6 py-3">
                                     @if($promo->language_id == '1')
-                                        <img src="{{ url('storage/images/en_icon.jpg') }}" loading='lazy' class="border border-slate-200 rounded-sm p-1 overflow-hidden">
+                                        <img src="{{ url('storage/images/english-icon.png') }}" loading='lazy' class="border border-slate-200 rounded-sm p-1 overflow-hidden">
                                     @else
-                                        <img src="{{ url('storage/images/jp_icon.jpg') }}" loading='lazy'  class="border border-slate-200 rounded-sm p-1 overflow-hidden">
+                                        <img src="{{ url('storage/images/japan-icon.png') }}" loading='lazy'  class="border border-slate-200 rounded-sm p-1 overflow-hidden">
                                     @endif
                                 </td>
                                 <td class="px-6 py-3">
@@ -214,8 +214,6 @@
             {{ $promos->links() }}
         </x-pagination>
     </div>
-
-
 
 
     {{-- Delete modal confirmation --}}

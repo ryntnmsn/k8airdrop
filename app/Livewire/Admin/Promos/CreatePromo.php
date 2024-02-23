@@ -50,7 +50,7 @@ class CreatePromo extends Component
     //new image name
     public function imageName() {
         $imageName = Carbon::now()->timestamp . '.' . $this->image->extension();
-        $image = $this->image->store('/', 'promos');
+        $image = $this->image->store('/', 'promo');
         return $image;
     }
 

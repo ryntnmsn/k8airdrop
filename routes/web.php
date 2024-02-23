@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function() {
         Route::group(['prefix' => 'articles'], function () {
             Route::get('/', IndexArticle::class)->name('articles.index');
             Route::get('/create', CreateArticle::class)->name('articles.create');
+            Route::get('/edit/{article}', EditArticle::class)->name('articles.edit');
         });
 
         //Article Categories Class

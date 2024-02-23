@@ -30,7 +30,7 @@
     @include('layouts.aside')
 
     <div class="p-4 sm:ml-64">
-        <div class="bg-white mt-20 {{ request()->is('admin/promos') ? 'max-w-[1920px]' : 'max-w-screen-2xl' }} {{request()->is('admin/promos/*/question*') ? '!max-w-[780px]' : '' }} shadow-xl shadow-gray-100 mx-auto w-full p-10 rounded-xl">
+        <div class="bg-white mt-20 {{ request()->is('admin/promos') || request()->is('admin/articles') ? 'max-w-[1920px]' : 'max-w-screen-2xl' }} {{request()->is('admin/promos/*/question*') ? '!max-w-[780px]' : '' }} shadow-xl shadow-gray-100 mx-auto w-full p-10 rounded-xl">
             <x-alert></x-alert>
             @yield('contents')
         </div>
@@ -39,6 +39,6 @@
     @include('layouts.footer')
     @livewireScripts
 
-    <script type="text/javascript" src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+    {{-- <script type="text/javascript" src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script> --}}
 </body>
 </html>

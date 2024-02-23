@@ -93,7 +93,7 @@ class EditPromo extends Component
 
         $filename = '';
         if($this->new_image != null){
-            $filename = $this->new_image->store('/', 'promos');
+            $filename = $this->new_image->store('/', 'promo');
         } else {
             $filename = $this->old_image;
         }

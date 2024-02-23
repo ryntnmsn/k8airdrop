@@ -3,14 +3,25 @@
 namespace App\Livewire\Admin\Articletag;
 
 use App\Models\ArticleTag;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\WithPagination;
 
 class IndexArticleTag extends Component
 {
+    use WithPagination;
 
     public $title = '';
     public $tagID;
+    public $pagination = 20;
+
+    protected $paginationTheme = 'tailwind';
+
+    // protected $listeners = [
+    //     'deleteConfirmed' => '$refresh'
+    // ];
+
 
     public ArticleTag $articleTag;
 
@@ -24,12 +35,11 @@ class IndexArticleTag extends Component
 
 
     public function storeArticleTag() {
-        $this->title = 'sample';
-        // $this->validate();
-        // ArticleTag::create([
-        //     'title' => $this->title,
-        //     'slug' => Str::slug($this->title)
-        // ]);
+        $this->validate();
+        ArticleTag::create([
+            'title' => $this->title,
+            'slug' => Str::slug($this->title)
+        ]);
     }
 
  
@@ -48,10 +58,20 @@ class IndexArticleTag extends Component
     }
 
 
+    public function deleteArticleTag(int $id) {
+        $this->tagID = $id;
+    }
+
+    public function destroyArticleTag() {
+        $articleTag = ArticleTag::findOrFail($this->tagID);
+        $articleTag->delete();
+        $this->js('window.location.reload()'); 
+    }
+
     public function render()
     {
-        $articleTags = ArticleTag::all();
-        return view('livewire.admin.articletag.index-article-tag', compact('articleTags'))
-            ->extends('layouts.app')->section('contents');
+        return view('livewire.admin.articletag.index-article-tag', [
+            'articleTags' => ArticleTag::paginate($this->pagination)
+        ])->extends('layouts.app')->section('contents');
     }
 }

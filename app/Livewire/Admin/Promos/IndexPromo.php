@@ -47,6 +47,7 @@ class IndexPromo extends Component
     public function destroyPromo() {
         $promo = Promo::findOrFail($this->promo_id);
         $promo->delete();
+        $this->js('window.location.reload()'); 
     }
 
 
@@ -64,13 +65,11 @@ class IndexPromo extends Component
             })
             ->orderBy($this->sortField, $this->sortDirection);
 
-
-        $query = $promos->toSql();
-
+        // $query = $promos->toSql();
 
         return view('livewire.admin.promos.index-promo', [
             'promos' => $promos->paginate($this->pagination),
-            'query' => $query
+            // 'query' => $query
         ])->extends('layouts.app')->section('contents');
     }
 }

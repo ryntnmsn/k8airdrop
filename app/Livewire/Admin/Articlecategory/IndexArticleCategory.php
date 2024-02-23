@@ -28,7 +28,6 @@ class IndexArticleCategory extends Component
             'slug' => Str::slug($this->title)
         ]);
 
-        $this->resetFields();
     }
 
     public function editArticleCategory(ArticleCategory $articleCategory) {
@@ -52,6 +51,7 @@ class IndexArticleCategory extends Component
     public function destroyArticleCategory() {
         $articleCategory = ArticleCategory::findOrFail($this->categoryID);
         $articleCategory->delete();
+        $this->resetFields();
     }
 
     public function mount() {

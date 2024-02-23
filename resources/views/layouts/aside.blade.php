@@ -69,7 +69,7 @@
                      <a wire:navigate href="{{ route('articles.tags.index') }}" class="{{ request()->is('admin/articles/tags*') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800' }} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-500 hover:text-slate-50">Tags</a>
                   </li>
                   <li>
-                     <a wire:navigate href="{{ route('articles.create') }}" class="text-slate-800 flex space-x-1 items-center w-full p-2 transition duration-75 rounded-lg pl-5 group hover:bg-indigo-500 hover:text-slate-50">
+                     <a wire:navigate href="{{ route('articles.create') }}" class="{{ request()->is('admin/articles/create') ? 'bg-indigo-500 text-slate-50' : 'text-slate-800' }} flex space-x-1 items-center w-full p-2 transition duration-75 rounded-lg pl-5 group hover:bg-indigo-500 hover:text-slate-50">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" data-slot="icon" class="w-5 h-5">
                            <path fill-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
                          </svg>

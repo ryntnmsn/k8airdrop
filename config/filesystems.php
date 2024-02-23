@@ -32,8 +32,8 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
-            // 'root' => public_path('uploads'),
+            // 'root' => storage_path('app'),
+            'root' => public_path('uploads'),
             'throw' => false,
         ],
 
@@ -57,10 +57,18 @@ return [
             'throw' => false,
         ],
 
-        'promos' => [
+        'promo' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/promos'),
-            'url' => env('APP_URL').'/storage/promos',
+            'root' => storage_path('app/public/promo'),
+            'url' => env('APP_URL').'/storage/promo',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'article' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/article'),
+            'url' => env('APP_URL').'/storage/article',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -80,7 +88,8 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        public_path('storage/promos') => storage_path('app/public/promos'),
+        public_path('storage/promo') => storage_path('app/public/promo'),
+        public_path('storage/article') => storage_path('app/public/article'),
     ],
 
 ];

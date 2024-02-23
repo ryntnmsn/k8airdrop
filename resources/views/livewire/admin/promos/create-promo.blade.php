@@ -273,14 +273,14 @@
                                 <div wire:ignore>
                                     <x-label for="terms">Terms and Conditions</x-label>
                                     <div id="container">
-                                        <x-textarea wire:model='terms' id="terms" name='terms' id="terms"></x-textarea>
+                                        <x-textarea wire:model='terms' id="terms" name='terms'></x-textarea>
                                     </div>
                                 </div>
                 
                                 <div wire:ignore>
                                     <x-label for="article">Article</x-label>
                                     <div id="container">
-                                        <x-textarea wire:model='article' id="article" name='article' id="article"></x-textarea>
+                                        <x-textarea wire:model='article' id="article" name='article'></x-textarea>
                                     </div>
                                 </div>
                             </div>

@@ -8,7 +8,7 @@
     <div class="pb-10">
         <div class="flex flex-col lg:flex-row space-x-0 space-y-5 lg:space-y-0 lg:space-x-5 lg:items-center">
             <div class="p-1 rounded-lg flex-none">
-                <img src="{{ url('storage/promos/', $image) }}" alt="" class="w-40 rounded-lg">
+                <img src="{{ url('storage/promo/', $image) }}" alt="" class="w-40 rounded-lg">
             </div>
             <div class="flex flex-col">
                 <x-label class="!font-medium block !text-xl">{{ $name }}</x-label>
