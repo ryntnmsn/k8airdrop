@@ -63,6 +63,6 @@ class IndexArticleCategory extends Component
         $articleCategories = ArticleCategory::all();
 
         return view('livewire.admin.articlecategory.index-article-category', compact('articleCategories'))
-        ->extends('layouts.app')->section('contents');;
+        ->extends('layouts.admin.app')->section('contents');;
     }
 }

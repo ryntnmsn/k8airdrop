@@ -49,8 +49,7 @@ class CreatePlatform extends Component
     public function render()
     {
         return view('livewire.admin.platforms.create-platform')
-            ->extends('layouts.app')
-            ->section('contents');
+            ->extends('layouts.admin.app')->section('contents');
     }
 
 }

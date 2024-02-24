@@ -69,6 +69,6 @@ class IndexArticle extends Component
 
         return view('livewire.admin.article.index-article', [
             'getArticles' => $articles->paginate($this->perPage)
-        ])->extends('layouts.app')->section('contents');
+        ])->extends('layouts.admin.app')->section('contents');
     }
 }

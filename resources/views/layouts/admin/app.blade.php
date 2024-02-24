@@ -20,14 +20,14 @@
     @livewireStyles
     <script>
         tinymce.init({
-          plugins: 'code table lists',
-          toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+            plugins: 'code table lists',
+            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
         });
-      </script>
+    </script>
 </head>
 <body>
-    @include('layouts.header')
-    @include('layouts.aside')
+    @include('layouts.admin.header')
+    @include('layouts.admin.aside')
 
     <div class="p-4 sm:ml-64">
         <div class="bg-white mt-20 {{ request()->is('admin/promos') || request()->is('admin/articles') ? 'max-w-[1920px]' : 'max-w-screen-2xl' }} {{request()->is('admin/promos/*/question*') ? '!max-w-[780px]' : '' }} shadow-xl shadow-gray-100 mx-auto w-full p-10 rounded-xl">
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    @include('layouts.footer')
+    @include('layouts.admin.footer')
     @livewireScripts
 
     {{-- <script type="text/javascript" src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script> --}}

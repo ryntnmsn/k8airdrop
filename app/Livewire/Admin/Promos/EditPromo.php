@@ -130,6 +130,6 @@ class EditPromo extends Component
         return view('livewire.admin.promos.edit-promo', [
             'platformsData' => $this->getPlatforms(),
             'languages' => $this->getLanguage()
-        ])->extends('layouts.app')->section('contents');
+        ])->extends('layouts.admin.app')->section('contents');
     }
 }

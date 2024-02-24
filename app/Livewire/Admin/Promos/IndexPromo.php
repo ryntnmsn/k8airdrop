@@ -70,6 +70,6 @@ class IndexPromo extends Component
         return view('livewire.admin.promos.index-promo', [
             'promos' => $promos->paginate($this->pagination),
             // 'query' => $query
-        ])->extends('layouts.app')->section('contents');
+        ])->extends('layouts.admin.app')->section('contents');
     }
 }

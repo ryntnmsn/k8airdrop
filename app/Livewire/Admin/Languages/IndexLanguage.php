@@ -19,7 +19,6 @@ class IndexLanguage extends Component
         }
 
         return view('livewire.admin.languages.index-language', compact('languages'))
-            ->extends('layouts.app')
-            ->section('contents');
+            ->extends('layouts.admin.app')->section('contents');
     }
 }

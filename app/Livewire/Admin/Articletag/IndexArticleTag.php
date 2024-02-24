@@ -72,6 +72,6 @@ class IndexArticleTag extends Component
     {
         return view('livewire.admin.articletag.index-article-tag', [
             'articleTags' => ArticleTag::paginate($this->pagination)
-        ])->extends('layouts.app')->section('contents');
+        ])->extends('layouts.admin.app')->section('contents');
     }
 }

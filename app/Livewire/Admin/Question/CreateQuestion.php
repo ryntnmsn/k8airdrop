@@ -76,6 +76,6 @@ class CreateQuestion extends Component
     public function render()
     {
         return view('livewire.admin.question.create-question')
-            ->extends('layouts.app')->section('contents');
+            ->extends('layouts.admin.app')->section('contents');
     }
 }

@@ -71,6 +71,6 @@ class CreateArticle extends Component
     public function render()
     {
         return view('livewire.admin.article.create-article')
-            ->extends('layouts.app')->section('contents');
+            ->extends('layouts.admin.app')->section('contents');
     }
 }

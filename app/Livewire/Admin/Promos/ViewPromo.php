@@ -182,6 +182,7 @@ class ViewPromo extends Component
 
     public function render()
     {
-        return view('livewire.admin.promos.view-promo')->extends('layouts.app')->section('contents');
+        return view('admin.livewire.admin.promos.view-promo')
+            ->extends('layouts.admin.app')->section('contents');
     }
 }

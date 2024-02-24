@@ -39,8 +39,7 @@ class IndexPlatform extends Component
         }
 
         return view('livewire.admin.platforms.index-platform', compact('platforms'))
-            ->extends('layouts.app')
-            ->section('contents');
+            ->extends('layouts.admin.app')->section('contents');
     }
 
 }

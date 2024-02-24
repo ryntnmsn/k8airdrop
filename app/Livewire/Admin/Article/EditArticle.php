@@ -92,6 +92,6 @@ class EditArticle extends Component
     {
 
         return view('livewire.admin.article.edit-article')
-            ->extends('layouts.app')->section('contents');
+            ->extends('layouts.admin.app')->section('contents');
     }
 }

@@ -21,6 +21,7 @@ use App\Livewire\Admin\Promos\IndexPromo;
 use App\Livewire\Admin\Promos\ViewPromo;
 use App\Livewire\Admin\Question\CreateQuestion;
 use App\Livewire\Admin\Question\EditQuestion;
+use App\Livewire\Home\IndexHome;
 use Illuminate\Support\Facades\Route;
 
 //auth controller
@@ -30,6 +31,7 @@ Route::controller(AuthController::class)->group(function() {
     Route::post('admin/logout', 'logout')->middleware('auth')->name('auth.logout');
 });
 
+Route::get('/', IndexHome::class)->name('home.index');
 
 Route::middleware('auth')->group(function() {
 
@@ -79,7 +81,6 @@ Route::middleware('auth')->group(function() {
         Route::group(['prefix' => 'articles/tags'], function () {
             Route::get('/', IndexArticleTag::class)->name('articles.tags.index');
         });
-
 
         Route::get('/playroom', function () {
             return view('playroom');

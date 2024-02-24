@@ -115,6 +115,6 @@ class CreatePromo extends Component
         return view('livewire.admin.promos.create-promo',[
             'platformsData' => $this->getPlatforms(),
             'languages' => $this->getLanguages(),
-        ])->extends('layouts.app')->section('contents');
+        ])->extends('layouts.admin.app')->section('contents');
     }
 }

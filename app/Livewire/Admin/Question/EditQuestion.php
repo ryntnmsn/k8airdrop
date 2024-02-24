@@ -76,6 +76,6 @@ class EditQuestion extends Component
     public function render()
     {
         return view('livewire.admin.question.edit-question')
-            ->extends('layouts.app')->section('contents');
+            ->extends('layouts.admin.app')->section('contents');
     }
 }

@@ -42,7 +42,6 @@ class EditLanguage extends Component
     public function render()
     {
         return view('livewire.admin.languages.edit-language')
-            ->extends('layouts.app')
-            ->section('contents');
+            ->extends('layouts.admin.app')->section('contents');
     }
 }

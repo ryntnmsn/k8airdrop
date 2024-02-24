@@ -37,7 +37,6 @@ class CreateLanguage extends Component
     public function render()
     {
         return view('livewire.admin.languages.create-language')
-            ->extends('layouts.app')
-            ->section('contents');
+            ->extends('layouts.admin.app')->section('contents');
     }
 }

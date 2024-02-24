@@ -9,7 +9,11 @@ export default {
     "./node_modules/tw-elements/dist/js/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      // maxWidth: {
+      //   '1440': '1440px',
+      // }
+    },
   },
   plugins: [
     require('flowbite/plugin'),

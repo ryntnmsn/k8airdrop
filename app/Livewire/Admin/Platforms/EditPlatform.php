@@ -60,7 +60,6 @@ class EditPlatform extends Component
     public function render()
     {
         return view('livewire.admin.platforms.edit-platform')
-        ->extends('layouts.app')
-        ->section('contents');
+        ->extends('layouts.admin.app')->section('contents');
     }
 }
