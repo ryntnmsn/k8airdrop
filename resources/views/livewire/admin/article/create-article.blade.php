@@ -102,7 +102,7 @@
                     @error('image')
                         <span class="text-rose-500 text-sm">{{ $message }}</span>
                     @enderror
-                 </div>
+                </div>
 
                 <div class="pt-10 flex space-x-4">
                     <x-button wire:target="storeArticle" type="submit" class="!float-none">Save</x-button>

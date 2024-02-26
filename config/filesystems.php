@@ -73,6 +73,22 @@ return [
             'throw' => false,
         ],
 
+        'featured_games' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/featured_games'),
+            'url' => env('APP_URL').'/storage/featured_games',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'carousel' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/carousel'),
+            'url' => env('APP_URL').'/storage/carousel',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
     ],
 
     /*
@@ -90,6 +106,8 @@ return [
         public_path('storage') => storage_path('app/public'),
         public_path('storage/promo') => storage_path('app/public/promo'),
         public_path('storage/article') => storage_path('app/public/article'),
+        public_path('storage/featured_games') => storage_path('app/public/featured_games'),
+        public_path('storage/carousel') => storage_path('app/public/carousel'),
     ],
 
 ];

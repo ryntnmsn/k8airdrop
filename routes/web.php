@@ -9,6 +9,12 @@ use App\Livewire\Admin\Articlecategory\CreateArticleCategory;
 use App\Livewire\Admin\Articlecategory\EditArticleCategory;
 use App\Livewire\Admin\Articlecategory\IndexArticleCategory;
 use App\Livewire\Admin\Articletag\IndexArticleTag;
+use App\Livewire\Admin\Carousels\CreateCarousel;
+use App\Livewire\Admin\Carousels\EditCarousel;
+use App\Livewire\Admin\Carousels\IndexCarousel;
+use App\Livewire\Admin\FeatureGames\CreateFeatureGame;
+use App\Livewire\Admin\FeatureGames\EditFeatureGame;
+use App\Livewire\Admin\FeatureGames\IndexFeatureGame;
 use App\Livewire\Admin\Platforms\CreatePlatform;
 use App\Livewire\Admin\Platforms\EditPlatform;
 use App\Livewire\Admin\Platforms\IndexPlatform;
@@ -82,11 +88,24 @@ Route::middleware('auth')->group(function() {
             Route::get('/', IndexArticleTag::class)->name('articles.tags.index');
         });
 
+        //Featured Games Class
+        Route::group(['prefix' => 'featured-games'], function () {
+            Route::get('/', IndexFeatureGame::class)->name('featured.games.index');
+            Route::get('/create', CreateFeatureGame::class)->name('featured.games.create');
+            Route::get('/edit/{featuredGames}', EditFeatureGame::class)->name('featured.games.edit');
+        });
+
+        //Carousels Class
+        Route::group(['prefix' => 'carousels'], function () {
+            Route::get('/', IndexCarousel::class)->name('carousel.index');
+            Route::get('/create', CreateCarousel::class)->name('carousel.create');
+            Route::get('/edit/{carousel}', EditCarousel::class)->name('carousel.edit');
+        });
+
         Route::get('/playroom', function () {
             return view('playroom');
         });
     });
-
 });
 
 

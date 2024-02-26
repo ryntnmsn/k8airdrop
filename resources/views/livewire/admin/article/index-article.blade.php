@@ -197,14 +197,14 @@
 
     <script>
         window.addEventListener('deleted',function(e){ 
-               Swal.fire({
-                   title: 'Deleted',
-                   text: 'Article deleted successfully',
-                   icon: 'success',
-                   iconColor: 'lightgreen'
-               }).then(function() {
-                    location.reload();
-               });
-           });
+            Swal.fire({
+                title: 'Deleted',
+                text: 'Article deleted successfully',
+                icon: 'success',
+                iconColor: 'lightgreen'
+            }).then(function() {
+                location.reload();
+            });
+        });
    </script>
 </div>

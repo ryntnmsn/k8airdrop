@@ -92,7 +92,7 @@
                                 @endif
                             </div>
                             <input wire:model='new_image' type="file" id="dropzone-file" class="hidden">
-                            <input wire:model='old_image' type="hidden">
+                            <input wire:model='old_image' class="hidden">
                         </label>
                     </div>
                     @error('image')

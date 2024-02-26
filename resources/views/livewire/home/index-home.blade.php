@@ -1,10 +1,10 @@
 <div>
-    <div class="glide">
+    <div class="glide rounded-2xl overflow-hidden">
         <div class="glide__track" data-glide-el="track">
             <ul class="glide__slides text-slate-100">
                 @foreach ($promos as $promo)
-                    <li class="glide__slide">
-                        <img src="{{ url('storage/promo', $promo->image) }}" alt="">
+                    <li class="glide__slide relative rounded-2xl">
+                        <img src="{{ url('storage/promo', $promo->image) }}" alt="{{ $promo->name }}" class="w-full">
                     </li>
                 @endforeach
             </ul>
