@@ -1,5 +1,5 @@
-<header class="absolute top-0 w-full dark:bg-slate-100 bg-slate-800">
-    <div class="max-w-[1440px] px-5 w-full mx-auto flex justify-between items-center">
+<header class="absolute top-0 w-full dark:bg-slate-100 bg-slate-900">
+    <div class="max-w-[1280px] px-5 w-full mx-auto flex justify-between items-center">
         <div class="flex-1">
             <b>
                 <h1 class="text-xl text-slate-200 dark:text-slate-600">
@@ -10,7 +10,7 @@
 
         <div class="flex-1">
             <ul class="flex justify-center items-center gap-10 text-lg font-medium text-slate-200 dark:text-slate-600 cursor-pointer">
-                <li class="py-8 text-center hover:text-indigo-500 duration-300 ease-in-out {{ request()->is('/') ? 'border-b-4 border-indigo-500 text-indigo-500' : '' }}">Home</li>
+                <li class="py-8 text-center hover:text-indigo-500 duration-300 ease-in-out {{ request()->is('/') ? 'border-b-4 border-indigo-500 text-indigo-500' : '' }}">{{ __('Home') }}</li>
                 <li class="py-8 text-center hover:text-indigo-500 duration-300 ease-in-out">Airdrops</li>
                 <li class="py-8 text-center hover:text-indigo-500 duration-300 ease-in-out">News</li>
                 <li class="py-8 text-center hover:text-indigo-500 duration-300 ease-in-out">Media</li>

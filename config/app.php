@@ -84,7 +84,9 @@ return [
     */
 
     'locale' => 'en',
+    
 
+    'all_langs' => ['en', 'jp'],
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -97,6 +99,7 @@ return [
     */
 
     'fallback_locale' => 'en',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -168,6 +171,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        /*
+         * Location Service Providers
+         */
+        Stevebauman\Location\LocationServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -184,5 +191,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
+    // 'Location' => 'Stevebauman\Location\Facade\Location',
 
 ];

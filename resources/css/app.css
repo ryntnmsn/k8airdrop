@@ -87,3 +87,8 @@ html, body {
   #btnChoice {
     display: none;
   }
+
+
+  .glide__slide--active {
+    transform: scale(1);
+  }

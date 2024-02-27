@@ -19,11 +19,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js']);
     @livewireStyles
 </head>
-<body class="bg-slate-900 dark:bg-slate-200">
+<body class="bg-slate-950 dark:bg-slate-200">
     
     @include('layouts.home.header')
     
-    <div class="h-full max-w-[1440px] px-5 mx-auto mt-28 bg-slate-900 dark:bg-slate-200 relative">
+    <div class="h-full max-w-[1280px] px-5 mx-auto mt-28 relative">
         @yield('contents')
     </div>
 
@@ -70,10 +70,26 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
     <script>
-        const config = {
-            autoplay: 6000
-        };
-        new Glide('.glide', config).mount()
+        var banner = new Glide('#banner', {
+            type: 'slider',
+            autoplay: 6000,
+            animationDuration: 1000,
+            animationTimingFunc: 'ease-in-out',
+        })
+        banner.mount()
+    </script>
+
+    <script>
+        var carousel = new Glide('#carousel', {
+            type: 'carousel',
+            autoplay: 3000,
+            animationDuration: 1000,
+            animationTimingFunc: 'ease-in-out',
+            focusAt: 'center',
+            perView: 3,
+            gap: 14,
+        })
+        carousel.mount()
     </script>
 
 </body>

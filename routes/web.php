@@ -28,7 +28,35 @@ use App\Livewire\Admin\Promos\ViewPromo;
 use App\Livewire\Admin\Question\CreateQuestion;
 use App\Livewire\Admin\Question\EditQuestion;
 use App\Livewire\Home\IndexHome;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+
+
+
+// Route::get('/playroom', function () {
+//     $ip = '175.45.142.131'; //For static IP address get (JAPAN)
+//     //$ip = '103.100.137.255'; //For static IP address get (PH)
+//     $data = \Location::get($ip);
+//     $locale = strtolower($data->countryCode);
+//     $appLocale = App::setLocale($locale);
+//     return view('playroom', ['appLocale' => $locale]);
+// });
+
+
+
+// $ip = '175.45.142.131'; //For static IP address get (JAPAN)
+// //$ip = '103.100.137.255'; //For static IP address get (PHILIPPINES)
+// $data = \Location::get($ip);
+// $locale = strtolower($data->countryCode);
+// if($locale == 'jp') {
+//     App::setLocale($locale);
+//     // Carbon::setlocale('ja');
+// } else {
+//     App::setLocale('en');
+// }
+
 
 //auth controller
 Route::controller(AuthController::class)->group(function() {
@@ -36,6 +64,7 @@ Route::controller(AuthController::class)->group(function() {
     Route::post('admin/login', 'login')->name('auth.login');
     Route::post('admin/logout', 'logout')->middleware('auth')->name('auth.logout');
 });
+
 
 Route::get('/', IndexHome::class)->name('home.index');
 
@@ -102,9 +131,7 @@ Route::middleware('auth')->group(function() {
             Route::get('/edit/{carousel}', EditCarousel::class)->name('carousel.edit');
         });
 
-        Route::get('/playroom', function () {
-            return view('playroom');
-        });
+        
     });
 });
 
