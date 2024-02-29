@@ -12,4 +12,8 @@ class Carousel extends Model
     protected $fillable = [
         'title', 'start_date', 'end_date', 'language_id', 'url', 'image', 'is_visible'
     ];
+
+    public function language() {
+        return $this->belongsTo(Language::class);
+    }
 }
