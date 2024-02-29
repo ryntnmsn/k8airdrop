@@ -72,8 +72,8 @@
     <script>
         var banner = new Glide('#banner', {
             type: 'slider',
-            autoplay: 6000,
-            animationDuration: 1500,
+            autoplay: 5000,
+            animationDuration: 500,
             animationTimingFunc: 'ease-in-out',
         })
         banner.mount()
@@ -91,19 +91,6 @@
         })
         carousel.mount()
     </script>
-
-<script>
-    var carousel = new Glide('#upcomingPromos', {
-        type: 'carousel',
-        autoplay: 1,
-        animationDuration: 10000,
-        animationTimingFunc: 'linear',
-        focusAt: 'center',
-        perView: 3,
-        gap: 17,
-    })
-    carousel.mount()
-</script>
 
 </body>
 </html>

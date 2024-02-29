@@ -127,7 +127,7 @@
         <div wire:loading.remove class="grid grid-cols-3 gap-5">
             @forelse ($promos as $promo)
                 <div wire:key="{{ $promo['id'] }}" class="relative rounded-xl overflow-hidden bg-slate-900 dark:bg-slate-100 p-4 hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
-                    <a href="{{ route('articles.categories.index') }}" class="absolute top-0 left-0 right-0 bottom-0"></a>
+                    <a href="{{ route('single.promo', $promo->slug) }}" class="absolute z-30 top-0 left-0 right-0 bottom-0"></a>
                     <div class="relative">
                         @if($promo->end_date >= Carbon\Carbon::now()->format('Y-m-d'))
                             <div class="ribbon_active z-50">Ongoing</div>
@@ -166,15 +166,13 @@
         </div>
     </div>
 
-
-
     {{-- Upcoming Promos --}}
     <div wire:ignore.self>
         <div class="mt-20">
             <div class="mb-5">
                 <x-title class="!text-slate-200 dark:!text-slate-600 !font-medium !text-4xl">Upcoming Promos</x-title>
             </div>
-            <div wire:loading.remove class="grid grid-cols-3 gap-5">
+            <div class="grid grid-cols-3 gap-5">
                 @foreach ($promoUpcoming as $promo)
                     <div class="relative rounded-xl overflow-hidden bg-slate-900 dark:bg-slate-100 p-4 hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
                         <a href="{{ route('articles.categories.index') }}" class="absolute top-0 left-0 right-0 bottom-0"></a>
@@ -206,17 +204,17 @@
     </div>
 
 
-
-
     {{-- Featured Games --}}
-    <div class="mt-20">
-        <div class="mb-5">
-            <x-title class="!text-slate-200 dark:!text-slate-600 !font-medium !text-4xl">Featured Games</x-title>
-        </div>
-        <div wire:loading.remove class="grid grid-cols-4 gap-5">
-            @foreach ($featuredGames as $featureGame)
-                <img src="{{ url('storage/featured_games/', $featureGame['image']) }}" alt="{{$featureGame['title']}}">
-            @endforeach
+    <div wire:ignore.self>
+        <div class="mt-20">
+            <div class="mb-5">
+                <x-title class="!text-slate-200 dark:!text-slate-600 !font-medium !text-4xl">Featured Games</x-title>
+            </div>
+            <div class="grid grid-cols-4 gap-5">
+                @foreach ($featuredGames as $featureGame)
+                    <img src="{{ url('storage/featured_games/', $featureGame['image']) }}" alt="{{$featureGame['title']}}">
+                @endforeach
+            </div>
         </div>
     </div>
 
@@ -260,7 +258,6 @@
                                     {{ $platform }}
                                 @endforeach
                             </x-text>
-                            
                         </div>
                     </div>
                     <div class="text-slate-600">

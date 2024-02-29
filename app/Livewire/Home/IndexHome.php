@@ -49,24 +49,24 @@ class IndexHome extends Component
             ->where('is_banner', '1')
             ->whereHas('language', function ($query) use ($lang) {
                 $query->where('code', $lang);
-            });
+            })->get();
 
         $this->promoCarousels = Carousel::where('is_visible', '1')
             ->where('start_date', '<', Carbon::now()->format('Y-m-d'))
             ->whereHas('language', function ($query) use ($lang){
                 $query->where('code', $lang);
-            });
+            })->get();
 
         $this->promoUpcoming = Promo::where('start_date', '>', Carbon::now()->format('Y-m-d'))
             ->where('is_visible', '1')
             ->whereHas('language', function ($query) use ($lang) {
                 $query->where('code', $lang);
-            });
+            })->get();
 
         $this->featuredGames = FeatureGame::where('is_visible', '1')
             ->whereHas('language', function ($query) use ($lang) {
                 $query->where('code', $lang);
-            });
+            })->get();
     }
 
 
@@ -91,7 +91,6 @@ class IndexHome extends Component
             })
             ->orderBy('end_date', 'desc');
 
-            
         return view('livewire.home.index-home', [
             'promos' => $promos->paginate($this->pagination)
         ])->extends('layouts.home.app')->section('contents');
