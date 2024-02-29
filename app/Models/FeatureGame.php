@@ -12,4 +12,8 @@ class FeatureGame extends Model
     protected $fillable = [
         'title', 'image', 'language_id', 'is_visible', 'url'
     ];
+
+    public function language() {
+        return $this->belongsTo(Language::class);
+    }
 }

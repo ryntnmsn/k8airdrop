@@ -92,5 +92,18 @@
         carousel.mount()
     </script>
 
+<script>
+    var carousel = new Glide('#upcomingPromos', {
+        type: 'carousel',
+        autoplay: 1,
+        animationDuration: 10000,
+        animationTimingFunc: 'linear',
+        focusAt: 'center',
+        perView: 3,
+        gap: 17,
+    })
+    carousel.mount()
+</script>
+
 </body>
 </html>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Home;
 
 use App\Models\Carousel;
+use App\Models\FeatureGame;
 use App\Models\Promo;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -20,6 +21,10 @@ class IndexHome extends Component
     public $filterPromoType;
     public $filterIsVisible;
     public $pagination = 6;
+    public $promoBanners;
+    public $promoCarousels;
+    public $promoUpcoming;
+    public $featuredGames;
 
     public function viewPromo($id) {
         $promo = Promo::with('platforms')->findOrFail($id);
@@ -35,10 +40,42 @@ class IndexHome extends Component
         $this->end_date = $promo->end_date;
     }
 
+
+    public function mount() {
+        $lang = app()->getLocale();
+
+        $this->promoBanners = Promo::with('platforms')
+            ->where('is_visible', '1')
+            ->where('is_banner', '1')
+            ->whereHas('language', function ($query) use ($lang) {
+                $query->where('code', $lang);
+            });
+
+        $this->promoCarousels = Carousel::where('is_visible', '1')
+            ->where('start_date', '<', Carbon::now()->format('Y-m-d'))
+            ->whereHas('language', function ($query) use ($lang){
+                $query->where('code', $lang);
+            });
+
+        $this->promoUpcoming = Promo::where('start_date', '>', Carbon::now()->format('Y-m-d'))
+            ->where('is_visible', '1')
+            ->whereHas('language', function ($query) use ($lang) {
+                $query->where('code', $lang);
+            });
+
+        $this->featuredGames = FeatureGame::where('is_visible', '1')
+            ->whereHas('language', function ($query) use ($lang) {
+                $query->where('code', $lang);
+            });
+    }
+
+
     public function render()
     {
         $lang = app()->getLocale();
-        $promos = Promo::with('platforms')->where('is_visible', '1')
+        $promos = Promo::with('platforms')
+                ->where('is_visible', '1')
+                ->where('start_date', '<=', Carbon::now()->format('Y-m-d'))
                 ->whereHas('language', function ($query) use ($lang) {
                     $query->where('code', $lang);
                     // $query->orderBy('created_at', 'desc');
@@ -54,16 +91,9 @@ class IndexHome extends Component
             })
             ->orderBy('end_date', 'desc');
 
-        // dd($promos->paginate()->toArray());
-
-        $promoBanners = Promo::with('platforms')->where('is_visible', '1')->where('is_banner', '1');
-
-        $promoCarousels = Carousel::where('is_visible', '1');
-
+            
         return view('livewire.home.index-home', [
-            'promos' => $promos->paginate($this->pagination),
-            'promoBanners' => $promoBanners->get(),
-            'promoCarousels' => $promoCarousels->get()
+            'promos' => $promos->paginate($this->pagination)
         ])->extends('layouts.home.app')->section('contents');
     }
 }
