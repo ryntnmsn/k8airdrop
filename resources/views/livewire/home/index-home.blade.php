@@ -146,7 +146,7 @@
                         <x-text class="text-xs !text-slate-500 dark:!text-slate-400 mb-2">Duration: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
                         <x-text class="text-xl font-medium mb-2">{{ $promo->name }}</x-text>
                         <x-text class="text-md font-medium">Prize pool: {{ $promo->prize_pool }}</x-text>
-                        <x-text class="text-md font-medium">Platforms: 
+                        <x-text class="text-md font-medium">Platforms:
                             @foreach ($promo->platforms as $platform)
                                 <span class="text-xs px-1 rounded-sm me-1 !text-white" style="background: {{ $platform->hex_color }}">
                                     {{ $platform->name }}
@@ -167,6 +167,7 @@
     </div>
 
     {{-- Upcoming Promos --}}
+    @if(count($promoUpcoming))
     <div wire:ignore.self>
         <div class="mt-20">
             <div class="mb-5">
@@ -189,7 +190,7 @@
                             <x-text class="text-xs !text-slate-500 dark:!text-slate-400 mb-2">Duration: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
                             <x-text class="text-xl font-medium mb-2">{{ $promo->name }}</x-text>
                             <x-text class="text-md font-medium">Prize pool: {{ $promo->prize_pool }}</x-text>
-                            <x-text class="text-md font-medium">Platforms: 
+                            <x-text class="text-md font-medium">Platforms:
                                 @foreach ($promo->platforms as $platform)
                                     <span class="text-xs px-1 rounded-sm me-1 !text-white" style="background: {{ $platform->hex_color }}">
                                         {{ $platform->name }}
@@ -202,9 +203,11 @@
             </div>
         </div>
     </div>
+    @endif
 
 
     {{-- Featured Games --}}
+    @if(count($featuredGames))
     <div wire:ignore.self>
         <div class="mt-20">
             <div class="mb-5">
@@ -217,6 +220,7 @@
             </div>
         </div>
     </div>
+    @endif
 
 
 
@@ -253,7 +257,7 @@
                             @if($type == 'click_to_join')
                                 <x-text class="!text-slate-600 dark:!text-slate-600">Game type: {{ $game_type }}</x-text>
                             @endif
-                            <x-text class="!text-slate-600 dark:!text-slate-600">Platforms: 
+                            <x-text class="!text-slate-600 dark:!text-slate-600">Platforms:
                                 @foreach ($platforms as $platform)
                                     {{ $platform }}
                                 @endforeach
