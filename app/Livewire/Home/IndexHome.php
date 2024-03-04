@@ -38,6 +38,8 @@ class IndexHome extends Component
         $this->description = $promo->description;
         $this->start_date = $promo->start_date;
         $this->end_date = $promo->end_date;
+        $this->button_name = $promo->button_name;
+        $this->button_link = $promo->button_link;
     }
 
 

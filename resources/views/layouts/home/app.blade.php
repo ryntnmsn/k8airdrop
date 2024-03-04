@@ -23,7 +23,7 @@
     
     @include('layouts.home.header')
     
-    <div class="h-full max-w-[1280px] px-5 mx-auto mt-28 relative">
+    <div class="max-w-[1280px] px-5 mx-auto mt-28 relative">
         @yield('contents')
     </div>
 
