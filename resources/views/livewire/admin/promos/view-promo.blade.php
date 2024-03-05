@@ -33,7 +33,7 @@
       <li role="presentation">
         <a
           href="#basic-information"
-          class="block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 font-medium leading-tight text-slate-500 hover:isolate hover:border-transparent hover:bg-slate-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-indigo-500 data-[te-nav-active]:text-indigo-500 "
+          class="block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 font-medium leading-tight text-slate-500 hover:isolate hover:border-transparent hover:bg-slate-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-indigo-600 data-[te-nav-active]:text-indigo-600 "
           data-te-toggle="pill"
           data-te-target="#basic-information"
           data-te-nav-active
@@ -46,7 +46,7 @@
       <li role="presentation">
         <a
           href="#participant"
-          class="block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 font-medium leading-tight text-slate-500 hover:isolate hover:border-transparent hover:bg-slate-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-indigo-500 data-[te-nav-active]:text-indigo-500 "
+          class="block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 font-medium leading-tight text-slate-500 hover:isolate hover:border-transparent hover:bg-slate-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-indigo-600 data-[te-nav-active]:text-indigo-600 "
           data-te-toggle="pill"
           data-te-target="#participant"
           role="tab"
@@ -59,7 +59,7 @@
         <li role="presentation">
             <a
             href="#manage-question"
-            class="block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 font-medium leading-tight text-slate-500 hover:isolate hover:border-transparent hover:bg-slate-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-indigo-500 data-[te-nav-active]:text-indigo-500 "
+            class="block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 font-medium leading-tight text-slate-500 hover:isolate hover:border-transparent hover:bg-slate-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-indigo-600 data-[te-nav-active]:text-indigo-600 "
             data-te-toggle="pill"
             data-te-target="#manage-question"
             role="tab"
@@ -575,7 +575,7 @@
                 </div>
 
                 <div class="flex items-center justify-between border-t p-4 md:p-6">
-                    <x-href  wire:click.prevent="add()" class="block !float-none !bg-transparent !text-indigo-500 !hover:text-indigo-600 !border-indigo-500">Add options</x-href>
+                    <x-href  wire:click.prevent="add()" class="block !float-none !bg-transparent !text-indigo-600 !hover:text-indigo-600 !border-indigo-600">Add options</x-href>
                     <x-button wire:target="updateQuestion" class="block !float-none">Save Question</x-button>
                 </div>
 
@@ -659,7 +659,7 @@
 
                 </div>
                 <div class="flex items-center justify-between border-t p-4 md:p-6">
-                    <x-href class="block !float-none !bg-transparent !text-indigo-500 !hover:text-indigo-600 !border-indigo-500" wire:click="addInputs">Add options</x-href>
+                    <x-href class="block !float-none !bg-transparent !text-indigo-600 !hover:text-indigo-600 !border-indigo-600" wire:click="addInputs">Add options</x-href>
                     <x-button wire:target="storeQuestion" class="block !float-none">Save Question</x-button>
                 </div>
 

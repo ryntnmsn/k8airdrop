@@ -83,7 +83,7 @@
                 <div class="flex-1">
                     <x-label class="!text-slate-200">Search</x-label>
                     <div class="relative">
-                        <x-input-text wire:model.live="searchPromo" placeholder="Enter text here.." class="!text-slate-200 bg-slate-800/[.50] !border-slate-800 focus:!ring-indigo-500 placeholder-slate-700"></x-input-text>
+                        <x-input-text wire:model.live="searchPromo" placeholder="Enter text here.." class="!text-slate-200 bg-slate-800/[.50] !border-slate-800 focus:!ring-indigo-600 placeholder-slate-700"></x-input-text>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-slate-700 absolute right-0 top-0 mt-2 me-2">
                             <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
                         </svg>
@@ -92,7 +92,7 @@
                 <div class="flex-1">
                     <div class="flex flex-col">
                         <x-label class="!text-slate-200">Promo type</x-label>
-                        <x-select wire:model.live="filterPromoType" class="!text-slate-200 bg-slate-800/[.50] !border-slate-800 focus:!ring-indigo-500">
+                        <x-select wire:model.live="filterPromoType" class="!text-slate-200 bg-slate-800/[.50] !border-slate-800 focus:!ring-indigo-600">
                             <option value="">All</option>
                             <option value="click_to_redirect">Click to Redirect</option>
                             <option value="click_to_join">Click to Join</option>
@@ -103,7 +103,7 @@
                 <div class="flex-1">
                     <div class="flex flex-col">
                         <x-label class="!text-slate-200">Status</x-label>
-                        <x-select wire:model.live="filterIsVisible" class="!text-slate-200 bg-slate-800/[.50] !border-slate-800 focus:!ring-indigo-500">
+                        <x-select wire:model.live="filterIsVisible" class="!text-slate-200 bg-slate-800/[.50] !border-slate-800 focus:!ring-indigo-600">
                             <option value="">All</option>
                             <option value=">=">Ongoing</option>
                             <option value="<">Ended</option>
@@ -113,7 +113,7 @@
                 <div class="flex-1">
                     <div class="flex flex-col">
                         <x-label class="!text-slate-200">Show</x-label>
-                        <x-select wire:model.live="pagination" class="!text-slate-200 bg-slate-800/[.50] !border-slate-800 focus:!ring-indigo-500">
+                        <x-select wire:model.live="pagination" class="!text-slate-200 bg-slate-800/[.50] !border-slate-800 focus:!ring-indigo-600">
                             <option value="6">6</option>
                             <option value="12">12</option>
                             <option value="24">24</option>

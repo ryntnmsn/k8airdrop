@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="flex justify-between">
-                    <x-button wire:ignore wire:click.prevent="addInputRow" id="btnChoice" class="!float-none !bg-transparent !text-indigo-500">Add Choices</x-button>
+                    <x-button wire:ignore wire:click.prevent="addInputRow" id="btnChoice" class="!float-none !bg-transparent !text-indigo-600">Add Choices</x-button>
                     <x-button wire:target="storeQuestion" class="!float-none">Save</x-button>
                 </div>
             </div>

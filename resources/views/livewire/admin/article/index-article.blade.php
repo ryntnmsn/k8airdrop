@@ -37,7 +37,7 @@
                     <div class="flex items-center space-x-2">
                         <span>Show active</span>
                         <span>
-                            <input wire:model.live="active" type="checkbox" class="w-5 h-5 rounded  text-indigo-500 border-slate-300">
+                            <input wire:model.live="active" type="checkbox" class="w-5 h-5 rounded  text-indigo-600 border-slate-300">
                         </span>
                     </div>
                     <div class="flex items-center float-right space-x-3">

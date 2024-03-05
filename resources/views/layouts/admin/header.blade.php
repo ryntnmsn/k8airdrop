@@ -9,7 +9,7 @@
               </svg>
            </button>
           <a href="https://flowbite.com" class="flex ms-2 md:me-24">
-            <span class="self-center text-lg font-semibold whitespace-nowrap text-indigo-500">K8AIRDROP ADMIN</span>
+            <span class="self-center text-lg font-semibold whitespace-nowrap text-indigo-600">K8AIRDROP ADMIN</span>
           </a>
         </div>
         <div class="flex items-center">
