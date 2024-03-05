@@ -69,7 +69,7 @@ Route::controller(AuthController::class)->group(function() {
     Route::post('admin/logout', 'logout')->middleware('auth')->name('auth.logout');
 });
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth', 'admin')->group(function() {
 
     Route::group(['prefix' => 'admin'], function() {
         //Dashboard Class
