@@ -205,7 +205,45 @@
                         </form>
                     </div>
                 @endif
-                <x-button wire:click.prevent="next_record">Next</x-button>
+                <div class="flex justify-between mt-20 border-t border-b border-slate-800 py-5">
+                    <x-button class="!bg-transparent !border-0 !p-0 flex flex-col !items-start !float-none w-full" wire:click.prevent="previousRecord">
+                        <div class="flex flex-row-reverse items-center gap-3">
+                            <span class="text-sm text-slate-800 font-semibold">
+                                Previous promo
+                            </span>
+                            <span>
+                                <div class="rounded-full border-2 border-slate-800 h-10 w-10 flex items-center justify-center p-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-slate-800 w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                                      </svg>
+                                </div>
+                            </span>
+                        </div>
+                        <p class="text-sm mt-3 text-slate-500 text-left font-semibold">{{ $previous_record }}</p>
+                    </x-button>
+                    <div class="px-10 flex items-center">
+                        <x-href href="{{ route('home.index') }}" class="!bg-transparent !border-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-slate-800 w-10 h-10">
+                                <path fill-rule="evenodd" d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z" clip-rule="evenodd" />
+                            </svg>
+                        </x-href>
+                    </div>
+                    <x-button class="!bg-transparent !border-0 !p-0 flex flex-col !items-end !float-none w-full" wire:click.prevent="nextRecord">
+                        <div class="flex items-center gap-3">
+                            <span class="text-sm text-slate-800">
+                                Next promo
+                            </span>
+                            <span>
+                                <div class="rounded-full border-2 border-slate-800 h-10 w-10 flex items-center justify-center p-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="text-slate-800 w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                    </svg>
+                                </div>
+                            </span>
+                        </div>
+                        <p class="text-sm mt-3 text-slate-500 text-right font-semibold">{{ $next_record }}</p>
+                    </x-button>
+                </div>
             </div>
             <div class="w-[30%]">
                 <div class="bg-slate-800/[.20] p-10 rounded-xl">

@@ -10,21 +10,48 @@ use Livewire\Component;
 class SinglePromo extends Component
 {
 
-    public $promo_id, $days_left, $name, $slug, $language_id, $is_visible, $is_featured, $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
+    public $promo_id, $next_record, $previous_record, $days_left, $name, $slug, $language_id, $is_visible, $is_featured, $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
     public $platforms;
 
 
-    public function next_record() {
+    public function nextRecord() {
         $lang = app()->getLocale();
         $next_record = Promo::where('id', '>' , $this->promo_id)
             ->whereHas('language', function ($query) use ($lang) {
                 return $query->where('code', $lang);
+        })->first();
+
+        if($next_record == null) {
+            $loop_record = Promo::orderBy('id', 'asc')
+            ->whereHas('language', function ($query) use ($lang) {
+                return $query->where('code', $lang);
             })->first();
-        dd($next_record);
-        $this->redirectRoute('single.promo', ['slug' => $next_record->slug]);
+            $this->redirectRoute('single.promo', ['slug' => $loop_record->slug]);
+        } else {
+            $this->redirectRoute('single.promo', ['slug' => $next_record->slug]);
+        }
+    }
+
+    public function previousRecord() {
+        $lang = app()->getLocale();
+        $previous_record = Promo::where('id', '<' , $this->promo_id)->orderBy('id', 'desc')
+            ->whereHas('language', function ($query) use ($lang) {
+                return $query->where('code', $lang);
+        })->first();
+
+        if($previous_record == null) {
+            $loop_record = Promo::orderBy('id', 'desc')
+            ->whereHas('language', function ($query) use ($lang) {
+                return $query->where('code', $lang);
+            })->first();
+            $this->redirectRoute('single.promo', ['slug' => $loop_record->slug]);
+        } else {
+            $this->redirectRoute('single.promo', ['slug' => $previous_record->slug]);
+        }
     }
 
     public function mount($slug) {
+        $lang = app()->getLocale();
         $promo = Promo::with('platforms')->where('slug', $slug)->first();
         $this->platforms = $promo->platforms()->get();
 
@@ -46,6 +73,39 @@ class SinglePromo extends Component
         $this->article = $promo->article;
         $this->button_name = $promo->button_name;
         $this->button_link = $promo->button_link;
+
+
+        //Next record
+        $nextRecord = Promo::where('id', '>' , $this->promo_id)
+        ->whereHas('language', function ($query) use ($lang) {
+            return $query->where('code', $lang);
+        })->first();
+
+        if($nextRecord == null) {
+            $nextRecordLoop = Promo::orderBy('id', 'asc')
+            ->whereHas('language', function ($query) use ($lang) {
+                return $query->where('code', $lang);
+            })->first();
+            $this->next_record = $nextRecordLoop->name;
+        } else {
+            $this->next_record = $nextRecord->name;
+        }
+
+        //Previous record
+        $previousRecord = Promo::where('id', '<' , $this->promo_id)->orderBy('id', 'desc')
+            ->whereHas('language', function ($query) use ($lang) {
+                return $query->where('code', $lang);
+        })->first();
+
+        if($previousRecord == null) {
+            $previousRecordLoop = Promo::orderBy('id', 'desc')
+            ->whereHas('language', function ($query) use ($lang) {
+                return $query->where('code', $lang);
+            })->first();
+            $this->previous_record = $previousRecordLoop->name;
+        } else {
+            $this->previous_record = $previousRecord->name;
+        }
     }
 
     public function render()
