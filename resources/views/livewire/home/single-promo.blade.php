@@ -148,63 +148,44 @@
 
 
                 {{-- PROMO TYPES --}}
-                {{-- CLICK TO UPLOAD --}}
-                @if($type == 'click_to_join' && $game_type == 'upload_image')
-                    <div class="mt-20 bg-slate-800/[.20] border-2 border-slate-900 rounded-xl p-10">
-                        <form>
-                            <h1 class="text-slate-200 font-semibold text-2xl mb-10">Fill out the form below to participate and claim your rewards.</h1>
-                            <div>
-                                {{-- Name --}}
-                                <div class="mb-8 relative">
-                                    <div class="absolute top-0 bottom-0 my-auto w-8 h-8 ms-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-slate-700">
-                                            <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
-                                          </svg>
-                                        </div>
-                                    <x-input-text class="!bg-slate-900 border-none !text-slate-200 !ps-12 !p-4 font-bold focus:ring-indigo-600 focus:ring-2 placeholder-slate-700" placeholder="Enter your name"></x-input-text>
+                @if(auth()->user())
+                    {{-- CLICK TO UPLOAD --}}
+                    @if($type == 'click_to_join' && $game_type == 'upload_image')
+                        <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
+                            <form>
+                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">Upload image below to participate.</h1>
+                                <div> 
+                                    <div class="mb-8">
+                                        <div class="flex items-center justify-center w-full">
+                                            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-slate-800/[.50] border-dashed rounded-lg cursor-pointer bg-slate-900">
+                                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                    <svg class="w-8 h-8 mb-4 text-slate-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                                    </svg>
+                                                    <p class="mb-2 text-sm text-slate-700"><span class="font-bold">Click to upload</span> or drag and drop</p>
+                                                    <p class="text-xs text-slate-700 font-bold">PNG, JPG, JPEG</p>
+                                                </div>
+                                                <input id="dropzone-file" type="file" class="hidden" />
+                                            </label>
+                                        </div> 
+                                    </div>
+                                    <div>
+                                        <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
+                                    </div>
                                 </div>
-                                {{-- Email --}}
-                                <div class="mb-8 relative">
-                                    <div class="absolute top-0 bottom-0 my-auto w-7 h-7 ms-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7 text-slate-700">
-                                            <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
-                                            <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
-                                        </svg>
-                                        </div>
-                                    <x-input-text class="!bg-slate-900 border-none !text-slate-200 !ps-12 !p-4 font-bold focus:ring-indigo-600 focus:ring-2 placeholder-slate-700" placeholder="Enter your email"></x-input-text>
-                                </div>
-
-                                <div class="mb-8 relative">
-                                    <div class="absolute top-0 bottom-0 my-auto w-7 h-7 ms-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7 text-slate-700">
-                                        <path fill-rule="evenodd" d="M4.5 3.75a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V6.75a3 3 0 0 0-3-3h-15Zm4.125 3a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Zm-3.873 8.703a4.126 4.126 0 0 1 7.746 0 .75.75 0 0 1-.351.92 7.47 7.47 0 0 1-3.522.877 7.47 7.47 0 0 1-3.522-.877.75.75 0 0 1-.351-.92ZM15 8.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15ZM14.25 12a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H15a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15Z" clip-rule="evenodd" />
-                                    </svg>
-                                        </div>
-                                    <x-input-text class="!bg-slate-900 border-none !text-slate-200 !ps-12 !p-4 font-bold focus:ring-indigo-600 focus:ring-2 placeholder-slate-700" placeholder="Enter K8 username"></x-input-text>
-                                </div>
-
-                                <div class="mb-8">
-                                    <div class="flex items-center justify-center w-full">
-                                        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-slate-800/[.50] border-dashed rounded-lg cursor-pointer bg-slate-900">
-                                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                <svg class="w-8 h-8 mb-4 text-slate-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                                                </svg>
-                                                <p class="mb-2 text-sm text-slate-700"><span class="font-bold">Click to upload</span> or drag and drop</p>
-                                                <p class="text-xs text-slate-700 font-bold">PNG, JPG, JPEG</p>
-                                            </div>
-                                            <input id="dropzone-file" type="file" class="hidden" />
-                                        </label>
-                                    </div> 
-                                </div>
-
-                                <div>
-                                    <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+                    @endif
+                @else
+                    <div class="mt-20 bg-slate-800/[.20] rounded-xl px-10 py-20 flex flex-col items-center justify-center">
+                        <h1 class="text-slate-200 font-semibold text-2xl mb-10">Please login to participate.</h1>
+                        <div class="flex space-x-5">
+                            <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Login here</x-href>
+                            <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Register here</x-href>
+                        </div>
                     </div>
                 @endif
+
                 <div class="flex justify-between mt-20 border-t border-b border-slate-800 py-5">
                     <x-button class="!bg-transparent !border-0 !p-0 flex flex-col !items-start !float-none w-full" wire:click.prevent="previousRecord">
                         <div class="flex flex-row-reverse items-center gap-3">

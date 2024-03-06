@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Livewire\Admin\Article\CreateArticle;
 use App\Livewire\Admin\Article\EditArticle;
 use App\Livewire\Admin\Article\IndexArticle;
@@ -29,10 +30,12 @@ use App\Livewire\Admin\Question\CreateQuestion;
 use App\Livewire\Admin\Question\EditQuestion;
 use App\Livewire\Home\Auth\IndexLogin;
 use App\Livewire\Home\Auth\IndexRegister;
+use App\Livewire\Home\IndexDashboard;
 use App\Livewire\Home\IndexHome;
 use App\Livewire\Home\SinglePromo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -65,19 +68,34 @@ Route::get('/', IndexHome::class)->name('home.index');
 Route::get('/promo/{slug}', SinglePromo::class)->name('single.promo');
 
 //user auth classes
-Route::get('/register', IndexRegister::class)->name('user.register');
-Route::get('/login', IndexLogin::class)->name('user.login');
+Route::middleware(RedirectIfAuthenticated::class)->group(function() {
+    Route::get('/register', IndexRegister::class)->name('user.register');
+    Route::get('/login', IndexLogin::class)->name('user.login');
+});
+
+
+// Route::get('/register', function () {
+//     if(Auth::check()) {
+        
+//     }
+// });
+
+//user dashboard
+Route::middleware('auth')->group(function() {
+    Route::get('/user/dashboard', IndexDashboard::class)->name('user.dashboard');
+});
+
 
 //admin auth controller
 Route::controller(AuthController::class)->group(function() {
-    Route::get('/admin', 'index')->name('auth.index');
+    Route::get('/k8admin', 'index')->name('auth.index');
     Route::post('admin/login', 'login')->name('auth.login');
     Route::post('admin/logout', 'logout')->middleware('auth')->name('auth.logout');
 });
 
 Route::middleware('auth', 'admin')->group(function() {
 
-    Route::group(['prefix' => 'admin'], function() {
+    Route::group(['prefix' => 'k8admin'], function() {
         //Dashboard Class
         Route::controller(DashboardController::class)->group(function() {
             Route::get('dashboard', 'index')->name('dashboard.index');

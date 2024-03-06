@@ -34,7 +34,7 @@
                                     <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z" clip-rule="evenodd" />
                                 </svg>
                                 </div>
-                            <x-input-text type="password" wire:model.live="password" class="!bg-slate-900 border-none !text-slate-200 !ps-12 !p-4 font-bold focus:ring-indigo-600 focus:ring-2 placeholder-slate-700" placeholder="Enter password"></x-input-text>
+                            <x-input-text type="password" wire:model.live="password"  class="!bg-slate-900 border-none !text-slate-200 !ps-12 !p-4 font-bold focus:ring-indigo-600 focus:ring-2 placeholder-slate-700" placeholder="Enter password"></x-input-text>
                         </div>
                         @error('password')
                             <span class="text-sm text-rose-500 pt-2 block">{{ $message }}</span>
@@ -49,14 +49,21 @@
                         </div>
                     </div>
 
-                    <div class="mb-8">
-                        <x-button type="submit" class="!float-none font-semibold px-12">Login</x-button>
+                    <div class="flex justify-between items-center mb-8">
+                        <div>
+                            <x-button type="submit" class="!float-none font-semibold px-12">Login</x-button>
+                        </div>
+    
+                        <div>
+                            <input wire:model="remember" id="checked-checkbox" type="checkbox" class="w-6 h-6 text-indigo-600 bg-transparent border-2 border-indigo-700 rounded-md focus:ring-indigo-500 focus:ring-2">
+                            <label for="checked-checkbox" class="ms-2 text-sm font-semibold text-slate-500">Remember me</label>
+                        </div>
                     </div>
 
                     <div>
                         <div class="relative">
                             <div class="flex items-center space-x-4">
-                                <label for="checked-checkbox" class="ms-2 text-sm font-medium text-slate-500">
+                                <label for="checked-checkbox" class="text-sm font-semibold text-slate-500">
                                     By accessing you confirm that you are at least 18 years old and agree to the  <a href="" class="text-indigo-600 hover:text-indigo-700">Terms of service</a>.
                                 </label>
                             </div>
