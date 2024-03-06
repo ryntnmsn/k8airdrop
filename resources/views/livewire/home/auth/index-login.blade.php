@@ -2,9 +2,14 @@
     <div class="h-full w-full max-w-[900px] mx-auto">
         <div class="flex bg-slate-800/[.20] rounded-3xl p-10">
            <div class="flex-1">
-            <form wire:submit.prevent="store">
-                <h1 class="text-slate-200 font-semibold text-4xl mb-10">Login</h1>
+            <form  wire:submit.prevent="login">
+                <h1 class="text-slate-200 font-semibold text-4xl mb-10">Sign in</h1>
                 <div>
+                    <div class="mb-8">
+                        @if(session()->has('error'))
+                            <span class="text-base text-rose-500">{{ session('error') }}</span>
+                        @endif
+                    </div>
                     {{-- username --}}
                     <div class="mb-8">
                         <div class="relative">
@@ -13,7 +18,7 @@
                                     <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
                                   </svg>
                                 </div>
-                            <x-input-text wire:model.live="k8_username" class="!bg-slate-900 border-none !text-slate-200 !ps-12 !p-4 font-bold focus:ring-indigo-600 focus:ring-2 placeholder-slate-700" placeholder="Enter name"></x-input-text>
+                            <x-input-text wire:model.live="k8_username" class="!bg-slate-900 border-none !text-slate-200 !ps-12 !p-4 font-bold focus:ring-indigo-600 focus:ring-2 placeholder-slate-700" placeholder="Enter K8 username"></x-input-text>
                         </div>
                         @error('k8_username')
                             <span class="text-sm text-rose-500 pt-2 block">{{ $message }}</span>
@@ -45,7 +50,7 @@
                     </div>
 
                     <div class="mb-8">
-                        <x-button wire:target="store" class="!float-none font-semibold px-12">Login</x-button>
+                        <x-button type="submit" class="!float-none font-semibold px-12">Login</x-button>
                     </div>
 
                     <div>

@@ -19,21 +19,24 @@ class IndexRegister extends Component
         'password_confirmation' => 'required|min:6|max:255'
     ];
 
-    public function updated($propertyName){
-        $this->validateOnly($propertyName);
-    }
+    // public function updated($propertyName){
+    //     $this->validateOnly($propertyName);
+    // }
 
     public function store() {
         $this->validate();
         
         if($this->terms == true) {
-            $user = User::create([
+            User::create([
                 'name' => $this->name,
                 'email' => $this->email,
                 'k8_username' => $this->k8_username,
                 'role' => false,
                 'password' => Hash::make($this->password),
             ]);
+            
+            $this->reset();
+            $this->redirectRoute('user.login');
         } else {
             session()->flash('terms_message', 'Please confirm terms of service.');
         }
