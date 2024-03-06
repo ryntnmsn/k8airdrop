@@ -10,24 +10,26 @@
 
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
+            document.documentElement.classList.add('dark')
         } else {
             document.documentElement.classList.remove('dark')
         }
     </script>
     <title>Document</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js']);
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
 <body class="bg-slate-950 dark:bg-slate-200">
     
-    @include('layouts.home.header')
-    
-    <div class="max-w-[1280px] px-5 mx-auto mt-28 relative">
-        @yield('contents')
-    </div>
+    <div class="h-full w-full flex flex-col justify-between">
+        @include('layouts.home.header')
+        
+        <div class="max-w-[1280px] w-full px-5 mx-auto my-10 relative box-border">
+            @yield('contents')
+        </div>
 
-    @include('layouts.home.footer')
+        @include('layouts.home.footer')
+    </div>
    
     @livewireScripts
 

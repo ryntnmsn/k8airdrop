@@ -27,6 +27,8 @@ use App\Livewire\Admin\Promos\IndexPromo;
 use App\Livewire\Admin\Promos\ViewPromo;
 use App\Livewire\Admin\Question\CreateQuestion;
 use App\Livewire\Admin\Question\EditQuestion;
+use App\Livewire\Home\Auth\IndexLogin;
+use App\Livewire\Home\Auth\IndexRegister;
 use App\Livewire\Home\IndexHome;
 use App\Livewire\Home\SinglePromo;
 use Illuminate\Support\Carbon;
@@ -62,7 +64,11 @@ use Illuminate\Support\Facades\Session;
 Route::get('/', IndexHome::class)->name('home.index');
 Route::get('/promo/{slug}', SinglePromo::class)->name('single.promo');
 
-//auth controller
+//user auth classes
+Route::get('/register', IndexRegister::class)->name('user.register');
+Route::get('/login', IndexLogin::class)->name('user.login');
+
+//admin auth controller
 Route::controller(AuthController::class)->group(function() {
     Route::get('/admin', 'index')->name('auth.index');
     Route::post('admin/login', 'login')->name('auth.login');

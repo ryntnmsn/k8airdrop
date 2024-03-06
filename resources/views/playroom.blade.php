@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1 style="color:black; font-size:30px">
-        a{{ $appLocale }}
+        {{ $appLocale }}
     </h1>
 </body>
 </html>
