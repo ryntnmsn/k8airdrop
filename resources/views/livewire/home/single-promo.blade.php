@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-10">
+                <div wire:ignore class="mt-10">
                     {{-- Other details --}}
                     <div id="accordion-open" data-accordion="open" data-active-classes="bg-slate-900 rounded-t-lg overfolow-hidden">
                         @if($description != null)
@@ -148,43 +148,62 @@
 
 
                 {{-- PROMO TYPES --}}
-                @if(auth()->user())
-                    {{-- CLICK TO UPLOAD --}}
+                
+                    {{-- CLICK TO UPLOAD IMAGE PROMO --}}
                     @if($type == 'click_to_join' && $game_type == 'upload_image')
-                        <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
-                            <form>
-                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">Upload image below to participate.</h1>
-                                <div> 
-                                    <div class="mb-8">
-                                        <div class="flex items-center justify-center w-full">
-                                            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-slate-800/[.50] border-dashed rounded-lg cursor-pointer bg-slate-900">
-                                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                    <svg class="w-8 h-8 mb-4 text-slate-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                                                    </svg>
-                                                    <p class="mb-2 text-sm text-slate-700"><span class="font-bold">Click to upload</span> or drag and drop</p>
-                                                    <p class="text-xs text-slate-700 font-bold">PNG, JPG, JPEG</p>
-                                                </div>
-                                                <input id="dropzone-file" type="file" class="hidden" />
-                                            </label>
-                                        </div> 
+                        @if(auth()->user())
+                            <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
+                                @if($joinPromo == true)
+                                <form wire:submit="uploadImage">
+                                    <h1 class="text-slate-200 font-semibold text-2xl mb-10">Upload image below to participate.</h1>
+                                    <div> 
+                                        <div class="mb-8">
+                                            <div class="flex items-center justify-center w-full">
+                                                <label for="dropzone-file" class="flex flex-col items-center justify-center overflow-hidden w-full  h-96 border-2 border-slate-800/[.50] border-dashed rounded-xl cursor-pointer bg-slate-900">
+                                                    <div class="flex flex-col items-center justify-center pt-5 pb-6 h-96">
+                                                        @if($userUploadImage)
+                                                            <img src="{{ $userUploadImage->temporaryUrl() }}" class="w-full">
+                                                        @else
+                                                            <svg class="w-8 h-8 mb-4 text-slate-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                                            </svg>
+                                                            <p class="mb-2 text-sm text-slate-700"><span class="font-bold">Click to upload</span> or drag and drop</p>
+                                                            <p class="text-xs text-slate-700 font-bold">PNG, JPG, JPEG</p>
+                                                        @endif
+                                                    </div>
+                                                    <input wire:model="userUploadImage" id="dropzone-file" type="file" class="hidden" />
+                                                </label>
+                                            </div> 
+                                        </div>
+                                        <div>
+                                            <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
+                                </form>
+                                @else
+                                    <div class="flex flex-col items-center justify-center py-10">
+                                        <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">Thank you for participating to this promo. <br> Please stay tuned for the announcement of winners.</h1>
+                                        <div class="flex space-x-5">
+                                            <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Check other promos</x-href>
+                                            <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Go to home page</x-href>
+                                        </div>
                                     </div>
+                                @endif
+                            </div>
+                        @else
+                            <div class="mt-20 bg-slate-800/[.20] rounded-xl px-10 py-20 flex flex-col items-center justify-center">
+                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">Please login to participate.</h1>
+                                <div class="flex space-x-5">
+                                    <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Login here</x-href>
+                                    <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Register here</x-href>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        @endif
+                        {{-- END OF UPLOAD IMAGE PROMO --}}
                     @endif
-                @else
-                    <div class="mt-20 bg-slate-800/[.20] rounded-xl px-10 py-20 flex flex-col items-center justify-center">
-                        <h1 class="text-slate-200 font-semibold text-2xl mb-10">Please login to participate.</h1>
-                        <div class="flex space-x-5">
-                            <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Login here</x-href>
-                            <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Register here</x-href>
-                        </div>
-                    </div>
-                @endif
+                    
+
+               
 
                 <div class="flex justify-between mt-20 border-t border-b border-slate-800 py-5">
                     <x-button class="!bg-transparent !border-0 !p-0 flex flex-col !items-start !float-none w-full" wire:click.prevent="previousRecord">

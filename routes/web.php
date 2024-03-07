@@ -73,16 +73,10 @@ Route::middleware(RedirectIfAuthenticated::class)->group(function() {
     Route::get('/login', IndexLogin::class)->name('user.login');
 });
 
-
-// Route::get('/register', function () {
-//     if(Auth::check()) {
-        
-//     }
-// });
-
 //user dashboard
 Route::middleware('auth')->group(function() {
     Route::get('/user/dashboard', IndexDashboard::class)->name('user.dashboard');
+    Route::post('/user/logout', [AuthController::class, 'userLogout'])->name('user.logout');
 });
 
 
@@ -94,7 +88,6 @@ Route::controller(AuthController::class)->group(function() {
 });
 
 Route::middleware('auth', 'admin')->group(function() {
-
     Route::group(['prefix' => 'k8admin'], function() {
         //Dashboard Class
         Route::controller(DashboardController::class)->group(function() {

@@ -4,14 +4,24 @@ namespace App\Livewire\Home;
 
 use App\Models\Platform;
 use App\Models\Promo;
+use App\Models\User;
+use App\Models\UserDetail;
 use Carbon\Carbon;
+use GuzzleHttp\Psr7\Request;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Stevebauman\Location\Facades\Location;
 
 class SinglePromo extends Component
 {
 
+    use WithFileUploads;
+
     public $promo_id, $next_record, $previous_record, $days_left, $name, $slug, $language_id, $is_visible, $is_featured, $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
     public $platforms;
+    public $userUploadImage;
+    public $questions;
+    public $joinPromo = true;
 
 
     public function nextRecord() {
@@ -52,8 +62,10 @@ class SinglePromo extends Component
 
     public function mount($slug) {
         $lang = app()->getLocale();
-        $promo = Promo::with('platforms')->where('slug', $slug)->first();
+        $promo = Promo::with('platforms', 'questions')->where('slug', $slug)->first();
         $this->platforms = $promo->platforms()->get();
+
+        $this->questions = $promo->questions()->get();
 
         $parseStartDate = Carbon::parse($promo->start_date);
         $parseEndDate = Carbon::parse($promo->end_date);
@@ -106,6 +118,39 @@ class SinglePromo extends Component
         } else {
             $this->previous_record = $previousRecord->name;
         }
+
+        //Check if user already joined promo
+        if(auth()->user()) {
+            $userId = auth()->user()->id;
+            $promoId = $this->promo_id;
+            $getPromoId = UserDetail::with('user')->where('promo_id', $promoId)
+                ->whereHas('user', function ($query) use ($userId)  {
+                    return $query->where('id', $userId);
+                })->value('promo_id');
+            
+            // dd($getPromoId);
+            if($promoId == $getPromoId) {
+                $this->joinPromo = false;
+            } else {
+                $this->joinPromo = true;
+            }
+        }
+    }
+
+
+    //Click to Join Upload Image function
+    public function uploadImage() {
+        $imageName = $this->userUploadImage->store('/', 'user');
+
+        UserDetail::create([
+            'user_id' => auth()->user()->id,
+            'promo_id' => $this->promo_id,
+            'image' => $imageName,
+            'ip' => \Request::ip(),
+        ]);
+
+        $this->js('window.location.reload()'); 
+
     }
 
     public function render()

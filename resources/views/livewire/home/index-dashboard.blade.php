@@ -13,7 +13,10 @@
                     <button class="text-slate-200 font-semibold">Account</button>
                 </li>
                 <li>
-                    <button class="text-slate-200 font-semibold">Logout</button>
+                    <form action="{{ route('user.logout') }}" method="post">
+                        @csrf
+                        <button type="submit" class="text-slate-200 font-semibold">Logout</button>
+                    </form>
                 </li>
             </ul>
         </div>

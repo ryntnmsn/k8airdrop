@@ -25,7 +25,6 @@ class IndexLogin extends Component
         ];
         
         // dd($credentials);
-
         if(Auth::attempt($credentials)) {
             if($this->remember == true) {
                 Cookie::queue('k8_username', $this->k8_username);
@@ -34,7 +33,7 @@ class IndexLogin extends Component
                 Cookie::queue('k8_username', '');
                 Cookie::queue('password', '');
             }
-            return $this->redirectRoute('home.index');
+            return $this->redirectRoute('user.dashboard');
         } else {
             session()->flash('error', 'Invalid credentials');
         }

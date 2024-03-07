@@ -89,6 +89,14 @@ return [
             'throw' => false,
         ],
 
+        'user' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/user'),
+            'url' => env('APP_URL').'/storage/user',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
     ],
 
     /*
@@ -108,6 +116,7 @@ return [
         public_path('storage/article') => storage_path('app/public/article'),
         public_path('storage/featured_games') => storage_path('app/public/featured_games'),
         public_path('storage/carousel') => storage_path('app/public/carousel'),
+        public_path('storage/user') => storage_path('app/public/user'),
     ],
 
 ];
