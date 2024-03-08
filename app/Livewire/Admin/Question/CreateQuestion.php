@@ -41,7 +41,8 @@ class CreateQuestion extends Component
         $this->validate();
         $question = Question::create([
             'question_title' => $this->question_title,
-            'question_type' => $this->question_type
+            'question_type' => $this->question_type,
+            'promo_id' => $this->promo_id
         ]);
 
         $question->promo()->attach($this->promo_id);
@@ -50,7 +51,8 @@ class CreateQuestion extends Component
             foreach($this->choices as $choice) {
                 // $choices[] = $this->choices[$key];
                 $choices = Choice::create([
-                    'choice' => $choice['choice']
+                    'choice' => $choice['choice'],
+                    'question_id' => $question->id
                 ]);
                 $question->choices()->attach($choices->id);
             }

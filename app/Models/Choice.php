@@ -10,8 +10,10 @@ class Choice extends Model
     use HasFactory;
 
     protected $fillable = [
-        'choice'
+        'choice', 'question_id'
     ];
 
-    
+    public function users() {
+        return $this->belongsToMany(User::class);
+    }
 }

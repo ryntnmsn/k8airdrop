@@ -4,6 +4,7 @@ namespace App\Livewire\Home;
 
 use App\Models\Platform;
 use App\Models\Promo;
+use App\Models\Question;
 use App\Models\User;
 use App\Models\UserDetail;
 use Carbon\Carbon;
@@ -21,6 +22,7 @@ class SinglePromo extends Component
     public $platforms;
     public $userUploadImage;
     public $questions;
+    public $choices = [];
     public $joinPromo = true;
 
 
@@ -62,10 +64,8 @@ class SinglePromo extends Component
 
     public function mount($slug) {
         $lang = app()->getLocale();
-        $promo = Promo::with('platforms', 'questions')->where('slug', $slug)->first();
+        $promo = Promo::with('platforms')->where('slug', $slug)->first();
         $this->platforms = $promo->platforms()->get();
-
-        $this->questions = $promo->questions()->get();
 
         $parseStartDate = Carbon::parse($promo->start_date);
         $parseEndDate = Carbon::parse($promo->end_date);
@@ -86,6 +86,9 @@ class SinglePromo extends Component
         $this->button_name = $promo->button_name;
         $this->button_link = $promo->button_link;
 
+
+        $this->questions = Question::with('choices')->where('promo_id', $this->promo_id)->get();
+       
 
         //Next record
         $nextRecord = Promo::where('id', '>' , $this->promo_id)
@@ -150,7 +153,17 @@ class SinglePromo extends Component
         ]);
 
         $this->js('window.location.reload()'); 
+    }
 
+
+    //Click to Join Multiple Choice
+    public function multipleChoice() {
+        $userId = User::where('id', auth()->user()->id)->first();
+        
+        foreach($this->choices as $choice) {
+            $userId->choices()->attach($choice);
+        }
+        dd($userId);
     }
 
     public function render()
