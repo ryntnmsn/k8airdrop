@@ -1,7 +1,7 @@
 <div>
     <div classs="mt-20">
        <div class="flex gap-10">
-        
+
             <div class="w-[70%]">
                 <div>
                     <div class="relative">
@@ -10,12 +10,12 @@
                             <div class="ribbon_active z-50">Ongoing</div>
                         @else
                             <div class="ribbon_inactive z-50">Ended</div>
-                        @endif  
+                        @endif
                     </div>
                     <div class="flex justify-between">
                         <p class="text-slate-500 my-5 font-semibold">
                             <span>
-                                Duration: 
+                                Duration:
                             </span>
                             <span>
                                 {{date('F j Y', strtotime($start_date))}} - {{date('F j Y', strtotime($end_date))}}
@@ -44,7 +44,7 @@
                                 <p class="!text-slate-500 font-semibold">Promo type</p>
                                 <p class="!text-slate-200 font-semibold text-3xl">
                                     @if($type == 'click_to_join')
-                                        Interactive    
+                                        Interactive
                                     @else
                                         Non-interactive
                                     @endif
@@ -60,7 +60,7 @@
                                     @else
                                         Ended
                                     @endif
-                                    
+
                                 </p>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                                     @if($joinPromo == true)
                                         <form wire:submit="uploadImage">
                                             <h1 class="text-slate-200 font-semibold text-2xl mb-10">Upload image below to participate.</h1>
-                                            <div> 
+                                            <div>
                                                 <div class="mb-8">
                                                     <div class="flex items-center justify-center w-full">
                                                         <label for="dropzone-file" class="flex flex-col items-center justify-center overflow-hidden w-full  h-96 border-2 border-slate-800/[.50] border-dashed rounded-xl cursor-pointer bg-slate-900">
@@ -173,7 +173,7 @@
                                                             </div>
                                                             <input wire:model="userUploadImage" id="dropzone-file" type="file" class="hidden" />
                                                         </label>
-                                                    </div> 
+                                                    </div>
                                                 </div>
                                                 <div>
                                                     <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
@@ -193,14 +193,30 @@
                             {{-- END OF UPLOAD IMAGE --}}
                             {{-- MULTIPLE CHOICE --}}
                             @elseif($type == 'click_to_join' && $game_type == 'multiple_choice')
-                                <div wire:ignore class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
+                                <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
                                     @if($joinPromo == true)
                                         <form wire:submit="multipleChoice">
                                             <h1 class="text-slate-200 font-semibold text-2xl mb-10">Multiple Choice</h1>
-                                            <div> 
+
+
+
+
+                                            <div class="mb-8">
+                                                <x-label class="!text-slate-200">Enter SNS ID (Twitter)</x-label>
+                                                <x-input-text wire:model="sns_id" class="!bg-slate-800 !border-0 !text-slate-200"></x-input-text>
+                                                @error('sns_id')
+                                                    {{$message}}
+                                                @enderror
+                                            </div>
+
+                                            <div>
                                                 <div class="mb-8">
                                                     <div class="flex flex-col w-full">
                                                         @foreach ($questions as $question)
+
+
+
+
                                                             <div class="mb-8">
                                                                 <div class="flex text-slate-200 font-semibold gap-1 mb-2">
                                                                     <span scope="row">{{$loop->iteration}}.</span><span><p>{{ $question->question_title }}</p></span>
@@ -210,24 +226,33 @@
 
                                                                         @if($question->question_type == 'single_select')
                                                                             <div class="w-full">
-                                                                                <div class="flex items-center px-4 py-2 border border-slate-900 rounded">
-                                                                                    <input wire:model="choices.{{ $question->id }}" value="{{ $choice->id }}" name="choice_{{ $question->id }}" id="choice_{{ $question->id }}" type="radio" class="w-5 h-5 text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600">
-                                                                                    <label for="choice_{{ $question->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->choice }}</label>
+                                                                                <div wire:key="{{$key}}" class="flex items-center px-4 py-2 border border-slate-900 rounded">
+                                                                                    <input wire:model="choices.{{$key}}" value="{{ $choice->id }}" name="{{ $choice->id }}" id="{{ $choice->id }}" type="radio" class="w-5 h-5 text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600">
+                                                                                    <label for="choice_{{ $choice->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->id }}</label>
                                                                                 </div>
-                                                                            </div>
-                                                                        @elseif($question->question_type == 'multiple_select')
-                                                                            <div class="w-full">
-                                                                                <div class="flex items-center px-4 py-2 border border-slate-900 rounded">
-                                                                                    <input wire:model="choices.{{ $choice->id }}[]" value="{{ $choice->id }}" name="choice_{{ $question->id }}" id="choice_{{ $question->id }}" type="checkbox" class="text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600 rounded-sm w-5 h-5">
-                                                                                    <label for="choice_{{ $question->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->choice }}</label>
-                                                                                </div>
+                                                                                @error('choices.'.$key)
+                                                                                    {{$message}}
+                                                                                @enderror
                                                                             </div>
                                                                         @endif
+
+                                                                        @if($question->question_type == 'multiple_select')
+                                                                            <div class="w-full">
+                                                                                <div class="flex items-center px-4 py-2 border border-slate-900 rounded">
+                                                                                    <input wire:model="checkbox" value="{{ $choice->id }}" name="{{ $question->id }}" id="{{ $choice->id }}" type="checkbox" class="text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600 rounded-sm w-5 h-5">
+                                                                                    <label for="{{ $question->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->id }}</label>
+                                                                                </div>
+                                                                                @error('checkbox')
+                                                                                    {{$message}}
+                                                                                @enderror
+                                                                            </div>
+                                                                        @endif
+
                                                                     @endforeach
                                                                 </div>
                                                             </div>
                                                         @endforeach
-                                                    </div> 
+                                                    </div>
                                                 </div>
                                                 <div>
                                                     <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
@@ -257,7 +282,7 @@
                         @endif
                     @endif
 
-               
+
 
                 <div class="flex justify-between mt-20 border-t border-b border-slate-800 py-5">
                     <x-button class="!bg-transparent !border-0 !p-0 flex flex-col !items-start !float-none w-full" wire:click.prevent="previousRecord">

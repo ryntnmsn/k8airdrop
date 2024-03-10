@@ -54,10 +54,10 @@ class CreateQuestion extends Component
                     'choice' => $choice['choice'],
                     'question_id' => $question->id
                 ]);
-                $question->choices()->attach($choices->id);
+                // $question->choices()->attach($choices->id);
             }
         }
-       
+
         $this->dispatch('created', [
             'title' => 'Created',
             'text' => 'Question created successfully.',

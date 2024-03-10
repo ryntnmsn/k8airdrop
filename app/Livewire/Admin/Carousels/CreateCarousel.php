@@ -43,7 +43,7 @@ class CreateCarousel extends Component
         ]);
         $this->dispatch('created');
     }
-    
+
 
     public function render()
     {

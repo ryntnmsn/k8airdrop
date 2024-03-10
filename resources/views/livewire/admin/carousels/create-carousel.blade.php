@@ -17,6 +17,9 @@
                 <div>
                     <x-label>URL</x-label>
                     <x-input-text wire:model='url'></x-input-text>
+                    @error('url')
+                        <span class="text-rose-500 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div>
                     <x-label>Language</x-label>
@@ -80,7 +83,7 @@
     </div>
 
     <script>
-        window.addEventListener('created',function(e){ 
+        window.addEventListener('created',function(e){
             Swal.fire({
                 title: 'Created',
                 text: 'Featured games created successfully',

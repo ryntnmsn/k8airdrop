@@ -21,8 +21,10 @@ class SinglePromo extends Component
     public $promo_id, $next_record, $previous_record, $days_left, $name, $slug, $language_id, $is_visible, $is_featured, $description, $is_banner, $terms, $article, $prize_pool, $start_date, $end_date, $type, $game_type, $button_name, $button_link, $image;
     public $platforms;
     public $userUploadImage;
+    public $sns_id;
     public $questions;
     public $choices = [];
+    public $checkbox = [];
     public $joinPromo = true;
 
 
@@ -88,7 +90,7 @@ class SinglePromo extends Component
 
 
         $this->questions = Question::with('choices')->where('promo_id', $this->promo_id)->get();
-       
+
 
         //Next record
         $nextRecord = Promo::where('id', '>' , $this->promo_id)
@@ -130,7 +132,7 @@ class SinglePromo extends Component
                 ->whereHas('user', function ($query) use ($userId)  {
                     return $query->where('id', $userId);
                 })->value('promo_id');
-            
+
             // dd($getPromoId);
             if($promoId == $getPromoId) {
                 $this->joinPromo = false;
@@ -152,18 +154,39 @@ class SinglePromo extends Component
             'ip' => \Request::ip(),
         ]);
 
-        $this->js('window.location.reload()'); 
+        $this->js('window.location.reload()');
     }
+
+
+    // protected $rules = [
+    //     // 'choices' => 'required',
+    //     'checkbox' => 'required'
+    // ];
 
 
     //Click to Join Multiple Choice
     public function multipleChoice() {
+
+
+        $this->validate([
+            'sns_id' => 'required',
+            'choices.*' => 'required',
+            'checkbox' => 'required'
+        ]);
+
+
         $userId = User::where('id', auth()->user()->id)->first();
-        
+
         foreach($this->choices as $choice) {
             $userId->choices()->attach($choice);
         }
-        dd($userId);
+
+        foreach($this->checkbox as $checkbox) {
+            $userId->choices()->attach($checkbox);
+        }
+
+
+
     }
 
     public function render()
