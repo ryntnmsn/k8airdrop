@@ -88,9 +88,7 @@ class SinglePromo extends Component
         $this->button_name = $promo->button_name;
         $this->button_link = $promo->button_link;
 
-
         $this->questions = Question::with('choices')->where('promo_id', $this->promo_id)->get();
-
 
         //Next record
         $nextRecord = Promo::where('id', '>' , $this->promo_id)
@@ -164,16 +162,35 @@ class SinglePromo extends Component
     // ];
 
 
+
     //Click to Join Multiple Choice
     public function multipleChoice() {
 
+        // foreach($this->checkbox as $checkbox) {
+        //     $choices = array_fill_keys($this->checkbox->toArray(), true);
+        // }
 
-        $this->validate([
-            'sns_id' => 'required',
-            'choices.*' => 'required',
-            'checkbox' => 'required'
-        ]);
+        foreach($this->checkbox as $checkbox) {
+            $checkboxes[] = $checkbox;
+        }
 
+        dd($checkboxes);
+
+
+        $validate_array = ['choices' => 'required', 'sns_id' => 'required', 'checkbox' => 'required'];
+        for($x=0; $x<=0; $x++) {
+            $validate_array['choices.'. $x] = 'required';
+        }
+       $this->validate($validate_array);
+
+    
+        // dd($choices);
+
+        // $this->validate([
+        //     'sns_id' => 'required',
+        //     'choices.'.$this->question_id => 'required',
+        //     // 'checkbox' => 'required'
+        // ]);
 
         $userId = User::where('id', auth()->user()->id)->first();
 
@@ -185,7 +202,12 @@ class SinglePromo extends Component
             $userId->choices()->attach($checkbox);
         }
 
-
+        UserDetail::create([
+            'user_id' => auth()->user()->id,
+            'promo_id' => $this->promo_id,
+            'sns_id' => $this->sns_id,
+            'ip' => \Request::ip(),
+        ]);
 
     }
 
