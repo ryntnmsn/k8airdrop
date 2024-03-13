@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Home;
 
+use App\Models\Comment;
 use App\Models\Platform;
 use App\Models\Promo;
 use App\Models\Question;
 use App\Models\User;
 use App\Models\UserDetail;
 use Carbon\Carbon;
+use Exception;
 use GuzzleHttp\Psr7\Request;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -25,7 +27,10 @@ class SinglePromo extends Component
     public $questions;
     public $choices = [];
     public $checkbox = [];
+    public $comments = [];
     public $joinPromo = true;
+
+
 
 
     public function nextRecord() {
@@ -156,43 +161,48 @@ class SinglePromo extends Component
     }
 
 
-    // protected $rules = [
-    //     // 'choices' => 'required',
-    //     'checkbox' => 'required'
-    // ];
 
-
-
-    //Click to Join Multiple Choice
+    //Click to Join Multiple Choice ////////////////////////////////////////////////////////////////////////////////////
     public function multipleChoice() {
 
-        // foreach($this->checkbox as $checkbox) {
-        //     $choices = array_fill_keys($this->checkbox->toArray(), true);
-        // }
+        $promo = Promo::with('questions')->where('id', $this->promo_id)->first();
 
-        foreach($this->checkbox as $checkbox) {
-            $checkboxes[] = $checkbox;
+        $questions = $promo->questions()->pluck('question_type')->toArray();
+
+        // dd($questions);
+
+        if(in_array('single_select',  $questions ?? []) && in_array('multiple_select',  $questions ?? [])) {
+            $validate_array = ['choices' => 'required', 'sns_id' => 'required', 'checkbox' => 'required'];
+            for($x=0; $x<=1; $x++) {
+                $validate_array['choices.'. $x] = 'required';
+            }
+        }elseif(in_array('single_select', $questions ?? [])) {
+            $validate_array = ['choices' => 'required', 'sns_id' => 'required'];
+            if(count($questions) == 1 ) {
+                $validate_array = ['choices' => 'required','sns_id' => 'required'];
+            } else {
+                for($x=0; $x<=1; $x++) {
+                    $validate_array['choices.'. $x] = 'required';
+                }
+            }
+        }elseif(in_array('multiple_select', $questions ?? [])) {
+            $validate_array = ['checkbox' => 'required','sns_id' => 'required'];
+        }else{
+            $validate_array = ['sns_id' => 'required'];
         }
 
-        dd($checkboxes);
+        // dd($validate_array);
 
-
-        $validate_array = ['choices' => 'required', 'sns_id' => 'required', 'checkbox' => 'required'];
-        for($x=0; $x<=0; $x++) {
-            $validate_array['choices.'. $x] = 'required';
-        }
-       $this->validate($validate_array);
-
-    
-        // dd($choices);
-
-        // $this->validate([
-        //     'sns_id' => 'required',
-        //     'choices.'.$this->question_id => 'required',
-        //     // 'checkbox' => 'required'
-        // ]);
-
+        $this->validate($validate_array);
+       
         $userId = User::where('id', auth()->user()->id)->first();
+
+        UserDetail::create([
+            'user_id' => auth()->user()->id,
+            'promo_id' => $this->promo_id,
+            'sns_id' => $this->sns_id,
+            'ip' => \Request::ip(),
+        ]);
 
         foreach($this->choices as $choice) {
             $userId->choices()->attach($choice);
@@ -202,12 +212,23 @@ class SinglePromo extends Component
             $userId->choices()->attach($checkbox);
         }
 
-        UserDetail::create([
-            'user_id' => auth()->user()->id,
-            'promo_id' => $this->promo_id,
-            'sns_id' => $this->sns_id,
-            'ip' => \Request::ip(),
-        ]);
+        if(is_array($this->comments)) {
+            foreach($this->comments as $comment) {
+                Comment::create([
+                    'user_id' => auth()->user()->id,
+                    'promo_id' => $this->promo_id,
+                    'comment' => $comment
+                ]);
+            }
+        } else {
+            Comment::create([
+                'user_id' => auth()->user()->id,
+                'promo_id' => $this->promo_id,
+                'comment' => $this->comments
+            ]);
+        }
+
+        $this->js('window.location.reload()');
 
     }
 

@@ -199,7 +199,11 @@
                                             <h1 class="text-slate-200 font-semibold text-2xl mb-10">Multiple Choice</h1>
                                             <div class="mb-8">
                                                 @if($errors->any())
-                                                    <span class="text-rose-500">Please answer all questions</span>
+                                                    @if($errors->has('sns_id'))
+                                                        <span class="text-rose-500">Please enter your sns id.</span>
+                                                    @else
+                                                        <span class="text-rose-500">Please answer all questions</span>
+                                                    @endif
                                                 @endif
                                             </div>
                                             <div class="mb-8">
@@ -210,24 +214,10 @@
                                                 <div class="mb-8">
                                                     <div class="flex flex-col w-full">
 
-                                                        {{-- @foreach ($questions as $key => $question)
-                                                            <p class="text-slate-200">{{ $question->question_title }}</p>
-                                                            @foreach ($question->choices as $choice)
-                                                                @if($question->question_type == 'single_select')
-                                                                    <div class="w-full mb-5">
-                                                                        <div class="flex items-center px-4 py-2 border border-slate-900 rounded">
-                                                                            <input wire:model="choices.{{ $key }}" value="{{ $choice->id }}" name="{{ $choice->id }}" id="{{ $choice->id }}" type="radio" class="w-5 h-5 text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600">
-                                                                            <label for="choice_{{ $choice->id }}" class="text-slate-200 w-full text-sm ms-2 font-semibold">{{ $choice->id }}</label>
-                                                                        </div>
-                                                                    </div>
-                                                                @endif
-                                                            @endforeach
-                                                        @endforeach --}}
-
                                                         @foreach ($questions as $key => $question)
                                                             <div class="mb-8">
                                                                 <div class="flex text-slate-200 font-semibold gap-1 mb-2">
-                                                                    <span scope="row">{{$loop->iteration}}.</span><span><p>{{ $question->question_title }}</p></span>
+                                                                    <span scope="row">{{$loop->iteration}}.</span><span><p>{{ $question->id }}_{{ $question->question_title }}</p></span>
                                                                 </div>
                                                                 <div class="grid grid-cols-2 gap-2 text-slate-500">
                                                                     @foreach ($question->choices as $choice)
@@ -238,21 +228,23 @@
                                                                                     <label for="choice_{{ $choice->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->id }}</label>
                                                                                 </div>
                                                                             </div>
-                                                                        @endif
-
-                                                                        @if($question->question_type == 'multiple_select')
-                                                                            <div class="w-full">
+                                                                        @elseif($question->question_type == 'multiple_select')
+                                                                            <div wire:ignore class="w-full">
                                                                                 <div class="flex items-center px-4 py-2 border border-slate-900 rounded">
-                                                                                    <input wire:model="checkbox.{{ $key }}.{{ $choice->id }}" value="{{ $choice->id }}" id="{{ $choice->id }}" type="checkbox" class="text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600 rounded-sm w-5 h-5">
+                                                                                    <input wire:model.defer="checkbox" value="{{ $choice->id }}" id="{{ $choice->id }}" type="checkbox" class="text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600 rounded-sm w-5 h-5">
                                                                                     <label for="{{ $choice->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->id }}</label>
                                                                                 </div>
                                                                             </div>
                                                                         @endif
                                                                     @endforeach
                                                                 </div>
+                                                                @if($question->question_type == 'comment')
+                                                                    <div class="w-full">
+                                                                        <textarea wire:model="comments.{{ $key }}" class="w-full h-52 rounded-lg focus:ring-indigo-600 !bg-slate-900 !border-0 !text-slate-200 !font-semibold"></textarea>
+                                                                    </div>
+                                                                @endif
                                                             </div>
                                                         @endforeach
-
                                                     </div>
                                                 </div>
                                                 <div>

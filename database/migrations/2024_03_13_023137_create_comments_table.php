@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('promo_id')
                 ->constrained('promos')
                 ->cascadeOnDelete();
-            $table->foreignId('question_id')
-                ->constrained('questions')
+            $table->foreignId('user_id')
+                ->constrained('users')
                 ->cascadeOnDelete();
             $table->timestamps();
         });
