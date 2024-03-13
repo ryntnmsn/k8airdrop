@@ -169,11 +169,11 @@ class SinglePromo extends Component
 
         $questions = $promo->questions()->pluck('question_type')->toArray();
 
-        // dd($questions);
+        dd($questions);
 
         if(in_array('single_select',  $questions ?? []) && in_array('multiple_select',  $questions ?? [])) {
             $validate_array = ['choices' => 'required', 'sns_id' => 'required', 'checkbox' => 'required'];
-            for($x=0; $x<=1; $x++) {
+            for($x=0; $x<=0; $x++) {
                 $validate_array['choices.'. $x] = 'required';
             }
         }elseif(in_array('single_select', $questions ?? [])) {
@@ -181,7 +181,7 @@ class SinglePromo extends Component
             if(count($questions) == 1 ) {
                 $validate_array = ['choices' => 'required','sns_id' => 'required'];
             } else {
-                for($x=0; $x<=1; $x++) {
+                for($x=0; $x<=0; $x++) {
                     $validate_array['choices.'. $x] = 'required';
                 }
             }
@@ -191,7 +191,7 @@ class SinglePromo extends Component
             $validate_array = ['sns_id' => 'required'];
         }
 
-        // dd($validate_array);
+        dd($validate_array);
 
         $this->validate($validate_array);
        

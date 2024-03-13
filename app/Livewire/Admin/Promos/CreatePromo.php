@@ -21,7 +21,7 @@ class CreatePromo extends Component
 
 
     public function generateSlug() {
-        $this->slug = Str::slug($this->name);
+        $this->slug = Str::slug($this->name, '-', 'ja');
     }
 
     public function getPlatforms() {
