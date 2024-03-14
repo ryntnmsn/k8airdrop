@@ -13,6 +13,7 @@ class UserDetail extends Model
         'user_id',
         'promo_id',
         'retweet_url',
+        'comment',
         'image',
         'sns_id',
         'is_winner',
@@ -22,4 +23,8 @@ class UserDetail extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
+    // public function promos() {
+    //     return $this->hasMany(Promo::class);
+    // }
 }

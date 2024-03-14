@@ -191,12 +191,12 @@
                                     @endif
                                 </div>
                             {{-- END OF UPLOAD IMAGE --}}
-                            {{-- MULTIPLE CHOICE --}}
+                            {{-- BEGIN OF MULTIPLE CHOICE --}}
                             @elseif($type == 'click_to_join' && $game_type == 'multiple_choice')
                                 <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
                                     @if($joinPromo == true)
                                         <form wire:submit="multipleChoice">
-                                            <h1 class="text-slate-200 font-semibold text-2xl mb-10">Multiple Choice</h1>
+                                            <h1 class="text-slate-200 font-semibold text-2xl mb-10">Fill out the form below to participate</h1>
                                             <div class="mb-8">
                                                 @if($errors->any())
                                                     @if($errors->has('sns_id'))
@@ -262,8 +262,50 @@
                                         </div>
                                     @endif
                                 </div>
-                            @endif
                             {{-- END OF MULTIPLE CHOICE --}}
+                            {{-- BEGIN OF PASTE RETWEET URL --}}
+                            @elseif($type == 'click_to_join' && $game_type == 'paste_retweet_url')
+                                <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
+                                    @if($joinPromo == true)
+                                        <form wire:submit="pasteRetweetURL">
+                                            <h1 class="text-slate-200 font-semibold text-2xl mb-10">Fill out the form below to participate</h1>
+                                            <div class="mb-8">
+                                                @if($errors->any())
+                                                    @if($errors->has('sns_id'))
+                                                        <span class="text-rose-500">Please enter your sns id.</span>
+                                                    @else
+                                                        <span class="text-rose-500">Please paste retweet url.</span>
+                                                    @endif
+                                                @endif
+                                            </div>
+                                            <div class="mb-8">
+                                                <x-label class="!text-slate-200 !font-semibold">Twitter ID</x-label>
+                                                <x-input-text wire:model="sns_id" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
+                                            </div>
+                                            <div class="mb-8">
+                                                <x-label class="!text-slate-200 !font-semibold">Paste Retweet URL (Twitter)</x-label>
+                                                <x-input-text wire:model="paste_retweet_url" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
+                                            </div>
+                                            <div class="mb-8">
+                                                <x-label class="!text-slate-200 !font-semibold">Comment</x-label>
+                                                <textarea wire:model="comment" class="w-full h-52 rounded-lg focus:ring-indigo-600 !bg-slate-900 !border-0 !text-slate-200 !font-semibold"></textarea>
+                                            </div>
+                                            <div>
+                                                <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
+                                            </div>
+                                        </form>
+                                    @else
+                                        <div class="flex flex-col items-center justify-center py-10">
+                                            <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">Thank you for participating to this promo. <br> Please stay tuned for the announcement of winners.</h1>
+                                            <div class="flex space-x-5">
+                                                <x-href href="{{ route('home.index') }}" class="!float-none font-semibold">Check other promos</x-href>
+                                                <x-href href="{{ route('home.index') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Go to home page</x-href>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                                {{-- END OF PASTE RETWEET URL --}}
+                            @endif
                         @else
                             <div class="mt-20 bg-slate-800/[.20] rounded-xl px-10 py-20 flex flex-col items-center justify-center">
                                 <h1 class="text-slate-200 font-semibold text-2xl mb-10">Please login to participate.</h1>

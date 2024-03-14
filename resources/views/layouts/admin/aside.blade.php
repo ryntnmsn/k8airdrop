@@ -26,15 +26,15 @@
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                </svg>
             </button>
-            <ul id="dropdown" class="{{ request()->is('admin/platforms*') || request()->is('admin/promos*') || request()->is('admin/languages*') ? 'block' : 'hidden'}} py-2 space-y-1">
+            <ul id="dropdown" class="{{ request()->is('k8admin/platforms*') || request()->is('k8admin/promos*') || request()->is('k8admin/languages*') ? 'block' : 'hidden'}} py-2 space-y-1">
                   <li>
-                     <a wire:navigate href="{{ route('promos.index') }}" class="{{ request()->is('admin/promos*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">All</a>
+                     <a wire:navigate href="{{ route('promos.index') }}" class="{{ request()->is('k8admin/promos*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">All</a>
                   </li>
                   <li>
-                     <a wire:navigate href="{{ route('platforms.index') }}" class="{{ request()->is('admin/platforms*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Platforms</a>
+                     <a wire:navigate href="{{ route('platforms.index') }}" class="{{ request()->is('k8admin/platforms*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Platforms</a>
                   </li>
                   <li>
-                     <a wire:navigate href="{{ route('languages.index') }}" class="{{ request()->is('admin/languages*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800' }} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Languages</a>
+                     <a wire:navigate href="{{ route('languages.index') }}" class="{{ request()->is('k8admin/languages*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800' }} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Languages</a>
                   </li>
                   <li>
                      <a wire:navigate href="{{ route('promos.create') }}" class="text-slate-800 flex space-x-1 items-center w-full p-2 transition duration-75 rounded-lg pl-5 group hover:bg-indigo-600 hover:text-slate-50">
@@ -58,18 +58,18 @@
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                </svg>
             </button>
-            <ul id="dropdown-articles" class="{{ request()->is('admin/articles*') || request()->is('admin/articles/categories*') || request()->is('admin/articles/tags*') ? 'block' : 'hidden'}} py-2 space-y-1">
+            <ul id="dropdown-articles" class="{{ request()->is('k8admin/articles*') || request()->is('k8admin/articles/categories*') || request()->is('k8admin/articles/tags*') ? 'block' : 'hidden'}} py-2 space-y-1">
                   <li>
-                     <a wire:navigate href="{{ route('articles.index') }}" class="{{ request()->is('admin/articles') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">All</a>
+                     <a wire:navigate href="{{ route('articles.index') }}" class="{{ request()->is('k8admin/articles') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">All</a>
                   </li>
                   <li>
-                     <a wire:navigate href="{{ route('articles.categories.index') }}" class="{{ request()->is('admin/articles/categories*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Categories</a>
+                     <a wire:navigate href="{{ route('articles.categories.index') }}" class="{{ request()->is('k8admin/articles/categories*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Categories</a>
                   </li>
                   <li>
-                     <a wire:navigate href="{{ route('articles.tags.index') }}" class="{{ request()->is('admin/articles/tags*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800' }} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Tags</a>
+                     <a wire:navigate href="{{ route('articles.tags.index') }}" class="{{ request()->is('k8admin/articles/tags*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800' }} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Tags</a>
                   </li>
                   <li>
-                     <a wire:navigate href="{{ route('articles.create') }}" class="{{ request()->is('admin/articles/create') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800' }} flex space-x-1 items-center w-full p-2 transition duration-75 rounded-lg pl-5 group hover:bg-indigo-600 hover:text-slate-50">
+                     <a wire:navigate href="{{ route('articles.create') }}" class="{{ request()->is('k8admin/articles/create') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800' }} flex space-x-1 items-center w-full p-2 transition duration-75 rounded-lg pl-5 group hover:bg-indigo-600 hover:text-slate-50">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" data-slot="icon" class="w-5 h-5">
                            <path fill-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
                          </svg>
@@ -79,7 +79,7 @@
             </ul>
          </li>
          <li class="border-b border-slate-100">
-            <a wire:navigate href="{{ route('carousel.index') }}" class="{{ request()->is('admin/carousels*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800'}} flex items-center p-2 rounded-lg hover:bg-indigo-600 hover:text-slate-50 group">
+            <a wire:navigate href="{{ route('carousel.index') }}" class="{{ request()->is('k8admin/carousels*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800'}} flex items-center p-2 rounded-lg hover:bg-indigo-600 hover:text-slate-50 group">
                <div class="w-6">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
@@ -89,7 +89,7 @@
             </a>
          </li>
          <li class="border-b border-slate-100">
-            <a wire:navigate href="{{ route('featured.games.index') }}" class="{{ request()->is('admin/featured-games*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center p-2 rounded-lg hover:bg-indigo-600 hover:text-slate-50 group">
+            <a wire:navigate href="{{ route('featured.games.index') }}" class="{{ request()->is('k8admin/featured-games*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center p-2 rounded-lg hover:bg-indigo-600 hover:text-slate-50 group">
                <div class="w-6">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />

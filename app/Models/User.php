@@ -46,10 +46,14 @@ class User extends Authenticatable
     ];
 
     public function user_detail() {
-        return $this->belongsTo(UserDetail::class);
+        return $this->hasMany(UserDetail::class);
     }
 
     public function choices() {
         return $this->belongsToMany(Choice::class);
+    }
+
+    public function promos() {
+        return $this->belongsToMany(Promo::class);
     }
 }

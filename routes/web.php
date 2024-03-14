@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SpinWheelController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Livewire\Admin\Article\CreateArticle;
 use App\Livewire\Admin\Article\EditArticle;
@@ -41,29 +42,6 @@ use Illuminate\Support\Facades\Session;
 
 
 
-// Route::get('/playroom', function () {
-//     $ip = '175.45.142.131'; //For static IP address get (JAPAN)
-//     //$ip = '103.100.137.255'; //For static IP address get (PH)
-//     $data = \Location::get($ip);
-//     $locale = strtolower($data->countryCode);
-//     $appLocale = App::setLocale($locale);
-//     return view('playroom', ['appLocale' => $locale]);
-// });
-
-
-
-// $ip = '175.45.142.131'; //For static IP address get (JAPAN)
-// //$ip = '103.100.137.255'; //For static IP address get (PHILIPPINES)
-// $data = \Location::get($ip);
-// $locale = strtolower($data->countryCode);
-// if($locale == 'jp') {
-//     App::setLocale($locale);
-//     // Carbon::setlocale('ja');
-// } else {
-//     App::setLocale('en');
-// }
-
-
 Route::get('/', IndexHome::class)->name('home.index');
 Route::get('/promo/{slug}', SinglePromo::class)->name('single.promo');
 
@@ -79,6 +57,9 @@ Route::middleware('auth')->group(function() {
     Route::post('/user/logout', [AuthController::class, 'userLogout'])->name('user.logout');
 });
 
+
+//spin the wheel
+Route::get('spin-the-wheel', [SpinWheelController::class, 'index' ]);
 
 //admin auth controller
 Route::controller(AuthController::class)->group(function() {

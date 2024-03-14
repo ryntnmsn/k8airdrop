@@ -24,6 +24,8 @@ class SinglePromo extends Component
     public $platforms;
     public $userUploadImage;
     public $sns_id;
+    public $paste_retweet_url;
+    public $comment;
     public $questions;
     public $choices = [];
     public $checkbox = [];
@@ -149,7 +151,6 @@ class SinglePromo extends Component
     //Click to Join Upload Image function
     public function uploadImage() {
         $imageName = $this->userUploadImage->store('/', 'user');
-
         UserDetail::create([
             'user_id' => auth()->user()->id,
             'promo_id' => $this->promo_id,
@@ -157,19 +158,17 @@ class SinglePromo extends Component
             'ip' => \Request::ip(),
         ]);
 
+
+
         $this->js('window.location.reload()');
     }
 
 
 
-    //Click to Join Multiple Choice ////////////////////////////////////////////////////////////////////////////////////
+    //Click to Join Multiple Choice
     public function multipleChoice() {
-
         $promo = Promo::with('questions')->where('id', $this->promo_id)->first();
-
         $questions = $promo->questions()->pluck('question_type')->toArray();
-
-        // dd($questions);
 
         if(in_array('single_select',  $questions ?? []) && in_array('multiple_select',  $questions ?? [])) {
             $validate_array = ['choices' => 'required', 'sns_id' => 'required', 'checkbox' => 'required'];
@@ -229,8 +228,28 @@ class SinglePromo extends Component
         }
 
         $this->js('window.location.reload()');
-
     }
+
+    //Click to Join Paste Retweet URL ////////////////////////////////////////////////////////////////////////////////////
+    public function pasteRetweetURL() {
+        $validate_array = [
+            'sns_id' => 'required|max:255',
+            'paste_retweet_url' => 'required|max:255',
+        ];
+        $this->validate($validate_array);
+
+        UserDetail::create([
+            'user_id' => auth()->user()->id,
+            'promo_id' => $this->promo_id,
+            'ip' => \Request::ip(),
+            'sns_id' => $this->sns_id,
+            'retweet_url' => $this->paste_retweet_url,
+            'comment' => $this->comment,
+        ]);
+
+        $this->js('window.location.reload()');
+    }
+
 
     public function render()
     {

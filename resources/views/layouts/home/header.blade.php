@@ -12,7 +12,7 @@
 
             <div class="flex-1">
                 <ul class="flex justify-center items-center gap-10 font-semibold text-slate-200 dark:text-slate-600 cursor-pointer">
-                    <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('/') ? 'border-b-4 border-indigo-600 text-indigo-600' : '' }}">
+                    <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('/') ? 'text-indigo-600' : '' }}">
                         <a href="{{ route('home.index') }}">{{ __('Home') }}</a>
                     </li>
                     <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out">Airdrops</li>
