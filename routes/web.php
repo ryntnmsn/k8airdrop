@@ -34,6 +34,7 @@ use App\Livewire\Home\Auth\IndexRegister;
 use App\Livewire\Home\IndexDashboard;
 use App\Livewire\Home\IndexHome;
 use App\Livewire\Home\SinglePromo;
+use App\Livewire\Home\Wheel\SpinWheel;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +60,8 @@ Route::middleware('auth')->group(function() {
 
 
 //spin the wheel
-Route::get('spin-the-wheel', [SpinWheelController::class, 'index' ]);
+Route::get('spin-the-wheel', SpinWheel::class)->name('spin.wheel');
+// Route::get('spin-the-wheel', [SpinWheelController::class, 'index' ]);
 
 //admin auth controller
 Route::controller(AuthController::class)->group(function() {
