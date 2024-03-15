@@ -251,3 +251,27 @@ html, body {
 }
 
 body.swal2-height-auto {height: 100%!important;}
+
+.services-ticker-block {
+  position: relative;
+  display:flex; 
+  align-items:center;
+  overflow-x: hidden;
+}
+.stb_line_single {
+    position: relative;
+    white-space: nowrap;
+    padding: 0;
+    will-change: transform;
+    display: flex;
+    flex-direction: column;
+}
+.stb-item {
+  padding: 0;
+  display: inline-block;
+  margin-right: 10rem;
+
+}
+.stb-item:hover {
+    color: #C02534;
+}

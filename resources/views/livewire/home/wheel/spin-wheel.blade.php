@@ -42,12 +42,14 @@
                         <div class="flex w-full">
                             <div class="bg-slate-900 p-10 w-full rounded-xl">
                                 {{-- Users Carousel --}}
-                                <div class="w-auto wrapper">
-                                    <div class="boxes" id="boxCol">
+                                <div class="services-ticker-block  h-96 overflow-hidden">
+                                    <div class="stb_line_single">
                                         @foreach ($userNames as $name)
-                                            <div class="box rounded-xl text-slate-200">
-                                                {{ $name }}
-                                            </div>
+                                            <a class="stb-item box rounded-xl text-slate-200">
+                                                <span>
+                                                    {{ $name }}
+                                                </span>
+                                            </a>
                                         @endforeach
                                     </div>
                                 </div>
@@ -79,6 +81,65 @@
                     location.reload();
                 })
             }, 5000);
+        }
+    </script>
+
+    <script>
+        gsap.utils.toArray('.stb_line_single').forEach((line, i) => {
+        
+        const links = line.querySelectorAll("a"),
+                tl = verticalLoop(links, 30)
+        
+        tl.progress( i ? 1 : 0 )
+        tl.timeScale( i ? -1 : 1 )
+        
+        i && tl.eventCallback("onReverseComplete", reverseCompleteHandler)
+            
+        function reverseCompleteHandler() {
+            console.log('reverseComplete')
+            tl.progress( 1 )
+        }
+        
+        // links.forEach(link => {
+        //     link.addEventListener("mouseenter", () => gsap.to(tl, {timeScale: 0, overwrite: true}));
+        //     link.addEventListener("mouseleave", () => gsap.to(tl, {timeScale: i ? -1 : 1, overwrite: true}));
+        // });
+        
+        });
+
+        // speed can be positive or negative (in pixels per second)
+        function verticalLoop(elements, speed) {
+        elements = gsap.utils.toArray(elements);
+        let firstBounds = elements[0].getBoundingClientRect(),
+            lastBounds = elements[elements.length - 1].getBoundingClientRect(),
+            top = firstBounds.top - firstBounds.height - Math.abs(elements[1].getBoundingClientRect().top - firstBounds.bottom),
+            bottom = lastBounds.top,
+            distance = bottom - top,
+            duration = Math.abs(distance / speed),
+            tl = gsap.timeline({repeat: -1}),
+            plus = speed < 0 ? "-=" : "+=",
+            minus = speed < 0 ? "+=" : "-=";
+        elements.forEach(el => {
+            let bounds = el.getBoundingClientRect(),
+                ratio = Math.abs((bottom - bounds.top) / distance);
+            if (speed < 0) {
+            ratio = 1 - ratio;
+            }
+            tl.to(el, {
+            y: plus + distance * ratio,
+            duration: duration * ratio,
+            ease: "none"
+            }, 0);
+            tl.fromTo(el, {
+            y: minus + distance
+            }, {
+            y: plus + (1 - ratio) * distance,
+            ease: "none",
+            duration: (1 - ratio) * duration,
+            immediateRender: false
+            }, duration * ratio)
+        });
+        return tl;
         }
     </script>
 
