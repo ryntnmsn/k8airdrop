@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark')
@@ -24,7 +25,7 @@
     <div class="h-full w-full flex flex-col justify-between">
         @include('layouts.home.header')
         
-        <div class="max-w-[1280px] w-full px-5 mx-auto my-10 relative box-border {{ request()->is('user/dashboard*') ? 'h-full' : '' }}">
+        <div class="max-w-[1280px] w-full px-5 mx-auto my-10 relative box-border {{ request()->is('spin-the-wheel') || request()->is('user/dashboard*') ? 'h-full' : '' }}">
             @yield('contents')
         </div>
 
@@ -92,6 +93,22 @@
             gap: 17,
         })
         carousel.mount()
+    </script>
+
+    <script>
+        var nameCarousel = new Glide('#nameCarousel', {
+            type: 'carousel',
+            autoplay: 1,
+            startAt: 1,
+            mode: 'vertical',
+            animationDuration: 10000,
+            animationTimingFunc: 'linear',
+            focusAt: 'center',
+            perView: 10,
+            gap: 17,
+            
+        })
+        nameCarousel.mount()
     </script>
 
 </body>

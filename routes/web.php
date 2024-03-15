@@ -56,12 +56,10 @@ Route::middleware(RedirectIfAuthenticated::class)->group(function() {
 Route::middleware('auth')->group(function() {
     Route::get('/user/dashboard', IndexDashboard::class)->name('user.dashboard');
     Route::post('/user/logout', [AuthController::class, 'userLogout'])->name('user.logout');
+    //spin the wheel
+    Route::get('spin-the-wheel', SpinWheel::class)->name('spin.wheel');
 });
 
-
-//spin the wheel
-Route::get('spin-the-wheel', SpinWheel::class)->name('spin.wheel');
-// Route::get('spin-the-wheel', [SpinWheelController::class, 'index' ]);
 
 //admin auth controller
 Route::controller(AuthController::class)->group(function() {

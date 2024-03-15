@@ -17,6 +17,7 @@ class UserDetail extends Model
         'image',
         'sns_id',
         'is_winner',
+        'spin_wheel_rewards',
         'ip',
     ];
 
