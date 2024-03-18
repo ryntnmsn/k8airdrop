@@ -40,7 +40,6 @@
                                 {{ $loop->iteration }}
                             </td>
                             <td scope="row" class="px-6 py-3 font-medium whitespace-nowrap">
-                                {{ $articleTag->id }}
                                 {{$articleTag->title}}
                             </td>
                             <td class="px-6 py-3 flex justify-end">

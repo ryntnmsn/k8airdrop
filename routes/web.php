@@ -29,6 +29,8 @@ use App\Livewire\Admin\Promos\IndexPromo;
 use App\Livewire\Admin\Promos\ViewPromo;
 use App\Livewire\Admin\Question\CreateQuestion;
 use App\Livewire\Admin\Question\EditQuestion;
+use App\Livewire\Admin\Wheel\SpinTheWheel;
+use App\Livewire\Admin\Wheel\SpinUserFaker;
 use App\Livewire\Home\Auth\IndexLogin;
 use App\Livewire\Home\Auth\IndexRegister;
 use App\Livewire\Home\IndexDashboard;
@@ -130,7 +132,13 @@ Route::middleware('auth', 'admin')->group(function() {
             Route::get('/edit/{carousel}', EditCarousel::class)->name('carousel.edit');
         });
 
+        //Spin the Wheel Class
+        Route::group(['prefix' => 'spin-the-wheel'], function () {
+            Route::get('/', SpinTheWheel::class)->name('spinthewheel.index');
+            Route::get('/user-faker', SpinUserFaker::class)->name('spinuserfaker.index');
+        });
         
+
     });
 });
 

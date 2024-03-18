@@ -3,6 +3,8 @@
 namespace App\Livewire\Home\Wheel;
 
 use App\Models\UserSpin;
+use App\Models\SpinTheWheel;
+use App\Models\UserFaker;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Livewire\Component;
@@ -11,7 +13,10 @@ class SpinWheel extends Component
 {
     public $rewards;
     public $isJoined = true;
-    public $userNames;
+    public $users;
+    public $wheels;
+    public $maxWinners;
+    public $winnersCount;
 
     public function mount() {
         //check if user already spin the wheel
@@ -27,22 +32,18 @@ class SpinWheel extends Component
             }
         }
 
-        $array = [
-            '100' => 20, 
-            '200' => 20, 
-            '300' => 15, 
-            '400' => 10,
-            '500' => 10, 
-            '600' => 10, 
-            '700' => 10,
-            '800' => 5
-        ];
-        
+        $this->wheels = SpinTheWheel::all();
+        foreach ($this->wheels as $key => $wheel) {
+            $temp_arr = "key".$key . '_' . $wheel->rewards;
+            $array[$temp_arr] = intval($wheel->probability);
+           
+        }
+
         $mostDecimals = 0;
         foreach ($array as $value => $weight) {
             $tempDecimals = 0;
             while ((string)$weight !== (string)floor($weight)) {
-                $weight *= 10; 
+                $weight *= 10;
                 ++$tempDecimals;
             }
             $mostDecimals = max($mostDecimals, $tempDecimals);
@@ -63,90 +64,37 @@ class SpinWheel extends Component
                 }
             }
         }
-
-        $this->rewards = $value;
+        
+        $this->rewards = preg_replace('/key[0-9]+_/', '', $value);
 
         $this->userFaker();
-        // dd($this->rewards);
+
+        $this->winnersCount = UserSpin::whereDate('joined_date', Carbon::now()->format('Y-m-d'))->where('is_winner', 1)->get();
     }
 
+
     public function spinWheel() {
+
+        $is_winner = 0;
+        if($this->rewards == 0) {
+                $is_winner = 0;
+        } else {
+            $is_winner = 1;
+        }
+
         UserSpin::create([
             'user_id' => auth()->user()->id,
             'rewards' => $this->rewards,
             'joined_date' => Carbon::now()->format('Y-m-d'),
+            'is_winner' => $is_winner,
             'ip' => \Request::ip(),
         ]);
     }
 
     public function userFaker() {
-        $userNames = [
-            'Stietenv4',
-            'njwordho',
-            'vanillaski3v',
-            'Mekinjamiq',
-            'sapaira6h',
-            'svest5y',
-            'mahastory5t',
-            'bulokovadq',
-            'Cherascond',
-            'graphismlinksci',
-            'anglesce',
-            'hyzticxwl',
-            'da2timy4',
-            'apatzatss1',
-            'livriranazk',
-            'Jelah5w',
-            'eshaelkag2',
-            'embaurart9',
-            'votornTutlc',
-            'Berghain0t',
-            'subirexn',
-            'sprkyldyyk',
-            'pristan6h',
-            'Dennunzio3i',
-            'graceful87qo',
-            'kalimijnfz',
-            'silha2i',
-            'detassato1f',
-            'pithogjf',
-            'sikahertem',
-            'svest5y',
-            'mahastory5t',
-            'bulokovadq',
-            'Cherascond',
-            'graphismlinksci',
-            'anglesce',
-            'hyzticxwl',
-            'da2timy4',
-            'apatzatss1',
-            'livriranazk',
-            'Jelah5w',
-            'eshaelkag2',
-            'embaurart9',
-            'votornTutlc',
-            'Berghain0t',
-            'subirexn',
-            'sprkyldyyk',
-            'pristan6h',
-            'Dennunzio3i',
-            'graceful87qo',
-            'kalimijnfz',
-            'silha2i',
-            'detassato1f',
-            'pithogjf',
-            'sikahertem',
-        ];
+        
+        $this->users = UserFaker::inRandomOrder()->get();
 
-        foreach($userNames as $name) {
-            $fakeNames[] = $name;
-        }
-
-        // $this->userNames = Arr::random($fakeNames);
-        shuffle($fakeNames);
-
-        $this->userNames = $fakeNames;
-        // dd($fakeNames);
     }
 
 

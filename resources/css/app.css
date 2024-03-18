@@ -193,8 +193,8 @@ html, body {
 /* spin the wheel */
 .container {
   position:relative;
-  width:400px;
-  height: 400px;
+  width:600px;
+  height: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -245,7 +245,7 @@ html, body {
 .container .wheel .number span {
   position: relative;
   transform:rotate(45deg);
-  font-size:2em;
+  font-size:1.5em;
   font-weight: 700;
   color:#fff
 }
@@ -269,9 +269,10 @@ body.swal2-height-auto {height: 100%!important;}
 .stb-item {
   padding: 0;
   display: inline-block;
-  margin-right: 10rem;
+  /* margin-right: 10rem; */
 
 }
 .stb-item:hover {
-    color: #C02534;
+    color: rgb(88 80 236);
+    cursor: default;
 }
