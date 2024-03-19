@@ -4,6 +4,7 @@ namespace App\Livewire\Home\Wheel;
 
 use App\Models\UserSpin;
 use App\Models\SpinTheWheel;
+use App\Models\SpinTheWheelSetting;
 use App\Models\UserFaker;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
@@ -15,7 +16,7 @@ class SpinWheel extends Component
     public $isJoined = true;
     public $users;
     public $wheels;
-    public $maxWinners;
+    public $maxWinners = true;
     public $winnersCount;
 
     public function mount() {
@@ -32,12 +33,30 @@ class SpinWheel extends Component
             }
         }
 
+
+        $this->winnersCount = UserSpin::whereDate('joined_date', Carbon::now()->format('Y-m-d'))->where('is_winner', 1)->get();
+
+        $spinTheWheelSetting = SpinTheWheelSetting::latest()->first();
+
+        $maxWinnersCount = count($this->winnersCount);
+
         $this->wheels = SpinTheWheel::all();
-        foreach ($this->wheels as $key => $wheel) {
-            $temp_arr = "key".$key . '_' . $wheel->rewards;
-            $array[$temp_arr] = intval($wheel->probability);
-           
+
+        $array = [];
+        if($maxWinnersCount == $spinTheWheelSetting->total_winners) {
+            $array = [
+                '0' => '1',
+                '0' => '2',
+                '0' => '3'
+            ];
+        } else {
+            foreach ($this->wheels as $key => $wheel) {
+                $temp_arr = "key".$key . '_' . $wheel->rewards;
+                $array[$temp_arr] = intval($wheel->probability);
+            }
         }
+
+        // dd($array);
 
         $mostDecimals = 0;
         foreach ($array as $value => $weight) {
@@ -69,8 +88,9 @@ class SpinWheel extends Component
 
         $this->userFaker();
 
-        $this->winnersCount = UserSpin::whereDate('joined_date', Carbon::now()->format('Y-m-d'))->where('is_winner', 1)->get();
+        // dd($maxWinnersCount);
     }
+
 
 
     public function spinWheel() {

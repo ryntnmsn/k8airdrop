@@ -35,8 +35,10 @@ use App\Livewire\Home\Auth\IndexLogin;
 use App\Livewire\Home\Auth\IndexRegister;
 use App\Livewire\Home\IndexDashboard;
 use App\Livewire\Home\IndexHome;
+use App\Livewire\Home\IndexUserAccount;
 use App\Livewire\Home\SinglePromo;
 use App\Livewire\Home\Wheel\SpinWheel;
+use App\Livewire\Home\Wheel\SpinWheelDashboard;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -60,6 +62,8 @@ Route::middleware('auth')->group(function() {
     Route::post('/user/logout', [AuthController::class, 'userLogout'])->name('user.logout');
     //spin the wheel
     Route::get('spin-the-wheel', SpinWheel::class)->name('spin.wheel');
+    Route::get('/user/spin-the-wheel', SpinWheelDashboard::class)->name('spin.wheel.dashboard');
+    Route::get('/user/account', IndexUserAccount::class)->name('user.account');
 });
 
 

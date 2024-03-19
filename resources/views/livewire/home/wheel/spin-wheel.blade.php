@@ -1,5 +1,4 @@
 <div class="h-full">
-   
         @if($isJoined == false)
             <div class="h-full flex items-center justify-center">
                 <div wire:ignore class="container">
@@ -14,53 +13,8 @@
                 </div>
             </div>
         @else
-            <div>
-                <div class="flex w-full h-full">
-                    <div class="w-[70%]">
-                        <h1 class="text-slate-200 font-semibold text-2xl">Please come back again for more exciting rewards!</h1>
-                        <div>
-                            <p class="text-slate-200 font-semibold">Today's winners count: {{ count($winnersCount) }}</p>
-                        </div>
-                    </div>
-                    <div class="w-[30%] h-full">
-                        <div class="flex w-full">
-                            <div class="bg-slate-900 p-8 w-full rounded-xl">
-                                {{-- Users Carousel --}}
-                                <div class="flex flex-col">
-                                    <div class="flex justify-between text-slate-200 font-semibold text-sm mb-5">
-                                        <div class="flex gap-1">
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                                    <path d="M7 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM14.5 9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM1.615 16.428a1.224 1.224 0 0 1-.569-1.175 6.002 6.002 0 0 1 11.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 0 1 7 18a9.953 9.953 0 0 1-5.385-1.572ZM14.5 16h-.106c.07-.297.088-.611.048-.933a7.47 7.47 0 0 0-1.588-3.755 4.502 4.502 0 0 1 5.874 2.636.818.818 0 0 1-.36.98A7.465 7.465 0 0 1 14.5 16Z" />
-                                                  </svg>
-                                            </span>
-                                            <span>
-                                                Names
-                                            </span>
-                                        </div>
-                                        <div>Rewards</div>
-                                    </div>
-                                    <div class="services-ticker-block  h-96 overflow-hidden">
-                                        <div class="stb_line_single flex w-full">
-                                            @foreach ($users as $user)
-                                                <div class="w-full">
-                                                    <a class="stb-item box !flex text-slate-500 text-sm font-semibold !justify-between w-full border-b border-slate-800 py-2">
-                                                        <span class="py-2">
-                                                            {{ $user['name'] }}
-                                                        </span>
-                                                        <span class="py-2">
-                                                            {{ $user['rewards'] }}
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="flex w-full h-full items-center justify-center">
+                <h1 class="text-slate-200 font-semibold text-2xl">Please come back again for more exciting rewards!</h1>
             </div>
         @endif
 
@@ -99,6 +53,31 @@
             }, 5000);
         }
     </script>
+
+
+{{-- 
+    <script>
+        let wheel1 = document.querySelector('.wheel1');
+        let spinBtn1 = document.querySelector('.spinBtn1');
+        let value = 2000;
+
+        spinBtn1.onclick = function() {
+            wheel1.style.transform = "rotate(" + value + "deg)";
+            value += 2000;
+            setTimeout(function() {
+                Swal.fire({
+                    title: 'Sorry',
+                    text: `Come back again tomorrow for another spin`,
+                    icon: 'error',
+                    iconColor: 'red'
+                }).then(function() {
+                    location.reload();
+                })
+            }, 5000);
+        }
+    </script> --}}
+
+
 
     <script>
         gsap.utils.toArray('.stb_line_single').forEach((line, i) => {

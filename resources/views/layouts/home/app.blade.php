@@ -26,7 +26,7 @@
     <div class="h-full w-full flex flex-col justify-between">
         @include('layouts.home.header')
         
-        <div class="max-w-[1280px] w-full px-5 mx-auto my-10 relative box-border {{ request()->is('spin-the-wheel') || request()->is('user/dashboard*') ? 'h-full' : '' }}">
+        <div class="max-w-[1280px] w-full px-5 mx-auto my-10 relative box-border {{ request()->is('spin-the-wheel') || request()->is('user/dashboard*') || request()->is('user/spin-the-wheel*') || request()->is('user/account*') ? 'h-full' : '' }}">
             @yield('contents')
         </div>
 

@@ -1,8 +1,26 @@
 <div>
     <div class="relative">
-        <div class="flex">
-            <div class="flex-1 flex flex-col space-y-1">
+        <div class="flex justify-between">
+            <div class="flex flex-col space-y-1">
                 <x-title>Spin the Wheel Settings</x-title>
+            </div>
+            <div>
+               <form wire:submit.prevent="updateSpinWheelSettings">
+                    <x-label>Winners count per day</x-label>
+                    <div class="flex relative items-center">
+                        <x-input-text wire:model="totalWinners"></x-input-text>
+                        <button wire:target="updateSpinWheelSettings" type="submit" class="bg-slate-200 p-1 rounded-md absolute right-0 mr-1 z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                              </svg>
+                        </button>
+                    </div>
+                    <div>
+                        @error('total_winners')
+                            <span class="text-rose-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </form>
             </div>
         </div>
         <div class="mt-10">
@@ -22,9 +40,9 @@
                             <th scope="col" class="px-6 py-3">
                                 Probability
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            {{-- <th scope="col" class="px-6 py-3">
                                 No. of winners
-                            </th>
+                            </th> --}}
                             <th scope="col" class="px-6 py-3">
                                 Action
                             </th>
@@ -45,9 +63,9 @@
                                 <td class="px-6 py-3">
                                     {{ $wheel->probability }}
                                 </td>
-                                <td class="px-6 py-3">
+                                {{-- <td class="px-6 py-3">
                                     {{ $wheel->winners_count }}
-                                </td>
+                                </td> --}}
                                 <td class="px-6 py-3 flex">
                                     <x-button wire:click="editSpinWheel({{$wheel->id}})" class="!p-2 !bg-transparent !border-0 !text-slate-600" data-modal-target="edit-modal" data-modal-toggle="edit-modal">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
@@ -65,7 +83,7 @@
 
 
 
-        <!-- Edit modal -->
+    <!-- Edit modal -->
     <div wire:ignore.self id="edit-modal" data-modal-backdrop="edit" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
             <!-- Modal content -->

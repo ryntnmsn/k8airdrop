@@ -42,7 +42,7 @@ class IndexRegister extends Component
         }
      
     }
-
+    
     public function render()
     {
         return view('livewire.home.auth.index-register')
