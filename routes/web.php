@@ -36,6 +36,8 @@ use App\Livewire\Home\Auth\IndexRegister;
 use App\Livewire\Home\IndexDashboard;
 use App\Livewire\Home\IndexHome;
 use App\Livewire\Home\IndexUserAccount;
+use App\Livewire\Home\News\IndexNews;
+use App\Livewire\Home\News\IndexNewsCategory;
 use App\Livewire\Home\SinglePromo;
 use App\Livewire\Home\Wheel\SpinWheel;
 use App\Livewire\Home\Wheel\SpinWheelDashboard;
@@ -66,6 +68,12 @@ Route::middleware('auth')->group(function() {
     Route::get('/user/account', IndexUserAccount::class)->name('user.account');
 });
 
+
+//news class
+Route::group(['prefix' => 'news'], function () {
+    Route::get('/', IndexNews::class)->name('news.index');
+    Route::get('/category/{slug}', IndexNewsCategory::class)->name('news.category.index');
+});
 
 //admin auth controller
 Route::controller(AuthController::class)->group(function() {

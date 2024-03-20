@@ -60,8 +60,6 @@
             </table>
         </div>
     </div>
-
-
 <!-- Add modal -->
 <div wire:ignore.self id="add-modal" data-modal-backdrop="add" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-2xl max-h-full">
@@ -86,10 +84,18 @@
                         <x-label>Title</x-label>
                         <x-input-text wire:model="title"></x-input-text>
                         @error('title')
-                        <span class="text-rose-500">{{ $message }}</span>
+                            <span class="text-rose-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div>
+                        <x-label>Icon (400x400)</x-label>
+                        <x-input-text type="file" wire:model="image"></x-input-text>
+                        @error('image')
+                            <span class="text-rose-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
+                
                 <!-- Modal footer -->
                 <div class="flex items-center p-4 md:p-5 border-t border-slate-200 rounded-b">
                     <x-button wire:target="storeArticleCategory">Create</x-button>
@@ -125,6 +131,18 @@
                         <x-input-text wire:model="title" value="{{ $title ?? ''}}"></x-input-text>
                         @error('title')
                         <span class="text-rose-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div>
+                        <x-label>Image</x-label>
+                        <img src="{{ url('storage/article_category/', $image) }}" alt="" class="w-40">
+                        <input type="hidden" wire:model="image" value="{{ $image ?? '' }}">
+                    </div>
+                    <div>
+                        <x-label>Change image (400x400)</x-label>
+                        <x-input-text type="file" wire:model="newImage"></x-input-text>
+                        @error('image')
+                            <span class="text-rose-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>

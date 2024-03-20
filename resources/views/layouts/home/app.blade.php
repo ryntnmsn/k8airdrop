@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-    <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark')
@@ -24,10 +23,12 @@
 <body class="bg-slate-950 dark:bg-slate-200">
     
     <div class="h-full w-full flex flex-col justify-between">
-        @include('layouts.home.header')
+        <div>
+            @include('layouts.home.header')
         
-        <div class="max-w-[1280px] w-full px-5 mx-auto my-10 relative box-border {{ request()->is('spin-the-wheel') || request()->is('user/dashboard*') || request()->is('user/spin-the-wheel*') || request()->is('user/account*') ? 'h-full' : '' }}">
-            @yield('contents')
+            <div class="max-w-[1280px] w-full px-5 mx-auto my-10 relative box-border {{ request()->is('spin-the-wheel') || request()->is('user/dashboard*') || request()->is('user/spin-the-wheel*') || request()->is('user/account*') || request()->is('news*') ? 'h-fit' : '' }}">
+                @yield('contents')
+            </div>
         </div>
 
         @include('layouts.home.footer')
@@ -97,20 +98,15 @@
     </script>
 
     <script>
-        var nameCarousel = new Glide('#nameCarousel', {
-            type: 'carousel',
-            autoplay: 1,
-            startAt: 1,
-            mode: 'vertical',
-            animationDuration: 10000,
-            animationTimingFunc: 'linear',
-            focusAt: 'center',
-            perView: 10,
-            gap: 17,
-            
+        var newsSlider = new Glide('#newsSlider', {
+            type: 'slider',
+            autoplay: 5000,
+            animationDuration: 500,
+            animationTimingFunc: 'ease-in-out',
         })
-        nameCarousel.mount()
+        newsSlider.mount()
     </script>
+  <script src="https://www.cryptohopper.com/widgets/js/script"></script>
 
 </body>
 </html>

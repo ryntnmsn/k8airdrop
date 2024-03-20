@@ -97,6 +97,14 @@ return [
             'throw' => false,
         ],
 
+        'article_category' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/article_category'),
+            'url' => env('APP_URL').'/storage/article_category',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
     ],
 
     /*
@@ -117,6 +125,7 @@ return [
         public_path('storage/featured_games') => storage_path('app/public/featured_games'),
         public_path('storage/carousel') => storage_path('app/public/carousel'),
         public_path('storage/user') => storage_path('app/public/user'),
+        public_path('storage/article_category') => storage_path('app/public/article_category'),
     ],
 
 ];

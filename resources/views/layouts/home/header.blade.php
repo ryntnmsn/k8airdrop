@@ -44,4 +44,15 @@
             </div>
         </div>
     </div>
+
+    {{-- page title --}}
+    @if(request()->is('news*'))
+        <div class="w-full bg-slate-800">
+            <div class="max-w-[1280px] px-5 w-full mx-auto items-center">
+                <h1 class="text-slate-200 py-5 text-4xl font-semibold">News</h1>
+            </div>
+        </div>
+    @endif
+
 </header>
+

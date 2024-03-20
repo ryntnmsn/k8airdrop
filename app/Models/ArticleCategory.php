@@ -11,7 +11,7 @@ class ArticleCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'slug'
+        'title', 'slug', 'image'
     ];
 
     public function articles(): BelongsToMany {
