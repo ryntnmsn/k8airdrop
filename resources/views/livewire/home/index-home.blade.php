@@ -66,7 +66,7 @@
     <div class="mt-20">
         <div class="flex mb-5 items-center justify-between">
                 <div>
-                    <x-title class="!text-slate-200 dark:!text-slate-600 !font-medium !text-4xl">Airdrop Promos</x-title>
+                    <x-title class="!text-slate-200 dark:!text-slate-600 !font-semibold !text-4xl">Airdrop Promos</x-title>
                 </div>
                 <div>
                     <button onclick="showFilter()" class="border rounded-md p-1 bg-slate-800 border-slate-700">
@@ -142,16 +142,18 @@
                         <img src="{{ url('storage/promo/', $promo->image) }}" alt="{{ $promo->name }}" class="w-full rounded-xl">
                     </div>
                     <div class="py-5 h-full">
-                        <x-text class="text-xs !text-slate-500 dark:!text-slate-400 mb-2">Duration: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
-                        <x-text class="text-xl font-medium mb-2">{{ $promo->name }}</x-text>
-                        <x-text class="text-md font-medium">Prize pool: {{ $promo->prize_pool }}</x-text>
-                        <x-text class="text-md font-medium">Platforms:
-                            @foreach ($promo->platforms as $platform)
-                                <span class="text-xs px-1 rounded-sm me-1 !text-white" style="background: {{ $platform->hex_color }}">
-                                    {{ $platform->name }}
-                                </span>
-                            @endforeach
-                        </x-text>
+                        <x-text class="text-sm font-semibold !text-slate-500 dark:!text-slate-400 mb-2">Duration: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
+                        <x-text class="text-xl font-semibold mb-2">{{ $promo->name }}</x-text>
+                        <x-text class="text-md font-semibold">Prize pool: {{ $promo->prize_pool }}</x-text>
+                        @if(count($promo->platforms) != null)
+                            <x-text class="text-md font-semibold">Platforms:
+                                @foreach ($promo->platforms as $platform)
+                                    <span class="text-xs px-1 rounded-sm me-1 !text-white" style="background: {{ $platform->hex_color }}">
+                                        {{ $platform->name }}
+                                    </span>
+                                @endforeach
+                            </x-text>
+                        @endif
                     </div>
                 </div>
             @empty
@@ -170,7 +172,7 @@
     <div wire:ignore.self>
         <div class="mt-20">
             <div class="mb-5">
-                <x-title class="!text-slate-200 dark:!text-slate-600 !font-medium !text-4xl">Upcoming Promos</x-title>
+                <x-title class="!text-slate-200 dark:!text-slate-600 !font-semibold !text-4xl">Upcoming Promos</x-title>
             </div>
             <div class="grid grid-cols-3 gap-5">
                 @foreach ($promoUpcoming as $promo)
@@ -187,9 +189,9 @@
                         </div>
                         <div class="py-5 h-full">
                             <x-text class="text-xs !text-slate-500 dark:!text-slate-400 mb-2">Duration: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
-                            <x-text class="text-xl font-medium mb-2">{{ $promo->name }}</x-text>
-                            <x-text class="text-md font-medium">Prize pool: {{ $promo->prize_pool }}</x-text>
-                            <x-text class="text-md font-medium">Platforms:
+                            <x-text class="text-xl font-semibold mb-2">{{ $promo->name }}</x-text>
+                            <x-text class="text-md font-semibold">Prize pool: {{ $promo->prize_pool }}</x-text>
+                            <x-text class="text-md font-semibold">Platforms:
                                 @foreach ($promo->platforms as $platform)
                                     <span class="text-xs px-1 rounded-sm me-1 !text-white" style="background: {{ $platform->hex_color }}">
                                         {{ $platform->name }}
@@ -210,7 +212,7 @@
     <div wire:ignore.self>
         <div class="mt-20">
             <div class="mb-5">
-                <x-title class="!text-slate-200 dark:!text-slate-600 !font-medium !text-4xl">Featured Games</x-title>
+                <x-title class="!text-slate-200 dark:!text-slate-600 !font-semibold !text-4xl">Featured Games</x-title>
             </div>
             <div class="grid grid-cols-4 gap-5">
                 @foreach ($featuredGames as $featureGame)
@@ -264,13 +266,13 @@
                         </div>
                     </div>
                     <div class="text-slate-600">
-                        <p class="font-medium mb-4">Promo Description</p>
+                        <p class="font-semibold mb-4">Promo Description</p>
                         {!! $description !!}
                     </div>
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-4 md:p-5 border-t border-slate-200 rounded-b dark:border-slate-600">
-                    <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-slate-900 focus:outline-none bg-white rounded-lg border border-slate-200 hover:bg-slate-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-slate-100 dark:focus:ring-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-600 dark:hover:text-white dark:hover:bg-slate-700">Decline</button>
+                    <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-semibold text-slate-900 focus:outline-none bg-white rounded-lg border border-slate-200 hover:bg-slate-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-slate-100 dark:focus:ring-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-600 dark:hover:text-white dark:hover:bg-slate-700">Decline</button>
                 </div>
             </div>
         </div>

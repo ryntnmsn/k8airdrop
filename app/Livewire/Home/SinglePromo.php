@@ -30,6 +30,7 @@ class SinglePromo extends Component
     public $choices = [];
     public $checkbox = [];
     public $comments = [];
+    public $promoStatus = true;
     public $joinPromo = true;
 
 
@@ -79,6 +80,13 @@ class SinglePromo extends Component
         $parseStartDate = Carbon::parse($promo->start_date);
         $parseEndDate = Carbon::parse($promo->end_date);
         $this->days_left = Carbon::parse(Carbon::now())->diffInDays($parseEndDate ,false) + 1;
+
+        // If promo ends
+        if($promo->end_date >= Carbon::now()->format('Y-m-d')) {
+            $this->promoStatus = true;
+        } else {
+            $this->promoStatus = false;
+        }
 
         // dd($this->platforms);
         $this->promo_id = $promo->id;

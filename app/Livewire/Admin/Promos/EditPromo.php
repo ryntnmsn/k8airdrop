@@ -76,6 +76,8 @@ class EditPromo extends Component
         $this->article = $getPromo->article;
         $this->old_image = $getPromo->image;
 
+        // dd($this->promo);
+
     }
 
     protected $rules = [
@@ -89,6 +91,7 @@ class EditPromo extends Component
     ];
 
     public function updatePromo() {
+
         $this->validate();
 
         $filename = '';
@@ -118,7 +121,18 @@ class EditPromo extends Component
             'image' => $filename,
         ]);
 
-        $this->promo->platforms()->sync($this->platforms);  
+        
+        $count = count($this->promo->platforms);
+
+        if($count == 0) {
+            foreach($this->platforms as $key => $value) {
+                $this->promo->platforms()->attach($this->platforms[$key]);
+            }
+        } else {
+            $this->promo->platforms()->sync($this->platforms);  
+        }
+
+        
 
         $this->dispatch('updated');
 

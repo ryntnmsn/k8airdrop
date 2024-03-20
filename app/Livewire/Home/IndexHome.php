@@ -94,7 +94,7 @@ class IndexHome extends Component
             ->orderBy('end_date', 'desc');
 
         return view('livewire.home.index-home', [
-            'promos' => $promos->paginate($this->pagination)
+            'promos' => $promos->simplePaginate($this->pagination)
         ])->extends('layouts.home.app')->section('contents');
     }
 }

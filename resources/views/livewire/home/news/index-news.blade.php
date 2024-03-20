@@ -76,7 +76,7 @@
                                 </span>
                             </div>
                         </div>
-                        <h1 class="text-slate-200 font-semibold text-2xl leading-tight mt-2">{{ $news->title }}</h1>
+                        <h1 class="text-slate-200 font-semibold text-xl leading-tight mt-2">{{ $news->title }}</h1>
                         <p class="text-slate-400">
                             {{ Str::limit($news->short_description, 150) }}
                         </p>
@@ -109,7 +109,7 @@
                                 </span>
                             </div>
                         </div>
-                        <h1 class="text-slate-200 font-semibold text-2xl leading-tight mt-2">{{ $news->title }}</h1>
+                        <h1 class="text-slate-200 font-semibold text-xl leading-tight mt-2">{{ $news->title }}</h1>
                         <p class="text-slate-400">
                             {{ Str::limit($news->short_description, 150) }}
                         </p>

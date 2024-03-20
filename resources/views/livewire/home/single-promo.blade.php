@@ -84,7 +84,7 @@
                             </button>
                         </h2>
                         <div id="accordion-open-body-1" class="rounded-b-lg hidden bg-slate-800/[.20] py-5" aria-labelledby="accordion-open-heading-1">
-                            <div class="p-5 border-b-0 text-slate-200 leading-6">
+                            <div class="p-5 border-b-0 text-slate-200 leading-[1.8rem]">
                                 {!! $description !!}
                                 @if(!empty($button_name) && !empty($button_link))
                                     <div class="mt-10 flex">
@@ -117,7 +117,7 @@
                             </button>
                         </h2>
                         <div id="accordion-open-body-2" class="rounded-b-lg hidden bg-slate-800/[.20] py-5" aria-labelledby="accordion-open-heading-2">
-                            <div class="p-5 border-b-0 text-slate-200 leading-6">
+                            <div class="p-5 border-b-0 text-slate-200 leading-[1.8rem]">
                                 {!! $terms !!}
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                             </button>
                         </h2>
                         <div id="accordion-open-body-3" class="rounded-b-lg hidden bg-slate-800/[.20] py-5" aria-labelledby="accordion-open-heading-3">
-                            <div class="p-5 border-b-0 text-slate-200 leading-6">
+                            <div class="p-5 border-b-0 text-slate-200 leading-[1.8rem]">
                                 {!! $article !!}
                             </div>
                         </div>
@@ -149,171 +149,173 @@
 
                 {{-- PROMO TYPES --}}
                     {{-- UPLOAD IMAGE --}}
-                    @if($type == 'click_to_join')
-                        @if(auth()->user())
-                            @if($type == 'click_to_join' && $game_type == 'upload_image')
-                                <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
-                                    @if($joinPromo == true)
-                                        <form wire:submit="uploadImage">
-                                            <h1 class="text-slate-200 font-semibold text-2xl mb-10">Upload image below to participate.</h1>
-                                            <div>
-                                                <div class="mb-8">
-                                                    <div class="flex items-center justify-center w-full">
-                                                        <label for="dropzone-file" class="flex flex-col items-center justify-center overflow-hidden w-full  h-96 border-2 border-slate-800/[.50] border-dashed rounded-xl cursor-pointer bg-slate-900">
-                                                            <div class="flex flex-col items-center justify-center pt-5 pb-6 h-96">
-                                                                @if($userUploadImage)
-                                                                    <img src="{{ $userUploadImage->temporaryUrl() }}" class="w-full">
-                                                                @else
-                                                                    <svg class="w-8 h-8 mb-4 text-slate-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                                                                    </svg>
-                                                                    <p class="mb-2 text-slate-700"><span class="font-bold">Click to upload</span> or drag and drop</p>
-                                                                    <p class="text-xs text-slate-700 font-bold">PNG, JPG, JPEG</p>
-                                                                @endif
-                                                            </div>
-                                                            <input wire:model="userUploadImage" id="dropzone-file" type="file" class="hidden" />
-                                                        </label>
+                    @if($promoStatus == true)
+                        @if($type == 'click_to_join')
+                            @if(auth()->user())
+                                @if($type == 'click_to_join' && $game_type == 'upload_image')
+                                    <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
+                                        @if($joinPromo == true)
+                                            <form wire:submit="uploadImage">
+                                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">Upload image below to participate.</h1>
+                                                <div>
+                                                    <div class="mb-8">
+                                                        <div class="flex items-center justify-center w-full">
+                                                            <label for="dropzone-file" class="flex flex-col items-center justify-center overflow-hidden w-full  h-96 border-2 border-slate-800/[.50] border-dashed rounded-xl cursor-pointer bg-slate-900">
+                                                                <div class="flex flex-col items-center justify-center pt-5 pb-6 h-96">
+                                                                    @if($userUploadImage)
+                                                                        <img src="{{ $userUploadImage->temporaryUrl() }}" class="w-full">
+                                                                    @else
+                                                                        <svg class="w-8 h-8 mb-4 text-slate-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                                                        </svg>
+                                                                        <p class="mb-2 text-slate-700"><span class="font-bold">Click to upload</span> or drag and drop</p>
+                                                                        <p class="text-xs text-slate-700 font-bold">PNG, JPG, JPEG</p>
+                                                                    @endif
+                                                                </div>
+                                                                <input wire:model="userUploadImage" id="dropzone-file" type="file" class="hidden" />
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
+                                            </form>
+                                        @else
+                                            <div class="flex flex-col items-center justify-center py-10">
+                                                <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">Thank you for participating to this promo. <br> Please stay tuned for the announcement of winners.</h1>
+                                                <div class="flex space-x-5">
+                                                    <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Check other promos</x-href>
+                                                    <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Go to home page</x-href>
                                                 </div>
                                             </div>
-                                        </form>
-                                    @else
-                                        <div class="flex flex-col items-center justify-center py-10">
-                                            <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">Thank you for participating to this promo. <br> Please stay tuned for the announcement of winners.</h1>
-                                            <div class="flex space-x-5">
-                                                <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Check other promos</x-href>
-                                                <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Go to home page</x-href>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            {{-- END OF UPLOAD IMAGE --}}
-                            {{-- BEGIN OF MULTIPLE CHOICE --}}
-                            @elseif($type == 'click_to_join' && $game_type == 'multiple_choice')
-                                <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
-                                    @if($joinPromo == true)
-                                        <form wire:submit="multipleChoice">
-                                            <h1 class="text-slate-200 font-semibold text-2xl mb-10">Fill out the form below to participate</h1>
-                                            <div class="mb-8">
-                                                @if($errors->any())
-                                                    @if($errors->has('sns_id'))
-                                                        <span class="text-rose-500">Please enter your sns id.</span>
-                                                    @else
-                                                        <span class="text-rose-500">Please answer all questions</span>
-                                                    @endif
-                                                @endif
-                                            </div>
-                                            <div class="mb-8">
-                                                <x-label class="!text-slate-200 !font-semibold">Enter SNS ID (Twitter)</x-label>
-                                                <x-input-text wire:model="sns_id" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
-                                            </div>
-                                            <div>
+                                        @endif
+                                    </div>
+                                {{-- END OF UPLOAD IMAGE --}}
+                                {{-- BEGIN OF MULTIPLE CHOICE --}}
+                                @elseif($type == 'click_to_join' && $game_type == 'multiple_choice')
+                                    <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
+                                        @if($joinPromo == true)
+                                            <form wire:submit="multipleChoice">
+                                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">Fill out the form below to participate</h1>
                                                 <div class="mb-8">
-                                                    <div class="flex flex-col w-full">
+                                                    @if($errors->any())
+                                                        @if($errors->has('sns_id'))
+                                                            <span class="text-rose-500">Please enter your sns id.</span>
+                                                        @else
+                                                            <span class="text-rose-500">Please answer all questions</span>
+                                                        @endif
+                                                    @endif
+                                                </div>
+                                                <div class="mb-8">
+                                                    <x-label class="!text-slate-200 !font-semibold">Enter SNS ID (Twitter)</x-label>
+                                                    <x-input-text wire:model="sns_id" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
+                                                </div>
+                                                <div>
+                                                    <div class="mb-8">
+                                                        <div class="flex flex-col w-full">
 
-                                                        @foreach ($questions as $key => $question)
-                                                            <div class="mb-8">
-                                                                <div class="flex text-slate-200 font-semibold gap-1 mb-2">
-                                                                    <span scope="row">{{$loop->iteration}}.</span><span><p>{{ $question->id }}_{{ $question->question_title }}</p></span>
-                                                                </div>
-                                                                <div class="grid grid-cols-2 gap-2 text-slate-500">
-                                                                    @foreach ($question->choices as $choice)
-                                                                        @if($question->question_type == 'single_select')
-                                                                            <div class="w-full">
-                                                                                <div class="flex items-center px-4 py-2 border border-slate-900 rounded">
-                                                                                    <input wire:model="choices.{{ $key }}" value="{{ $choice->id }}" name="{{ $choice->id }}" id="{{ $choice->id }}" type="radio" class="w-5 h-5 text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600">
-                                                                                    <label for="choice_{{ $choice->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->id }}</label>
-                                                                                </div>
-                                                                            </div>
-                                                                        @elseif($question->question_type == 'multiple_select')
-                                                                            <div wire:ignore class="w-full">
-                                                                                <div class="flex items-center px-4 py-2 border border-slate-900 rounded">
-                                                                                    <input wire:model.defer="checkbox" value="{{ $choice->id }}" id="{{ $choice->id }}" type="checkbox" class="text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600 rounded-sm w-5 h-5">
-                                                                                    <label for="{{ $choice->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->id }}</label>
-                                                                                </div>
-                                                                            </div>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </div>
-                                                                @if($question->question_type == 'comment')
-                                                                    <div class="w-full">
-                                                                        <textarea wire:model="comments.{{ $key }}" class="w-full h-52 rounded-lg focus:ring-indigo-600 !bg-slate-900 !border-0 !text-slate-200 !font-semibold"></textarea>
+                                                            @foreach ($questions as $key => $question)
+                                                                <div class="mb-8">
+                                                                    <div class="flex text-slate-200 font-semibold gap-1 mb-2">
+                                                                        <span scope="row">{{$loop->iteration}}.</span><span><p>{{ $question->id }}_{{ $question->question_title }}</p></span>
                                                                     </div>
-                                                                @endif
-                                                            </div>
-                                                        @endforeach
+                                                                    <div class="grid grid-cols-2 gap-2 text-slate-500">
+                                                                        @foreach ($question->choices as $choice)
+                                                                            @if($question->question_type == 'single_select')
+                                                                                <div class="w-full">
+                                                                                    <div class="flex items-center px-4 py-2 border border-slate-900 rounded">
+                                                                                        <input wire:model="choices.{{ $key }}" value="{{ $choice->id }}" name="{{ $choice->id }}" id="{{ $choice->id }}" type="radio" class="w-5 h-5 text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600">
+                                                                                        <label for="choice_{{ $choice->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->id }}</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @elseif($question->question_type == 'multiple_select')
+                                                                                <div wire:ignore class="w-full">
+                                                                                    <div class="flex items-center px-4 py-2 border border-slate-900 rounded">
+                                                                                        <input wire:model.defer="checkbox" value="{{ $choice->id }}" id="{{ $choice->id }}" type="checkbox" class="text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600 rounded-sm w-5 h-5">
+                                                                                        <label for="{{ $choice->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->id }}</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </div>
+                                                                    @if($question->question_type == 'comment')
+                                                                        <div class="w-full">
+                                                                            <textarea wire:model="comments.{{ $key }}" class="w-full h-52 rounded-lg focus:ring-indigo-600 !bg-slate-900 !border-0 !text-slate-200 !font-semibold"></textarea>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
                                                     </div>
+                                                    <div>
+                                                        <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        @else
+                                            <div class="flex flex-col items-center justify-center py-10">
+                                                <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">Thank you for participating to this promo. <br> Please stay tuned for the announcement of winners.</h1>
+                                                <div class="flex space-x-5">
+                                                    <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Check other promos</x-href>
+                                                    <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Go to home page</x-href>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                {{-- END OF MULTIPLE CHOICE --}}
+                                {{-- BEGIN OF PASTE RETWEET URL --}}
+                                @elseif($type == 'click_to_join' && $game_type == 'paste_retweet_url')
+                                    <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
+                                        @if($joinPromo == true)
+                                            <form wire:submit="pasteRetweetURL">
+                                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">Fill out the form below to participate</h1>
+                                                <div class="mb-8">
+                                                    @if($errors->any())
+                                                        @if($errors->has('sns_id'))
+                                                            <span class="text-rose-500">Please enter your sns id.</span>
+                                                        @else
+                                                            <span class="text-rose-500">Please paste retweet url.</span>
+                                                        @endif
+                                                    @endif
+                                                </div>
+                                                <div class="mb-8">
+                                                    <x-label class="!text-slate-200 !font-semibold">Twitter ID</x-label>
+                                                    <x-input-text wire:model="sns_id" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
+                                                </div>
+                                                <div class="mb-8">
+                                                    <x-label class="!text-slate-200 !font-semibold">Paste Retweet URL (Twitter)</x-label>
+                                                    <x-input-text wire:model="paste_retweet_url" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
+                                                </div>
+                                                <div class="mb-8">
+                                                    <x-label class="!text-slate-200 !font-semibold">Comment</x-label>
+                                                    <textarea wire:model="comment" class="w-full h-52 rounded-lg focus:ring-indigo-600 !bg-slate-900 !border-0 !text-slate-200 !font-semibold"></textarea>
                                                 </div>
                                                 <div>
                                                     <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
                                                 </div>
+                                            </form>
+                                        @else
+                                            <div class="flex flex-col items-center justify-center py-10">
+                                                <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">Thank you for participating to this promo. <br> Please stay tuned for the announcement of winners.</h1>
+                                                <div class="flex space-x-5">
+                                                    <x-href href="{{ route('home.index') }}" class="!float-none font-semibold">Check other promos</x-href>
+                                                    <x-href href="{{ route('home.index') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Go to home page</x-href>
+                                                </div>
                                             </div>
-                                        </form>
-                                    @else
-                                        <div class="flex flex-col items-center justify-center py-10">
-                                            <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">Thank you for participating to this promo. <br> Please stay tuned for the announcement of winners.</h1>
-                                            <div class="flex space-x-5">
-                                                <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Check other promos</x-href>
-                                                <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Go to home page</x-href>
-                                            </div>
-                                        </div>
-                                    @endif
+                                        @endif
+                                    </div>
+                                    {{-- END OF PASTE RETWEET URL --}}
+                                @endif
+                            @else
+                                <div class="mt-20 bg-slate-800/[.20] rounded-xl px-10 py-20 flex flex-col items-center justify-center">
+                                    <h1 class="text-slate-200 font-semibold text-2xl mb-10">Please login to participate.</h1>
+                                    <div class="flex space-x-5">
+                                        <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Login here</x-href>
+                                        <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Register here</x-href>
+                                    </div>
                                 </div>
-                            {{-- END OF MULTIPLE CHOICE --}}
-                            {{-- BEGIN OF PASTE RETWEET URL --}}
-                            @elseif($type == 'click_to_join' && $game_type == 'paste_retweet_url')
-                                <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
-                                    @if($joinPromo == true)
-                                        <form wire:submit="pasteRetweetURL">
-                                            <h1 class="text-slate-200 font-semibold text-2xl mb-10">Fill out the form below to participate</h1>
-                                            <div class="mb-8">
-                                                @if($errors->any())
-                                                    @if($errors->has('sns_id'))
-                                                        <span class="text-rose-500">Please enter your sns id.</span>
-                                                    @else
-                                                        <span class="text-rose-500">Please paste retweet url.</span>
-                                                    @endif
-                                                @endif
-                                            </div>
-                                            <div class="mb-8">
-                                                <x-label class="!text-slate-200 !font-semibold">Twitter ID</x-label>
-                                                <x-input-text wire:model="sns_id" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
-                                            </div>
-                                            <div class="mb-8">
-                                                <x-label class="!text-slate-200 !font-semibold">Paste Retweet URL (Twitter)</x-label>
-                                                <x-input-text wire:model="paste_retweet_url" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
-                                            </div>
-                                            <div class="mb-8">
-                                                <x-label class="!text-slate-200 !font-semibold">Comment</x-label>
-                                                <textarea wire:model="comment" class="w-full h-52 rounded-lg focus:ring-indigo-600 !bg-slate-900 !border-0 !text-slate-200 !font-semibold"></textarea>
-                                            </div>
-                                            <div>
-                                                <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
-                                            </div>
-                                        </form>
-                                    @else
-                                        <div class="flex flex-col items-center justify-center py-10">
-                                            <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">Thank you for participating to this promo. <br> Please stay tuned for the announcement of winners.</h1>
-                                            <div class="flex space-x-5">
-                                                <x-href href="{{ route('home.index') }}" class="!float-none font-semibold">Check other promos</x-href>
-                                                <x-href href="{{ route('home.index') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Go to home page</x-href>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                                {{-- END OF PASTE RETWEET URL --}}
                             @endif
-                        @else
-                            <div class="mt-20 bg-slate-800/[.20] rounded-xl px-10 py-20 flex flex-col items-center justify-center">
-                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">Please login to participate.</h1>
-                                <div class="flex space-x-5">
-                                    <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Login here</x-href>
-                                    <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Register here</x-href>
-                                </div>
-                            </div>
                         @endif
                     @endif
 
