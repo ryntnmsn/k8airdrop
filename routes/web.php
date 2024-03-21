@@ -38,6 +38,9 @@ use App\Livewire\Home\IndexHome;
 use App\Livewire\Home\IndexUserAccount;
 use App\Livewire\Home\News\IndexNews;
 use App\Livewire\Home\News\IndexNewsCategory;
+use App\Livewire\Home\News\IndexNewsLatest;
+use App\Livewire\Home\News\IndexNewsSingle;
+use App\Livewire\Home\News\IndexNewsTrending;
 use App\Livewire\Home\SinglePromo;
 use App\Livewire\Home\Wheel\SpinWheel;
 use App\Livewire\Home\Wheel\SpinWheelDashboard;
@@ -48,6 +51,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
 
+// Route::get('/placeholder', function () {
+//     return view('placeholder');
+// });
 
 Route::get('/', IndexHome::class)->name('home.index');
 Route::get('/promo/{slug}', SinglePromo::class)->name('single.promo');
@@ -72,7 +78,9 @@ Route::middleware('auth')->group(function() {
 //news class
 Route::group(['prefix' => 'news'], function () {
     Route::get('/', IndexNews::class)->name('news.index');
+    Route::get('/latest', IndexNewsLatest::class)->name('news.latest.index');
     Route::get('/category/{slug}', IndexNewsCategory::class)->name('news.category.index');
+    Route::get('/{slug}', IndexNewsSingle::class)->name('news.single.index');
 });
 
 //admin auth controller

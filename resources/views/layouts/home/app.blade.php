@@ -20,7 +20,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="bg-slate-950 dark:bg-slate-200">
+<body class="bg-slate-950">
     
     <div class="h-full w-full flex flex-col justify-between">
         <div>

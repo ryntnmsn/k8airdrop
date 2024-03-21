@@ -132,8 +132,6 @@ class EditPromo extends Component
             $this->promo->platforms()->sync($this->platforms);  
         }
 
-        
-
         $this->dispatch('updated');
 
     }

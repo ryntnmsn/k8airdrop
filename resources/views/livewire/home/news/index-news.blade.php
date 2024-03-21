@@ -16,7 +16,7 @@
                                     {{ $news->short_description }}
                                 </p>
                                 <div class="flex">
-                                    <x-href class="!float-none">Read more</x-href>
+                                    <x-href href="{{ route('news.single.index', $news->slug) }}" class="!float-none">Read more</x-href>
                                 </div>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
     </div>
 
     {{-- news categories --}}
-    <div class="mb-10">
+    <div class="mb-20">
         <div class="grid grid-cols-2 gap-8">
             @foreach ($newsCategories as $category)
                 <div class="bg-slate-900 flex-1 p-2 rounded-md hover:bg-slate-800 duration-300 ease-in-out cursor-pointer">
@@ -56,19 +56,32 @@
 
     {{-- latest news --}}
     <div class="mb-10">
-        <h1 class="text-slate-200 font-semibold text-3xl mb-10">Latest news</h1>
+        <div class="flex justify-between">
+            <h1 class="text-slate-200 font-semibold text-3xl mb-5">Latest news</h1>
+            <a href="{{ route('news.latest.index') }}" class="text-indigo-600 flex items-center font-medium">
+                <span>See more</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                    <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
         <div class="grid grid-cols-3 gap-8">
             @foreach ($newsLatest as $news)
-                <div class="flex flex-col gap-4 bg-slate-900 hover:bg-slate-800 duration-300 ease-in-out p-5 rounded-lg cursor-pointer">
+                <div class="flex flex-col gap-4 bg-slate-900 hover:bg-slate-800 duration-300 ease-in-out p-5 rounded-lg cursor-pointer relative">
+                    <a href="{{ route('news.single.index', $news->slug) }}" class="absolute top-0 bottom-0 right-0 left-0"></a>
                     <div>
                         <img src="{{ url('storage/article/', $news->image) }}" alt="{{ $news->title }}" class="rounded-lg">
                     </div>
                     <div class="flex flex-col gap-4">
                         <div class="flex justify-between">
-                            <div>
-                                @foreach ($news->categories as $category)
-                                    <span class="bg-slate-800 text-slate-500 text-sm px-2 py-1 rounded-sm">{{ $category->title }}</span>
-                                @endforeach
+                            <div class="relative">
+                                <div class="z-10 absolute flex">
+                                    @foreach ($news->categories as $category)
+                                        <span class="text-slate-500 text-sm me-1 rounded-sm">
+                                            <a href="{{ route('news.category.index', $category->slug) }}" class=" bg-slate-800 px-2 py-1 rounded-sm">{{ $category->title }}</a>
+                                        </span>
+                                    @endforeach
+                                </div>
                             </div>
                             <div>
                                 <span class="text-sm text-slate-500">
@@ -76,7 +89,7 @@
                                 </span>
                             </div>
                         </div>
-                        <h1 class="text-slate-200 font-semibold text-xl leading-tight mt-2">{{ $news->title }}</h1>
+                        <h1 class="text-slate-200 font-semibold text-xl leading-normal mt-2">{{ $news->title }}</h1>
                         <p class="text-slate-400">
                             {{ Str::limit($news->short_description, 150) }}
                         </p>
@@ -89,33 +102,38 @@
 
     {{-- news --}}
     <div class="mb-10">
-        <h1 class="text-slate-200 font-semibold text-3xl mb-10">Incase you missed it</h1>
+        <h1 class="text-slate-200 font-semibold text-3xl mb-5">Incase you missed it</h1>
         <div class="grid grid-cols-3 gap-8 mb-10">
             @foreach ($newsAll as $news)
-                <div class="flex flex-col gap-4 bg-slate-900 hover:bg-slate-800 duration-300 ease-in-out p-5 rounded-lg cursor-pointer">
-                    <div>
-                        <img src="{{ url('storage/article/', $news->image) }}" alt="{{ $news->title }}" class="rounded-lg">
-                    </div>
-                    <div class="flex flex-col gap-4">
-                        <div class="flex justify-between">
-                            <div>
+            <div class="flex flex-col gap-4 bg-slate-900 hover:bg-slate-800 duration-300 ease-in-out p-5 rounded-lg cursor-pointer relative">
+                <a href="{{ route('news.single.index', $news->slug) }}" class="absolute top-0 bottom-0 right-0 left-0"></a>
+                <div>
+                    <img src="{{ url('storage/article/', $news->image) }}" alt="{{ $news->title }}" class="rounded-lg">
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="flex justify-between">
+                        <div class="relative">
+                            <div class="z-10 absolute flex">
                                 @foreach ($news->categories as $category)
-                                    <span class="bg-slate-800 text-slate-500 text-sm px-2 py-1 rounded-sm">{{ $category->title }}</span>
+                                    <span class="text-slate-500 text-sm me-1 rounded-sm">
+                                        <a href="{{ route('news.category.index', $category->slug) }}" class=" bg-slate-800 px-2 py-1 rounded-sm">{{ $category->title }}</a>
+                                    </span>
                                 @endforeach
                             </div>
-                            <div>
-                                <span class="text-sm text-slate-500">
-                                    {{ Carbon\Carbon::parse($news->updated_at)->diffForHumans() }}
-                                </span>
-                            </div>
                         </div>
-                        <h1 class="text-slate-200 font-semibold text-xl leading-tight mt-2">{{ $news->title }}</h1>
-                        <p class="text-slate-400">
-                            {{ Str::limit($news->short_description, 150) }}
-                        </p>
-                        <a href="" class="text-indigo-600">Read more</a>
+                        <div>
+                            <span class="text-sm text-slate-500">
+                                {{ Carbon\Carbon::parse($news->updated_at)->diffForHumans() }}
+                            </span>
+                        </div>
                     </div>
+                    <h1 class="text-slate-200 font-semibold text-xl leading-normal mt-2">{{ $news->title }}</h1>
+                    <p class="text-slate-400">
+                        {{ Str::limit($news->short_description, 150) }}
+                    </p>
+                    <a href="" class="text-indigo-600">Read more</a>
                 </div>
+            </div>
             @endforeach
         </div>
         <div class="w-full">

@@ -66,7 +66,7 @@
     <div class="mt-20">
         <div class="flex mb-5 items-center justify-between">
                 <div>
-                    <x-title class="!text-slate-200 dark:!text-slate-600 !font-semibold !text-4xl">Airdrop Promos</x-title>
+                    <x-title class="!text-slate-200 !font-semibold !text-4xl">Airdrop Promos</x-title>
                 </div>
                 <div>
                     <button onclick="showFilter()" class="border rounded-md p-1 bg-slate-800 border-slate-700">
@@ -125,7 +125,7 @@
         <div class="text-slate-200" wire:loading.delay>Loading...</div>
         <div wire:loading.remove class="grid grid-cols-3 gap-5">
             @forelse ($promos as $promo)
-                <div wire:key="{{ $promo['id'] }}" class="relative rounded-xl overflow-hidden bg-slate-900 dark:bg-slate-100 p-4 hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
+                <div wire:key="{{ $promo['id'] }}" class="relative rounded-xl overflow-hidden bg-slate-900 p-4 hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
                     <a href="{{ route('single.promo', $promo->slug) }}" class="absolute z-30 top-0 left-0 right-0 bottom-0"></a>
                     <div class="relative">
                         @if($promo->end_date >= Carbon\Carbon::now()->format('Y-m-d'))
@@ -142,11 +142,11 @@
                         <img src="{{ url('storage/promo/', $promo->image) }}" alt="{{ $promo->name }}" class="w-full rounded-xl">
                     </div>
                     <div class="py-5 h-full">
-                        <x-text class="text-sm font-semibold !text-slate-500 dark:!text-slate-400 mb-2">Duration: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
-                        <x-text class="text-xl font-semibold mb-2">{{ $promo->name }}</x-text>
-                        <x-text class="text-md font-semibold">Prize pool: {{ $promo->prize_pool }}</x-text>
+                        <x-text class="text-sm font-semibold !text-slate-500 mb-2">Duration: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
+                        <x-text class="text-xl !text-slate-200 font-semibold mb-2">{{ $promo->name }}</x-text>
+                        <x-text class="text-md !text-slate-200 font-semibold">Prize pool: {{ $promo->prize_pool }}</x-text>
                         @if(count($promo->platforms) != null)
-                            <x-text class="text-md font-semibold">Platforms:
+                            <x-text class="text-md !text-slate-200 font-semibold">Platforms:
                                 @foreach ($promo->platforms as $platform)
                                     <span class="text-xs px-1 rounded-sm me-1 !text-white" style="background: {{ $platform->hex_color }}">
                                         {{ $platform->name }}
@@ -163,7 +163,9 @@
             @endforelse
         </div>
         <div class="mt-10">
-            {{ $promos->links() }}
+            <div class="flex justify-center">
+                <x-button wire:click="loadMore" class="!float-none">Load more</x-button>
+            </div>
         </div>
     </div>
 
@@ -172,7 +174,7 @@
     <div wire:ignore.self>
         <div class="mt-20">
             <div class="mb-5">
-                <x-title class="!text-slate-200 dark:!text-slate-600 !font-semibold !text-4xl">Upcoming Promos</x-title>
+                <x-title class="!text-slate-200 !font-semibold !text-4xl">Upcoming Promos</x-title>
             </div>
             <div class="grid grid-cols-3 gap-5">
                 @foreach ($promoUpcoming as $promo)
@@ -185,10 +187,10 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
                                     </svg>
                             </div>
-                            <img src="{{ url('storage/promo/', $promo->image) }}" alt="{{ $promo->name }}" class="w-full rounded-xl">
+                            <img src="{{ url('storage/promo/', $promo->image) }}" alt="{{ $promo->name }}" class="w-full rounded-xl" loading="lazy">
                         </div>
                         <div class="py-5 h-full">
-                            <x-text class="text-xs !text-slate-500 dark:!text-slate-400 mb-2">Duration: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
+                            <x-text class="text-xs !text-slate-500 mb-2">Duration: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
                             <x-text class="text-xl font-semibold mb-2">{{ $promo->name }}</x-text>
                             <x-text class="text-md font-semibold">Prize pool: {{ $promo->prize_pool }}</x-text>
                             <x-text class="text-md font-semibold">Platforms:
@@ -212,11 +214,11 @@
     <div wire:ignore.self>
         <div class="mt-20">
             <div class="mb-5">
-                <x-title class="!text-slate-200 dark:!text-slate-600 !font-semibold !text-4xl">Featured Games</x-title>
+                <x-title class="!text-slate-200 !font-semibold !text-4xl">Featured Games</x-title>
             </div>
             <div class="grid grid-cols-4 gap-5">
                 @foreach ($featuredGames as $featureGame)
-                    <img src="{{ url('storage/featured_games/', $featureGame['image']) }}" alt="{{$featureGame['title']}}">
+                    <img src="{{ url('storage/featured_games/', $featureGame['image']) }}" alt="{{$featureGame['title']}}" loading="lazy" class="w-full">
                 @endforeach
             </div>
         </div>
@@ -224,21 +226,20 @@
     @endif
 
 
-
     {{-- Promo Modal --}}
     <div wire:ignore.self id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-[820px] max-h-full">
             <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-slate-700">
+            <div class="relative bg-white rounded-lg shadow ">
                 <!-- Modal header -->
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-slate-600">
-                    <h3 class="text-xl font-semibold text-slate-600 dark:text-white">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                    <h3 class="text-xl font-semibold text-slate-600>
                         <div wire:loading.delay>Loading...</div>
                         <div wire:loading.remove>
                             {{ $name }}
                         </div>
                     </h3>
-                    <button type="button" class="text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-slate-600 dark:hover:text-white" data-modal-hide="default-modal">
+                    <button type="button" class="text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="default-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                         </svg>
@@ -252,13 +253,13 @@
                             <img src="{{ url('storage/promo/', $image) }}" alt="{{ $name }}" class="w-full rounded-xl">
                         </div>
                         <div class="flex-1 space-y-1">
-                            <x-text class="!text-slate-600 dark:!text-slate-600">Prize pool: {{ $prize_pool }}</x-text>
-                            <x-text class="!text-slate-600 dark:!text-slate-600">Duration: {{date('F j', strtotime($start_date))}} - {{date('F j Y', strtotime($end_date))}}</x-text>
-                            <x-text class="!text-slate-600 dark:!text-slate-600">Promo type: {{ $type }}</x-text>
+                            <x-text class="!text-slate-600">Prize pool: {{ $prize_pool }}</x-text>
+                            <x-text class="!text-slate-600">Duration: {{date('F j', strtotime($start_date))}} - {{date('F j Y', strtotime($end_date))}}</x-text>
+                            <x-text class="!text-slate-600">Promo type: {{ $type }}</x-text>
                             @if($type == 'click_to_join')
-                                <x-text class="!text-slate-600 dark:!text-slate-600">Game type: {{ $game_type }}</x-text>
+                                <x-text class="!text-slate-600">Game type: {{ $game_type }}</x-text>
                             @endif
-                            <x-text class="!text-slate-600 dark:!text-slate-600">Platforms:
+                            <x-text class="!text-slate-600">Platforms:
                                 @foreach ($platforms as $platform)
                                     {{ $platform }}
                                 @endforeach

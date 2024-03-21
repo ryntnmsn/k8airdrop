@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+
 class IndexHome extends Component
 {
     use WithPagination;
@@ -25,6 +26,7 @@ class IndexHome extends Component
     public $promoCarousels;
     public $promoUpcoming;
     public $featuredGames;
+    public $amount = 6;
 
     public function viewPromo($id) {
         $promo = Promo::with('platforms')->findOrFail($id);
@@ -71,9 +73,19 @@ class IndexHome extends Component
             })->get();
     }
 
+    public function loadMore() {
+        $this->amount += 6;
+    }
+
+
+    public function placeholder() {
+        return view('placeholder')->render();
+    }
+
 
     public function render()
     {
+        // sleep(5);
         $lang = app()->getLocale();
         $promos = Promo::with('platforms')
                 ->where('is_visible', '1')
@@ -94,7 +106,7 @@ class IndexHome extends Component
             ->orderBy('end_date', 'desc');
 
         return view('livewire.home.index-home', [
-            'promos' => $promos->simplePaginate($this->pagination)
+            'promos' => $promos->take($this->amount)->get(),
         ])->extends('layouts.home.app')->section('contents');
     }
 }
