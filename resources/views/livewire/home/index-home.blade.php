@@ -5,36 +5,7 @@
             <ul class="glide__slides text-slate-100">
                 @foreach ($promoBanners as $banner)
                     <li class="glide__slide relative rounded-2xl">
-                        <div class="absolute top-0 left-0 bottom-0 right-0 flex items-center p-28 z-10">
-                            <div class="p-20 bg-slate-400/[.50] backdrop-blur-md rounded-2xl h-full w-1/2 flex items-center">
-                                <div class="space-y-5">
-                                    <div>
-                                        <x-title class="!text-slate-50">{{ $banner['name'] }}</x-title>
-                                    </div>
-                                    <div>
-                                        <div>
-                                            <p class="text-slate-50 text-lg">Promo type: {{$banner['type']}}</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-slate-50 text-lg">Duration: {{date('F j', strtotime($banner['start_date']))}} - {{date('F j Y', strtotime($banner['end_date']))}}</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-slate-50 text-lg">Prize pool: {{ $banner['prize_pool'] }}</p>
-                                        </div>
-                                        <div>
-                                            {{-- <p class="text-slate-50 text-lg">Platforms:
-                                                @foreach ($banner->platforms as $platform)
-                                                    <span class="border rounded-md px-2 text-sm">{{ $platform['name'] }}</span>
-                                                @endforeach
-                                            </p> --}}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <x-button class="!float-none">Click to Join</x-button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="{{ route('single.promo', $banner->slug) }}" class="absolute bottom-0 top-0 left-0 right-0"></a>
                         <img src="{{ url('storage/promo', $banner['image']) }}" alt="{{ $banner['name'] }}" class="w-full">
                     </li>
                 @endforeach
@@ -59,7 +30,6 @@
             </ul>
         </div>
     </div>
-
 
 
     {{-- Promos --}}
@@ -125,7 +95,7 @@
         <div class="text-slate-200" wire:loading.delay>Loading...</div>
         <div wire:loading.remove class="grid grid-cols-3 gap-5">
             @forelse ($promos as $promo)
-                <div wire:key="{{ $promo['id'] }}" class="relative rounded-xl overflow-hidden bg-slate-900 p-4 hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
+                <div wire:key="{{ $promo['id'] }}" class="relative rounded-xl overflow-hidden bg-slate-900 hover:bg-slate-800 hover:z-50 p-4 hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
                     <a href="{{ route('single.promo', $promo->slug) }}" class="absolute z-30 top-0 left-0 right-0 bottom-0"></a>
                     <div class="relative">
                         @if($promo->end_date >= Carbon\Carbon::now()->format('Y-m-d'))
@@ -178,7 +148,7 @@
             </div>
             <div class="grid grid-cols-3 gap-5">
                 @foreach ($promoUpcoming as $promo)
-                    <div class="relative rounded-xl overflow-hidden bg-slate-900 dark:bg-slate-100 p-4 hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
+                    <div class="relative rounded-xl overflow-hidden bg-slate-900 hover:bg-slate-800 hover:z-50 dark:bg-slate-100 p-4 hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
                         <a href="{{ route('articles.categories.index') }}" class="absolute top-0 left-0 right-0 bottom-0"></a>
                         <div class="relative">
                             <div class="ribbon_upcoming z-50">Upcoming</div>
@@ -233,7 +203,7 @@
             <div class="relative bg-white rounded-lg shadow ">
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
-                    <h3 class="text-xl font-semibold text-slate-600>
+                    <h3 class="text-xl font-semibold text-slate-600">
                         <div wire:loading.delay>Loading...</div>
                         <div wire:loading.remove>
                             {{ $name }}

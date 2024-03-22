@@ -83,11 +83,20 @@ class ViewPromo extends Component
 
         foreach($question->choices as $input) {
             $this->inputs->push(['choice' => $input]); //increment field by default
-
             // $this->choices[$key] = $input; //get value from the database
         }
 
         // dd($this->choices);
+    }
+
+    public function deleteQuestion(Question $question) {
+       $this->question_id = $question->id;
+    }
+
+    public function destroyQuestion() {
+        $question = Question::findOrFail($this->question_id);
+        $question->delete();
+        $this->js('window.location.reload()'); 
     }
 
     // public function addInputs() {

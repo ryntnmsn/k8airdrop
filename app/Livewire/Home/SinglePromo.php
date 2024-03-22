@@ -32,6 +32,7 @@ class SinglePromo extends Component
     public $comments = [];
     public $promoStatus = true;
     public $joinPromo = true;
+    public $participants;
 
 
 
@@ -71,13 +72,13 @@ class SinglePromo extends Component
             $this->redirectRoute('single.promo', ['slug' => $previous_record->slug]);
         }
     }
-
-    public function mount($slug) {
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function mount($slug) { 
         $lang = app()->getLocale();
         $promo = Promo::with('platforms')->where('slug', $slug)->first();
         $this->platforms = $promo->platforms()->get();
 
-        $parseStartDate = Carbon::parse($promo->start_date);
+        // $parseStartDate = Carbon::parse($promo->start_date);
         $parseEndDate = Carbon::parse($promo->end_date);
         $this->days_left = Carbon::parse(Carbon::now())->diffInDays($parseEndDate ,false) + 1;
 
@@ -137,15 +138,17 @@ class SinglePromo extends Component
             $this->previous_record = $previousRecord->name;
         }
 
+        
+        $userId = auth()->user()->id ?? '';
+        $promoId = $this->promo_id;
+        $getPromoId = UserDetail::with('user')->where('promo_id', $promoId)
+            ->whereHas('user', function ($query) use ($userId)  {
+                return $query->where('id', $userId);
+                })->value('promo_id');
+    
+
         //Check if user already joined promo
         if(auth()->user()) {
-            $userId = auth()->user()->id;
-            $promoId = $this->promo_id;
-            $getPromoId = UserDetail::with('user')->where('promo_id', $promoId)
-                ->whereHas('user', function ($query) use ($userId)  {
-                    return $query->where('id', $userId);
-                })->value('promo_id');
-
             // dd($getPromoId);
             if($promoId == $getPromoId) {
                 $this->joinPromo = false;
@@ -153,22 +156,38 @@ class SinglePromo extends Component
                 $this->joinPromo = true;
             }
         }
+
+        //Get all paticipants of this promo
+        $promo = Promo::with('users')->where('id', $this->promo_id)->first();
+        $this->participants = $promo->users()->get();
+
+        
     }
 
 
     //Click to Join Upload Image function
     public function uploadImage() {
+
+        $this->validate([
+            'userUploadImage' => 'required|image|mimes:png,jpg,jpeg'
+        ]);
+
+        $userID = auth()->user()->id;
+
+        $user = User::where('id', $userID)->first();
+        
         $imageName = $this->userUploadImage->store('/', 'user');
         UserDetail::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => $userID,
             'promo_id' => $this->promo_id,
             'image' => $imageName,
             'ip' => \Request::ip(),
         ]);
-
-
+        
+        $user->promos()->attach($this->promo_id);
 
         $this->js('window.location.reload()');
+        
     }
 
 
@@ -202,8 +221,10 @@ class SinglePromo extends Component
 
         $this->validate($validate_array);
        
-        $userId = User::where('id', auth()->user()->id)->first();
+        $userID = auth()->user()->id;
 
+        $user = User::where('id', $userID)->first();
+        
         UserDetail::create([
             'user_id' => auth()->user()->id,
             'promo_id' => $this->promo_id,
@@ -212,11 +233,11 @@ class SinglePromo extends Component
         ]);
 
         foreach($this->choices as $choice) {
-            $userId->choices()->attach($choice);
+            $user->choices()->attach($choice);
         }
 
         foreach($this->checkbox as $checkbox) {
-            $userId->choices()->attach($checkbox);
+            $user->choices()->attach($checkbox);
         }
 
         if(is_array($this->comments)) {
@@ -235,6 +256,8 @@ class SinglePromo extends Component
             ]);
         }
 
+        $user->promos()->attach($this->promo_id);
+
         $this->js('window.location.reload()');
     }
 
@@ -246,6 +269,10 @@ class SinglePromo extends Component
         ];
         $this->validate($validate_array);
 
+        $userID = auth()->user()->id;
+
+        $user = User::where('id', $userID)->first();
+        
         UserDetail::create([
             'user_id' => auth()->user()->id,
             'promo_id' => $this->promo_id,
@@ -254,7 +281,7 @@ class SinglePromo extends Component
             'retweet_url' => $this->paste_retweet_url,
             'comment' => $this->comment,
         ]);
-
+        $user->promos()->attach($this->promo_id);
         $this->js('window.location.reload()');
     }
 

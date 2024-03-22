@@ -235,7 +235,7 @@
                         <button data-modal-hide="popup-modal" type="submit" class="text-white bg-rose-600 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg inline-flex items-center px-5 py-2.5 text-center me-2">
                             Yes, I'm sure
                         </button>
-                        <button data-modal-hide="popup-modal" type="button" class="text-slate-500 bg-white hover:bg-slate-100 focus:ring-4 focus:outline-none focus:ring-slate-200 rounded-lg border border-slate-200 font-medium px-5 py-2.5 hover:text-slate-900 focus:z-10 ">No, cancel</button>
+                        <button data-modal-hide="popup-modal" type="submit" class="text-slate-500 bg-white hover:bg-slate-100 focus:ring-4 focus:outline-none focus:ring-slate-200 rounded-lg border border-slate-200 font-medium px-5 py-2.5 hover:text-slate-900 focus:z-10 ">No, cancel</button>
                     </form>
                 </div>
             </div>

@@ -25,6 +25,7 @@ class UserDetail extends Model
         return $this->belongsTo(User::class);
     }
 
+
     // public function promos() {
     //     return $this->hasMany(Promo::class);
     // }

@@ -45,8 +45,10 @@ class IndexPromo extends Component
     }
 
     public function destroyPromo() {
+        
         $promo = Promo::findOrFail($this->promo_id);
         $promo->delete();
+        // $this->newPromo = Promo::make();
         $this->js('window.location.reload()'); 
     }
 

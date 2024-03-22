@@ -31,14 +31,16 @@
                         <h1 class="text-slate-200 text-3xl font-semibold">{{ $name }}</h1>
                     </div>
                     <div class="flex border-2 border-slate-800 mt-10 rounded-lg overflow-hidden">
-                        <div class="flex-1 border-r-2 border-slate-800 py-5">
-                            <div class="flex flex-col justify-center items-center space-y-2 ">
-                                <p class="!text-slate-500 font-semibold">Prize pool</p>
-                                <p class="!text-slate-200 font-semibold text-3xl">
-                                    {{ $prize_pool }}
-                                </p>
+                        @if($prize_pool != null)
+                            <div class="flex-1 border-r-2 border-slate-800 py-5">
+                                <div class="flex flex-col justify-center items-center space-y-2 ">
+                                    <p class="!text-slate-500 font-semibold">Prize pool</p>
+                                    <p class="!text-slate-200 font-semibold text-3xl">
+                                        {{ $prize_pool }}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                         <div class="flex-1 border-r-2 border-slate-800 py-5">
                             <div class="flex flex-col justify-center items-center space-y-2">
                                 <p class="!text-slate-500 font-semibold">Promo type</p>
@@ -143,6 +145,36 @@
                             </div>
                         </div>
                         @endif
+
+                        @if($type == 'click_to_join')
+                        {{-- Participants --}}
+                        <h2 id="accordion-open-heading-4" class="bg-slate-800/[.20] rounded-t-lg mt-5">
+                            <button type="button" class="flex items-center justify-between w-full p-5 font-semibold rtl:text-right gap-3 rounded-t-lg text-slate-200" data-accordion-target="#accordion-open-body-4" aria-expanded="false" aria-controls="accordion-open-body-3">
+                                <div class="flex items-center space-x-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
+                                    </svg>
+                                    <span class="flex items-center text-lg font-semibold">Participants ({{ count($participants) }})</span>
+                                </div>
+                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/></svg>
+                            </button>
+                        </h2>
+                        <div id="accordion-open-body-4" class="rounded-b-lg hidden bg-slate-800/[.20] py-5" aria-labelledby="accordion-open-heading-4">
+                            <div class="p-5 border-b-0 text-slate-200 leading-[1.8rem]">
+                                <table>
+                                    @foreach ($participants as $participant)
+                                        <tr>
+                                            <td>
+                                                {{ $participant->k8_username }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
+                        </div>
+                        @endif
+
                     </div>
                 </div>
 
@@ -175,6 +207,9 @@
                                                                 <input wire:model="userUploadImage" id="dropzone-file" type="file" class="hidden" />
                                                             </label>
                                                         </div>
+                                                        @error('userUploadImage')
+                                                            <span class="text-rose-500 text-sm">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                     <div>
                                                         <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
@@ -214,11 +249,10 @@
                                                 <div>
                                                     <div class="mb-8">
                                                         <div class="flex flex-col w-full">
-
                                                             @foreach ($questions as $key => $question)
                                                                 <div class="mb-8">
                                                                     <div class="flex text-slate-200 font-semibold gap-1 mb-2">
-                                                                        <span scope="row">{{$loop->iteration}}.</span><span><p>{{ $question->id }}_{{ $question->question_title }}</p></span>
+                                                                        <span scope="row">{{$loop->iteration}}.</span><span><p>{{ $question->question_title }}</p></span>
                                                                     </div>
                                                                     <div class="grid grid-cols-2 gap-2 text-slate-500">
                                                                         @foreach ($question->choices as $choice)
@@ -226,14 +260,14 @@
                                                                                 <div class="w-full">
                                                                                     <div class="flex items-center px-4 py-2 border border-slate-900 rounded">
                                                                                         <input wire:model="choices.{{ $key }}" value="{{ $choice->id }}" name="{{ $choice->id }}" id="{{ $choice->id }}" type="radio" class="w-5 h-5 text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600">
-                                                                                        <label for="choice_{{ $choice->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->id }}</label>
+                                                                                        <label for="choice_{{ $choice->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->choice }}</label>
                                                                                     </div>
                                                                                 </div>
                                                                             @elseif($question->question_type == 'multiple_select')
                                                                                 <div wire:ignore class="w-full">
                                                                                     <div class="flex items-center px-4 py-2 border border-slate-900 rounded">
                                                                                         <input wire:model.defer="checkbox" value="{{ $choice->id }}" id="{{ $choice->id }}" type="checkbox" class="text-indigo-600 bg-slate-800 border-slate-800 focus:ring-indigo-600 rounded-sm w-5 h-5">
-                                                                                        <label for="{{ $choice->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->id }}</label>
+                                                                                        <label for="{{ $choice->id }}" class="w-full text-sm ms-2 font-semibold">{{ $choice->choice }}</label>
                                                                                     </div>
                                                                                 </div>
                                                                             @endif
@@ -387,16 +421,6 @@
                                         </p>
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="mt-20">
-                        <div class="mb-5">
-                            <h1 class="text-slate-200 font-semibold text-2xl">Platforms</h1>
-                        </div>
-                        <div class="inline-block space-y-1">
-                            @foreach ($getPlatforms as $platform)
-                               <span style="background-color: {{ $platform->hex_color }}" class="text-white px-2 rounded-sm text-xs font-semibold">{{ $platform->name }}</span>
                             @endforeach
                         </div>
                     </div>
