@@ -289,7 +289,7 @@
                 </form>
             </div>
         </div>
-  
+
         <script>
             window.addEventListener('updated',function(e){ 
                 Swal.fire({
@@ -297,7 +297,8 @@
                     text: 'Promo updated successfully',
                     icon: 'success',
                     iconColor: 'lightgreen'
-
+                }).then(function () {
+                    location.reload()
                 });
             });
 

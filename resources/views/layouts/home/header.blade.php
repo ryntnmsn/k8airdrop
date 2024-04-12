@@ -13,9 +13,9 @@
                     </li>
                     <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out">{{ __('Promos') }}</li>
                     <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('news*') ? 'text-indigo-600' : '' }}">
-                        <a wire:navigate href="{{ route('news.index') }}">News</a>
+                        <a wire:navigate href="{{ route('news.index') }}">{{ __('News') }}</a>
                     </li>
-                    <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out">Media</li>
+                    <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out">{{ __('Media') }}</li>
                 </ul>
             </div>
     
@@ -29,8 +29,8 @@
                         </a>
                     @else
                         <div class="flex">
-                            <x-href href="{{ route('user.login') }}" class="!bg-transparent !border-0 !font-semibold">Sign in</x-href>
-                            <x-href href="{{ route('user.register') }}" class="!font-semibold">Sign up</x-href>
+                            <x-href href="{{ route('user.login') }}" class="!bg-transparent !border-0 !font-semibold">{{ __('Sign in') }}</x-href>
+                            <x-href href="{{ route('user.register') }}" class="!font-semibold">{{ __('Sign up') }}</x-href>
                             {{-- <button id="theme-toggle" type="button" class="flex items-center justify-center bg-slate-800 dark:bg-slate-200 text-slate-500 dark:text-slate-400 hover:bg-slate-700 dark:hover:bg-slate-300 focus:outline-none dark:focus:ring-slate-700 rounded-full text-sm duration-300 ease-in-out h-10 w-10">
                                 <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 rounded-full" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
                                 <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 rounded-full" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
@@ -47,9 +47,9 @@
         <div class="w-full bg-slate-800">
             <div class="max-w-[1280px] px-5 w-full mx-auto items-center">
                 @if(request()->is('news/latest'))
-                    <h1 class="text-slate-200 py-5 text-4xl font-semibold">Latest news</h1>
+                    <h1 class="text-slate-200 py-5 text-4xl font-semibold">{{ __('Latest news') }}</h1>
                 @else
-                    <h1 class="text-slate-200 py-5 text-4xl font-semibold">News</h1>
+                    <h1 class="text-slate-200 py-5 text-4xl font-semibold">{{ __('News') }}</h1>
                 @endif
             </div>
         </div>

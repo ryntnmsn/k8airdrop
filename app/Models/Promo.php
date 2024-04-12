@@ -36,8 +36,8 @@ class Promo extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function user_details() : HasMany {
-        return $this->hasMany(UserDetail::class);
+    public function participants() : HasMany {
+        return $this->hasMany(Participant::class);
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Promos;
 
 use App\Models\Choice;
+use App\Models\Participant;
 use App\Models\Promo;
 use App\Models\Question;
 use Livewire\Component;
@@ -21,6 +22,7 @@ class ViewPromo extends Component
     public $choice;
     public $questions;
     public $inputs;
+    public $participants;
 
     public Promo $promo;
 
@@ -187,10 +189,13 @@ class ViewPromo extends Component
         ]);
         // $this->inputs = collect();
 
+        $this->participants = Participant::where('promo_id', $this->promo_id)->get();
+
     }
 
     public function render()
     {
+ 
         return view('livewire.admin.promos.view-promo')
             ->extends('layouts.admin.app')->section('contents');
     }

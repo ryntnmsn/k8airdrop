@@ -3,6 +3,8 @@
 namespace App\Livewire\Home;
 
 use App\Models\Comment;
+use App\Models\Message;
+use App\Models\Participant;
 use App\Models\Platform;
 use App\Models\Promo;
 use App\Models\Question;
@@ -29,7 +31,8 @@ class SinglePromo extends Component
     public $questions;
     public $choices = [];
     public $checkbox = [];
-    public $comments = [];
+    // public $comments = [];
+    public $messages = [];
     public $promoStatus = true;
     public $joinPromo = true;
     public $participants;
@@ -141,16 +144,17 @@ class SinglePromo extends Component
         
         $userId = auth()->user()->id ?? '';
         $promoId = $this->promo_id;
-        $getPromoId = UserDetail::with('user')->where('promo_id', $promoId)
-            ->whereHas('user', function ($query) use ($userId)  {
-                return $query->where('id', $userId);
-                })->value('promo_id');
+        // $getPromoId = Participant::with('user')->where('promo_id', $promoId)
+        //     ->whereHas('user', function ($query) use ($userId)  {
+        //         return $query->where('id', $userId);
+        //         })->value('promo_id');
     
+        $getPromoId = Participant::where('promo_id', $promoId)->where('user_id', $userId)->exists();
 
         //Check if user already joined promo
         if(auth()->user()) {
             // dd($getPromoId);
-            if($promoId == $getPromoId) {
+            if($getPromoId != null) {
                 $this->joinPromo = false;
             } else {
                 $this->joinPromo = true;
@@ -158,10 +162,9 @@ class SinglePromo extends Component
         }
 
         //Get all paticipants of this promo
-        $promo = Promo::with('users')->where('id', $this->promo_id)->first();
-        $this->participants = $promo->users()->get();
+        // $promo = Promo::with('users')->where('id', $this->promo_id)->first();
+        $this->participants = Participant::where('promo_id', $this->promo_id)->get();
 
-        
     }
 
 
@@ -173,13 +176,18 @@ class SinglePromo extends Component
         ]);
 
         $userID = auth()->user()->id;
-
+        $userK8Username = auth()->user()->k8_username;
+        $userName = auth()->user()->name;
+        $userEmail = auth()->user()->email;
         $user = User::where('id', $userID)->first();
         
         $imageName = $this->userUploadImage->store('/', 'user');
-        UserDetail::create([
+        Participant::create([
             'user_id' => $userID,
             'promo_id' => $this->promo_id,
+            'name' => $userName,
+            'email' => $userEmail,
+            'k8_username' => $userK8Username,
             'image' => $imageName,
             'ip' => \Request::ip(),
         ]);
@@ -222,12 +230,16 @@ class SinglePromo extends Component
         $this->validate($validate_array);
        
         $userID = auth()->user()->id;
-
+        $userName = auth()->user()->name;
+        $userEmail = auth()->user()->email;
         $user = User::where('id', $userID)->first();
         
-        UserDetail::create([
+        Participant::create([
             'user_id' => auth()->user()->id,
             'promo_id' => $this->promo_id,
+            'name' => $userName,
+            'email' => $userEmail,
+            'k8_username' => auth()->user()->k8_username,
             'sns_id' => $this->sns_id,
             'ip' => \Request::ip(),
         ]);
@@ -240,19 +252,19 @@ class SinglePromo extends Component
             $user->choices()->attach($checkbox);
         }
 
-        if(is_array($this->comments)) {
-            foreach($this->comments as $comment) {
-                Comment::create([
+        if(is_array($this->messages)) {
+            foreach($this->messages as $message) {
+                Message::create([
                     'user_id' => auth()->user()->id,
                     'promo_id' => $this->promo_id,
-                    'comment' => $comment
+                    'message' => $message
                 ]);
             }
         } else {
-            Comment::create([
+            Message::create([
                 'user_id' => auth()->user()->id,
                 'promo_id' => $this->promo_id,
-                'comment' => $this->comments
+                'message' => $this->messages
             ]);
         }
 
@@ -270,13 +282,18 @@ class SinglePromo extends Component
         $this->validate($validate_array);
 
         $userID = auth()->user()->id;
+        $userName = auth()->user()->name;
+        $userEmail = auth()->user()->email;
 
         $user = User::where('id', $userID)->first();
         
-        UserDetail::create([
+        Participant::create([
             'user_id' => auth()->user()->id,
             'promo_id' => $this->promo_id,
+            'name' => $userName,
+            'email' => $userEmail,
             'ip' => \Request::ip(),
+            'k8_username' => auth()->user()->k8_username,
             'sns_id' => $this->sns_id,
             'retweet_url' => $this->paste_retweet_url,
             'comment' => $this->comment,

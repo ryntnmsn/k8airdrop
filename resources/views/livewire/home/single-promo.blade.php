@@ -275,7 +275,7 @@
                                                                     </div>
                                                                     @if($question->question_type == 'comment')
                                                                         <div class="w-full">
-                                                                            <textarea wire:model="comments.{{ $key }}" class="w-full h-52 rounded-lg focus:ring-indigo-600 !bg-slate-900 !border-0 !text-slate-200 !font-semibold"></textarea>
+                                                                            <textarea wire:model="messages.{{ $key }}" class="w-full h-52 rounded-lg focus:ring-indigo-600 !bg-slate-900 !border-0 !text-slate-200 !font-semibold"></textarea>
                                                                         </div>
                                                                     @endif
                                                                 </div>

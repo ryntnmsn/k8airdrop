@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Home;
 
+use App\Models\Participant;
 use App\Models\Promo;
 use App\Models\User;
 use App\Models\UserDetail;
@@ -17,20 +18,19 @@ class IndexDashboard extends Component
 
     public function mount() {
         $userId = auth()->user()->id;
-        $this->promos = Promo::with('user_details')
-            ->whereHas('user_details', function ($query) use ($userId) {
+
+        // $this->promos = Participant::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
+
+        $this->promos = Promo::with('participants')
+            ->whereHas('participants', function ($query) use ($userId) {
                 return $query->where('user_id', $userId);
             })->get();
-
- 
 
     //    dd($this->userDetails);
     }
 
     public function render()
     {
-
-
         return view('livewire.home.index-dashboard',)->extends('layouts.home.app')->section('contents');
     }
 }
