@@ -11,7 +11,7 @@
                     <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('/') ? 'text-indigo-600' : '' }}">
                         <a wire:navigate href="{{ route('home.index') }}">{{ __('Home') }}</a>
                     </li>
-                    <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out">Airdrops</li>
+                    <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out">{{ __('Promos') }}</li>
                     <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('news*') ? 'text-indigo-600' : '' }}">
                         <a wire:navigate href="{{ route('news.index') }}">News</a>
                     </li>
