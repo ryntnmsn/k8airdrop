@@ -23,6 +23,8 @@ class ViewPromo extends Component
     public $questions;
     public $inputs;
     public $participants;
+    public $k8_username;
+    public $is_winner;
 
     public Promo $promo;
 
@@ -157,6 +159,37 @@ class ViewPromo extends Component
 
     //     $this->resetFields();
     // }
+
+    public function storeParticipant() {
+        $this->validate([
+            'k8_username' => 'required',
+        ]);
+
+        $is_winner = false;
+        if($this->is_winner == 'true') {
+            $is_winner = true;
+        } else {
+            $is_winner = false;
+        }
+
+        $participant = Participant::where('k8_username', $this->k8_username)->exists();
+
+        if($participant == null) {
+            Participant::create([
+                'name' => 'Dummy',
+                'promo_id' => $this->promo_id,
+                'k8_username' => $this->k8_username,
+                'email' => 'Dummy',
+                'ip' => 'Dummy',
+                'is_winner' => $is_winner
+            ]);
+        } else {
+            echo 'Already exists';
+        }
+
+       
+    }
+
 
     public function mount($id) {
 

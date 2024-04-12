@@ -241,6 +241,14 @@
         role="tabpanel"
         aria-labelledby="participant-tab">
         
+        <div class="mb-5">
+            <div class="flex justify-end">
+                <div>
+                    <x-button class="!float-none" data-modal-target="add-participant-modal" data-modal-toggle="add-participant-modal">Create Dummy</x-button>
+                </div>
+            </div>
+        </div>
+
         <div class="overflow-x-auto sm:rounded-lg">
             <table class="w-full text-left rtl:text-right rounded-2xl text-slate-600 ">
                 <thead class="bg-slate-100">
@@ -586,6 +594,91 @@
         </div>
     </div>
 </div>
+
+
+
+{{-- Add participants modal --}}
+<div wire:ignore.self id="add-participant-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-xl max-h-full">
+        <div class="relative bg-white rounded-lg shadow">
+            <button type="button" class="absolute top-3 end-2.5 text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="add-participant-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-4 md:p-5 text-left">
+                <h3 class="mb-5 text-xl font-semibold text-slate-600">Create Participant</h3>
+                <form wire:submit.prevent="storeParticipant">
+                    <div class="mb-5">
+                        <x-label>K8 Username</x-label>
+                        <x-input-text wire:model="k8_username"></x-input-text>
+                        @error('k8_username')
+                            <span class="text-sm text-rose-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-5">
+                        <x-label>Is winner</x-label>
+                        <x-select wire:model="is_winner">
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </x-select>
+                        @error('is_winner')
+                            <span class="text-sm text-rose-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-5">
+                        <x-button wire:target="storeParticipant" type="submit" class="!float-none">Create</x-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{{-- Edit participants modal --}}
+<div wire:ignore.self id="edit-participant-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-xl max-h-full">
+        <div class="relative bg-white rounded-lg shadow">
+            <button type="button" class="absolute top-3 end-2.5 text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="edit-participant-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-4 md:p-5 text-left">
+                <h3 class="mb-5 text-xl font-semibold text-slate-600">Create Participant</h3>
+                <form wire:submit.prevent="updateParticipant">
+                    <div class="mb-5">
+                        <x-label>K8 Username</x-label>
+                        <x-input-text wire:model="k8_username"></x-input-text>
+                        @error('k8_username')
+                            <span class="text-sm text-rose-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-5">
+                        <x-label>Is winner</x-label>
+                        <x-select wire:model="is_winner">
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </x-select>
+                        @error('is_winner')
+                            <span class="text-sm text-rose-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-5">
+                        <x-button wire:target="updateParticipant" type="submit" class="!float-none">Create</x-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <script>
     document.addEventListener('livewire:initialized', ()=>{
         @this.on('deleted', (event)=>{
