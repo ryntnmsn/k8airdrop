@@ -32,6 +32,7 @@ use App\Livewire\Admin\Question\CreateQuestion;
 use App\Livewire\Admin\Question\EditQuestion;
 use App\Livewire\Admin\Wheel\SpinTheWheel;
 use App\Livewire\Admin\Wheel\SpinUserFaker;
+use App\Livewire\Admin\Wheel\SpinUsers;
 use App\Livewire\Home\Auth\IndexLogin;
 use App\Livewire\Home\Auth\IndexRegister;
 use App\Livewire\Home\IndexDashboard;
@@ -45,6 +46,7 @@ use App\Livewire\Home\News\IndexNewsTrending;
 use App\Livewire\Home\SinglePromo;
 use App\Livewire\Home\Wheel\SpinWheel;
 use App\Livewire\Home\Wheel\SpinWheelDashboard;
+use App\Models\Subscription;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -156,14 +158,19 @@ Route::middleware('auth', 'admin')->group(function() {
         //Spin the Wheel Class
         Route::group(['prefix' => 'spin-the-wheel'], function () {
             Route::get('/', SpinTheWheel::class)->name('spinthewheel.index');
+            Route::get('/users', SpinUsers::class)->name('spinthewheel.users.index');
             Route::get('/user-faker', SpinUserFaker::class)->name('spinuserfaker.index');
         });
+
+        // //Subscription class
+        // Route::group(['prefix' => 'subscriptions'], function () {
+        //     Route::get('/', Subscription::class)->name('subscription.index');
+        // });
         
         //Exports
         Route::controller(ExportController::class)->group(function () {
             Route::get('/promo-participants/{id}', 'exportPromoParticipants')->name('export.promo.participants');
         });
-       
         
     });
 });

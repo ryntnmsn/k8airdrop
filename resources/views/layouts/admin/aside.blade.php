@@ -133,6 +133,9 @@
             </button>
             <ul id="dropdown-spin" class="{{ request()->is('k8admin/spin-the-wheel*') ? 'block' : 'hidden'}} py-2 space-y-1">
                   <li>
+                     <a wire:navigate href="{{ route('spinthewheel.users.index') }}" class="{{ request()->is('k8admin/spin-the-wheel/users') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Users</a>
+                  </li>
+                  <li>
                      <a wire:navigate href="{{ route('spinthewheel.index') }}" class="{{ request()->is('k8admin/spin-the-wheel') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Settings</a>
                   </li>
                   <li>

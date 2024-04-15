@@ -60,7 +60,6 @@
                     @else
                         @foreach ($messages as $message)
                             <td>
-                                
                             </td>
                         @endforeach
                     @endif

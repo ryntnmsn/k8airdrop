@@ -16,4 +16,8 @@ class UserSpin extends Model
         'is_winner',
         'ip'
     ];
+
+    public function users() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
