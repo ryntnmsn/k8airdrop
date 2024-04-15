@@ -234,7 +234,7 @@ class SinglePromo extends Component
         $userEmail = auth()->user()->email;
         $user = User::where('id', $userID)->first();
         
-        Participant::create([
+        $participant = Participant::create([
             'user_id' => auth()->user()->id,
             'promo_id' => $this->promo_id,
             'name' => $userName,
@@ -245,11 +245,12 @@ class SinglePromo extends Component
         ]);
 
         foreach($this->choices as $choice) {
-            $user->choices()->attach($choice);
+            $participant->choices()->attach($choice);
+            // $user->choices()->attach($choice);
         }
 
         foreach($this->checkbox as $checkbox) {
-            $user->choices()->attach($checkbox);
+            $participant->choices()->attach($checkbox);
         }
 
         if(is_array($this->messages)) {

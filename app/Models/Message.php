@@ -14,4 +14,11 @@ class Message extends Model
         'promo_id',
         'message',
     ];
+
+
+    public function participant() {
+        return $this->hasMany(Participant::class);
+    }
+
 }
+

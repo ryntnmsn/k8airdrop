@@ -52,7 +52,7 @@
           role="tab"
           aria-controls="participant"
           aria-selected="false"
-          >Participants</a
+          >Participants <span class="text-xs">({{ count($participants) }})</span></a
         >
       </li>
       @if($type == 'click_to_join' && $game_type == 'multiple_choice')
@@ -243,8 +243,9 @@
         
         <div class="mb-5">
             <div class="flex justify-end">
-                <div>
+                <div class="flex gap-2">
                     <x-button class="!float-none" data-modal-target="add-participant-modal" data-modal-toggle="add-participant-modal">Create Dummy</x-button>
+                    <x-href href="{{ route('export.promo.participants', $promo_id) }}" class="!float-none" >Export</x-href>
                 </div>
             </div>
         </div>

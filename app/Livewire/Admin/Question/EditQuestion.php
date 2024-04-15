@@ -70,7 +70,6 @@ class EditQuestion extends Component
         foreach($questionGet->choices as $choice) {
             $this->choices->push(['choice' => $choice->choice, 'id' => $choice->id]);
         }
-
     }
 
     public function render()

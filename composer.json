@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.3",
+        "maatwebsite/excel": "^3.1",
         "stevebauman/location": "^7.1"
     },
     "require-dev": {

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\SpinWheelController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Livewire\Admin\Article\CreateArticle;
@@ -158,7 +159,12 @@ Route::middleware('auth', 'admin')->group(function() {
             Route::get('/user-faker', SpinUserFaker::class)->name('spinuserfaker.index');
         });
         
-
+        //Exports
+        Route::controller(ExportController::class)->group(function () {
+            Route::get('/promo-participants/{id}', 'exportPromoParticipants')->name('export.promo.participants');
+        });
+       
+        
     });
 });
 

@@ -22,4 +22,9 @@ class Participant extends Model
         'is_winner',
         'ip',
     ];
+
+    public function choices() {
+        return $this->belongsToMany(Choice::class);
+    }
+
 }
