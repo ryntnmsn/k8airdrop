@@ -37,12 +37,16 @@ use App\Livewire\Home\Auth\IndexLogin;
 use App\Livewire\Home\Auth\IndexRegister;
 use App\Livewire\Home\IndexDashboard;
 use App\Livewire\Home\IndexHome;
+use App\Livewire\Home\IndexMedia;
+use App\Livewire\Home\IndexPromo as HomeIndexPromo;
+use App\Livewire\Home\IndexPromoPage;
 use App\Livewire\Home\IndexUserAccount;
 use App\Livewire\Home\News\IndexNews;
 use App\Livewire\Home\News\IndexNewsCategory;
 use App\Livewire\Home\News\IndexNewsLatest;
 use App\Livewire\Home\News\IndexNewsSingle;
 use App\Livewire\Home\News\IndexNewsTrending;
+use App\Livewire\Home\Promos\IndexPromos;
 use App\Livewire\Home\SinglePromo;
 use App\Livewire\Home\Wheel\SpinWheel;
 use App\Livewire\Home\Wheel\SpinWheelDashboard;
@@ -60,6 +64,9 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('/', IndexHome::class)->name('home.index');
 Route::get('/promo/{slug}', SinglePromo::class)->name('single.promo');
+Route::get('/promos', IndexPromoPage::class)->name('index.promos');
+Route::get('/media', IndexMedia::class)->name('index.media');
+
 
 //user auth classes
 Route::middleware(RedirectIfAuthenticated::class)->group(function() {

@@ -6,11 +6,11 @@
             <div class="glide__slides text-slate-100">
                 @foreach ($newsSlider as $news)
                     <div class="glide__slide relative">
-                        <div class="flex gap-10">
-                            <div class="w-[65%]">
+                        <div class="flex flex-col lg:flex-row gap-10">
+                            <div class="w-100 lg:w-[65%]">
                                 <img src="{{ url('storage/article/', $news->image) }}" alt="{{ $news->title }}" class="rounded-xl">
                             </div>
-                            <div class="w-[35%] space-y-5">
+                            <div class="w-100 lg:w-[35%] space-y-5">
                                 <h1 class="text-slate-200 text-3xl font-semibold">{{ $news->title }}</h1>
                                 <p class="text-slate-400">
                                     {{ $news->short_description }}
@@ -28,7 +28,7 @@
 
     {{-- news categories --}}
     <div class="mb-20">
-        <div class="grid grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
             @foreach ($newsCategories as $category)
                 <div class="bg-slate-900 flex-1 p-2 rounded-md hover:bg-slate-800 duration-300 ease-in-out cursor-pointer">
                     <div class="flex justify-between items-center relative">
@@ -65,7 +65,7 @@
                 </svg>
             </a>
         </div>
-        <div class="grid grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             @foreach ($newsLatest as $news)
                 <div class="flex flex-col gap-4 bg-slate-900 hover:bg-slate-800 duration-300 ease-in-out p-5 rounded-lg cursor-pointer relative">
                     <a href="{{ route('news.single.index', $news->slug) }}" class="absolute top-0 bottom-0 right-0 left-0"></a>
@@ -103,7 +103,7 @@
     {{-- news --}}
     <div class="mb-10">
         <h1 class="text-slate-200 font-semibold text-3xl mb-5">Incase you missed it</h1>
-        <div class="grid grid-cols-3 gap-8 mb-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
             @foreach ($newsAll as $news)
             <div class="flex flex-col gap-4 bg-slate-900 hover:bg-slate-800 duration-300 ease-in-out p-5 rounded-lg cursor-pointer relative">
                 <a href="{{ route('news.single.index', $news->slug) }}" class="absolute top-0 bottom-0 right-0 left-0"></a>

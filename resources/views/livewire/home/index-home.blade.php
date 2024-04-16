@@ -39,16 +39,17 @@
                     <x-title class="!text-slate-200 !font-semibold !text-4xl">Airdrop Promos</x-title>
                 </div>
                 <div>
-                    <button onclick="showFilter()" class="border rounded-md p-1 bg-slate-800 border-slate-700">
+                    <button onclick="showFilter()" class="border rounded-md p-1 bg-slate-800 border-slate-700 flex gap-2 items-center pe-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-slate-400">
                             <path d="M18.75 12.75h1.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM12 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 6ZM12 18a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 18ZM3.75 6.75h1.5a.75.75 0 1 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM5.25 18.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM3 12a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 3 12ZM9 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM12.75 12a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM9 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
                         </svg>
+                        <span class="text-slate-400">Filter</span>
                     </button>
                 </div>
         </div>
 
         <div wire:ignore.self id="containerFilter" class="hidden mb-10 p-5 bg-slate-900 rounded-xl">
-            <div class="flex flex-row gap-10">
+            <div class="flex flex-col md:flex-row gap-10">
                 <div class="flex-1">
                     <x-label class="!text-slate-200">Search</x-label>
                     <div class="relative">
@@ -93,9 +94,9 @@
         </div>
 
         <div class="text-slate-200" wire:loading.delay>Loading...</div>
-        <div wire:loading.remove class="grid grid-cols-3 gap-5">
+        <div wire:loading.remove class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             @forelse ($promos as $promo)
-                <div wire:key="{{ $promo['id'] }}" class="relative rounded-xl overflow-hidden bg-slate-900 hover:bg-slate-800 hover:z-50 p-4 hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
+                <div wire:key="{{ $promo['id'] }}" class="relative rounded-xl overflow-hidden bg-slate-900 hover:bg-slate-800 hover:z-50 p-4 md:hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
                     <a href="{{ route('single.promo', $promo->slug) }}" class="absolute z-30 top-0 left-0 right-0 bottom-0"></a>
                     <div class="relative">
                         @if($promo->end_date >= Carbon\Carbon::now()->format('Y-m-d'))
@@ -146,9 +147,9 @@
             <div class="mb-5">
                 <x-title class="!text-slate-200 !font-semibold !text-4xl">Upcoming Promos</x-title>
             </div>
-            <div class="grid grid-cols-3 gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 @foreach ($promoUpcoming as $promo)
-                    <div class="relative rounded-xl overflow-hidden bg-slate-900 hover:bg-slate-800 hover:z-50 dark:bg-slate-100 p-4 hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
+                    <div class="relative rounded-xl overflow-hidden bg-slate-900 hover:bg-slate-800 hover:z-50 p-4 md:hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
                         <a href="{{ route('articles.categories.index') }}" class="absolute top-0 left-0 right-0 bottom-0"></a>
                         <div class="relative">
                             <div class="ribbon_upcoming z-50">Upcoming</div>
@@ -160,10 +161,10 @@
                             <img src="{{ url('storage/promo/', $promo->image) }}" alt="{{ $promo->name }}" class="w-full rounded-xl" loading="lazy">
                         </div>
                         <div class="py-5 h-full">
-                            <x-text class="text-xs !text-slate-500 mb-2">Duration: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
-                            <x-text class="text-xl font-semibold mb-2">{{ $promo->name }}</x-text>
-                            <x-text class="text-md font-semibold">Prize pool: {{ $promo->prize_pool }}</x-text>
-                            <x-text class="text-md font-semibold">Platforms:
+                            <x-text class="text-sm font-semibold !text-slate-500 mb-2">Duration: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
+                            <x-text class="!text-slate-200 text-xl font-semibold mb-2">{{ $promo->name }}</x-text>
+                            <x-text class="!text-slate-200 text-md font-semibold">Prize pool: {{ $promo->prize_pool }}</x-text>
+                            <x-text class="!text-slate-200 text-md font-semibold">Platforms:
                                 @foreach ($promo->platforms as $platform)
                                     <span class="text-xs px-1 rounded-sm me-1 !text-white" style="background: {{ $platform->hex_color }}">
                                         {{ $platform->name }}
@@ -186,7 +187,7 @@
             <div class="mb-5">
                 <x-title class="!text-slate-200 !font-semibold !text-4xl">Featured Games</x-title>
             </div>
-            <div class="grid grid-cols-4 gap-5">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
                 @foreach ($featuredGames as $featureGame)
                     <img src="{{ url('storage/featured_games/', $featureGame['image']) }}" alt="{{$featureGame['title']}}" loading="lazy" class="w-full">
                 @endforeach

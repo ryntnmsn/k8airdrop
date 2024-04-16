@@ -1,8 +1,7 @@
 <div>
     <div classs="mt-20">
-       <div class="flex gap-10">
-
-            <div class="w-[70%]">
+       <div class="flex flex-col lg:flex-row gap-10">
+            <div class="w-100 lg:w-[70%]">
                 <div>
                     <div class="relative">
                         <img src="{{ url('storage/promo/', $image) }}" alt="{{ $name }}" class="w-full rounded-xl">
@@ -185,7 +184,7 @@
                         @if($type == 'click_to_join')
                             @if(auth()->user())
                                 @if($type == 'click_to_join' && $game_type == 'upload_image')
-                                    <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
+                                    <div class="mt-20 bg-slate-800/[.20] rounded-xl p-5 lg:p-10">
                                         @if($joinPromo == true)
                                             <form wire:submit="uploadImage">
                                                 <h1 class="text-slate-200 font-semibold text-2xl mb-10">Upload image below to participate.</h1>
@@ -229,7 +228,7 @@
                                 {{-- END OF UPLOAD IMAGE --}}
                                 {{-- BEGIN OF MULTIPLE CHOICE --}}
                                 @elseif($type == 'click_to_join' && $game_type == 'multiple_choice')
-                                    <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
+                                    <div class="mt-20 bg-slate-800/[.20] rounded-xl p-5 lg:p-10">
                                         @if($joinPromo == true)
                                             <form wire:submit="multipleChoice">
                                                 <h1 class="text-slate-200 font-semibold text-2xl mb-10">Fill out the form below to participate</h1>
@@ -275,7 +274,7 @@
                                                                     </div>
                                                                     @if($question->question_type == 'comment')
                                                                         <div class="w-full">
-                                                                            <textarea wire:model="messages.{{ $key }}" class="w-full h-52 rounded-lg focus:ring-indigo-600 !bg-slate-900 !border-0 !text-slate-200 !font-semibold"></textarea>
+                                                                            <textarea wire:model="comments.{{ $key }}" class="w-full h-52 rounded-lg focus:ring-indigo-600 !bg-slate-900 !border-0 !text-slate-200 !font-semibold"></textarea>
                                                                         </div>
                                                                     @endif
                                                                 </div>
@@ -300,7 +299,7 @@
                                 {{-- END OF MULTIPLE CHOICE --}}
                                 {{-- BEGIN OF PASTE RETWEET URL --}}
                                 @elseif($type == 'click_to_join' && $game_type == 'paste_retweet_url')
-                                    <div class="mt-20 bg-slate-800/[.20] rounded-xl p-10">
+                                    <div class="mt-20 bg-slate-800/[.20] rounded-xl p-5 lg:p-10">
                                         @if($joinPromo == true)
                                             <form wire:submit="pasteRetweetURL">
                                                 <h1 class="text-slate-200 font-semibold text-2xl mb-10">Fill out the form below to participate</h1>
@@ -395,13 +394,13 @@
                     </x-button>
                 </div>
             </div>
-            <div class="w-[30%]">
-                <div class="bg-slate-800/[.20] p-10 rounded-xl">
+            <div class="w-100 lg:w-[30%] mt-10 lg:mt-0">
+                <div class="bg-slate-800/[.20] p-5 lg:p-10 rounded-xl">
                     <div>
                         <div class="mb-5">
                             <h1 class="text-slate-200 font-semibold text-2xl">Other Promos</h1>
                         </div>
-                        <div class="flex-col space-y-5">
+                        <div class="flex-col space-y-8">
                             @foreach ($getPromos as $promo)
                                 <div class="flex gap-3 relative">
                                     <a href="{{ route('single.promo', $promo->slug) }}" class="absolute top-0 bottom-0 left-0 right-0 z-10 cursor-pointer"></a>
@@ -429,4 +428,3 @@
        </div>
     </div>
 </div>
-

@@ -93,6 +93,11 @@
             focusAt: 'center',
             perView: 3,
             gap: 17,
+            breakpoints: {
+                600: {
+                    perView: 2
+                }
+            }
         })
         carousel.mount()
     </script>
