@@ -352,6 +352,10 @@
                         @endif
                     @endif
 
+                    <div class="mt-20">
+                        <livewire:comments :model="$promo"/>
+                    </div>
+
 
 
                 <div class="flex justify-between mt-20 border-t border-b border-slate-800 py-5">

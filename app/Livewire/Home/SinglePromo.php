@@ -36,6 +36,7 @@ class SinglePromo extends Component
     public $promoStatus = true;
     public $joinPromo = true;
     public $participants;
+    public $promo;
 
 
 
@@ -79,6 +80,7 @@ class SinglePromo extends Component
     public function mount($slug) { 
         $lang = app()->getLocale();
         $promo = Promo::with('platforms')->where('slug', $slug)->first();
+        $this->promo = $promo;
         $this->platforms = $promo->platforms()->get();
 
         // $parseStartDate = Carbon::parse($promo->start_date);
