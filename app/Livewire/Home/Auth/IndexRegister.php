@@ -12,7 +12,7 @@ class IndexRegister extends Component
     public $name, $email, $k8_username, $password, $password_confirmation, $terms = true;
 
     protected $rules = [
-        'name' => 'required|max:255|min:4',
+        'name' => 'required|max:255',
         'email' => 'required|email|max:255|min:4|unique:users,email',
         'k8_username' => 'required|max:255|min:3|unique:users,k8_username',
         'password' => 'required|max:255|confirmed|min:6',

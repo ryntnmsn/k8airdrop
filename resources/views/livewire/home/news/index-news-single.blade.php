@@ -11,7 +11,11 @@
             <div>
                 <div class="mb-5">
                     <span class="text-slate-400 font-semibold">
-                        {{ date('F j, Y', strtotime($created_at)); }}
+                        @if(app()->getLocale() == 'jp')
+                            {{ Carbon\Carbon::parse($created_at)->locale('ja-JP')->translatedFormat('d F Y') }}
+                        @else
+                            {{ Carbon\Carbon::parse($created_at)->translatedFormat('d F Y') }}
+                        @endif
                     </span>
                 </div>
                 <img src="{{ url('storage/article/', $image) }}" alt="{{ $title }}" loading="lazy" class="w-full rounded-xl">
@@ -59,7 +63,7 @@
                             </div>
                             <div>
                                 <span class="text-sm text-slate-500">
-                                    {{ Carbon\Carbon::parse($news->updated_at)->diffForHumans() }}
+                                    {{ Carbon\Carbon::parse($news->updated_at->locale('ja-JP'))->diffForHumans() }}
                                 </span>
                             </div>
                         </div>

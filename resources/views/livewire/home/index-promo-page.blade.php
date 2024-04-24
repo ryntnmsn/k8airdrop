@@ -77,7 +77,13 @@
                      <img src="{{ url('storage/promo/', $promo->image) }}" alt="{{ $promo->name }}" class="w-full rounded-xl">
                  </div>
                  <div class="py-5 h-full">
-                     <x-text class="text-sm font-semibold !text-slate-500 mb-2">{{ __('Duration') }}: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
+                     <x-text class="text-sm font-semibold !text-slate-500 mb-2">{{ __('Duration') }}:
+                        @if(app()->getLocale() == 'jp')
+                            {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->translatedFormat('F j') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->translatedFormat('F j Y') }}
+                        @else
+                            {{ Carbon\Carbon::parse($promo->start_date)->translatedFormat('F j') }} - {{ Carbon\Carbon::parse($promo->end_date)->translatedFormat('F j Y') }}
+                        @endif
+                    </x-text>
                      <x-text class="text-xl !text-slate-200 font-semibold mb-2">{{ $promo->name }}</x-text>
                      <x-text class="text-md !text-slate-200 font-semibold">{{ __('Prize pool') }}: {{ $promo->prize_pool }}</x-text>
                      @if(count($promo->platforms) != null)

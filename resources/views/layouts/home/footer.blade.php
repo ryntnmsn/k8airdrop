@@ -51,7 +51,7 @@
                             <ul class="mt-5 space-y-2">
                                 <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Facebook</a></li>
                                 <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Instagram</a></li>
-                                <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Twitter</a></li>
+                                <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">X</a></li>
                                 <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Youtube</a></li>
                                 <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Discord</a></li>
                                 <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Telegram</a></li>

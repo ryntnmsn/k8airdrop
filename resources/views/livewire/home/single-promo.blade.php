@@ -17,7 +17,11 @@
                                 {{ __('Duration') }}:
                             </span>
                             <span>
-                                {{date('F j Y', strtotime($start_date))}} - {{date('F j Y', strtotime($end_date))}}
+                                @if(app()->getLocale() == 'jp')
+                                    {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->translatedFormat('F j Y') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->translatedFormat('F j Y') }}
+                                @else
+                                    {{ Carbon\Carbon::parse($promo->start_date)->translatedFormat('F j Y') }} - {{ Carbon\Carbon::parse($promo->end_date)->translatedFormat('F j Y') }}
+                                @endif
                             </span>
                         </p>
                         <p class="text-slate-500 my-5 font-semibold">
@@ -411,7 +415,13 @@
                                         <img src="{{ url('storage/promo/', $promo->image) }}" alt="{{ $promo->name }}" class="w-full rounded-md">
                                     </div>
                                     <div class="w-[60%]">
-                                        <p class="text-xs text-slate-500 font-semibold mb-2">{{date('F j Y', strtotime($start_date))}} to {{date('F j Y', strtotime($end_date))}}</p>
+                                        <p class="text-xs text-slate-500 font-semibold mb-2">
+                                            @if(app()->getLocale() == 'jp')
+                                                {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->translatedFormat('F j Y') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->translatedFormat('F j Y') }}
+                                            @else
+                                                {{ Carbon\Carbon::parse($promo->start_date)->translatedFormat('F j Y') }} - {{ Carbon\Carbon::parse($promo->end_date)->translatedFormat('F j Y') }}
+                                            @endif
+                                        </p>
                                         <p class="text-slate-200 font-semibold break-words">
                                             {{ Str::limit($promo->name, 34, '...') }}
                                         </p>

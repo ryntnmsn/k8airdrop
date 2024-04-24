@@ -16,7 +16,11 @@
                             </div>
                             <div>
                                 <span class="text-sm text-slate-500">
-                                    {{ Carbon\Carbon::parse($news->updated_at)->diffForHumans() }}
+                                    @if(app()->getLocale() == 'jp')
+                                        {{ Carbon\Carbon::parse($news->updated_at->locale('ja-JP'))->diffForHumans() }}
+                                    @else
+                                        {{ Carbon\Carbon::parse($news->updated_at)->diffForHumans() }}
+                                    @endif
                                 </span>
                             </div>
                         </div>

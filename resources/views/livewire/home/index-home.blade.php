@@ -53,7 +53,7 @@
                 <div class="flex-1">
                     <x-label class="!text-slate-200">{{ __('Search') }}</x-label>
                     <div class="relative">
-                        <x-input-text wire:model.live="searchPromo" placeholder="Enter text here.." class="!text-slate-200 bg-slate-800/[.50] !border-slate-800 focus:!ring-indigo-600 placeholder-slate-700"></x-input-text>
+                        <x-input-text wire:model.live="searchPromo" placeholder="{{ __('Enter text here') }}" class="!text-slate-200 bg-slate-800/[.50] !border-slate-800 focus:!ring-indigo-600 placeholder-slate-700"></x-input-text>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-slate-700 absolute right-0 top-0 mt-2 me-2">
                             <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
                         </svg>
@@ -63,7 +63,7 @@
                     <div class="flex flex-col">
                         <x-label class="!text-slate-200">{{ __('Promo type') }}</x-label>
                         <x-select wire:model.live="filterPromoType" class="!text-slate-200 bg-slate-800/[.50] !border-slate-800 focus:!ring-indigo-600">
-                            <option value="">All</option>
+                            <option value="">{{ __('All') }}</option>
                             <option value="click_to_redirect">{{ __('Click to Redirect') }}</option>
                             <option value="click_to_join">{{ __('Click to Join') }}</option>
                             <option value="click_to_redeem">{{ __('Click to Redeem') }}</option>
@@ -113,7 +113,13 @@
                         <img src="{{ url('storage/promo/', $promo->image) }}" alt="{{ $promo->name }}" class="w-full rounded-xl">
                     </div>
                     <div class="py-5 h-full">
-                        <x-text class="text-sm font-semibold !text-slate-500 mb-2">{{ __('Duration') }}: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
+                        <x-text class="text-sm font-semibold !text-slate-500 mb-2">{{ __('Duration') }}: 
+                            @if(app()->getLocale() == 'jp')
+                                {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->translatedFormat('F j') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->translatedFormat('F j Y') }}
+                            @else
+                                {{ Carbon\Carbon::parse($promo->start_date)->translatedFormat('F j') }} - {{ Carbon\Carbon::parse($promo->end_date)->translatedFormat('F j Y') }}
+                            @endif
+                        </x-text>
                         <x-text class="text-xl !text-slate-200 font-semibold mb-2">{{ $promo->name }}</x-text>
                         <x-text class="text-md !text-slate-200 font-semibold">{{ __('Prize pool') }}: {{ $promo->prize_pool }}</x-text>
                         @if(count($promo->platforms) != null)
@@ -161,7 +167,13 @@
                             <img src="{{ url('storage/promo/', $promo->image) }}" alt="{{ $promo->name }}" class="w-full rounded-xl" loading="lazy">
                         </div>
                         <div class="py-5 h-full">
-                            <x-text class="text-sm font-semibold !text-slate-500 mb-2">{{ __('Duration') }}: {{date('F j', strtotime($promo->start_date))}} - {{date('F j Y', strtotime($promo->end_date))}}</x-text>
+                            <x-text class="text-sm font-semibold !text-slate-500 mb-2">{{ __('Duration') }}:
+                                @if(app()->getLocale() == 'jp')
+                                    {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->translatedFormat('F j') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->translatedFormat('F j Y') }}
+                                @else
+                                    {{ Carbon\Carbon::parse($promo->start_date)->translatedFormat('F j') }} - {{ Carbon\Carbon::parse($promo->end_date)->translatedFormat('F j Y') }}
+                                @endif
+                            </x-text>
                             <x-text class="!text-slate-200 text-xl font-semibold mb-2">{{ $promo->name }}</x-text>
                             <x-text class="!text-slate-200 text-md font-semibold">{{ __('Prize pool') }}: {{ $promo->prize_pool }}</x-text>
                             <x-text class="!text-slate-200 text-md font-semibold">{{ __('Platforms') }}:
