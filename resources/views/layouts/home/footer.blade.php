@@ -21,18 +21,18 @@
                         </div>
                         <div class="flex w-100 sm:w-[66.66%]">
                             <div class="flex-1">
-                                <h1 class="text-slate-200 font-bold text-lg">USEFUL LINKS</h1>
+                                <h1 class="text-slate-200 font-bold text-lg">{{ __('USEFUL LINKS') }}</h1>
                                 <ul class="mt-5 space-y-2">
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Home</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Airdrops</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">News</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Media</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Login</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Register</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Home') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Promos') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('News') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Media') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Sign in') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Sign up') }}</a></li>
                                 </ul>
                             </div>
                             <div class="flex-1">
-                                <h1 class="text-slate-200 font-bold text-lg">ENTERTAINMENT</h1>
+                                <h1 class="text-slate-200 font-bold text-lg">{{ __('ENTERTAINMENT') }}</h1>
                                 <ul class="mt-5 space-y-2">
                                     <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Games Lobby</a></li>
                                     <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Promotions</a></li>
@@ -47,7 +47,7 @@
                     <div class="flex">
                         <div class="flex-1 hidden sm:block lg:hidden"></div>
                         <div class="flex-1">
-                            <h1 class="text-slate-200 font-bold text-lg">SOCIAL LINKS</h1>
+                            <h1 class="text-slate-200 font-bold text-lg">{{ __('SOCIAL LINKS') }}</h1>
                             <ul class="mt-5 space-y-2">
                                 <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Facebook</a></li>
                                 <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Instagram</a></li>
@@ -59,10 +59,10 @@
                             </ul>
                         </div>
                         <div class="flex-1">
-                            <h1 class="text-slate-200 font-bold text-lg">THE AMBASSADORS</h1>
+                            <h1 class="text-slate-200 font-bold text-lg">{{ __('THE AMBASSADORS') }}</h1>
                             <div class="mt-5">
                                 <img src="{{ url('storage/images/sponsor.webp') }}" alt="K8 Ambassadors">
-                                <span class="text-slate-400 text-sm">Yaya Touré | Wesley Sneijder</span>
+                                <span class="text-slate-400 text-sm">{{ __('Yaya Touré') }} | {{ __('Wesley Sneijder') }}</span>
                             </div>
                         </div>
                     </div>
@@ -73,8 +73,8 @@
     <div class="py-4 bg-slate-800 px-5">
         <div class="max-w-[1280px] mx-auto text-center">
             <p class="text-slate-500 text-sm font-medium">
-                Copyright 2024 © K8 Airdrop. All rights reserved.
-                <a href="" class="text-slate-400">Privacy Policy</a>
+                {{ __('Copyright 2024 © K8 Airdrop. All rights reserved') }}.
+                <a href="" class="text-slate-400">{{ __('Privacy Policy') }}</a>
             </p>
         </div>
     </div>

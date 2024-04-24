@@ -2,7 +2,7 @@
         @if($isJoined == false)
             <div class="h-full flex items-center justify-center">
                 <div wire:ignore class="container">
-                    <div class="spinBtn" wire:click="spinWheel">SPIN</div>
+                    <div class="spinBtn" wire:click="spinWheel">{{ __('SPIN') }}</div>
                     <div class="wheel bg-no-repeat bg-cover" style="background-image:url({{ url('storage/images/wheel_bg.jpg') }});">
                         @foreach ($wheels as $wheel)
                             <div class="number" style="--i:{{ $wheel->id }};">
@@ -14,7 +14,7 @@
             </div>
         @else
             <div class="flex w-full h-full items-center justify-center">
-                <h1 class="text-slate-200 font-semibold text-2xl">Please come back again for more exciting rewards!</h1>
+                <h1 class="text-slate-200 font-semibold text-2xl">{{ __('Please come back again for more exciting rewards') }}!</h1>
             </div>
         @endif
 

@@ -3,7 +3,7 @@
         <div class="flex bg-slate-800/[.20] rounded-3xl p-10">
            <div class="flex-1">
             <form  wire:submit.prevent="login">
-                <h1 class="text-slate-200 font-semibold text-4xl mb-10">Sign in</h1>
+                <h1 class="text-slate-200 font-semibold text-4xl mb-10">{{ __('Sign in') }}</h1>
                 <div>
                     <div class="mb-8">
                         @if(session()->has('error'))
@@ -44,19 +44,19 @@
                     <div class="mb-8">
                         <div class="relative">
                             <p class="font-semibold text-slate-500">
-                                Don't have an account? <a href="" class="text-indigo-600 hover:text-indigo-700">Register here</a>.
+                                {{ __('Dont have an account') }}? <a href="" class="text-indigo-600 hover:text-indigo-700">{{ __('Register here') }}</a>.
                             </p>
                         </div>
                     </div>
 
                     <div class="flex justify-between items-center mb-8">
                         <div>
-                            <x-button type="submit" class="!float-none font-semibold px-12">Login</x-button>
+                            <x-button type="submit" class="!float-none font-semibold px-12">{{ __('Sign in') }}</x-button>
                         </div>
     
                         <div>
                             <input wire:model="remember" id="checked-checkbox" type="checkbox" class="w-6 h-6 text-indigo-600 bg-transparent border-2 border-indigo-700 rounded-md focus:ring-indigo-500 focus:ring-2">
-                            <label for="checked-checkbox" class="ms-2 text-sm font-semibold text-slate-500">Remember me</label>
+                            <label for="checked-checkbox" class="ms-2 text-sm font-semibold text-slate-500">{{ __('Remember me') }}</label>
                         </div>
                     </div>
 
@@ -64,7 +64,7 @@
                         <div class="relative">
                             <div class="flex items-center space-x-4">
                                 <label for="checked-checkbox" class="text-sm font-semibold text-slate-500">
-                                    By accessing you confirm that you are at least 18 years old and agree to the  <a href="" class="text-indigo-600 hover:text-indigo-700">Terms of service</a>.
+                                    {{ __('By accessing you confirm that you are at least 18 years old and agree to the') }}  <a href="" class="text-indigo-600 hover:text-indigo-700">{{ __('Terms of service') }}</a>.
                                 </label>
                             </div>
                         </div>
