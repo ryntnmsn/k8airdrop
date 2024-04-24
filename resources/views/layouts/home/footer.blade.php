@@ -34,10 +34,10 @@
                             <div class="flex-1">
                                 <h1 class="text-slate-200 font-bold text-lg">{{ __('ENTERTAINMENT') }}</h1>
                                 <ul class="mt-5 space-y-2">
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Games Lobby</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Promotions</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Affiliate Program</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">VIP</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Games Lobby') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Promotions') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Affiliate Program') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('VIP') }}</a></li>
                                 </ul>
                             </div>
                         </div>
