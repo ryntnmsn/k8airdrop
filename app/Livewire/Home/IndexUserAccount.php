@@ -31,7 +31,6 @@ class IndexUserAccount extends Component
         if($this->password != null) {
             $validate_array = [
                 'name' => 'required|max:255',
-                'email' => 'required|email|max:255',
                 'password' => 'required|max:255|confirmed|min:6',
                 'password_confirmation' => 'required|min:6|max:255'
             ];
@@ -42,7 +41,6 @@ class IndexUserAccount extends Component
         $user = User::where('id', $this->userID)->first();
         $user->update([
             'name' => $this->name,
-            'email' => $this->email,
             'password' => Hash::make($this->password)
         ]);
 

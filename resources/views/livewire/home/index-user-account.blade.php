@@ -33,14 +33,17 @@
                     <div class="flex flex-wrap gap-5 mb-10">
                         <div class="flex-1">
                             <x-label class="!text-slate-200 font-semibold">{{ __('Email') }}</x-label>
-                            <x-input-text wire:model="email" class="!p-3 text-slate-200 font-semibold bg-slate-900 border-0 w-full"></x-input-text>
+                            <x-input-text wire:model="email" readonly class="!p-3 text-slate-200 font-semibold bg-slate-900 border-0 w-full"></x-input-text>
                             @error('email')
                                 <span class="text-rose-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                     <div class="p-8 border border-slate-800 mb-10">
-                        <x-label class="mb-4 !text-slate-200 font-semibold">{{ __('Change password') }}</x-label>
+                        <div class="mb-4">
+                            <x-label class="!text-slate-200 font-semibold">{{ __('Change password') }}</x-label>
+                            <p class="text-slate-500 text-sm">{{ __('Leave blank if you do not want to change password') }}</p>
+                        </div>
                         <div class="flex md:flex-row flex-col gap-5">
                             <div class="flex-1">
                                 <x-label class="!text-slate-200 font-semibold">{{ __('New password') }}</x-label>

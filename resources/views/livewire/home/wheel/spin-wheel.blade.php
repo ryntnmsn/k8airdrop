@@ -34,7 +34,7 @@
                 if(rewards == 0) {
                     Swal.fire({
                         title: 'Sorry',
-                        text: `Come back again tomorrow for another spin`,
+                        text: `Feel free to return tomorrow for another round of spins!`,
                         icon: 'error',
                         iconColor: 'red'
                     }).then(function() {

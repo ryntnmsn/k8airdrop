@@ -1,9 +1,9 @@
 <div class="h-full">
-    <div class="flex gap-10 h-full">
-        <div class="w-[20%] border-r border-slate-900">
+    <div class="lg:flex w-100 gap-10 h-full">
+        <div wire:ignore class="hidden lg:block w-[20%] border-r border-slate-900">
             @include('layouts/user/nav')
         </div>
-        <div class="w-[80%]">
+        <div class="w-100 lg:w-[80%]">
             <div class="flex items-center justify-between pb-8">
                 <div>
                     <h1 class="text-slate-200 text-3xl font-semibold border-b border-slate-900">{{ __('Spin the Wheel') }} <span class="text-xl"></span></h1>
