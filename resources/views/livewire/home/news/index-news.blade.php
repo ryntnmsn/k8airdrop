@@ -16,7 +16,7 @@
                                     {{ $news->short_description }}
                                 </p>
                                 <div class="flex">
-                                    <x-href href="{{ route('news.single.index', $news->slug) }}" class="!float-none">Read more</x-href>
+                                    <x-href href="{{ route('news.single.index', $news->slug) }}" class="!float-none">{{ __('Read more') }}</x-href>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
     {{-- latest news --}}
     <div class="mb-10">
         <div class="flex justify-between">
-            <h1 class="text-slate-200 font-semibold text-3xl mb-5">Latest news</h1>
+            <h1 class="text-slate-200 font-semibold text-3xl mb-5">{{ __('Latest news') }}</h1>
             <a href="{{ route('news.latest.index') }}" class="text-indigo-600 flex items-center font-medium">
                 <span>See more</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -93,7 +93,7 @@
                         <p class="text-slate-400">
                             {{ Str::limit($news->short_description, 150) }}
                         </p>
-                        <a href="" class="text-indigo-600">Read more</a>
+                        <a href="" class="text-indigo-600">{{ __('Read more') }}</a>
                     </div>
                 </div>
             @endforeach
@@ -102,7 +102,7 @@
 
     {{-- news --}}
     <div class="mb-10">
-        <h1 class="text-slate-200 font-semibold text-3xl mb-5">Incase you missed it</h1>
+        <h1 class="text-slate-200 font-semibold text-3xl mb-5">{{ __('Trending') }}</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
             @foreach ($newsAll as $news)
             <div class="flex flex-col gap-4 bg-slate-900 hover:bg-slate-800 duration-300 ease-in-out p-5 rounded-lg cursor-pointer relative">
@@ -131,7 +131,7 @@
                     <p class="text-slate-400">
                         {{ Str::limit($news->short_description, 150) }}
                     </p>
-                    <a href="" class="text-indigo-600">Read more</a>
+                    <a href="" class="text-indigo-600">{{ __('Read more') }}</a>
                 </div>
             </div>
             @endforeach
@@ -143,5 +143,4 @@
         </div>
     </div>
 
-    <div class="cryptohopper-web-widget" data-id="1" data-chart_color="#5850ec" data-table_columns="rank,name,price_usd,market_cap_usd,available_supply,weekly" data-coins="bitcoin,ethereum,tether,solana,xrp,usd-coin" data-table_style="dark" data-realtime="on"></div>
 </div>

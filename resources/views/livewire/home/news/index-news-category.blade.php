@@ -24,7 +24,7 @@
                         <p class="text-slate-400">
                             {{ Str::limit($news->short_description, 150) }}
                         </p>
-                        <a href="" class="text-indigo-600">Read more</a>
+                        <a href="" class="text-indigo-600">{{ __('Read more') }}</a>
                     </div>
                 </div>
             @endforeach
@@ -36,6 +36,5 @@
         </div>
     </div>
 
-    <div wire:ignore class="cryptohopper-web-widget" data-id="1" data-chart_color="#5850ec" data-table_columns="rank,name,price_usd,market_cap_usd,available_supply,weekly" data-coins="bitcoin,ethereum,tether,solana,xrp,usd-coin" data-table_style="dark" data-realtime="on"></div>
 
 </div>

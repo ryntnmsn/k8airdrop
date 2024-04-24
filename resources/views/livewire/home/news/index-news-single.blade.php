@@ -38,7 +38,7 @@
     </div>
 
     <div class="mt-40">
-        <h1 class="text-slate-200 font-semibold text-3xl mb-10">Recommended to read</h1>
+        <h1 class="text-slate-200 font-semibold text-3xl mb-10">{{ __('Recommended to read') }}</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach ($recommendedNews as $news)
                 <div class="flex flex-col gap-4 bg-slate-900 hover:bg-slate-800 duration-300 ease-in-out p-5 rounded-lg cursor-pointer relative">
@@ -67,7 +67,7 @@
                         <p class="text-slate-400">
                             {{ Str::limit($news->short_description, 150) }}
                         </p>
-                        <a href="" class="text-indigo-600">Read more</a>
+                        <a href="" class="text-indigo-600">{{ __('Read more') }}</a>
                     </div>
                 </div>
             @endforeach

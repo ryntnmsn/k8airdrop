@@ -6,15 +6,15 @@
                     <div class="relative">
                         <img src="{{ url('storage/promo/', $image) }}" alt="{{ $name }}" class="w-full rounded-xl">
                         @if($end_date >= Carbon\Carbon::now()->format('Y-m-d'))
-                            <div class="ribbon_active z-50">Ongoing</div>
+                            <div class="ribbon_active z-50">{{ __('Ongoing') }}</div>
                         @else
-                            <div class="ribbon_inactive z-50">Ended</div>
+                            <div class="ribbon_inactive z-50">{{ __('Ended') }}</div>
                         @endif
                     </div>
                     <div class="flex justify-between">
                         <p class="text-slate-500 my-5 font-semibold">
                             <span>
-                                Duration:
+                                {{ __('Duration') }}:
                             </span>
                             <span>
                                 {{date('F j Y', strtotime($start_date))}} - {{date('F j Y', strtotime($end_date))}}
@@ -33,7 +33,7 @@
                         @if($prize_pool != null)
                             <div class="flex-1 border-r-2 border-slate-800 py-5">
                                 <div class="flex flex-col justify-center items-center space-y-2 ">
-                                    <p class="!text-slate-500 font-semibold">Prize pool</p>
+                                    <p class="!text-slate-500 font-semibold">{{ __('Prize pool') }}</p>
                                     <p class="!text-slate-200 font-semibold text-3xl">
                                         {{ $prize_pool }}
                                     </p>
@@ -42,26 +42,25 @@
                         @endif
                         <div class="flex-1 border-r-2 border-slate-800 py-5">
                             <div class="flex flex-col justify-center items-center space-y-2">
-                                <p class="!text-slate-500 font-semibold">Promo type</p>
-                                <p class="!text-slate-200 font-semibold text-3xl">
+                                <p class="!text-slate-500 font-semibold">{{ __('Promo type') }}</p>
+                                <p class="!text-slate-200 font-semibold text-2xl">
                                     @if($type == 'click_to_join')
-                                        Interactive
+                                        {{ __('Interactive') }}
                                     @else
-                                        Non-interactive
+                                        {{ __('Non-interactive') }}
                                     @endif
                                 </p>
                             </div>
                         </div>
                         <div class="flex-1 py-5">
                             <div class="flex flex-col justify-center items-center space-y-2">
-                                <p class="!text-slate-500 font-semibold">Days Left</p>
+                                <p class="!text-slate-500 font-semibold">{{ __('Days Left') }}</p>
                                 <p class="!text-slate-200 font-semibold text-3xl">
                                     @if($days_left >= 1)
                                         {{ $days_left }}
                                     @else
-                                        Ended
+                                        {{ __('Ended') }}
                                     @endif
-
                                 </p>
                             </div>
                         </div>
@@ -78,7 +77,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
                                     </svg>
-                                    <span class="flex items-center text-lg font-semibold">Promo Description</span>
+                                    <span class="flex items-center text-lg font-semibold">{{ __('Promo Description') }}</span>
                                 </div>
                                 <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/></svg>
@@ -111,7 +110,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75" />
                                       </svg>
-                                    <span class="flex items-center text-lg font-semibold">Terms and Conditions</span>
+                                    <span class="flex items-center text-lg font-semibold">{{ __('Terms and Conditions') }}</span>
                                 </div>
                                 <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/></svg>
@@ -132,7 +131,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
                                     </svg>
-                                    <span class="flex items-center text-lg font-semibold">Article</span>
+                                    <span class="flex items-center text-lg font-semibold">{{ __('Article') }}</span>
                                 </div>
                                 <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/></svg>
@@ -153,7 +152,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
                                     </svg>
-                                    <span class="flex items-center text-lg font-semibold">Participants ({{ count($participants) }})</span>
+                                    <span class="flex items-center text-lg font-semibold">{{ __('Participants') }} ({{ count($participants) }})</span>
                                 </div>
                                 <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/></svg>
@@ -187,7 +186,7 @@
                                     <div class="mt-20 bg-slate-800/[.20] rounded-xl p-5 lg:p-10">
                                         @if($joinPromo == true)
                                             <form wire:submit="uploadImage">
-                                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">Upload image below to participate.</h1>
+                                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">{{ __('Upload image below to participate') }}.</h1>
                                                 <div>
                                                     <div class="mb-8">
                                                         <div class="flex items-center justify-center w-full">
@@ -199,7 +198,7 @@
                                                                         <svg class="w-8 h-8 mb-4 text-slate-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                                                                         </svg>
-                                                                        <p class="mb-2 text-slate-700"><span class="font-bold">Click to upload</span> or drag and drop</p>
+                                                                        <p class="mb-2 text-slate-700"><span class="font-bold">{{ __('Click to upload') }}</span></p>
                                                                         <p class="text-xs text-slate-700 font-bold">PNG, JPG, JPEG</p>
                                                                     @endif
                                                                 </div>
@@ -211,16 +210,16 @@
                                                         @enderror
                                                     </div>
                                                     <div>
-                                                        <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
+                                                        <x-button type="submit" class="!float-none font-semibold">{{ __('Submit Entry') }}</x-button>
                                                     </div>
                                                 </div>
                                             </form>
                                         @else
                                             <div class="flex flex-col items-center justify-center py-10">
-                                                <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">Thank you for participating to this promo. <br> Please stay tuned for the announcement of winners.</h1>
+                                                <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">{{ __('Thank you for participating to this promo') }}. <br> {{ __('Please stay tuned for the announcement of winners') }}.</h1>
                                                 <div class="flex space-x-5">
-                                                    <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Check other promos</x-href>
-                                                    <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Go to home page</x-href>
+                                                    <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">{{ __('Check other promos') }}</x-href>
+                                                    <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">{{ __('Go to home page') }}</x-href>
                                                 </div>
                                             </div>
                                         @endif
@@ -231,18 +230,18 @@
                                     <div class="mt-20 bg-slate-800/[.20] rounded-xl p-5 lg:p-10">
                                         @if($joinPromo == true)
                                             <form wire:submit="multipleChoice">
-                                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">Fill out the form below to participate</h1>
+                                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">{{ __('Fill out the form below to participate') }}</h1>
                                                 <div class="mb-8">
                                                     @if($errors->any())
                                                         @if($errors->has('sns_id'))
-                                                            <span class="text-rose-500">Please enter your sns id.</span>
+                                                            <span class="text-rose-500">{{ __('Please enter your sns id') }}.</span>
                                                         @else
-                                                            <span class="text-rose-500">Please answer all questions</span>
+                                                            <span class="text-rose-500">{{ __('Please answer all questions') }}</span>
                                                         @endif
                                                     @endif
                                                 </div>
                                                 <div class="mb-8">
-                                                    <x-label class="!text-slate-200 !font-semibold">Enter SNS ID (Twitter)</x-label>
+                                                    <x-label class="!text-slate-200 !font-semibold">{{ __('Enter SNS ID') }} (X)</x-label>
                                                     <x-input-text wire:model="sns_id" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
                                                 </div>
                                                 <div>
@@ -282,16 +281,16 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
+                                                        <x-button type="submit" class="!float-none font-semibold">{{ __('Submit Entry') }}</x-button>
                                                     </div>
                                                 </div>
                                             </form>
                                         @else
                                             <div class="flex flex-col items-center justify-center py-10">
-                                                <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">Thank you for participating to this promo. <br> Please stay tuned for the announcement of winners.</h1>
+                                                <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">{{ __('Thank you for participating to this promo') }}. <br> {{ __('Please stay tuned for the announcement of winners') }}.</h1>
                                                 <div class="flex space-x-5">
-                                                    <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Check other promos</x-href>
-                                                    <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Go to home page</x-href>
+                                                    <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">{{ __('Check other promos') }}</x-href>
+                                                    <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">{{ __('Go to home page') }}</x-href>
                                                 </div>
                                             </div>
                                         @endif
@@ -302,38 +301,38 @@
                                     <div class="mt-20 bg-slate-800/[.20] rounded-xl p-5 lg:p-10">
                                         @if($joinPromo == true)
                                             <form wire:submit="pasteRetweetURL">
-                                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">Fill out the form below to participate</h1>
+                                                <h1 class="text-slate-200 font-semibold text-2xl mb-10">{{ __('Fill out the form below to participate') }}</h1>
                                                 <div class="mb-8">
                                                     @if($errors->any())
                                                         @if($errors->has('sns_id'))
-                                                            <span class="text-rose-500">Please enter your sns id.</span>
+                                                            <span class="text-rose-500">{{ __('Please enter your sns id') }}.</span>
                                                         @else
-                                                            <span class="text-rose-500">Please paste retweet url.</span>
+                                                            <span class="text-rose-500">{{ __('Please paste retweet url') }}.</span>
                                                         @endif
                                                     @endif
                                                 </div>
                                                 <div class="mb-8">
-                                                    <x-label class="!text-slate-200 !font-semibold">Twitter ID</x-label>
+                                                    <x-label class="!text-slate-200 !font-semibold">{{ __('X ID') }}</x-label>
                                                     <x-input-text wire:model="sns_id" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
                                                 </div>
                                                 <div class="mb-8">
-                                                    <x-label class="!text-slate-200 !font-semibold">Paste Retweet URL (Twitter)</x-label>
+                                                    <x-label class="!text-slate-200 !font-semibold">{{ __('Paste Retweet URL') }} (X)</x-label>
                                                     <x-input-text wire:model="paste_retweet_url" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
                                                 </div>
                                                 <div class="mb-8">
-                                                    <x-label class="!text-slate-200 !font-semibold">Comment</x-label>
+                                                    <x-label class="!text-slate-200 !font-semibold">{{ __('Comment') }}</x-label>
                                                     <textarea wire:model="comment" class="w-full h-52 rounded-lg focus:ring-indigo-600 !bg-slate-900 !border-0 !text-slate-200 !font-semibold"></textarea>
                                                 </div>
                                                 <div>
-                                                    <x-button type="submit" class="!float-none font-semibold">Submit Entry</x-button>
+                                                    <x-button type="submit" class="!float-none font-semibold">{{ __('Submit Entry') }}</x-button>
                                                 </div>
                                             </form>
                                         @else
                                             <div class="flex flex-col items-center justify-center py-10">
-                                                <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">Thank you for participating to this promo. <br> Please stay tuned for the announcement of winners.</h1>
+                                                <h1 class="text-green-300 font-semibold text-2xl text-center mb-10">{{ __('Thank you for participating to this promo') }}. <br> {{ __('Please stay tuned for the announcement of winners') }}.</h1>
                                                 <div class="flex space-x-5">
-                                                    <x-href href="{{ route('home.index') }}" class="!float-none font-semibold">Check other promos</x-href>
-                                                    <x-href href="{{ route('home.index') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Go to home page</x-href>
+                                                    <x-href href="{{ route('home.index') }}" class="!float-none font-semibold">{{ __('Check other promos') }}</x-href>
+                                                    <x-href href="{{ route('home.index') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">{{ __('Go to home page') }}</x-href>
                                                 </div>
                                             </div>
                                         @endif
@@ -342,10 +341,10 @@
                                 @endif
                             @else
                                 <div class="mt-20 bg-slate-800/[.20] rounded-xl px-10 py-20 flex flex-col items-center justify-center">
-                                    <h1 class="text-slate-200 font-semibold text-2xl mb-10">Please login to participate.</h1>
+                                    <h1 class="text-slate-200 font-semibold text-2xl mb-10">{{ __('Please login to participate') }}.</h1>
                                     <div class="flex space-x-5">
-                                        <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">Login here</x-href>
-                                        <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">Register here</x-href>
+                                        <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">{{ __('Login here') }}</x-href>
+                                        <x-href href="{{ route('user.register') }}" class="!float-none font-semibold !bg-transparent !text-indigo-500">{{ __('Register here') }}</x-href>
                                     </div>
                                 </div>
                             @endif
@@ -362,7 +361,7 @@
                     <x-button class="!bg-transparent !border-0 !p-0 flex flex-col !items-start !float-none w-full" wire:click.prevent="previousRecord">
                         <div class="flex flex-row-reverse items-center gap-3">
                             <span class="text-sm text-slate-800 font-semibold">
-                                Previous promo
+                                {{ __('Previous promo') }}
                             </span>
                             <span>
                                 <div class="rounded-full border-2 border-slate-800 h-10 w-10 flex items-center justify-center p-0">
@@ -384,7 +383,7 @@
                     <x-button class="!bg-transparent !border-0 !p-0 flex flex-col !items-end !float-none w-full" wire:click.prevent="nextRecord">
                         <div class="flex items-center gap-3">
                             <span class="text-sm text-slate-800">
-                                Next promo
+                                {{ __('Next promo') }}
                             </span>
                             <span>
                                 <div class="rounded-full border-2 border-slate-800 h-10 w-10 flex items-center justify-center p-0">
@@ -402,7 +401,7 @@
                 <div class="bg-slate-800/[.20] p-5 lg:p-10 rounded-xl">
                     <div>
                         <div class="mb-5">
-                            <h1 class="text-slate-200 font-semibold text-2xl">Other Promos</h1>
+                            <h1 class="text-slate-200 font-semibold text-2xl">{{ __('Other Promos') }}</h1>
                         </div>
                         <div class="flex-col space-y-8">
                             @foreach ($getPromos as $promo)
@@ -417,7 +416,7 @@
                                             {{ Str::limit($promo->name, 34, '...') }}
                                         </p>
                                         <p class="text-slate-200 font-semibold">
-                                            <span>Prize:</span>
+                                            <span>{{ __('Prize') }}:</span>
                                             <span>
                                                 {{ $promo->prize_pool }}
                                             </span>
