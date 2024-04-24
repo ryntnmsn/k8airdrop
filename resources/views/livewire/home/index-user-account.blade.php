@@ -33,7 +33,7 @@
                     <div class="flex flex-wrap gap-5 mb-10">
                         <div class="flex-1">
                             <x-label class="!text-slate-200 font-semibold">{{ __('Email') }}</x-label>
-                            <x-input-text wire:model="email" readonly class="!p-3 text-slate-200 font-semibold bg-slate-900 border-0 w-full"></x-input-text>
+                            <x-input-text wire:model="email" readonly class="!p-3 text-slate-600 font-semibold bg-slate-900 border-0 w-full"></x-input-text>
                             @error('email')
                                 <span class="text-rose-500 text-sm">{{ $message }}</span>
                             @enderror

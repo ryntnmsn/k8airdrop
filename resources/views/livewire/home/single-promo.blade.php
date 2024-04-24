@@ -365,7 +365,7 @@
                     <x-button class="!bg-transparent !border-0 !p-0 flex flex-col !items-start !float-none w-full" wire:click.prevent="previousRecord">
                         <div class="flex flex-row-reverse items-center gap-3">
                             <span class="text-sm text-slate-800 font-semibold">
-                                {{ __('Previous promo') }}
+                                {{ __('Previous') }}
                             </span>
                             <span>
                                 <div class="rounded-full border-2 border-slate-800 h-10 w-10 flex items-center justify-center p-0">
@@ -387,7 +387,7 @@
                     <x-button class="!bg-transparent !border-0 !p-0 flex flex-col !items-end !float-none w-full" wire:click.prevent="nextRecord">
                         <div class="flex items-center gap-3">
                             <span class="text-sm text-slate-800">
-                                {{ __('Next promo') }}
+                                {{ __('Next') }}
                             </span>
                             <span>
                                 <div class="rounded-full border-2 border-slate-800 h-10 w-10 flex items-center justify-center p-0">

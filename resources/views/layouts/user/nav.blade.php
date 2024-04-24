@@ -1,4 +1,4 @@
-<p class="font-semibold text-slate-500 mb-10">MENU</p>
+<p class="font-semibold text-slate-500 mb-10">{{ __('MENU') }}</p>
             <ul class="flex flex-col space-y-8">
                 <li class="{{ request()->is('user/dashboard') ? 'bg-indigo-600' : ''}} pr-10 pl-2 py-3 rounded-md">
                     <a wire:navigate href="{{ route('user.dashboard') }}" class="text-slate-200 font-semibold flex gap-2">
@@ -9,7 +9,7 @@
                               </svg>
                         </span>
                         <span>
-                            Promos  @if(request()->is('user/dashboard')) ({{ count($promos) }})@endif
+                            {{ __('Promos') }}  @if(request()->is('user/dashboard')) ({{ count($promos) }})@endif
                         </span>
                     </a>
                 </li>
@@ -22,7 +22,7 @@
                               </svg>
                         </span>
                         <span>
-                            Spin the Wheel  @if(request()->is('user/spin-the-wheel')) ({{ count($spinWheels) }})@endif
+                            {{ __('Spin the Wheel') }}  @if(request()->is('user/spin-the-wheel')) ({{ count($spinWheels) }})@endif
                         </span>
                     </a>
                 </li>
@@ -34,7 +34,7 @@
                               </svg>
                         </span>
                         <span>
-                            Account
+                            {{ __('Account') }}
                         </span>
                     </a>
                 </li>
@@ -49,7 +49,7 @@
                                 </svg>
                             </span>
                             <span>
-                                Sign out
+                                {{ __('Sign out') }}
                             </span>
                         </button>
                     </form>

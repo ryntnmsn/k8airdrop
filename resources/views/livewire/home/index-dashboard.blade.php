@@ -4,7 +4,7 @@
             @include('layouts/user/nav')
         </div>
         <div class="w-100 lg:w-[80%]">
-            <h1 class="text-slate-200 text-3xl font-semibold pb-8 border-b border-slate-900">Entries <span class="text-xl">({{ count($promos) }})</span></h1>
+            <h1 class="text-slate-200 text-3xl font-semibold pb-8 border-b border-slate-900">{{ __('Entries') }} <span class="text-xl">({{ count($promos) }})</span></h1>
             <div>
                 <div class="flex flex-col w-full gap-1">
 
