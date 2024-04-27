@@ -156,7 +156,9 @@
                     text: 'Article updated successfully',
                     icon: 'success',
                     iconColor: 'lightgreen'
-                });
+                }).then(function() {
+                    location.reload();
+                });;
             });
     </script>
 </div>
