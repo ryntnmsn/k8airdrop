@@ -103,7 +103,7 @@ class EditPromo extends Component
 
         $this->promo->update([
             'name' => $this->name,
-            'slug' => Str::slug($this->name),
+            'slug' => Str::slug($this->name, '-', 'ja'),
             'type' => $this->type,
             'prize_pool' => $this->prize_pool,
             'start_date' => $this->start_date,

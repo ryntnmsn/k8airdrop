@@ -66,7 +66,7 @@ class CreatePromo extends Component
 
         $promo = Promo::create([
             'name' => $this->name,
-            'slug' => $this->slug,
+            'slug' => Str::slug($this->name, '-', 'ja'),
             'language_id' => $this->language_id,
             'description' => $this->description,
             'terms' => $this->terms,
