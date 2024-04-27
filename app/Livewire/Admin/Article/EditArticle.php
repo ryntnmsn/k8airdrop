@@ -31,7 +31,7 @@ class EditArticle extends Component
     // ];
 
     public function updateArticle() {
-        $article = Article::with('categories', 'tags')->findOrFail($this->article_id);
+        $article = Article::with('categories', 'tags')->where('id', $this->article_id)->first();
 
         $filename = '';
         if($this->new_image != null) {
