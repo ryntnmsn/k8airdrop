@@ -51,7 +51,7 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a wire:navigate href="{{ route('spin.wheel.dashboard') }}" class="text-slate-200 font-semibold flex px-4 py-3 gap-2">
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -63,7 +63,7 @@
                                             {{ __('Spin the Wheel') }}
                                         </span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a wire:navigate href="{{ route('user.account') }}" class="text-slate-200 font-semibold flex gap-2 px-4 py-3">
                                         <span>
