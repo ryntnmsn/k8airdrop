@@ -30,6 +30,11 @@ html, body {
     width:100%!important
 } */
 
+.promo-description a {
+  color:rgb(243, 158, 0)!important;
+  font-weight:600
+}
+
 .news-description a {
   color:rgb(230, 126, 35);
 }

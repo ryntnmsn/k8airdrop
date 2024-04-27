@@ -89,7 +89,9 @@
                         </h2>
                         <div id="accordion-open-body-1" class="rounded-b-lg hidden bg-slate-800/[.20] py-5" aria-labelledby="accordion-open-heading-1">
                             <div class="p-5 border-b-0 text-slate-200 leading-[1.8rem]">
-                                {!! $description !!}
+                                <div class="promo-description">
+                                    {!! $description !!}
+                                </div>
                                 @if(!empty($button_name) && !empty($button_link))
                                     <div class="mt-10 flex">
                                         <x-href href="{!! $button_link !!}" target="__blank" class="!float-none flex items-center !font-semibold">
@@ -121,7 +123,7 @@
                             </button>
                         </h2>
                         <div id="accordion-open-body-2" class="rounded-b-lg hidden bg-slate-800/[.20] py-5" aria-labelledby="accordion-open-heading-2">
-                            <div class="p-5 border-b-0 text-slate-200 leading-[1.8rem]">
+                            <div class="prormo-terms p-5 border-b-0 text-slate-200 leading-[1.8rem]">
                                 {!! $terms !!}
                             </div>
                         </div>
@@ -142,7 +144,7 @@
                             </button>
                         </h2>
                         <div id="accordion-open-body-3" class="rounded-b-lg hidden bg-slate-800/[.20] py-5" aria-labelledby="accordion-open-heading-3">
-                            <div class="p-5 border-b-0 text-slate-200 leading-[1.8rem]">
+                            <div class="promo-article p-5 border-b-0 text-slate-200 leading-[1.8rem]">
                                 {!! $article !!}
                             </div>
                         </div>
