@@ -22,13 +22,13 @@ class EditArticle extends Component
     
     public Article $article;
 
-    protected $rules = [
-        'title' => 'required',
-        'short_description' => 'required',
-        'description' => 'required',
-        'image' => 'required|image|mimes:jpg,png,jpeg|max:512|dimensions:min_width=1388,min_height=750,max_width=1388,max_height=750',
-        'language_id' => 'required',
-    ];
+    // protected $rules = [
+    //     'title' => 'required',
+    //     'short_description' => 'required',
+    //     'description' => 'required',
+    //     'image' => 'required|image|mimes:jpg,png,jpeg|max:512|dimensions:min_width=1388,min_height=750,max_width=1388,max_height=750',
+    //     'language_id' => 'required',
+    // ];
 
     public function updateArticle() {
         $article = Article::with('categories', 'tags')->findOrFail($this->article_id);
