@@ -12,7 +12,7 @@ class Article extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'short_description', 'language_id', 'is_visible', 'image', 'demo_url'
+        'title', 'slug', 'description', 'short_description', 'language_id', 'is_visible', 'image', 'demo_url'
     ];
 
     public function categories(): BelongsToMany {

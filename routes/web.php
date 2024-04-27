@@ -183,4 +183,74 @@ Route::middleware('auth', 'admin')->group(function() {
 });
 
 
+//REDIRECT SNS LINKS ENGLISH
+Route::get('/fben', function() {
+    return redirect('https://www.facebook.com/k8.io.official'); // facebook
+ })->name('enFacebook');
+
+ Route::get('/twxen', function() {
+    return redirect('https://twitter.com/k8official_en'); // twitter
+ })->name('enTwitter');
+
+ Route::get('/instaen', function() {
+    return redirect('https://www.instagram.com/_k8gaming/'); // instagram
+ })->name('enInstagram');
+
+ Route::get('/yten', function() {
+    return redirect('https://www.youtube.com/@K8-ZONE'); // youtube
+ })->name('enYoutube');
+
+ Route::get('/teleen', function() {
+    return redirect('https://t.me/k8casino'); // telegram
+ })->name('enTelegram');
+
+ Route::get('/discord', function() {
+    return redirect('https://discord.gg/m7aV5kRF4w'); //discord
+ })->name('enDiscord');
+
+ Route::get('/tiktoken', function() {
+    return redirect('https://prelink.co/k8tiktokeng'); // tiktok
+ })->name('enTiktok');
+
+ Route::get('/twitchen', function() {
+    return redirect('https://www.twitch.tv/k8casino'); // twitch
+ })->name('enTwitch');
+
+ Route::get('/forum', function() {
+    return redirect('https://www.k8forum.io/'); // forum
+ })->name('k8forum');
+ 
+ 
+ // REDIRECT SNS LINK JAPAN
+  Route::get('/ytjp', function() {
+    return redirect('https://www.youtube.com/@K8-ZONE'); // youtube
+ })->name('jpYoutube');
+ 
+Route::get('/tgcn', function() {
+    return redirect('https://t.me/K8news'); // telegram
+ })->name('jpTelegram');
+
+ Route::get('/instajp', function() {
+    return redirect('https://www.instagram.com/k8.io_japan/'); // instagram
+ })->name('jpInstagram');
+
+ Route::get('/twxjp', function() {
+    return redirect('https://www.twitter.com/k8official_jp'); // twitter
+ })->name('jpTwitter');
+
+ Route::get('/twitchjp', function() {
+    return redirect('https://www.twitch.tv/k8_official_jp'); // twitch
+ })->name('jpTwitch');
+
+ Route::get('/linejp', function() {
+    return redirect('https://liff.line.me/1645278921-kWRPP32q/?accountId=510ftlxl'); // line
+ })->name('jpLine');
+
+
+ Route::get('/share', function() {
+    return view('share');
+ });
+
+
+
 
