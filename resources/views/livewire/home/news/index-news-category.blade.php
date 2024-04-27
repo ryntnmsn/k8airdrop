@@ -1,6 +1,6 @@
 <div>
     <div class="mb-10">
-        <h1 class="text-slate-200 font-semibold text-3xl mb-10">{{ $title }}</h1>
+        <h1 class="text-slate-200 font-semibold text-3xl mb-10">{{ __($title) }}</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
             @foreach ($newsAll as $news)
                 <div class="flex flex-col gap-4 bg-slate-900 hover:bg-slate-800 duration-300 ease-in-out p-5 rounded-lg cursor-pointer">
