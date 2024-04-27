@@ -53,6 +53,7 @@ use App\Livewire\Home\Wheel\SpinWheelDashboard;
 use App\Models\Subscription;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -250,6 +251,11 @@ Route::get('/tgcn', function() {
  Route::get('/share', function() {
     return view('share');
  });
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
+
 
 
 
