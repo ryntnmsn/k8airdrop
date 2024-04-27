@@ -58,7 +58,7 @@
 
                 <div>
                     <x-label>Short Description</x-label>
-                    <x-textarea wire:model="short_description" class="w-full !h-40"></x-textarea>
+                    <x-input-text wire:model="short_description"></x-input-text>
                     @error('short_description')
                         <span class="text-rose-500 text-sm">{{$message}}</span>
                     @enderror
@@ -67,7 +67,7 @@
                 <div wire:ignore.self>
                     <x-label>Description</x-label>
                     <x-textarea wire:model="description" class="w-full !h-40" id="description"></x-textarea>
-                    @error('desciption')
+                    @error('description')
                         <span class="text-rose-500 text-sm">{{$message}}</span>
                     @enderror
                 </div>
@@ -137,6 +137,7 @@
     <script>
         tinymce.init({
             selector: '#description',
+            plugins: 'code table lists link media',
             forced_root_block: false,
             setup: function (editor) {
                 editor.on('init change', function () {

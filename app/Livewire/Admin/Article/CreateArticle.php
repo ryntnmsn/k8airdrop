@@ -53,8 +53,6 @@ class CreateArticle extends Component
             'is_visible' => $this->is_visible
         ]);
 
-        dd($article);
-
 
         foreach($this->article_categories as $key => $value) {
             $article->categories()->attach($this->article_categories[$key]);
