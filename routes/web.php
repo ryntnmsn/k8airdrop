@@ -260,9 +260,8 @@ Route::get('/linkstorage', function () {
 
 //Redirections
 
-Route::get('promo/crtie-quan-2-dou-shen-verwoshi-ting-shite-shang-jin-getchiyansu/yVPXMk', function () {
+Route::get('/promo/crtie-quan-2-dou-shen-verwoshi-ting-shite-shang-jin-getchiyansu/yVPXMk', function () {
     return redirect('https://k8airdrop.com/promo/crtie-quan-2-dou-shen-verwoshi-ting-shite-shang-jin-getchiyansu');
 });
-
 
 
