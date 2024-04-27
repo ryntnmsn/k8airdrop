@@ -32,6 +32,7 @@ class IndexNews extends Component
                 $query->where('code', $lang);
             })->inRandomOrder()->simplePaginate($this->paginate);
 
+
         $newsCategories = ArticleCategory::all();
 
         return view('livewire.home.news.index-news', [

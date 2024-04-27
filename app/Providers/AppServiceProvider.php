@@ -28,9 +28,9 @@ class AppServiceProvider extends ServiceProvider
         //     URL::forceScheme('http');
         // }
 
-        $ip = '175.45.142.131'; //For static IP address get (JAPAN)
+        //$ip = '175.45.142.131'; //For static IP address get (JAPAN)
         //$ip = '103.100.137.255'; //For static IP address get (PHILIPPINES)
-        $data = \Location::get($ip);
+        $data = \Location::get();
         $locale = strtolower($data->countryCode);
         if($locale == 'jp') {
             App::setLocale($locale);
@@ -38,6 +38,5 @@ class AppServiceProvider extends ServiceProvider
         } else {
             App::setLocale('en');
         }
-
     }
 }

@@ -34,7 +34,11 @@
                         <a class="absolute top-0 bottom-0 right-0 left-0" href="{{ route('news.category.index', $category->slug) }}"></a>
                         <div class="flex gap-4">
                             <div>
-                                <img src="{{ url('storage/article_category/', $category->image) }}" alt="{{ __($category->title) }}" class="w-20">
+                                @if($category->image != null)
+                                    <img src="{{ url('storage/article_category/', $category->image) }}" alt="{{ __($category->title) }}" class="w-20">
+                                @else
+                                    <div class="py-8"></div>
+                                @endif
                             </div>
                             <div class="flex items-center">
                                 <p class="text-slate-200 text-xl font-semibold">

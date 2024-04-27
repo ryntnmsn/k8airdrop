@@ -15,7 +15,7 @@ class CreateFeatureGame extends Component
 
     protected $rules = [
         'title' => 'required',
-        'image' => 'required|image|mimes:jpg,png,jpeg|max:512|dimensions:min_width=640,min_height=640,max_width=640,max_height=640',
+        'image' => 'required|image|mimes:jpg,png,jpeg|max:512',
         'language_id' => 'required',
     ];
 
