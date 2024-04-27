@@ -40,7 +40,7 @@ class CreateArticle extends Component
     }
 
     public function storeArticle() {
-        // $this->validate();
+        $this->validate();
         // $is_visible = (isset($this->is_visible) == '0' ? '0' : '1');
         $article = Article::create([
             'title' => $this->title,
@@ -52,6 +52,8 @@ class CreateArticle extends Component
             'demo_url' => $this->demo_url,
             'is_visible' => $this->is_visible
         ]);
+
+        dd($article);
 
 
         foreach($this->article_categories as $key => $value) {

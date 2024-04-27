@@ -64,7 +64,7 @@
                     @enderror
                 </div>
 
-                <div wire:ignore>
+                <div wire:ignore.self>
                     <x-label>Description</x-label>
                     <x-textarea wire:model="description" class="w-full !h-40" id="description"></x-textarea>
                     @error('desciption')
