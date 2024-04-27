@@ -20,7 +20,8 @@
     @livewireStyles
     <script>
         tinymce.init({
-            plugins: 'code table lists',
+            selector: 'textarea',
+            plugins: 'code table lists link media',
             toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
         });
     </script>
