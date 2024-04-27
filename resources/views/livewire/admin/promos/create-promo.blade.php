@@ -374,6 +374,7 @@
             //tinymce editor
             tinymce.init({
                 selector: '#description',
+                plugins: 'code table lists link media',
                 forced_root_block: false,
                 setup: function (editor) {
                     editor.on('init change', function () {
@@ -384,9 +385,11 @@
                     });
                 }
             });
-    
+
+
             tinymce.init({
                 selector: '#terms',
+                plugins: 'code table lists link media',
                 forced_root_block: false,
                 setup: function (editor) {
                     editor.on('init change', function () {
@@ -400,6 +403,7 @@
     
             tinymce.init({
                 selector: '#article',
+                plugins: 'code table lists link media',
                 forced_root_block: false,
                 setup: function (editor) {
                     editor.on('init change', function () {

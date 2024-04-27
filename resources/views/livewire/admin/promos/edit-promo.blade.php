@@ -376,21 +376,22 @@
             //tinymce editor
             tinymce.init({
                 selector: '#description',
-                allow_conditional_comments: true,
+                plugins: 'code table lists link media',
+                forced_root_block: false,
                 setup: function (editor) {
                     editor.on('init change', function () {
                         editor.save();
                     });
                     editor.on('change', function (e) {
-                        var content = tinymce.activeEditor.getContent();
-                        @this.set('description', content);
+                        @this.set('description', editor.getContent());
                     });
                 }
             });
-            
-    
+
+
             tinymce.init({
                 selector: '#terms',
+                plugins: 'code table lists link media',
                 forced_root_block: false,
                 setup: function (editor) {
                     editor.on('init change', function () {
@@ -404,6 +405,7 @@
     
             tinymce.init({
                 selector: '#article',
+                plugins: 'code table lists link media',
                 forced_root_block: false,
                 setup: function (editor) {
                     editor.on('init change', function () {
