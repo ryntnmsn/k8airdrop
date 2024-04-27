@@ -30,7 +30,7 @@ html, body {
     width:100%!important
 } */
 
-.promo-description a {
+.promo-description a, .promo-terms a, .promo-article a {
   color:rgb(243, 158, 0)!important;
   font-weight:600
 }
