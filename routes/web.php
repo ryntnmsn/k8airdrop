@@ -224,7 +224,7 @@ Route::get('/fben', function() {
  
  // REDIRECT SNS LINK JAPAN
   Route::get('/ytjp', function() {
-    return redirect('https://www.youtube.com/@K8-ZONE'); // youtube
+    return redirect('https://www.youtube.com/@K8Pachi'); // youtube
  })->name('jpYoutube');
  
 Route::get('/tgcn', function() {

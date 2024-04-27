@@ -24,20 +24,20 @@
                                 <h1 class="text-slate-200 font-bold text-lg">{{ __('USEFUL LINKS') }}</h1>
                                 <ul class="mt-5 space-y-2">
                                     <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Home') }}</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Promos') }}</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('News') }}</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Media') }}</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Sign in') }}</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Sign up') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('index.promos') }}">{{ __('Promos') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('news.index') }}">{{ __('News') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('index.media') }}">{{ __('Media') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('user.login') }}">{{ __('Sign in') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('user.register') }}">{{ __('Sign up') }}</a></li>
                                 </ul>
                             </div>
                             <div class="flex-1">
                                 <h1 class="text-slate-200 font-bold text-lg">{{ __('ENTERTAINMENT') }}</h1>
                                 <ul class="mt-5 space-y-2">
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Games Lobby') }}</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Promotions') }}</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('Affiliate Program') }}</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">{{ __('VIP') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="https://playk8.io/games/slots/" target="__blank">{{ __('Games Lobby') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="https://playk8.io/promotions/" target="__blank">{{ __('Promotions') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="https://playk8.io/member/vip/" target="__blank">{{ __('Affiliate Program') }}</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="https://playk8.io/member/vip/" target="__blank">{{ __('VIP') }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -48,15 +48,26 @@
                         <div class="flex-1 hidden sm:block lg:hidden"></div>
                         <div class="flex-1">
                             <h1 class="text-slate-200 font-bold text-lg">{{ __('SOCIAL LINKS') }}</h1>
-                            <ul class="mt-5 space-y-2">
-                                <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Facebook</a></li>
-                                <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Instagram</a></li>
-                                <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">X</a></li>
-                                <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Youtube</a></li>
-                                <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Discord</a></li>
-                                <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Telegram</a></li>
-                                <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('home.index') }}">Tiktok</a></li>
-                            </ul>
+                            @if(app()->getLocale() == 'jp')
+                                <ul class="mt-5 space-y-2">
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('jpTwitter') }}" target="__blank">X</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('jpInstagram') }}" target="__blank">Instagram</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('jpTelegram') }}" target="__blank">Telegram</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('jpTwitch') }}" target="__blank">Twitch</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('jpYoutube') }}" target="__blank">Youtube</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('jpLine') }}" target="__blank">Line</a></li>
+                                </ul>
+                            @else
+                                <ul class="mt-5 space-y-2">
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('enFacebook') }}" target="__blank">Facebook</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('enInstagram') }}" target="__blank">Instagram</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('enTwitter') }}" target="__blank">X</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('enYoutube') }}" target="__blank">Youtube</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('enDiscord') }}" target="__blank">Discord</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('enTelegram') }}" target="__blank">Telegram</a></li>
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('enTiktok') }}" target="__blank">Tiktok</a></li>
+                                </ul>
+                            @endif
                         </div>
                         <div class="flex-1">
                             <h1 class="text-slate-200 font-bold text-lg">{{ __('THE AMBASSADORS') }}</h1>
