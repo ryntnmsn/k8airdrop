@@ -13,7 +13,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="{{ request()->is('user/spin-the-wheel') ? 'bg-indigo-600' : ''}} pr-10 pl-2 py-3 rounded-md">
+                {{-- <li class="{{ request()->is('user/spin-the-wheel') ? 'bg-indigo-600' : ''}} pr-10 pl-2 py-3 rounded-md">
                     <a wire:navigate href="{{ route('spin.wheel.dashboard') }}" class="text-slate-200 font-semibold flex gap-2">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -25,7 +25,7 @@
                             {{ __('Spin the Wheel') }}  @if(request()->is('user/spin-the-wheel')) ({{ count($spinWheels) }})@endif
                         </span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="{{ request()->is('user/account') ? 'bg-indigo-600' : ''}} pr-10 pl-2 py-3 rounded-md">
                     <a wire:navigate href="{{ route('user.account') }}" class="text-slate-200 font-semibold flex gap-2">
                         <span>
