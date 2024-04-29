@@ -230,7 +230,7 @@ class SinglePromo extends Component
         // dd($validate_array);
 
         $this->validate($validate_array);
-       
+        
         $userID = auth()->user()->id;
         $userName = auth()->user()->name;
         $userEmail = auth()->user()->email;

@@ -96,7 +96,7 @@
                     <div class="mb-8">
                         <div class="relative">
                             <p class="font-semibold text-slate-500">
-                                {{ __('Already have an account?') }} <a href="" class="text-indigo-600 hover:text-indigo-700">{{ __('Login here') }}</a>.
+                                {{ __('Already have an account?') }} <a href="{{ route('user.login') }}" class="text-indigo-600 hover:text-indigo-700">{{ __('Login here') }}</a>.
                             </p>
                         </div>
                     </div>

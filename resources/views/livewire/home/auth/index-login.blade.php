@@ -44,7 +44,7 @@
                     <div class="mb-8">
                         <div class="relative">
                             <p class="font-semibold text-slate-500">
-                                {{ __('Dont have an account') }}? <a href="" class="text-indigo-600 hover:text-indigo-700">{{ __('Register here') }}</a>.
+                                {{ __('Dont have an account') }}? <a href="{{ route('user.register') }}" class="text-indigo-600 hover:text-indigo-700">{{ __('Register here') }}</a>.
                             </p>
                         </div>
                     </div>
