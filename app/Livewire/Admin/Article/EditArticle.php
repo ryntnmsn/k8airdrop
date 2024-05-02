@@ -50,7 +50,7 @@ class EditArticle extends Component
 
         $article->update([
             'title' => $this->title,
-            'slug' => Str::slug($this->name, '-', 'ja'),
+            'slug' => Str::slug($this->title, '-', 'ja'),
             'description' => $this->description,
             'short_description' => $this->short_description,
             'language_id' => $this->language_id,
