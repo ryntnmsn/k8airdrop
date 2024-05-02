@@ -44,7 +44,7 @@ class CreateArticle extends Component
         // $is_visible = (isset($this->is_visible) == '0' ? '0' : '1');
         $article = Article::create([
             'title' => $this->title,
-            'slug' => Str::slug($this->title),
+            'slug' => Str::slug($this->name, '-', 'ja'),
             'short_description' => $this->short_description,
             'description' => $this->description,
             'language_id' => $this->language_id,

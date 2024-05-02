@@ -7,6 +7,7 @@ use App\Models\ArticleCategory;
 use App\Models\ArticleTag;
 use App\Models\Language;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class EditArticle extends Component
@@ -49,6 +50,7 @@ class EditArticle extends Component
 
         $article->update([
             'title' => $this->title,
+            'slug' => Str::slug($this->name, '-', 'ja'),
             'description' => $this->description,
             'short_description' => $this->short_description,
             'language_id' => $this->language_id,
