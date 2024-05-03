@@ -49,8 +49,9 @@
                         </div>
                         <div class="mt-2">
                             <label for="" class="text-sm ">
-                                <span class="text-slate-500">No K8 account? Register now or use code:</span>
+                                <span class="text-slate-500">{{ __("Don't have a K8 account? Register now or use code") }}</span>
                                 <span><a href="https://playk8.io?invite=K8airdrops" class="text-indigo-600">K8airdrops</a></span>
+                                <span class="text-slate-500">{{ __("for exclusive offers!") }}</span>
                             </label>
                         </div>
                         @error('k8_username')
