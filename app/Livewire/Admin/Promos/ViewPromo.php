@@ -26,6 +26,7 @@ class ViewPromo extends Component
     public $participant_id;
     public $k8_username = '';
     public $is_winner;
+    public $uploadedImage;
 
     public Promo $promo;
 
@@ -194,6 +195,7 @@ class ViewPromo extends Component
         $this->participant_id = $participant->id;
         $this->k8_username = $participant->k8_username;
         $this->is_winner = $participant->is_winner;
+        $this->uploadedImage = $participant->image;
     }
 
     public function updateParticipant() {

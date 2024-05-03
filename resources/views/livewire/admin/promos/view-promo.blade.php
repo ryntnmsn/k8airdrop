@@ -312,6 +312,14 @@
                             </td>
                             <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap flex">
                                 <div>
+                                    <x-href wire:click="editParticipant({{ $participant->id }})" class="!bg-transparent !text-slate-600 !border-0 !p-2" data-modal-target="image-modal" data-modal-toggle="image-modal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                          </svg>
+                                    </x-href>
+                                </div>
+                                <div>
                                     <x-href wire:click="editParticipant({{ $participant->id }})" class="!bg-transparent !text-slate-600 !border-0 !p-2" data-modal-target="edit-participant-modal" data-modal-toggle="edit-participant-modal">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
@@ -569,7 +577,6 @@
 </div>
 
 
-
 {{-- Delete modal confirmation --}}
 <div wire:ignore.self id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
@@ -595,8 +602,6 @@
         </div>
     </div>
 </div>
-
-
 
 {{-- Add participants modal --}}
 <div wire:ignore.self id="add-participant-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -679,6 +684,25 @@
 </div>
 
 
+{{-- Image modal --}}
+<div wire:ignore.self id="image-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-xl max-h-full">
+        <div class="relative bg-white rounded-lg shadow">
+            <button type="button" class="absolute top-3 end-2.5 text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="image-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-4 md:p-5 text-left">
+                <img src="{{ url('storage/user/' . $uploadedImage) }}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <script>
     document.addEventListener('livewire:initialized', ()=>{
@@ -692,5 +716,9 @@
         });
     });
 </script>
+
+
+
+
 
 </div>

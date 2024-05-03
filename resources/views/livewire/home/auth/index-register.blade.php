@@ -47,6 +47,12 @@
                                 </div>
                             <x-input-text wire:model.live="k8_username" class="!bg-slate-800 border-none !text-slate-200 !ps-12 !p-4 font-bold focus:ring-indigo-600 focus:ring-2 placeholder-slate-600" placeholder="{{ __('Enter K8 username') }}"></x-input-text>
                         </div>
+                        <div class="mt-2">
+                            <label for="" class="text-sm ">
+                                <span class="text-slate-500">No K8 account? Register now or use code:</span>
+                                <span><a href="https://playk8.io?invite=K8airdrops" class="text-indigo-600">K8airdrops</a></span>
+                            </label>
+                        </div>
                         @error('k8_username')
                             <span class="text-sm text-rose-500 pt-2 block">{{ __($message) }}</span>
                         @enderror
