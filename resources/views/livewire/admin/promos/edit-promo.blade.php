@@ -20,12 +20,7 @@
                                         <x-input-text wire:model='name' id="name" name="name"></x-input-text>
                                         
                                         <div wire:key='slug' class="flex items-center rounded mt-2">
-                                            <span class="flex-none text-sm text-slate-400">
-                                                URL Preview: {{ config('app.url') }}/promos/
-                                            </span>
-                                            <span class="flex-1">
-                                                <x-input-text id='slug_url' wire:model='slug' name="slug" class="!bg-transparent !text-sm text-slate-400 !border-0 !p-0 rounded-0 focus:ring-0 focus:border-0" readonly></x-input-text>
-                                            </span>
+                                            <span><label class="text-sm text-slate-400" for="">{{ $slug }}</label></span>
                                         </div>
                                         
                                         @error('name')
