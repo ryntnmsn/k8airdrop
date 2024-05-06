@@ -66,9 +66,7 @@
                             <span class="text-xs text-rose-600">{{$message}}</span>
                         @enderror
                     </div>
-                    <p class="float-right pt-1">
-                        <a href="" class="text-xs text-indigo-500 font-medium hover:text-indigo-600">Forgot password?</a>
-                    </p>
+                    
 
                 </div>
                 <button type="submit" class="flex justify-center items-center space-x-1 bg-indigo-500 px-5 py-3 text-white font-medium rounded-lg w-full hover:bg-indigo-600">

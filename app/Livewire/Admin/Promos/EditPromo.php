@@ -62,7 +62,7 @@ class EditPromo extends Component
         $this->promo_id = $getPromo->id;
         $this->promo = $getPromo;
         $this->name = $getPromo->name;
-        $this->slug = 'https://k8airdrop.com/promos/' . $getPromo->slug;
+        $this->slug = 'https://k8airdrop.com/promo/' . $getPromo->slug;
         $this->prize_pool = $getPromo->prize_pool;
         $this->start_date = $getPromo->start_date;
         $this->end_date = $getPromo->end_date;

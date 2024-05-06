@@ -53,11 +53,14 @@
                         <div>
                             <x-button type="submit" class="!float-none font-semibold px-12">{{ __('Sign in') }}</x-button>
                         </div>
-    
                         <div>
                             <input wire:model="remember" id="checked-checkbox" type="checkbox" class="w-6 h-6 text-indigo-600 bg-transparent border-2 border-indigo-700 rounded-md focus:ring-indigo-500 focus:ring-2">
                             <label for="checked-checkbox" class="ms-2 text-sm font-semibold text-slate-500">{{ __('Remember me') }}</label>
                         </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <a href="{{ route('forgot.password') }}" class="text-indigo-600 text-sm">{{ __('Forgot password') }}</a>
                     </div>
 
                     <div>
@@ -70,6 +73,8 @@
                         </div>
                     </div>
                 </div>
+
+                
             </form>
            </div>
            <div class="flex-1 bg-cover bg-center" style="background-image:url({{ url('storage/images/login-banner.jpg') }});">

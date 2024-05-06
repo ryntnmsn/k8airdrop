@@ -33,8 +33,11 @@ use App\Livewire\Admin\Question\EditQuestion;
 use App\Livewire\Admin\Wheel\SpinTheWheel;
 use App\Livewire\Admin\Wheel\SpinUserFaker;
 use App\Livewire\Admin\Wheel\SpinUsers;
+use App\Livewire\Home\Auth\ForgotPassword;
 use App\Livewire\Home\Auth\IndexLogin;
 use App\Livewire\Home\Auth\IndexRegister;
+use App\Livewire\Home\Auth\ResetPassword;
+use App\Livewire\Home\Auth\TokenExpired;
 use App\Livewire\Home\IndexDashboard;
 use App\Livewire\Home\IndexHome;
 use App\Livewire\Home\IndexMedia;
@@ -68,11 +71,13 @@ Route::get('/promo/{slug}', SinglePromo::class)->name('single.promo');
 Route::get('/promos', IndexPromoPage::class)->name('index.promos');
 Route::get('/media', IndexMedia::class)->name('index.media');
 
-
 //user auth classes
 Route::middleware(RedirectIfAuthenticated::class)->group(function() {
     Route::get('/register', IndexRegister::class)->name('user.register');
     Route::get('/login', IndexLogin::class)->name('user.login');
+    Route::get('/forgot-password', ForgotPassword::class)->name('forgot.password');
+    Route::get('/reset-password/{token}', ResetPassword::class)->name('reset.password');
+    Route::get('/token-expired', TokenExpired::class)->name('token.expired');
 });
 
 //user dashboard

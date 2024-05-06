@@ -246,5 +246,17 @@
     "Already have an account?": "すでにアカウントをお持ちですか？",
     "SOCIAL LINKS": "ソーシャルリンク",
     "Yaya Touré": "ヤヤ・トゥーレ",
-    "Wesley Sneijder": "ヴェスレイ・スナイデル"
+    "Wesley Sneijder": "ヴェスレイ・スナイデル",
+
+    "Email not found": "メールが見つかりません。",
+    "Password reset link sent successfully.": "パスワードリセットリンクが正常に送信されました。",
+    "Password not match": "パスワードが一致しません。",
+    "Password reset successfully": "パスワードが正常にリセットされました。",
+    "Token expired": "有効期限が切れました。",
+    "Reset Password": "パスワードを再設定する",
+    "Send reset link": "リセットリンクを送信する",
+    "Forgot password": "パスワードをお忘れですか。"
+
+    
+
 }

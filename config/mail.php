@@ -100,8 +100,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'k8airdrop@mail-k8.io'),
+        'name' => env('MAIL_FROM_NAME', 'K8airdrop'),
     ],
 
     /*
