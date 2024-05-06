@@ -187,7 +187,7 @@
                                                                                                         <p
                                                                                                             style="color:#000; padding: 0px; font-size: 16px; font-family: inherit; text-align: left;">
                                                                                                             <b
-                                                                                                                style="font-size:18px">Hi,
+                                                                                                                style="font-size:18px">
                                                                                                                 {{$user->name}}！</b>
                                                                                                             <br>
                                                                                                             <br>
@@ -239,7 +239,7 @@
                                                                                                     <p
                                                                                                         style="color:#000; padding: 0px; font-size: 16px; font-family: inherit; text-align: left;">
                                                                                                         <b
-                                                                                                            style="font-size:18px">Hi,
+                                                                                                            style="font-size:18px">
                                                                                                             {{$user->name}}！</b>
                                                                                                         <br>
                                                                                                         <br>
