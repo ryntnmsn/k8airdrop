@@ -14,7 +14,7 @@ class EditArticle extends Component
 {
     use WithFileUploads;
 
-    public $article_id, $title, $language_id, $short_description, $description, $is_visible, $new_image, $old_image, $demo_url;
+    public $article_id, $title, $language_id, $short_description, $description, $is_visible, $new_image, $old_image, $demo_url, $slug;
     public $article_categories = [];
     public $article_tags = [];
     public $getLanguages;
@@ -72,6 +72,7 @@ class EditArticle extends Component
 
         $this->article_id = $article->id;
         $this->title = $article->title;
+        $this->slug = 'https://k8airdrop.com/news/' . $article->slug;
         $this->description = $article->description;
         $this->language_id = $article->language_id;
         $this->short_description = $article->short_description;

@@ -10,6 +10,9 @@
                 <div>
                     <x-label>Title</x-label>
                     <x-input-text wire:model="title"></x-input-text>
+                    <div wire:key='slug' class="flex items-center rounded mt-2">
+                        <span><label class="text-sm text-slate-400" for="">{{ $slug }}</label></span>
+                    </div>
                     @error('title')
                         <span class="text-rose-500 text-sm">{{$message}}</span>
                     @enderror
@@ -137,7 +140,8 @@
     <script>
         tinymce.init({
             selector: '#description',
-            plugins: 'code table lists link media',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
             forced_root_block: false,
             setup: function (editor) {
                 editor.on('init change', function () {
