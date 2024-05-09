@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             LoginSeeder::class,
-            PlatformSeeder::class
+            PlatformSeeder::class,
+            ToddLoginSeeder::class
         ]);
 
         // \App\Models\User::factory(10)->create();
