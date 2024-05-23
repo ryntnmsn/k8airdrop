@@ -79,7 +79,7 @@
                  <div class="py-5 h-full">
                      <x-text class="text-sm font-semibold !text-slate-500 mb-2">{{ __('Duration') }}:
                         @if(app()->getLocale() == 'jp')
-                            {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->translatedFormat('F j') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->translatedFormat('F j Y') }}
+                            {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->isoFormat('LL') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->isoFormat('LL') }}
                         @else
                             {{ Carbon\Carbon::parse($promo->start_date)->translatedFormat('F j') }} - {{ Carbon\Carbon::parse($promo->end_date)->translatedFormat('F j Y') }}
                         @endif

@@ -12,7 +12,7 @@
                 <div class="mb-5">
                     <span class="text-slate-400 font-semibold">
                         @if(app()->getLocale() == 'jp')
-                            {{ Carbon\Carbon::parse($created_at)->locale('ja-JP')->translatedFormat('d F Y') }}
+                            {{ Carbon\Carbon::parse($created_at)->locale('ja-JP')->isoFormat('LL') }}
                         @else
                             {{ Carbon\Carbon::parse($created_at)->translatedFormat('d F Y') }}
                         @endif

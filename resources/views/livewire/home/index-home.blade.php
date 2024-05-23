@@ -96,7 +96,7 @@
         <div class="text-slate-200" wire:loading.delay>{{ __('Loading') }}...</div>
         <div wire:loading.remove class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             @forelse ($promos as $promo)
-                <div wire:key="{{ $promo['id'] }}" class="relative rounded-xl overflow-hidden bg-slate-900 hover:bg-slate-800 hover:z-50 p-4 md:hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
+                <div wire:key="{{ $promo['id'] }}" class="bg-slate-900 relative rounded-xl overflow-hidden hover:bg-slate-800 hover:z-50 p-4 md:hover:scale-[1.1] duration-300 ease-in-out cursor-pointer">
                     <a href="{{ route('single.promo', $promo->slug) }}" class="absolute z-30 top-0 left-0 right-0 bottom-0"></a>
                     <div class="relative">
                         @if($promo->end_date >= Carbon\Carbon::now()->format('Y-m-d'))
@@ -115,7 +115,7 @@
                     <div class="py-5 h-full">
                         <x-text class="text-sm font-semibold !text-slate-500 mb-2">{{ __('Duration') }}: 
                             @if(app()->getLocale() == 'jp')
-                                {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->translatedFormat('F j') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->translatedFormat('F j Y') }}
+                                {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->isoFormat('LL') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->isoFormat('LL') }}
                             @else
                                 {{ Carbon\Carbon::parse($promo->start_date)->translatedFormat('F j') }} - {{ Carbon\Carbon::parse($promo->end_date)->translatedFormat('F j Y') }}
                             @endif

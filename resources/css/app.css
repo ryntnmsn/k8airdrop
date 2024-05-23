@@ -30,6 +30,10 @@ html, body {
     width:100%!important
 } */
 
+.bgColor {
+  background-color: #2B3248;
+}
+
 .promo-description a, .promo-terms a, .promo-article a {
   color:rgb(243, 158, 0)!important;
   font-weight:600

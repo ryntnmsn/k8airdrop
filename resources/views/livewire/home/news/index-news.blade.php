@@ -78,10 +78,10 @@
                     <div class="flex flex-col gap-4">
                         <div class="flex justify-between">
                             <div class="relative">
-                                <div class="z-10 absolute flex">
+                                <div class="z-10 flex ">
                                     @foreach ($news->categories as $category)
                                         <span class="text-slate-500 text-sm me-1 rounded-sm">
-                                            <a href="{{ route('news.category.index', $category->slug) }}" class=" bg-slate-800 px-2 py-1 rounded-sm">{{ $category->title }}</a>
+                                            <a href="{{ route('news.category.index', $category->slug) }}" class=" bg-slate-800 px-2 py-1 rounded-sm block">{{ __($category->title) }}</a>
                                         </span>
                                     @endforeach
                                 </div>

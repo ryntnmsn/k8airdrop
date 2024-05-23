@@ -18,7 +18,7 @@
                             </span>
                             <span>
                                 @if(app()->getLocale() == 'jp')
-                                    {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->translatedFormat('F j Y') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->translatedFormat('F j Y') }}
+                                    {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->isoFormat('LL') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->isoFormat('LL') }}
                                 @else
                                     {{ Carbon\Carbon::parse($promo->start_date)->translatedFormat('F j Y') }} - {{ Carbon\Carbon::parse($promo->end_date)->translatedFormat('F j Y') }}
                                 @endif
@@ -419,7 +419,7 @@
                                     <div class="w-[60%]">
                                         <p class="text-xs text-slate-500 font-semibold mb-2">
                                             @if(app()->getLocale() == 'jp')
-                                                {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->translatedFormat('F j Y') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->translatedFormat('F j Y') }}
+                                                {{ Carbon\Carbon::parse($promo->start_date)->locale('ja-JP')->isoFormat('LL') }} - {{ Carbon\Carbon::parse($promo->end_date)->locale('ja-JP')->isoFormat('LL') }}
                                             @else
                                                 {{ Carbon\Carbon::parse($promo->start_date)->translatedFormat('F j Y') }} - {{ Carbon\Carbon::parse($promo->end_date)->translatedFormat('F j Y') }}
                                             @endif

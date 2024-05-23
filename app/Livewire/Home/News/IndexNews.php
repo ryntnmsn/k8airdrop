@@ -25,7 +25,7 @@ class IndexNews extends Component
         
         $newsSlider = $news->limit(5)->get();
       
-        $newsLatest = $news->limit(5)->limit(3)->get();
+        $newsLatest = $news->limit(3)->get();
         
         $newsAll = Article::with('categories')->where('is_visible', '1')
             ->whereHas('language', function ($query) use ($lang) {
