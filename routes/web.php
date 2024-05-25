@@ -31,6 +31,7 @@ use App\Livewire\Admin\Promos\IndexPromo;
 use App\Livewire\Admin\Promos\ViewPromo;
 use App\Livewire\Admin\Question\CreateQuestion;
 use App\Livewire\Admin\Question\EditQuestion;
+use App\Livewire\Admin\Subscription\IndexSubscription;
 use App\Livewire\Admin\Wheel\SpinTheWheel;
 use App\Livewire\Admin\Wheel\SpinUserFaker;
 use App\Livewire\Admin\Wheel\SpinUsers;
@@ -42,7 +43,6 @@ use App\Livewire\Home\Auth\TokenExpired;
 use App\Livewire\Home\IndexDashboard;
 use App\Livewire\Home\IndexHome;
 use App\Livewire\Home\IndexMedia;
-use App\Livewire\Home\IndexPromo as HomeIndexPromo;
 use App\Livewire\Home\IndexPromoPage;
 use App\Livewire\Home\IndexUserAccount;
 use App\Livewire\Home\News\IndexNews;
@@ -71,8 +71,6 @@ Route::get('/', IndexHome::class)->name('home.index');
 Route::get('/promo/{slug}', SinglePromo::class)->name('single.promo');
 Route::get('/promos', IndexPromoPage::class)->name('index.promos');
 Route::get('/media', IndexMedia::class)->name('index.media');
-
-Route::post('/subscribe-newsletter', [NewsletterSubscriptionController::class, 'store'])->name('newsletter.store');
 
 //Newsletter Subscription
 // Route::controller(NewsletterSubscriptionController::class)->group(function (){
@@ -183,14 +181,16 @@ Route::middleware('auth', 'admin')->group(function() {
             Route::get('/user-faker', SpinUserFaker::class)->name('spinuserfaker.index');
         });
 
-        // //Subscription class
-        // Route::group(['prefix' => 'subscriptions'], function () {
-        //     Route::get('/', Subscription::class)->name('subscription.index');
-        // });
+        //Subscription class
+        Route::group(['prefix' => 'subscriptions'], function () {
+            Route::get('/', IndexSubscription::class)->name('subscription.index');
+        });
         
         //Exports
         Route::controller(ExportController::class)->group(function () {
             Route::get('/promo-participants/{id}', 'exportPromoParticipants')->name('export.promo.participants');
+            Route::get('/english-subscribers', 'exportEnglishSubscribers')->name('export.english.subscribers');
+            Route::get('/japan-subscribers', 'exportJapanSubscribers')->name('export.japan.subscribers');
         });
         
     });

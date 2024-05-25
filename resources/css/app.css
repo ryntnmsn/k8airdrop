@@ -33,7 +33,7 @@ html, body {
 /*Newsletter*/
 /* newsletter */
 .mpopup {
-  /* display: none; */
+  display: none;
   position: fixed;
   background-color: rgba(0,0,0,0.6);
 }

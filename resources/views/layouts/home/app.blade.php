@@ -151,13 +151,10 @@
 <script>
     function subscriptionPopup(){
         var mpopup = $('#mpopupBox');
-        
         mpopup.show();
-        
         $(".close").on('click',function(){
             mpopup.hide();
         });
-        
         $(window).on('click', function(e) {
             if(e.target == mpopup[0]){
                 mpopup.hide();

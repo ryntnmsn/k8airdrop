@@ -2,17 +2,28 @@
     <div class="relative">
         <div class="flex">
             <div class="flex-1 flex flex-col space-y-1">
-                <x-title>Users</x-title>
+                <x-title>Subscriptions</x-title>
             </div>
             <div class="flex-1">
-                <x-button type="submit" data-modal-target="add-modal" data-modal-toggle="add-modal">
+                <x-button id="dropdownDefaultButton" data-dropdown-toggle="dropdownExport">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                     <span>
-                        Create
+                        Export
                     </span>
                 </x-button>
+                <!-- Dropdown menu -->
+                <div id="dropdownExport" class="z-20 hidden bg-white divide-y divide-slate-100 rounded-lg shadow w-44">
+                    <ul class="py-2 text-slate-800" aria-labelledby="dropdownDefaultButton">
+                        <li>
+                            <a href="{{ route('export.english.subscribers') }}" class="block px-4 py-2 hover:bg-slate-100">English</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('export.japan.subscribers') }}" class="block px-4 py-2 hover:bg-slate-100">Japan</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="mt-10">
@@ -24,9 +35,6 @@
                                 No.
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Name
-                            </th>
-                            <th scope="col" class="px-6 py-3">
                                 Email
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -34,6 +42,9 @@
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 IP
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Date
                             </th>
                         </tr>
                     </thead>
@@ -43,9 +54,6 @@
                                 <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap w-1">
                                     {{ $loop->iteration }}
                                 </td>
-                                <td scope="row" class="px-6 py-3 font-medium whitespace-nowrap">
-                                    {{ $user->name }}
-                                </td>
                                 <td class="px-6 py-3">
                                     {{ $user->email }}
                                 </td>
@@ -54,6 +62,9 @@
                                 </td>
                                 <td class="px-6 py-3">
                                     {{ $user->ip }}
+                                </td>
+                                <td class="px-6 py-3">
+                                    {{ date('F j Y', strtotime($user->created_at)) }}
                                 </td>
                             </tr>
                         @endforeach
