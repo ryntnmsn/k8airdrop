@@ -30,9 +30,14 @@ html, body {
     width:100%!important
 } */
 
-.bgColor {
-  background-color: #2B3248;
+/*Newsletter*/
+/* newsletter */
+.mpopup {
+  /* display: none; */
+  position: fixed;
+  background-color: rgba(0,0,0,0.6);
 }
+/*End of newsletter*/
 
 .promo-description a, .promo-terms a, .promo-article a {
   color:rgb(243, 158, 0)!important;

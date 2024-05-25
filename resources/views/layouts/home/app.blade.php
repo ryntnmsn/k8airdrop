@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    
     <link rel="icon" type="image/x-icon" href="{{ url('storage/images/favicon-32x32.png') }}">
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -64,6 +65,7 @@
         </div>
 
         @include('layouts.home.footer')
+        @livewire('home.newsletter.newsletter-subscription')
     </div>
    
     @livewireScripts
@@ -143,7 +145,38 @@
         })
         newsSlider.mount()
     </script>
-  <script src="https://www.cryptohopper.com/widgets/js/script"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script>
+    function subscriptionPopup(){
+        var mpopup = $('#mpopupBox');
+        
+        mpopup.show();
+        
+        $(".close").on('click',function(){
+            mpopup.hide();
+        });
+        
+        $(window).on('click', function(e) {
+            if(e.target == mpopup[0]){
+                mpopup.hide();
+            }
+        });
+    }
+    
+    $(document).ready(function() {
+        var popDisplayed = $.cookie('popDisplayed');
+        if(popDisplayed == '1'){
+            return false;
+        }else{
+            setTimeout( function() {
+                subscriptionPopup();
+            },3000);
+            $.cookie('popDisplayed', '1', { expires: 7 });
+        }
+    });
+</script>
 
 </body>
 </html>

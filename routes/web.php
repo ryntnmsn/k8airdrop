@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\NewsletterSubscriptionController;
 use App\Http\Controllers\SpinWheelController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Livewire\Admin\Article\CreateArticle;
@@ -70,6 +71,13 @@ Route::get('/', IndexHome::class)->name('home.index');
 Route::get('/promo/{slug}', SinglePromo::class)->name('single.promo');
 Route::get('/promos', IndexPromoPage::class)->name('index.promos');
 Route::get('/media', IndexMedia::class)->name('index.media');
+
+Route::post('/subscribe-newsletter', [NewsletterSubscriptionController::class, 'store'])->name('newsletter.store');
+
+//Newsletter Subscription
+// Route::controller(NewsletterSubscriptionController::class)->group(function (){
+//     Route::get('/subscribe-newsletter', 'store')->name('newsletter.store');
+// });
 
 //user auth classes
 Route::middleware(RedirectIfAuthenticated::class)->group(function() {
