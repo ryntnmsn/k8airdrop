@@ -19,7 +19,8 @@
             <div class="text-slate-200 border-b border-slate-700" wire:loading>{{ __('Loading') }}...</div>
             <div wire:loading.remove class="bg-slate-800 rounded-b-xl overflow-hidden shadow-2xl">
                 @foreach ($promoResults as $result)
-                    <div class="p-3 border-b border-slate-700 hover:bg-slate-700 cursor-pointer duration-300 ease-in-out">
+                    <div class="relative p-3 border-b border-slate-700 hover:bg-slate-700 cursor-pointer duration-300 ease-in-out">
+                        <a href="{{ route('single.promo', $result->slug) }}" class="absolute top-0 left-0 right-0 bottom-0"></a>
                         <div>
                             <span class="text-xs text-slate-500">{{ __('Promo') }}</span>
                         </div>
@@ -32,7 +33,8 @@
                     </div>
                 @endforeach
                 @foreach ($newsResults as $result)
-                    <div class="p-3 border-b border-slate-700 hover:bg-slate-700 cursor-pointer duration-300 ease-in-out">
+                    <div class="p-3 relative border-b group border-slate-700 hover:bg-slate-700 cursor-pointer duration-300 ease-in-out">
+                        <a href="{{ route('news.single.index', $result->slug) }}" class="absolute top-0 left-0 right-0 bottom-0"></a>
                         <div>
                             <span class="text-xs text-slate-500">{{ __('News') }}</span>
                         </div>
