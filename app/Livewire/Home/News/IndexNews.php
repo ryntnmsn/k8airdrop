@@ -11,7 +11,12 @@ class IndexNews extends Component
 {
     use WithPagination;
 
-    public $paginate = 12;
+    public $amount = 12;
+
+    public function loadMore() {
+        $this->amount += 12;
+    }
+
 
     public function render()
     {
@@ -25,19 +30,19 @@ class IndexNews extends Component
         
         $newsSlider = $news->limit(5)->get();
       
-        $newsLatest = $news->limit(3)->get();
+        // $newsLatest = $news->limit(6)->get();
         
         $newsAll = Article::with('categories')->where('is_visible', '1')
             ->whereHas('language', function ($query) use ($lang) {
                 $query->where('code', $lang);
-            })->inRandomOrder()->simplePaginate($this->paginate);
+            })->orderBy('created_at', 'desc')->take($this->amount)->get();
 
 
         $newsCategories = ArticleCategory::all();
 
         return view('livewire.home.news.index-news', [
             'newsCategories' => $newsCategories,
-            'newsLatest' => $newsLatest,
+            // 'newsLatest' => $newsLatest,
             'newsSlider' => $newsSlider,
             'newsAll' => $newsAll,
         ])->extends('layouts.home.app')->section('contents');

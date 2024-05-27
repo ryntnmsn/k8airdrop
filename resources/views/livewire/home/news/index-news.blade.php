@@ -57,56 +57,6 @@
         </div>
     </div>
 
-    {{-- latest news --}}
-    <div class="mb-10">
-        <div class="flex justify-between">
-            <h1 class="text-slate-200 font-semibold text-3xl mb-5">{{ __('Latest news') }}</h1>
-            <a href="{{ route('news.latest.index') }}" class="text-indigo-600 flex items-center font-medium">
-                <span>{{ __('See more') }}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                    <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-                </svg>
-            </a>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            @foreach ($newsLatest as $news)
-                <div class="flex flex-col gap-4 bg-slate-900 hover:bg-slate-800 duration-300 ease-in-out p-5 rounded-lg cursor-pointer relative">
-                    <a href="{{ route('news.single.index', $news->slug) }}" class="absolute top-0 bottom-0 right-0 left-0"></a>
-                    <div>
-                        <img src="{{ url('storage/article/', $news->image) }}" alt="{{ $news->title }}" class="rounded-lg">
-                    </div>
-                    <div class="flex flex-col gap-4">
-                        <div class="flex justify-between">
-                            <div class="relative">
-                                <div class="z-10 flex ">
-                                    @foreach ($news->categories as $category)
-                                        <span class="text-slate-500 text-sm me-1 rounded-sm">
-                                            <a href="{{ route('news.category.index', $category->slug) }}" class=" bg-slate-800 px-2 py-1 rounded-sm block">{{ __($category->title) }}</a>
-                                        </span>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div>
-                                <span class="text-sm text-slate-500">
-                                    @if(app()->getLocale() == 'jp')
-                                        {{ Carbon\Carbon::parse($news->updated_at->locale('ja-JP'))->diffForHumans() }}
-                                    @else
-                                        {{ Carbon\Carbon::parse($news->updated_at)->diffForHumans() }}
-                                    @endif
-                                </span>
-                            </div>
-                        </div>
-                        <h1 class="text-slate-200 font-semibold text-xl leading-normal mt-2">{{ $news->title }}</h1>
-                        <p class="text-slate-400">
-                            {{ Str::limit($news->short_description, 150) }}
-                        </p>
-                        <a href="" class="text-indigo-600">{{ __('Read more') }}</a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-
     {{-- news --}}
     <div class="mb-10">
         <h1 class="text-slate-200 font-semibold text-3xl mb-5">{{ __('Trending') }}</h1>
@@ -147,9 +97,9 @@
             </div>
             @endforeach
         </div>
-        <div class="w-full">
-            <div class="w-[170px] mx-auto">
-                {{ $newsAll->links() }}
+        <div class="mt-10">
+            <div class="flex justify-center">
+                <x-button wire:click="loadMore" class="!float-none">{{ __('Load more') }}</x-button>
             </div>
         </div>
     </div>

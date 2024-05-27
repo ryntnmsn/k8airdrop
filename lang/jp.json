@@ -254,7 +254,9 @@
     "Token expired": "有効期限が切れました。",
     "Reset Password": "パスワードを再設定する",
     "Send reset link": "リセットリンクを送信する",
-    "Forgot password": "パスワードをお忘れですか。"
+    "Forgot password": "パスワードをお忘れですか。",
+    "Search here": "検索",
+    "No results found": "結果が見つかりませんでした"
 
     
 

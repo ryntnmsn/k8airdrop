@@ -80,16 +80,6 @@
                         </x-select>
                     </div>
                 </div>
-                <div class="flex-1">
-                    <div class="flex flex-col">
-                        <x-label class="!text-slate-200">{{ __('Show') }}</x-label>
-                        <x-select wire:model.live="pagination" class="!text-slate-200 bg-slate-800/[.50] !border-slate-800 focus:!ring-indigo-600">
-                            <option value="6">6</option>
-                            <option value="12">12</option>
-                            <option value="24">24</option>
-                        </x-select>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -121,7 +111,9 @@
                             @endif
                         </x-text>
                         <x-text class="text-xl !text-slate-200 font-semibold mb-2">{{ $promo->name }}</x-text>
-                        <x-text class="text-md !text-slate-200 font-semibold">{{ __('Prize pool') }}: {{ $promo->prize_pool }}</x-text>
+                        @if($promo->prize_pool != null)
+                            <x-text class="text-md !text-slate-200 font-semibold">{{ __('Prize pool') }}: {{ $promo->prize_pool }}</x-text>
+                        @endif
                         @if(count($promo->platforms) != null)
                             <x-text class="text-md !text-slate-200 font-semibold">{{ __('Platforms') }}:
                                 @foreach ($promo->platforms as $platform)
@@ -175,7 +167,9 @@
                                 @endif
                             </x-text>
                             <x-text class="!text-slate-200 text-xl font-semibold mb-2">{{ $promo->name }}</x-text>
-                            <x-text class="!text-slate-200 text-md font-semibold">{{ __('Prize pool') }}: {{ $promo->prize_pool }}</x-text>
+                            @if($promo->prize_pool != null)
+                                <x-text class="text-md !text-slate-200 font-semibold">{{ __('Prize pool') }}: {{ $promo->prize_pool }}</x-text>
+                            @endif                            
                             <x-text class="!text-slate-200 text-md font-semibold">{{ __('Platforms') }}:
                                 @foreach ($promo->platforms as $platform)
                                     <span class="text-xs px-1 rounded-sm me-1 !text-white" style="background: {{ $platform->hex_color }}">
