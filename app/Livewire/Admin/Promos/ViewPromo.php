@@ -71,8 +71,6 @@ class ViewPromo extends Component
             $question->choices()->attach($choice->id);
         }
 
-
-
         session()->flash('statusAdded', 'Question successfully added.');
     }
 
@@ -164,7 +162,7 @@ class ViewPromo extends Component
 
     public function storeParticipant() {
         $this->validate([
-            'k8_username' => 'required',
+            'k8_username' => 'required|alpha_dash',
         ]);
 
         $is_winner = false;
@@ -185,9 +183,13 @@ class ViewPromo extends Component
                 'ip' => 'Dummy',
                 'is_winner' => $is_winner
             ]);
+
+            $this->js('window.location.reload()');
+
         } else {
-            echo 'Already exists';
+            session()->flash('errorParticipant', 'Already exists');
         }
+
     }
 
     public function editParticipant($id) {
@@ -199,6 +201,10 @@ class ViewPromo extends Component
     }
 
     public function updateParticipant() {
+        $this->validate([
+            'k8_username' => 'required|alpha_dash',
+        ]);
+
         $participant = Participant::where('id', $this->participant_id)->first();
 
         $is_winner = false;
@@ -208,9 +214,18 @@ class ViewPromo extends Component
             $is_winner = false;
         }
 
-        $participant->update([
-            'is_winner' => $is_winner
-        ]);
+        if($participant->email == 'Dummy') {
+            $participant->update([
+                'k8_username' => $this->k8_username,
+                'is_winner' => $is_winner
+            ]);
+        } else {
+            $participant->update([
+                'is_winner' => $is_winner
+            ]);
+        }
+        
+        $this->js('window.location.reload()');
     }
 
     public function mount($id) {
@@ -244,14 +259,16 @@ class ViewPromo extends Component
         ]);
         // $this->inputs = collect();
 
-        $this->participants = Participant::where('promo_id', $this->promo_id)->get();
+        
 
     }
 
     public function render()
     {
+        $getParticipants = Participant::where('promo_id', $this->promo_id)->orderBy('is_winner', 'desc')->get();
  
-        return view('livewire.admin.promos.view-promo')
-            ->extends('layouts.admin.app')->section('contents');
+        return view('livewire.admin.promos.view-promo', [
+            'getParticipants' => $getParticipants
+        ])->extends('layouts.admin.app')->section('contents');
     }
 }

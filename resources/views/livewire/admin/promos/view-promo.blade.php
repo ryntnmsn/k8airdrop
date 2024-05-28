@@ -43,7 +43,7 @@
           >Basic Informations</a
         >
       </li>
-      <li role="presentation">
+      {{-- <li role="presentation">
         <a
           href="#participant"
           class="block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 font-medium leading-tight text-slate-500 hover:isolate hover:border-transparent hover:bg-slate-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-indigo-600 data-[te-nav-active]:text-indigo-600 "
@@ -52,9 +52,9 @@
           role="tab"
           aria-controls="participant"
           aria-selected="false"
-          >Participants <span class="text-xs">({{ count($participants) }})</span></a
+          >Participants <span class="text-xs">({{ count($getParticipants) }})</span></a
         >
-      </li>
+      </li> --}}
       @if($type == 'click_to_join' && $game_type == 'multiple_choice')
         <li role="presentation">
             <a
@@ -233,9 +233,118 @@
                     </div>
                 </div>
             </div>
+
+
+
+            {{-- PARTICIPANTS --}}
+            <div class="mb-5 mt-20">
+                <div class="flex justify-between">
+                    <div><x-title>Participants <span class="text-xl">({{ count($getParticipants) }})</span></x-title></div>
+                    <div class="flex gap-2">
+                        <x-button class="!float-none" data-modal-target="add-participant-modal" data-modal-toggle="add-participant-modal">Create Dummy</x-button>
+                        <x-href href="{{ route('export.promo.participants', $promo_id) }}" class="!float-none" >Export</x-href>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="overflow-x-auto sm:rounded-lg">
+                <table class="w-full text-left rtl:text-right rounded-2xl text-slate-600 ">
+                    <thead class="bg-slate-100">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 w-2 uppercase text-xs">
+                                No.
+                            </th>
+                            <th scope="col" class="px-6 py-3 uppercase text-xs">
+                                Nick Name
+                            </th>
+                            <th scope="col" class="px-6 py-3 uppercase text-xs">
+                                K8 Username
+                            </th>
+                            <th scope="col" class="px-6 py-3 uppercase text-xs">
+                                Email
+                            </th>
+                            <th scope="col" class="px-6 py-3 uppercase text-xs">
+                                IP
+                            </th>
+                            <th scope="col" class="px-6 py-3 uppercase text-xs">
+                                SNS ID
+                            </th>
+                            <th scope="col" class="px-6 py-3 uppercase text-xs">
+                                Is winner
+                            </th>
+                            <th scope="col" class="px-6 py-3 uppercase text-xs">
+                                Joined date
+                            </th>
+                            <th scope="col" class="px-6 py-3 uppercase text-xs">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($getParticipants as $participant)
+                            <tr class="border-b hover:bg-slate-100 rounded-xl">
+                                <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap w-2">
+                                    {{ $loop->iteration }}
+                                </td>
+                                <td row='scope' class="px-6 py-3 font-medium">
+                                    {{ $participant->name }}
+                                </td>
+                                <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap">
+                                    {{ $participant->k8_username }}
+                                </td>
+                                <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap">
+                                    {{ $participant->email }}
+                                </td>
+                                <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap">
+                                    {{ $participant->ip }}
+                                </td>
+                                <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap">
+                                    {{ $participant->sns_id }}
+                                </td>
+                                <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap">
+                                    @if($participant->is_winner == 0)
+                                        No
+                                    @else
+                                        Yes
+                                    @endif
+                                </td>
+                                <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap">
+                                    {{ $participant->created_at->diffForHumans() }}
+                                </td>
+                                <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap flex">
+                                    <div>
+                                        <x-href wire:click="editParticipant({{ $participant->id }})" class="!bg-transparent !text-slate-600 !border-0 !p-2" data-modal-target="image-modal" data-modal-toggle="image-modal">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                              </svg>
+                                        </x-href>
+                                    </div>
+                                    <div>
+                                        <x-href wire:click="editParticipant({{ $participant->id }})" class="!bg-transparent !text-slate-600 !border-0 !p-2" data-modal-target="edit-participant-modal" data-modal-toggle="edit-participant-modal">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                              </svg>
+                                        </x-href>
+                                    </div>
+                                    <div>
+                                        <x-href wire:click="" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="!bg-transparent !text-slate-600 !border-0 !p-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                              </svg>
+                                        </x-href>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+
         </div>
       </div>
-      <div
+     {{--  <div
         class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
         id="participant"
         role="tabpanel"
@@ -284,7 +393,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($participants as $participant)
+                    @foreach ($getParticipants as $participant)
                         <tr class="border-b hover:bg-slate-100 rounded-xl">
                             <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap w-2">
                                 {{ $loop->iteration }}
@@ -305,7 +414,11 @@
                                 {{ $participant->sns_id }}
                             </td>
                             <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap">
-                                {{ $participant->is_winner }}
+                                @if($participant->is_winner == 0)
+                                    No
+                                @else
+                                    Yes
+                                @endif
                             </td>
                             <td row='scope' class="px-6 py-3 font-medium whitespace-nowrap">
                                 {{ $participant->created_at->diffForHumans() }}
@@ -340,7 +453,7 @@
             </table>
         </div>
 
-      </div>
+      </div> --}}
       <div
         class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
         id="manage-question"
@@ -632,6 +745,9 @@
                         @error('is_winner')
                             <span class="text-sm text-rose-500">{{ $message }}</span>
                         @enderror
+                        @if(session('errorParticipant'))
+                            <span class="text-sm text-rose-500">{{ session('errorParticipant') }}</span>
+                        @endif
                     </div>
                     <div class="mb-5">
                         <x-button wire:target="storeParticipant" type="submit" class="!float-none">Create</x-button>
@@ -695,7 +811,10 @@
                 <span class="sr-only">Close modal</span>
             </button>
             <div class="p-4 md:p-5 text-left">
-                <img src="{{ url('storage/user/' . $uploadedImage) }}" alt="">
+                <div class="text-slate-800" wire:loading.delay>{{ __('Loading') }}...</div>
+                <div wire:loading.remove>
+                    <img src="{{ url('storage/user/' . $uploadedImage) }}" alt="">
+                </div>
             </div>
         </div>
     </div>
