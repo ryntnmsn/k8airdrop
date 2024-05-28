@@ -144,7 +144,7 @@ class SinglePromo extends Component
         }
 
         
-        $userId = auth()->user()->id ?? '';
+        $userId = auth()->user()->id;
         $promoId = $this->promo_id;
         // $getPromoId = Participant::with('user')->where('promo_id', $promoId)
         //     ->whereHas('user', function ($query) use ($userId)  {

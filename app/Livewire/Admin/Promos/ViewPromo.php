@@ -172,7 +172,7 @@ class ViewPromo extends Component
             $is_winner = false;
         }
 
-        $participant = Participant::where('k8_username', $this->k8_username)->exists();
+        $participant = Participant::where('k8_username', $this->k8_username)->where('promo_id', $this->promo_id)->exists();
 
         if($participant == null) {
             Participant::create([
