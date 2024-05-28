@@ -192,6 +192,10 @@ class ViewPromo extends Component
 
     }
 
+    public function resetUploadedImage() {
+        $this->uploadedImage = null;
+    }
+
     public function editParticipant($id) {
         $participant = Participant::where('id', $id)->first();
         $this->participant_id = $participant->id;
@@ -224,7 +228,7 @@ class ViewPromo extends Component
                 'is_winner' => $is_winner
             ]);
         }
-        
+
         $this->js('window.location.reload()');
     }
 
