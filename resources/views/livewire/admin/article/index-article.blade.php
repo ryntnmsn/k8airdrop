@@ -83,6 +83,9 @@
                                 Language
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Views
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 <button wire:click="sortBy('is_visible')" class="uppercase flex items-center space-x-1">
                                     <span>
                                         Status
@@ -132,6 +135,13 @@
                                     @else
                                         <img src="{{ url('storage/images/japan-icon.png') }}" loading='lazy'  class="block border border-slate-200 rounded-sm overflow-hidden">
                                     @endif
+                                </td>
+                                
+                                <td class="px-6 py-3">
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-1"><span class="text-[10px] text-slate-500">TODAY:</span> <span>{{ views($article)->period(\CyrildeWit\EloquentViewable\Support\Period::since(today()))->count() }}</span></div>
+                                        <div class="flex items-center gap-1"><span class="text-[10px] text-slate-500">TOTAL:</span> <span>{{ views($article)->count() }}</span></div>
+                                    </div>
                                 </td>
 
                                 <td class="px-6 py-3">

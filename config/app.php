@@ -177,6 +177,8 @@ return [
         Stevebauman\Location\LocationServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Usamamuneerchaudhary\Commentify\Providers\CommentifyServiceProvider::class,
+        CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
+
     ])->toArray(),
 
     /*

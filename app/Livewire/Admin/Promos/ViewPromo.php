@@ -263,14 +263,12 @@ class ViewPromo extends Component
         ]);
         // $this->inputs = collect();
 
-        
-
     }
 
     public function render()
     {
         $getParticipants = Participant::where('promo_id', $this->promo_id)->orderBy('is_winner', 'desc')->get();
- 
+
         return view('livewire.admin.promos.view-promo', [
             'getParticipants' => $getParticipants
         ])->extends('layouts.admin.app')->section('contents');

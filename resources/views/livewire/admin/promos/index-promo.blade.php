@@ -122,6 +122,9 @@
                                 </button>
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Views
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Action
                             </th>
                         </tr>
@@ -177,6 +180,12 @@
                                     @else
                                         <x-status-hidden></x-status-hidden>
                                     @endif
+                                </td>
+                                <td class="px-6 py-3">
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-1"><span class="text-[10px] text-slate-500">TODAY:</span> <span>{{ views($promo)->period(\CyrildeWit\EloquentViewable\Support\Period::since(today()))->count() }}</span></div>
+                                        <div class="flex items-center gap-1"><span class="text-[10px] text-slate-500">TOTAL:</span> <span>{{ views($promo)->count() }}</span></div>
+                                    </div>
                                 </td>
                                 <td class="px-6 py-3">
                                     <div class="flex flex-row gap-3">

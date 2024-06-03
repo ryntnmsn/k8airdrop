@@ -23,6 +23,9 @@ class IndexNewsSingle extends Component
         $this->tags = $news->tags()->get();
         $this->created_at = $news->created_at;
         $this->recommendedNews = $recommendedNews;
+
+        views($news)->record();
+
     }
 
     public function render()

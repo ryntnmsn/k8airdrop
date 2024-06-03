@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Usamamuneerchaudhary\Commentify\Traits\Commentable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 
-class Promo extends Model
+class Promo extends Model implements Viewable
 {
+    use InteractsWithViews;
     use Commentable;
     use HasFactory;
 

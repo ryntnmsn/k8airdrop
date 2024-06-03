@@ -166,6 +166,8 @@ class SinglePromo extends Component
         //Get all paticipants of this promo
         // $promo = Promo::with('users')->where('id', $this->promo_id)->first();
         $this->participants = Participant::where('promo_id', $this->promo_id)->get();
+        
+        views($promo)->record();
 
     }
 
