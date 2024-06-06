@@ -50,6 +50,7 @@
                             <h1 class="text-slate-200 font-bold text-lg">{{ __('SOCIAL LINKS') }}</h1>
                             @if(app()->getLocale() == 'jp')
                                 <ul class="mt-5 space-y-2">
+                                    <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('enDiscord') }}" target="__blank">Discord</a></li>
                                     <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('jpTwitter') }}" target="__blank">X</a></li>
                                     <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('jpInstagram') }}" target="__blank">Instagram</a></li>
                                     <li><a class="text-slate-400 font-medium hover:text-indigo-600 duration-300 ease" href="{{ route('jpTelegram') }}" target="__blank">Telegram</a></li>
