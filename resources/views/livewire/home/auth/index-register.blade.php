@@ -1,3 +1,4 @@
+@section('title') Register Account @stop
 <div>
     <div class="h-full w-full max-w-[900px] mx-auto  mt-10 md:mt-40">
         <div class="flex flex-col md:flex-row bg-slate-900 rounded-3xl overflow-hidden">

@@ -1,3 +1,6 @@
+@section('title') {{$title}} @stop
+@section('description') {{ Str::words(strip_tags($description), 35) }} @stop
+@section('image') {{ url('storage/article', $image) }} @stop
 <div>
     <div class="w-full max-w-[720px] mx-auto">
         <div class="mb-10">

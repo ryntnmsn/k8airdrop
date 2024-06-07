@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" type="image/png" href="{{url('images/favicon-32x32.png')}}">
+
+    <title>K8Airdrop Promo Giveaways @yield('title')</title>
+
+    <meta property="og:title" content="K8Airdrop Promo Giveaways @yield('title')" />
+    <meta property="og:description" content="@yield('description')" />
+    <meta property="og:url" content="https://k8airdrop.com/" />
+    <meta property="og:image" content="@yield('image')" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="200" />
+    <meta property="og:type" content="website" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -48,8 +59,6 @@
         gtag('config', 'G-K45S4ZY0RP');
     </script>
     <meta name="google-site-verification" content="T9N027FUfIL4UY1BNx-srcGB6sQOg8oQYqJQDLY3MBM" />
-
-    <title>K8 Airdrop Promo Giveaways</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>

@@ -1,3 +1,4 @@
+@section('title') News @stop
 <div>
     {{-- news slider --}}
     <div wire:ignore id="newsSlider" class="glide rounded-2xl overflow-hidden mb-10">

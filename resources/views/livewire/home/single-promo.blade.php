@@ -1,3 +1,6 @@
+@section('title') {{$name}} @stop
+@section('description') {{ Str::words(strip_tags($description), 35) }} @stop
+@section('image') {{ url('storage/promo', $image) }} @stop
 <div>
     <div classs="mt-20">
        <div class="flex flex-col lg:flex-row gap-10">

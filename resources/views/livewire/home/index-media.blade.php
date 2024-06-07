@@ -1,3 +1,4 @@
+@section('title') Media @stop
 <div>
     <div class="mb-20">
         <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>

@@ -1,3 +1,4 @@
+@section('title') Login Account @stop
 <div>
     <div class="h-full w-full max-w-[900px] mx-auto mt-10 md:mt-40">
         <div class="flex bg-slate-900 flex-col md:flex-row rounded-3xl overflow-hidden">

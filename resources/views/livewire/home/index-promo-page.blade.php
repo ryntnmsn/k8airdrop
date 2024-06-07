@@ -1,3 +1,4 @@
+@section('title') Promos @stop
 <div>
     {{-- Promos --}}
     <div class="mt-10">

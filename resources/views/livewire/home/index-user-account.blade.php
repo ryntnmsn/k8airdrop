@@ -1,3 +1,4 @@
+@section('title') User Account @stop
 <div class="h-full">
     <div class="lg:flex w-100 gap-10 h-full">
         <div wire:ignore class="hidden lg:block w-[20%] border-r border-slate-900">
