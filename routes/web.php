@@ -16,6 +16,7 @@ use App\Livewire\Admin\Articletag\IndexArticleTag;
 use App\Livewire\Admin\Carousels\CreateCarousel;
 use App\Livewire\Admin\Carousels\EditCarousel;
 use App\Livewire\Admin\Carousels\IndexCarousel;
+use App\Livewire\Admin\Clicktracker\ClickTrackerIndex;
 use App\Livewire\Admin\FeatureGames\CreateFeatureGame;
 use App\Livewire\Admin\FeatureGames\EditFeatureGame;
 use App\Livewire\Admin\FeatureGames\IndexFeatureGame;
@@ -184,6 +185,11 @@ Route::middleware('auth', 'admin')->group(function() {
         //Subscription class
         Route::group(['prefix' => 'subscriptions'], function () {
             Route::get('/', IndexSubscription::class)->name('subscription.index');
+        });
+
+        //Track Click
+        Route::group(['prefix' => 'click-tracker'], function () {
+            Route::get('/', ClickTrackerIndex::class)->name('tracker.click.index');
         });
         
         //Exports

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('track_clicks', function (Blueprint $table) {
             $table->id();
             $table->string('link');
-            $table->integer('click');
+            $table->date('click_date');
+            $table->string('code');
             $table->timestamps();
         });
     }
