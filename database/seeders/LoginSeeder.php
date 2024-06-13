@@ -22,9 +22,15 @@ class LoginSeeder extends Seeder
                 'password' => Hash::make('k8admin123'),
             ],
             [
-                'ronin' => 'Ronin',
+                'name' => 'Ronin',
                 'email' => 'ronin@mail-k8.io',
                 'k8_username' => 'ronink8',
+                'password' => Hash::make('k8admin123'),
+            ],
+            [
+                'name' => 'Wawa',
+                'email' => 'wawach@gmail.com',
+                'k8_username' => 'wawach',
                 'password' => Hash::make('k8admin123'),
             ]
         ]);
