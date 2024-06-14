@@ -94,6 +94,11 @@ class SinglePromo extends Component
             $this->promoStatus = false;
         }
 
+        //If promo not yet started
+        if($promo->start_date > Carbon::now()->format('Y-m-d')) {
+            return abort(404);
+        }
+
         // dd($this->platforms);
         $this->promo_id = $promo->id;
         $this->name = $promo->name;
