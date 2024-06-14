@@ -3,12 +3,13 @@
         <tr>
             <td>No.</td>
             <td>Nick Name</td>
-            <td>K8 Username</td>
+            <td>Registered K8 Username</td>
             <td>Email</td>
             <td>User ID</td>
             <td>Retweet URL</td>
+            <td>Comment</td>
             <td>Image</td>
-            <td>SNS ID</td>
+            <td>K8 ID</td>
             <td>IP</td>
             <td>Is Winner</td>
             <td>Joined Date</td>
@@ -34,6 +35,7 @@
                 <td>{{ $participant->email }}</td>
                 <td>{{ $participant->user_id }}</td>
                 <td>{{ $participant->retweet_url }}</td>
+                <td>{{ $participant->comment }}</td>
                 <td>{{ $participant->image }}</td>
                 <td>{{ $participant->sns_id }}</td>
                 <td>{{ $participant->ip }}</td>

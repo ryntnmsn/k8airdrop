@@ -321,11 +321,11 @@
                                                     @endif
                                                 </div>
                                                 <div class="mb-8">
-                                                    <x-label class="!text-slate-200 !font-semibold">{{ __('X ID') }}</x-label>
+                                                    <x-label class="!text-slate-200 !font-semibold">{{ __('K8 ID') }}</x-label>
                                                     <x-input-text wire:model="sns_id" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
                                                 </div>
                                                 <div class="mb-8">
-                                                    <x-label class="!text-slate-200 !font-semibold">{{ __('Paste Retweet URL') }} (X)</x-label>
+                                                    <x-label class="!text-slate-200 !font-semibold">{{ __('Paste Retweet URL') }}</x-label>
                                                     <x-input-text wire:model="paste_retweet_url" class="!bg-slate-900 !border-0 !text-slate-200 !font-semibold"></x-input-text>
                                                 </div>
                                                 <div class="mb-8">
