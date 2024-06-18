@@ -33,6 +33,7 @@ use App\Livewire\Admin\Promos\ViewPromo;
 use App\Livewire\Admin\Question\CreateQuestion;
 use App\Livewire\Admin\Question\EditQuestion;
 use App\Livewire\Admin\Subscription\IndexSubscription;
+use App\Livewire\Admin\Users\UsersIndex;
 use App\Livewire\Admin\Wheel\SpinTheWheel;
 use App\Livewire\Admin\Wheel\SpinUserFaker;
 use App\Livewire\Admin\Wheel\SpinUsers;
@@ -185,6 +186,11 @@ Route::middleware('auth', 'admin')->group(function() {
         //Subscription class
         Route::group(['prefix' => 'subscriptions'], function () {
             Route::get('/', IndexSubscription::class)->name('subscription.index');
+        });
+
+        //Subscription class
+        Route::group(['prefix' => 'users'], function () {
+            Route::get('/', UsersIndex::class)->name('user.index');
         });
 
         //Track Click
