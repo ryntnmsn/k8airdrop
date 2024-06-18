@@ -2,7 +2,7 @@
     <div class="relative">
         <div class="flex">
             <div class="flex-1 flex flex-col space-y-1">
-                <x-title>Users <span class="text-lg">({{ count($users) }})</span></x-title>
+                <x-title>Users <span class="text-lg">({{ $users->total() }})</span></x-title>
             </div>
             <div class="flex-1">
                 {{-- <x-button id="dropdownDefaultButton" data-dropdown-toggle="dropdownExport">
