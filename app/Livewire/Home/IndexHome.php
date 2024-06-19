@@ -51,6 +51,7 @@ class IndexHome extends Component
         $this->promoBanners = Promo::with('platforms')
             ->where('is_visible', '1')
             ->where('is_banner', '1')
+            ->where('end_date', '>=', Carbon::now()->format('Y-m-d'))
             ->whereHas('language', function ($query) use ($lang) {
                 $query->where('code', $lang);
             })->get();
