@@ -105,6 +105,15 @@ return [
             'throw' => false,
         ],
 
+
+        'assets' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/assets'),
+            'url' => env('APP_URL').'/storage/assets',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
     ],
 
     /*
@@ -121,6 +130,7 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('storage/promo') => storage_path('app/public/promo'),
+        public_path('storage/assets') => storage_path('app/public/assets'),
         public_path('storage/article') => storage_path('app/public/article'),
         public_path('storage/featured_games') => storage_path('app/public/featured_games'),
         public_path('storage/carousel') => storage_path('app/public/carousel'),
