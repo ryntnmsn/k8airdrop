@@ -49,6 +49,7 @@ use App\Livewire\Home\IndexPromoPage;
 use App\Livewire\Home\IndexUserAccount;
 use App\Livewire\Home\News\IndexNews;
 use App\Livewire\Home\News\IndexNewsCategory;
+use App\Livewire\Home\Mascot\IndexMascot;
 use App\Livewire\Home\News\IndexNewsLatest;
 use App\Livewire\Home\News\IndexNewsSingle;
 use App\Livewire\Home\News\IndexNewsTrending;
@@ -87,6 +88,10 @@ Route::middleware(RedirectIfAuthenticated::class)->group(function() {
     Route::get('/reset-password/{token}', ResetPassword::class)->name('reset.password');
     Route::get('/token-expired', TokenExpired::class)->name('token.expired');
 });
+
+//Home Mascot
+Route::get('/hachimaru', IndexMascot::class)->name('index.mascot');
+
 
 //user dashboard
 Route::middleware('auth')->group(function() {

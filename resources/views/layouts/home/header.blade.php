@@ -201,5 +201,13 @@
         </div>
     @endif
 
+    @if(request()->is('hachimaru'))
+        <div class="w-full bg-[#020617]">
+            <div class="max-w-[1280px] px-5 w-full mx-auto items-center">
+                <h1 class="text-slate-200 pt-8 text-4xl font-semibold">{{ __('Hachimaru') }}</h1>
+            </div>
+        </div>
+    @endif
+
 </header>
 
