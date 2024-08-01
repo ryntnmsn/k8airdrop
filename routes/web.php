@@ -291,6 +291,12 @@ Route::get('/88birthday', function() {
     return redirect('https://k8airdrop.com/promo/ba-wan-nodan-sheng-ri-ji-shang-jin-zong-e-3960');
 });
 
+Route::get('/k8pplaylucky', function() {
+    return redirect('https://k8airdrop.com/promo/puragumateitsukupureitogong-ni-k8-yi-shi-jie-tan-jian');
+});
+
+
+
 
 //Redirections
 
