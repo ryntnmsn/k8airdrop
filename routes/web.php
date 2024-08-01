@@ -287,6 +287,10 @@ Route::get('/linkstorage', function () {
 });
 
 
+Route::get('/88birthday', function() {
+    return redirect('https://k8airdrop.com/promo/ba-wan-nodan-sheng-ri-ji-shang-jin-zong-e-3960');
+});
+
 
 //Redirections
 
