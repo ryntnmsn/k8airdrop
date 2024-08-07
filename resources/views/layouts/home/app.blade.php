@@ -68,7 +68,7 @@
         <div>
             @include('layouts.home.header')
         
-            <div class="max-w-[1280px] w-full px-5 mx-auto my-10 relative box-border {{ request()->is('spin-the-wheel') || request()->is('user/dashboard*') || request()->is('user/spin-the-wheel*') || request()->is('user/account*') || request()->is('news*') ? 'h-fit' : '' }}">
+            <div class="max-w-[1280px] w-full px-5 mx-auto mt-5 mb-10 relative box-border {{ request()->is('spin-the-wheel') || request()->is('user/dashboard*') || request()->is('user/spin-the-wheel*') || request()->is('user/account*') || request()->is('news*') ? 'h-fit' : '' }}">
                 @yield('contents')
             </div>
         </div>

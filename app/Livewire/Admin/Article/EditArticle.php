@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Article;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\ArticleSubCategory;
 use App\Models\ArticleTag;
 use App\Models\Language;
 use Livewire\Component;
@@ -17,6 +18,7 @@ class EditArticle extends Component
     public $article_id, $title, $language_id, $short_description, $description, $is_visible, $new_image, $old_image, $demo_url, $slug;
     public $article_categories = [];
     public $article_tags = [];
+    public $article_sub_category;
     public $getLanguages;
     public $getCategories;
     public $getTags;
@@ -53,6 +55,7 @@ class EditArticle extends Component
             'slug' => Str::slug($this->title, '-', 'ja'),
             'description' => $this->description,
             'short_description' => $this->short_description,
+            'article_sub_category_id' => $this->article_sub_category,
             'language_id' => $this->language_id,
             'demo_url' => $this->demo_url,
             'is_visible' => $is_visible,
@@ -75,6 +78,7 @@ class EditArticle extends Component
         $this->slug = 'https://k8airdrop.com/news/' . $article->slug;
         $this->description = $article->description;
         $this->language_id = $article->language_id;
+        $this->article_sub_category = $article->article_sub_category_id;
         $this->short_description = $article->short_description;
         $this->demo_url = $article->demo_url;
         $this->old_image = $article->image;
@@ -94,7 +98,11 @@ class EditArticle extends Component
     public function render()
     {
 
-        return view('livewire.admin.article.edit-article')
-            ->extends('layouts.admin.app')->section('contents');
+        $getSubCategories = ArticleSubCategory::all();
+
+
+        return view('livewire.admin.article.edit-article', [
+            'getSubCategories' => $getSubCategories
+        ])->extends('layouts.admin.app')->section('contents');
     }
 }

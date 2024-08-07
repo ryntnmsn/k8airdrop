@@ -13,6 +13,14 @@ html, body {
 .comments p {
   color:#f1f1f1!important
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
 /* .max-w-1440 {
     width:100%;
     max-width: 1440px;

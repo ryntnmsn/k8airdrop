@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('banners', function (Blueprint $table) {
-            //
+        Schema::table('articles', function (Blueprint $table) {
+            $table->foreignId('article_sub_category_id')
+                ->nullable()
+                ->constrained('article_sub_categories');
         });
     }
 
@@ -21,7 +23,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('banners', function (Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             //
         });
     }

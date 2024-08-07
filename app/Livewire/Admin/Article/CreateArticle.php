@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Article;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\ArticleSubCategory;
 use App\Models\ArticleTag;
 use App\Models\Language;
 use Carbon\Carbon;
@@ -18,6 +19,7 @@ class CreateArticle extends Component
 
     public $title, $language_id, $short_description, $description, $image, $demo_url;
     public $article_categories = [];
+    public $article_sub_category;
     public $article_tags = [];
     public $getLanguages;
     public $getCategories;
@@ -50,7 +52,8 @@ class CreateArticle extends Component
             'language_id' => $this->language_id,
             'image' => $this->imageName(),
             'demo_url' => $this->demo_url,
-            'is_visible' => $this->is_visible
+            'is_visible' => $this->is_visible,
+            'article_sub_category_id' => $this->article_sub_category
         ]);
 
 
@@ -74,7 +77,11 @@ class CreateArticle extends Component
 
     public function render()
     {
-        return view('livewire.admin.article.create-article')
-            ->extends('layouts.admin.app')->section('contents');
+
+        $getSubCategories = ArticleSubCategory::all();
+
+        return view('livewire.admin.article.create-article', [
+            'getSubCategories' => $getSubCategories
+        ])->extends('layouts.admin.app')->section('contents');
     }
 }

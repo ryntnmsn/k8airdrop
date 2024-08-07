@@ -1,11 +1,11 @@
 @section('title') News Category @stop
 <div>
     <div class="mb-10">
-        <div class="mb-10">
+        {{-- <div class="mb-10">
             @if($slug != "how-to-guides")
                 <h1 class="text-slate-200 font-semibold text-3xl">{{ __($title) }}</h1>
             @endif
-        </div>
+        </div> --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
             @foreach ($newsAll as $news)
                 <div class="flex flex-col gap-4 bg-slate-900 hover:bg-slate-800 duration-300 ease-in-out p-5 rounded-lg cursor-pointer relative">
@@ -45,6 +45,4 @@
             </div>
         </div>
     </div>
-
-
 </div>

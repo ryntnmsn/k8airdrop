@@ -66,6 +66,9 @@
                      <a wire:navigate href="{{ route('articles.categories.index') }}" class="{{ request()->is('k8admin/articles/categories*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Categories</a>
                   </li>
                   <li>
+                     <a wire:navigate href="{{ route('articles.subcategories.index') }}" class="{{ request()->is('k8admin/articles/subcategories*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800 '}} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Sub categories</a>
+                  </li>
+                  <li>
                      <a wire:navigate href="{{ route('articles.tags.index') }}" class="{{ request()->is('k8admin/articles/tags*') ? 'bg-indigo-600 text-slate-50' : 'text-slate-800' }} flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-indigo-600 hover:text-slate-50">Tags</a>
                   </li>
                   <li>

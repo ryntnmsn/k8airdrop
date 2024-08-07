@@ -41,6 +41,17 @@
                 </div>
 
                 <div wire:ignore>
+                    <x-label class="!mb-0 !pb-0">Sub Category (nullable)</x-label>
+                    <small class="text-slate-400">Commonly use for "How to Guides" category only.</small>
+                    <x-select wire:model="article_sub_category">
+                        <option value="" selected class="hidden">--Select here--</option>
+                        @foreach ($getSubCategories as $getSubCategory)
+                            <option value="{{ $getSubCategory['id'] }}">{{ $getSubCategory['title'] }}</option>
+                        @endforeach
+                    </x-select>
+                </div>
+
+                <div wire:ignore>
                     <x-label>Tags</x-label>
                     <x-select wire:model="article_tags" id="article_tags" multiple>
                         @foreach ($getTags as $getTag)

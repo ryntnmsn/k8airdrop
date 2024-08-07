@@ -8,7 +8,7 @@ use App\Models\ArticleSubCategory;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class IndexNewsCategory extends Component
+class IndexNewsSubCategory extends Component
 {
     use WithPagination;
 
@@ -16,32 +16,27 @@ class IndexNewsCategory extends Component
     public $pagination = 12;
     public $news;
     public $slug;
-
+    public $subCatID;
 
     public function mount($slug) {
-        $categorySlug = ArticleCategory::where('slug', $slug)->first();
-        $this->slug = $categorySlug->slug;
-        $this->title = $categorySlug->title;
+        $subCat = ArticleSubCategory::where('slug', $slug)->first();
+        $this->subCatID = $subCat->id;
     }
 
     public function render()
     {
-        $lang = app()->getLocale();
-        $slug =  $this->slug;
 
-        $newsAll = Article::with('categories')->where('is_visible', '1')
-            ->whereHas('categories', function ($slugQuery) use ($slug) {
-                $slugQuery->where('slug', $slug);
-            })
+        $lang = app()->getLocale();
+
+        $newsAll = Article::with('subcategory')
+            ->where('is_visible', '1')
+            ->where('article_sub_category_id', $this->subCatID)
             ->whereHas('language', function ($langQuery) use ($lang) {
                 $langQuery->where('code', $lang);
             })->simplePaginate($this->pagination);
-        
-        $subCategories = ArticleSubCategory::all();
 
-        return view('livewire.home.news.index-news-category', [
+        return view('livewire.home.news.index-news-sub-category', [
             'newsAll' => $newsAll,
-            'subCategories' => $subCategories
         ])->extends('layouts.home.app')->section('contents');
     }
 }

@@ -15,7 +15,7 @@ class Article extends Model implements Viewable
     use HasFactory;
 
     protected $fillable = [
-        'title', 'slug', 'description', 'short_description', 'language_id', 'is_visible', 'image', 'demo_url'
+        'title', 'slug', 'description', 'short_description', 'language_id', 'is_visible', 'image', 'demo_url', 'article_sub_category_id'
     ];
 
     public function categories(): BelongsToMany {
@@ -28,5 +28,9 @@ class Article extends Model implements Viewable
 
     public function tags(): BelongsToMany {
         return $this->belongsToMany(ArticleTag::class);
+    }
+
+    public function subcategory() {
+        return $this->belongsTo(ArticleSubCategory::class);
     }
 }

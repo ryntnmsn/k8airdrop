@@ -15,11 +15,14 @@
                             <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('promos*') ? 'text-indigo-600' : '' }}">
                                 <a wire:navigate href="{{ route('index.promos') }}">{{ __('Promos') }}</a>
                             </li>
-                            <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('news*') ? 'text-indigo-600' : '' }}">
+                            <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('news') || request()->is('news/category/sports*') || request()->is('news/category/crypto*') || request()->is('news/category/k8-news*') || request()->is('news/category/casino*') || request()->is('news/category/featured-games*') || request()->is('news/category/slot-providers*') || request()->is('news/category/others*') ? 'text-indigo-600' : '' }}">
                                 <a wire:navigate href="{{ route('news.index') }}">{{ __('News') }}</a>
                             </li>
                             <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('media') ? 'text-indigo-600' : '' }}">
                                 <a wire:navigate href="{{ route('index.media') }}">{{ __('Media') }}</a>
+                            </li>
+                            <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('news/category/how-to-guides*') ? 'text-indigo-600' : '' }}">
+                                <a wire:navigate href="{{ url('news/category/how-to-guides') }}">{{ __('Guides') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -96,6 +99,27 @@
             </div>
         </div>
     </div>
+
+    @if(request()->is('news/category/how-to-guides*'))
+        <div class="bg-gradient-to-r from-slate-800 border-b border-slate-700 relative">
+            <div class="sm:hidden absolute top-0 right-0 z-10 flex justify-end h-full bg-gradient-to-l from-slate-900 w-40">
+                <div class="pr-5 pt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 text-slate-200">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                    </svg>
+                </div>
+            </div>
+            <div class="relative max-w-[1280px] px-5 py-2 mx-auto w-full overflow-scroll no-scrollbar">
+                <div class="flex flex-row gap-8">
+                    @foreach ($newsSubCategories as $newsSubCategory)
+                        <div>
+                            <a href="{{ route('news.sub.category.index', $newsSubCategory->slug) }}" class="hover:text-indigo-600 duration-300 ease-in-out font-semibold py-2 {{ (request()->segment(4) == $newsSubCategory->slug) ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-slate-200' }}" >{{ $newsSubCategory->title }}</a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    @endif
 
     <div class="bg-slate-800">
         <div class="relative max-w-[1280px] px-5 py-5 mx-auto w-full">
@@ -178,6 +202,8 @@
             <div class="max-w-[1280px] px-5 w-full mx-auto items-center">
                 @if(request()->is('news/latest'))
                     <h1 class="text-slate-200 py-5 text-4xl font-semibold">{{ __('Latest news') }}</h1>
+                @elseif(request()->is('news/category/how-to-guides*'))
+                    <h1 class="text-slate-200 py-5 text-4xl font-semibold">{{ __('Guides') }}</h1>
                 @else
                     <h1 class="text-slate-200 py-5 text-4xl font-semibold">{{ __('News') }}</h1>
                 @endif

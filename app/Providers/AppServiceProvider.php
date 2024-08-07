@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\ArticleSubCategory;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
@@ -28,8 +29,8 @@ class AppServiceProvider extends ServiceProvider
         //     URL::forceScheme('http');
         // }
 
-        $ip = \Request::ip();
-        //$ip = '175.45.142.131'; //For static IP address get (JAPAN)
+        //$ip = \Request::ip();
+        $ip = '175.45.142.131'; //For static IP address get (JAPAN)
         //$ip = '103.100.137.255'; //For static IP address get (PHILIPPINES)
         $data = \Location::get($ip);
         $locale = strtolower($data->countryCode);
@@ -39,5 +40,8 @@ class AppServiceProvider extends ServiceProvider
         } else {
             App::setLocale('en');
         }
+
+        $newsSubCategories = ArticleSubCategory::all();
+        view()->share('newsSubCategories', $newsSubCategories);
     }
 }

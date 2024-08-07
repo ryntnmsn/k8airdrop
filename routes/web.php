@@ -12,6 +12,7 @@ use App\Livewire\Admin\Article\IndexArticle;
 use App\Livewire\Admin\Articlecategory\CreateArticleCategory;
 use App\Livewire\Admin\Articlecategory\EditArticleCategory;
 use App\Livewire\Admin\Articlecategory\IndexArticleCategory;
+use App\Livewire\Admin\ArticleSubCategory\IndexArticleSubCategory;
 use App\Livewire\Admin\Articletag\IndexArticleTag;
 use App\Livewire\Admin\Carousels\CreateCarousel;
 use App\Livewire\Admin\Carousels\EditCarousel;
@@ -52,6 +53,7 @@ use App\Livewire\Home\News\IndexNewsCategory;
 use App\Livewire\Home\Mascot\IndexMascot;
 use App\Livewire\Home\News\IndexNewsLatest;
 use App\Livewire\Home\News\IndexNewsSingle;
+use App\Livewire\Home\News\IndexNewsSubCategory;
 use App\Livewire\Home\News\IndexNewsTrending;
 use App\Livewire\Home\Promos\IndexPromos;
 use App\Livewire\Home\SinglePromo;
@@ -109,6 +111,7 @@ Route::group(['prefix' => 'news'], function () {
     Route::get('/', IndexNews::class)->name('news.index');
     Route::get('/latest', IndexNewsLatest::class)->name('news.latest.index');
     Route::get('/category/{slug}', IndexNewsCategory::class)->name('news.category.index');
+    Route::get('/category/how-to-guides/{slug}', IndexNewsSubCategory::class)->name('news.sub.category.index');
     Route::get('/{slug}', IndexNewsSingle::class)->name('news.single.index');
 });
 
@@ -160,6 +163,11 @@ Route::middleware('auth', 'admin')->group(function() {
         //Article Categories Class
         Route::group(['prefix' => 'articles/categories'], function () {
             Route::get('/', IndexArticleCategory::class)->name('articles.categories.index');
+        });
+
+        //Article Sub categories Class
+        Route::group(['prefix' => 'articles/subcategories'], function () {
+            Route::get('/', IndexArticleSubCategory::class)->name('articles.subcategories.index');
         });
 
         //Article Tags Class
