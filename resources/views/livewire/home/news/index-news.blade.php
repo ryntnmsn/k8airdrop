@@ -28,33 +28,45 @@
 
     {{-- news categories --}}
     <div class="mb-20">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        {{-- <div class="grid grid-cols-1 sm:grid-cols-2 gap-8"> --}}
+        <div class="flex gap-2">
+
+            <div class="md:hidden block w-full">
+                <p class="text-slate-200 font-semibold text-xl pb-2">Categories</p>
+                <select wire:ignore id="select" class="bg-slate-900 border-0 w-full text-slate-200 py-3 px-5">
+                    @foreach ($newsCategories as $category)
+                        <option value="{{ route('news.category.index', $category->slug) }}">{{ $category->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+
             @foreach ($newsCategories as $category)
-                <div class="bg-slate-900 flex-1 p-2 rounded-md hover:bg-slate-800 duration-300 ease-in-out cursor-pointer">
+                <div wire:ignore class="md:block hidden bg-slate-900 flex-1 p-2 rounded-md hover:bg-slate-800 duration-300 ease-in-out cursor-pointer">
                     <div class="flex justify-between items-center relative">
                         <a class="absolute top-0 bottom-0 right-0 left-0" href="{{ route('news.category.index', $category->slug) }}"></a>
-                        <div class="flex gap-4">
+                        <div class="flex w-full">
                             <div>
                                 @if($category->image != null)
                                     <img src="{{ url('storage/article_category/', $category->image) }}" alt="{{ __($category->title) }}" class="w-20">
                                 @else
-                                    <div class="py-8"></div>
+                                    <div class="py-6"></div>
                                 @endif
                             </div>
-                            <div class="flex items-center">
-                                <p class="text-slate-200 text-xl font-semibold">
+                            <div class="flex items-center justify-center w-full">
+                                <p class="text-slate-200 text-base font-semibold text-center">
                                     {{ __($category->title) }}
                                 </p>
                             </div>
                         </div>
-                        <div class="pe-4 hover:pe-0 duration-300 ease-in-out">
+                        {{-- <div class="pe-4 hover:pe-0 duration-300 ease-in-out">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="text-slate-500 w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                             </svg>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             @endforeach
+            
         </div>
     </div>
 
@@ -106,3 +118,11 @@
     </div>
 
 </div>
+
+<script>
+    $(document).ready( function() {
+        $('#select').change( function() {
+            location.href = $(this).val();
+        });
+    });
+</script>
