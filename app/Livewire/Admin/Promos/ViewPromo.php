@@ -238,7 +238,7 @@ class ViewPromo extends Component
 
         $this->promo_id = $promo->id;
         $this->name = $promo->name;
-        $this->slug = env('APP_URL') . '/promos/' . $promo->slug;
+        $this->slug = env('APP_URL') . '/promo/' . $promo->slug;
         $this->image = $promo->image;
         $this->language_id = $promo->language->name ?? 'No language';
         $this->start_date = $promo->start_date;
