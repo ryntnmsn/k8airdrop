@@ -1,6 +1,5 @@
 <div>
     {{-- Hero Banners --}}
-    <h1 class="text-slate-800">Home</h1>
     <div wire:ignore id="banner" class="glide rounded-2xl overflow-hidden">
         <div class="glide__track" data-glide-el="track">
             <ul class="glide__slides text-slate-100">
