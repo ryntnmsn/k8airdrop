@@ -26,7 +26,8 @@
                 <div class="swiper mySwiper ps-[10px]">
                     <div class="swiper-wrapper">
                         @foreach ($promoCarousels as $carousel)
-                        <div class="swiper-slide">
+                        <div class="swiper-slide relative">
+                            <a href="{!! $carousel['url'] !!}" class="absolute block top-0 left-0 right-0 bottom-0" target="__blank"></a>
                             <img src="{{url('storage/carousel', $carousel['image'])}}" alt="{{$carousel['name']}}" class="w-full rounded-xl">
                         </div>
                         @endforeach
