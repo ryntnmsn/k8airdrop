@@ -2,7 +2,7 @@
     {{-- Hero Banners --}}
 
     <div class="flex">
-        <div class="w-full md:w-[75%]">
+        <div class="w-full md:w-[72%]">
             <div wire:ignore id="banner" class="glide rounded-2xl overflow-hidden">
                 <div class="glide__track" data-glide-el="track">
                     <ul class="glide__slides text-slate-100">
@@ -20,7 +20,8 @@
                 </div>
             </div>
         </div>
-        <div wire:ignore.self class="w-[25%] relative overflow-hidden hidden md:block md:h-[352px] lg:h-[504px]">
+
+        <div wire:ignore.self class="w-[28%] relative overflow-hidden hidden md:block md:h-[352px] lg:h-[484px]">
             <div class="relative overflow-hidden h-full">
                 <div class="swiper mySwiper ps-[10px]">
                     <div class="swiper-wrapper">
@@ -34,6 +35,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 
