@@ -1,4 +1,4 @@
-<?php
+lear<?php
 
 namespace App\Providers;
 

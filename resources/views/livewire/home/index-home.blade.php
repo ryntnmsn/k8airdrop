@@ -1,24 +1,44 @@
 <div>
     {{-- Hero Banners --}}
-    <div wire:ignore id="banner" class="glide rounded-2xl overflow-hidden">
-        <div class="glide__track" data-glide-el="track">
-            <ul class="glide__slides text-slate-100">
-                @foreach ($promoBanners as $banner)
-                    <li class="glide__slide relative rounded-2xl">
-                        <a href="{{ route('single.promo', $banner->slug) }}" class="absolute bottom-0 top-0 left-0 right-0"></a>
-                        <img src="{{ url('storage/promo', $banner['image']) }}" alt="{{ $banner['name'] }}" class="w-full">
-                    </li>
-                @endforeach
-            </ul>
+
+    <div class="flex">
+        <div class="w-full md:w-[75%]">
+            <div wire:ignore id="banner" class="glide rounded-2xl overflow-hidden">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides text-slate-100">
+                        @foreach ($promoBanners as $banner)
+                            <li class="glide__slide relative rounded-2xl">
+                                <a href="{{ route('single.promo', $banner->slug) }}" class="absolute bottom-0 top-0 left-0 right-0"></a>
+                                <img src="{{ url('storage/promo', $banner['image']) }}" alt="{{ $banner['name'] }}" class="w-full">
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left !rounded-full" data-glide-dir="<"><</button>
+                    <button class="glide__arrow glide__arrow--right !rounded-full" data-glide-dir=">">></button>
+                </div>
+            </div>
         </div>
-        <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left !rounded-full" data-glide-dir="<"><</button>
-            <button class="glide__arrow glide__arrow--right !rounded-full" data-glide-dir=">">></button>
+        <div wire:ignore.self class="w-[25%] relative overflow-hidden hidden md:block md:h-[352px] lg:h-[504px]">
+            <div class="relative overflow-hidden h-full">
+                <div class="swiper mySwiper ps-[10px]">
+                    <div class="swiper-wrapper">
+                        @foreach ($promoCarousels as $carousel)
+                        <div class="swiper-slide">
+                            <img src="{{url('storage/carousel', $carousel['image'])}}" alt="{{$carousel['name']}}" class="w-full rounded-xl">
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
         </div>
     </div>
 
+
     {{-- Promo Carousel --}}
-    <div wire:ignore id="carousel" class="carousel rounded-2xl overflow-hidden mt-5">
+    <div wire:ignore id="carousel" class="carousel block md:hidden rounded-2xl overflow-hidden mt-5 mb-10">
         <div class="glide__track" data-glide-el="track">
             <ul class="glide__slides text-slate-100">
                 @foreach ($promoCarousels as $carousel)
@@ -33,7 +53,7 @@
 
 
     {{-- Promos --}}
-    <div class="mt-20">
+    <div class="mt-10">
         <div class="flex mb-5 items-center justify-between">
                 <div>
                     <x-title class="!text-slate-200 !font-semibold !text-4xl">{{ __('Promos') }}</x-title>

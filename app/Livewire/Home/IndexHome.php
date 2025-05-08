@@ -63,6 +63,7 @@ class IndexHome extends Component
         //     })->get();
 
         $this->promoCarousels = Carousel::where('is_visible', '1')
+            ->where('end_date', '>=', Carbon::now()->format('Y-m-d'))
             ->whereHas('language', function ($query) use ($lang){
                 $query->where('code', $lang);
             })->get();

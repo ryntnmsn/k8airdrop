@@ -16,12 +16,13 @@
     <meta property="og:image:height" content="200" />
     <meta property="og:type" content="website" />
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-    
+
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark')
@@ -48,14 +49,14 @@
         })();
     </script>
     <!-- End Matomo Code -->
-    
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K45S4ZY0RP" defer></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-    
+
         gtag('config', 'G-K45S4ZY0RP');
     </script>
     <meta name="google-site-verification" content="T9N027FUfIL4UY1BNx-srcGB6sQOg8oQYqJQDLY3MBM" />
@@ -84,7 +85,7 @@
     <div class="h-full w-full flex flex-col justify-between">
         <div>
             @include('layouts.home.header')
-        
+
             <div class="max-w-[1280px] w-full px-5 mx-auto mt-5 mb-10 relative box-border {{ request()->is('spin-the-wheel') || request()->is('user/dashboard*') || request()->is('user/spin-the-wheel*') || request()->is('user/account*') || request()->is('news*') ? 'h-fit' : '' }}">
                 @yield('contents')
             </div>
@@ -93,7 +94,7 @@
         @include('layouts.home.footer')
         @livewire('home.newsletter.newsletter-subscription')
     </div>
-   
+
     @livewireScripts
 
     <script>
@@ -133,11 +134,37 @@
         });
     </script>
 
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+    var swiper = new Swiper(".mySwiper", {
+        direction: "vertical",
+        slidesPerView: 3,
+        loop: true,
+        spaceBetween: 10,
+        autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+        },
+
+        pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        },
+    });
+    </script>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
     <script>
         var banner = new Glide('#banner', {
-            type: 'slider',
+            type: 'carousel',
             autoplay: 5000,
+            loop: true,
             animationDuration: 500,
             animationTimingFunc: 'ease-in-out',
         })
@@ -187,7 +214,7 @@
             }
         });
     }
-    
+
     $(document).ready(function() {
         var popDisplayed = $.cookie('popDisplayed');
         if(popDisplayed == '1'){
