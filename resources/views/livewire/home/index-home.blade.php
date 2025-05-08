@@ -21,9 +21,9 @@
             </div>
         </div>
 
-        <div wire:ignore.self class="w-[28%] relative overflow-hidden hidden md:block md:h-[352px] lg:h-[484px]">
+        <div class="w-[28%] relative overflow-hidden hidden md:block md:h-[352px] lg:h-[484px]">
             <div class="relative overflow-hidden h-full">
-                <div class="swiper mySwiper ps-[10px]">
+                <div wire:ignore class="swiper mySwiper ps-[10px]">
                     <div class="swiper-wrapper">
                         @foreach ($promoCarousels as $carousel)
                         <div class="swiper-slide relative">
