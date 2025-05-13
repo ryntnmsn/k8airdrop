@@ -18,7 +18,7 @@
                                     <div class="mb-2">
                                         <x-label for="name">Name</x-label>
                                         <x-input-text wire:model='name' id="name" name="name" wire:keyup='generateSlug' value="{{ old('name') }}"></x-input-text>
-                                        
+
                                         <div wire:key='slug' class="flex items-center rounded mt-2">
                                             <span class="flex-none text-sm text-slate-400">
                                                 URL Preview: {{ config('app.url') }}/promos/
@@ -27,12 +27,12 @@
                                                 <x-input-text id='slug_url' wire:model='slug' name="slug" class="!bg-transparent !text-sm text-slate-400 !border-0 !p-0 rounded-0 focus:ring-0 focus:border-0" readonly></x-input-text>
                                             </span>
                                         </div>
-                                        
+
                                         @error('name')
                                             <span class="text-rose-500">{{ $message }}</span>
                                         @enderror
                                     </div>
-                    
+
                                     <div class="flex-1">
                                         <div class="flex flex-col xl:flex-row space-x-0 xl:space-x-4">
                                             <div class="flex-1">
@@ -48,7 +48,7 @@
                                                         @endforeach
                                                     </x-select>
                                                 </div>
-                                               
+
                                                 @error('platforms')
                                                     <span class="text-rose-500">{{ $message }}</span>
                                                 @enderror
@@ -78,20 +78,20 @@
                                     @enderror
                                  </div>
                             </div>
-    
+
                             <div>
                                 <x-label for="language">Language</x-label>
                                 <x-select wire:model='language_id' name="language_id" id="language" class="w-full">
                                         <option value="" class="hidden" selected>Select language</option>
                                     @foreach ($languages as $language)
-                                        <option value="{{ $language->id }}">{{ $language->name }}</option>                            
+                                        <option value="{{ $language->id }}">{{ $language->name }}</option>
                                     @endforeach
                                 </x-select>
                                 @error('language_id')
                                     <span class="text-rose-500">{{ $message }}</span>
                                 @enderror
                             </div>
-    
+
                             <div>
                                 <x-label for="promoType">Promo type</x-label>
                                 <x-select wire:model='type' name="type" class="w-full" id="promoType">
@@ -104,7 +104,7 @@
                             @error('type')
                                 <span class="text-rose-500">{{ $message }}</span>
                             @enderror
-    
+
                             <div id="gameType">
                                 <x-label for="game_type">Game type</x-label>
                                 <x-select wire:model='game_type' name="game_type" id="game_type" class="w-full">
@@ -115,7 +115,7 @@
                                     <option value="leave_comment">Leave Comment</option>
                                     <option value="subscribe_newsletter">Subscribe Newsletter</option>
                                 </x-select>
-    
+
                                 <div id="textHelper">
                                     <div class="flex flex-row items-center space-x-1 mt-2">
                                         <span class="text-sm text-slate-400">After creating this promo you can manage your question by clicking view </span>
@@ -123,18 +123,18 @@
                                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-slate-400">
                                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                            </svg> 
+                                            </svg>
                                         </span>
                                     </div>
                                 </div>
                             </div>
-                            
-    
+
+
                             {{-- CREATE QUESTIONS
                             <div class="questionGameType">
                                 <div class="border-2 border-dashed p-10 border-slate-300 bg-slate-100">
                                     <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Manage Questions</x-title>
-    
+
                                     @foreach ($questionInputs as $key => $value)
                                         <div class="add-input mb-10">
                                             <div class="flex items-center space-x-4">
@@ -163,18 +163,18 @@
                                             </div>
                                         </div>
                                     @endforeach
-    
+
                                     <div class="flex justify-center mt-10">
                                         <x-button wire:click.prevent='add({{$i}})' class="!float-none">Add Question</x-button>
                                     </div>
-    
+
                                 </div>
                             </div> --}}
-    
+
                         </div>
                     </div>
-    
-    
+
+
                     <div>
                         <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Promo Duration</x-title>
                         <div class="space-y-8 mb-20">
@@ -193,9 +193,9 @@
                                             <span class="text-rose-500">{{ $message }}</span>
                                         @enderror
                                     </div>
-    
+
                                     {{-- <span class="mx-4 text-slate-500">to</span> --}}
-                                    
+
                                     <div>
                                         <div wire:ignore class="relative">
                                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -220,8 +220,8 @@
                             </div>
                         </div>
                     </div>
-    
-    
+
+
                     <div>
                         <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Featured and Banner</x-title>
                         <div class="space-y-8 mb-20">
@@ -244,8 +244,8 @@
                                 </div>
                             </div>
                         </div>
-                    
-    
+
+
                         <div>
                             <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Button Settings</x-title>
                             <div class="space-y-8 mb-20">
@@ -259,24 +259,26 @@
                                 </div>
                             </div>
                         </div>
-    
+
                         <div class="mb-20">
                             <x-title class="!text-base border-b-2 border-slate-200 mb-4 pb-2 uppercase">Description, terms and article</x-title>
                             <div class="space-y-8">
                                 <div>
                                     <x-label for="description">Description</x-label>
                                     <div wire:ignore id="container">
-                                        <x-textarea wire:model='description' name='description' id="description"></x-textarea>
+                                        <div>
+                                            <x-textarea wire:model='description' name='description' id="description"></x-textarea>
+                                        </div>
                                     </div>
                                 </div>
-                
+
                                 <div wire:ignore>
                                     <x-label for="terms">Terms and Conditions</x-label>
                                     <div id="container">
                                         <x-textarea wire:model='terms' id="terms" name='terms'></x-textarea>
                                     </div>
                                 </div>
-                
+
                                 <div wire:ignore>
                                     <x-label for="article">Article</x-label>
                                     <div id="container">
@@ -285,7 +287,7 @@
                                 </div>
                             </div>
                         </div>
-    
+
                     <div>
                         <x-button wire:target='store' type="submit" class="float-left">Save</x-button>
                         <x-href href="{{ route('platforms.index') }}" class="ml-3 bg-white hover:!bg-rose-500 !text-rose-500 !border-rose-500 float-left hover:!text-slate-100">Cancel</x-href>
@@ -293,10 +295,10 @@
                 </form>
             </div>
         </div>
-    
-    
-    
-    
+
+
+
+
         @script()
             <script>
                 $(document).ready(function() {
@@ -308,34 +310,34 @@
                 });
             </script>
         @endscript
-    
-        {{-- <script> 
-            const start_date = document.getElementById("start_date"); 
-            start_date.addEventListener("click", (event) => { 
-                @this.set('start_date', event.target.value); 
+
+        {{-- <script>
+            const start_date = document.getElementById("start_date");
+            start_date.addEventListener("click", (event) => {
+                @this.set('start_date', event.target.value);
             });
-    
-            const end_date = document.getElementById("end_date"); 
-            end_date.addEventListener("click", (event) => { 
-                @this.set('end_date', event.target.value); 
-            }); 
+
+            const end_date = document.getElementById("end_date");
+            end_date.addEventListener("click", (event) => {
+                @this.set('end_date', event.target.value);
+            });
         </script> --}}
-    
-        <script> 
-            window.addEventListener("load", function() { 
-            elStart = document.getElementById("start_date"); 
-            elEnd = document.getElementById("end_date"); 
-            elStart.addEventListener("blur", (event) => { 
-                @this.set('start_date', event.target.value); 
-            }); 
-            elEnd.addEventListener("blur", (event) => { 
-                @this.set('end_date', event.target.value); 
-            }); 
-            }); 
+
+        <script>
+            window.addEventListener("load", function() {
+            elStart = document.getElementById("start_date");
+            elEnd = document.getElementById("end_date");
+            elStart.addEventListener("blur", (event) => {
+                @this.set('start_date', event.target.value);
+            });
+            elEnd.addEventListener("blur", (event) => {
+                @this.set('end_date', event.target.value);
+            });
+            });
         </script>
-    
-     
-    
+
+
+
         <script>
             //Alert
             document.addEventListener('livewire:initialized', ()=>{
@@ -350,7 +352,7 @@
                     })
                 });
             });
-    
+
             //Show Hide game type
             const promo_type = document.getElementById('promoType');
             const game_type = document.getElementById('gameType');
@@ -369,8 +371,8 @@
                     text_helper.style.display = 'none'
                 }
             });
-    
-          
+
+
             //tinymce editor
             tinymce.init({
                 selector: '#description',
@@ -404,7 +406,7 @@
                     });
                 }
             });
-    
+
             tinymce.init({
                 selector: '#article',
                 plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
