@@ -210,14 +210,14 @@ Route::middleware('auth', 'admin')->group(function() {
         Route::group(['prefix' => 'click-tracker'], function () {
             Route::get('/', ClickTrackerIndex::class)->name('tracker.click.index');
         });
-        
+
         //Exports
         Route::controller(ExportController::class)->group(function () {
             Route::get('/promo-participants/{id}', 'exportPromoParticipants')->name('export.promo.participants');
             Route::get('/english-subscribers', 'exportEnglishSubscribers')->name('export.english.subscribers');
             Route::get('/japan-subscribers', 'exportJapanSubscribers')->name('export.japan.subscribers');
         });
-        
+
     });
 });
 
@@ -258,13 +258,13 @@ Route::get('/fben', function() {
  Route::get('/forum', function() {
     return redirect('https://www.k8forum.io/'); // forum
  })->name('k8forum');
- 
- 
+
+
  // REDIRECT SNS LINK JAPAN
   Route::get('/ytjp', function() {
     return redirect('https://www.youtube.com/@K8Pachi'); // youtube
  })->name('jpYoutube');
- 
+
 Route::get('/tgcn', function() {
     return redirect('https://t.me/K8news'); // telegram
  })->name('jpTelegram');
@@ -303,6 +303,10 @@ Route::get('/k8pplaylucky', function() {
     return redirect('https://k8airdrop.com/promo/puragumateitsukupureitogong-ni-k8-yi-shi-jie-tan-jian');
 });
 
+Route::get('/k8gold25', function() {
+    return redirect('https://k8airdrop.com/promo/k8jin-rogoji-nian-jin-dakenohao-hua-3da-te-dian-kiyanpenkai-cui-zhong');
+});
+
 
 
 
@@ -315,5 +319,4 @@ Route::get('/promo/crtie-quan-2-dou-shen-verwoshi-ting-shite-shang-jin-getchiyan
 Route::get('/promo/crmonsutahantawoshi-ting-shite-shang-jin-getchiyansu/nxf7Gn', function () {
     return redirect('https://k8airdrop.com/promo/crmonsutahantawoshi-ting-shite-shang-jin-getchiyansu');
 });
-
 
