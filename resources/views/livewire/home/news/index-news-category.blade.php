@@ -34,7 +34,7 @@
                         <p class="text-slate-400">
                             {{ Str::limit($news->short_description, 150) }}
                         </p>
-                        <a href="" class="text-indigo-600">{{ __('Read more') }}</a>
+                        <a href="" class="text-amber-100">{{ __('Read more') }}</a>
                     </div>
                 </div>
             @endforeach

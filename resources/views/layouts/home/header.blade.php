@@ -6,29 +6,29 @@
                     <div>
                         <img src="{{ url('storage/images/k8_logo.png') }}" alt="K8 Airdrop Promo Giveaways" class="w-48" loading="lazy">
                     </div>
-    
+
                     <div class="hidden lg:block">
                         <ul class="flex justify-center items-center gap-10 font-semibold text-slate-200 cursor-pointer">
-                            <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('/') ? 'text-indigo-600' : '' }}">
+                            <li class="py-8 text-center hover:text-amber-100 duration-300 ease-in-out {{ request()->is('/') ? 'text-amber-100' : '' }}">
                                 <a wire:navigate href="{{ route('home.index') }}">{{ __('Home') }}</a>
                             </li>
-                            <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('promos*') ? 'text-indigo-600' : '' }}">
+                            <li class="py-8 text-center hover:text-amber-100 duration-300 ease-in-out {{ request()->is('promos*') ? 'text-amber-100' : '' }}">
                                 <a wire:navigate href="{{ route('index.promos') }}">{{ __('Promos') }}</a>
                             </li>
-                            <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('news') || request()->is('news/category/sports*') || request()->is('news/category/crypto*') || request()->is('news/category/k8-news*') || request()->is('news/category/casino*') || request()->is('news/category/featured-games*') || request()->is('news/category/slot-providers*') || request()->is('news/category/others*') ? 'text-indigo-600' : '' }}">
+                            <li class="py-8 text-center hover:text-amber-100 duration-300 ease-in-out {{ request()->is('news') || request()->is('news/category/sports*') || request()->is('news/category/crypto*') || request()->is('news/category/k8-news*') || request()->is('news/category/casino*') || request()->is('news/category/featured-games*') || request()->is('news/category/slot-providers*') || request()->is('news/category/others*') ? 'text-amber-100' : '' }}">
                                 <a wire:navigate href="{{ route('news.index') }}">{{ __('News') }}</a>
                             </li>
-                            <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('media') ? 'text-indigo-600' : '' }}">
+                            <li class="py-8 text-center hover:text-amber-100 duration-300 ease-in-out {{ request()->is('media') ? 'text-amber-100' : '' }}">
                                 <a wire:navigate href="{{ route('index.media') }}">{{ __('Media') }}</a>
                             </li>
-                            <li class="py-8 text-center hover:text-indigo-600 duration-300 ease-in-out {{ request()->is('news/category/how-to-guides*') ? 'text-indigo-600' : '' }}">
+                            <li class="py-8 text-center hover:text-amber-100 duration-300 ease-in-out {{ request()->is('news/category/how-to-guides*') ? 'text-amber-100' : '' }}">
                                 <a wire:navigate href="{{ url('news/category/how-to-guides') }}">{{ __('Guides') }}</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-    
+
             <div>
                 <div class="flex justify-end space-x-3">
                     @if(auth()->user())
@@ -37,7 +37,7 @@
                                 <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
                             </svg>
                         </a>
-                       
+
                         <button class="lg:hidden block cursor-pointer" id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" aria-hidden="true" fill="none" viewBox="0 0 10 6">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-slate-500 w-10 h-10">
                                 <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
@@ -88,10 +88,10 @@
                                 </li>
                             </ul>
                         </div>
-                        
+
                     @else
                         <div class="flex">
-                            <x-href href="{{ route('user.login') }}" class="!bg-transparent !border-0 !font-semibold">{{ __('Sign in') }}</x-href>
+                            <x-href href="{{ route('user.login') }}" class="!bg-transparent !text-slate-100 hover:!text-amber-100 !border-0 !font-semibold">{{ __('Sign in') }}</x-href>
                             <x-href href="{{ route('user.register') }}" class="!font-semibold">{{ __('Sign up') }}</x-href>
                         </div>
                     @endif
@@ -113,7 +113,7 @@
                 <div class="flex flex-row gap-8">
                     @foreach ($newsSubCategories as $newsSubCategory)
                         <div>
-                            <a href="{{ route('news.sub.category.index', $newsSubCategory->slug) }}" class="hover:text-indigo-600 duration-300 ease-in-out font-semibold py-2 {{ (request()->segment(4) == $newsSubCategory->slug) ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-slate-200' }}" >{{ $newsSubCategory->title }}</a>
+                            <a href="{{ route('news.sub.category.index', $newsSubCategory->slug) }}" class="hover:text-amber-100 duration-300 ease-in-out font-semibold py-2 {{ (request()->segment(4) == $newsSubCategory->slug) ? 'text-amber-100 border-b-2 border-indigo-600' : 'text-slate-200' }}" >{{ $newsSubCategory->title }}</a>
                         </div>
                     @endforeach
                 </div>
@@ -126,7 +126,7 @@
             @livewire('home.index-search')
         </div>
     </div>
-    
+
 
 
     {{-- mobile menu --}}
@@ -137,12 +137,12 @@
                 <div class="flex justify-center">
                     <ul class="text-center flex flex-col items-center gap-2">
                         <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 {{ request()->is('/') ? 'text-indigo-600 ' : 'text-slate-200 '}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 {{ request()->is('/') ? 'text-amber-100 ' : 'text-slate-200 '}}">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                               </svg>
                         </li>
                         <li>
-                            <p class="{{ request()->is('/') ? 'text-indigo-600 ' : 'text-slate-200 '}} font-medium">{{ __('Home') }}</p>
+                            <p class="{{ request()->is('/') ? 'text-amber-100 ' : 'text-slate-200 '}} font-medium">{{ __('Home') }}</p>
                         </li>
                     </ul>
                </div>
@@ -152,12 +152,12 @@
                 <div class="flex justify-center">
                     <ul class="text-center flex flex-col items-center gap-2">
                         <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 {{ request()->is('promos') ? 'text-indigo-600 ' : 'text-slate-200 '}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 {{ request()->is('promos') ? 'text-amber-100 ' : 'text-slate-200 '}}">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
                               </svg>
                         </li>
                         <li>
-                            <p class="{{ request()->is('promos*') ? 'text-indigo-600 ' : 'text-slate-200 '}} font-medium">{{ __('Promos') }}</p>
+                            <p class="{{ request()->is('promos*') ? 'text-amber-100 ' : 'text-slate-200 '}} font-medium">{{ __('Promos') }}</p>
                         </li>
                     </ul>
                </div>
@@ -167,12 +167,12 @@
                 <div class="flex justify-center">
                     <ul class="text-center flex flex-col items-center gap-2">
                         <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 {{ request()->is('news*') ? 'text-indigo-600 ' : 'text-slate-200 '}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 {{ request()->is('news*') ? 'text-amber-100 ' : 'text-slate-200 '}}">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
                               </svg>
                         </li>
                         <li>
-                            <p class="{{ request()->is('news*') ? 'text-indigo-600 ' : 'text-slate-200 '}} font-medium">{{ __('News') }}</p>                        
+                            <p class="{{ request()->is('news*') ? 'text-amber-100 ' : 'text-slate-200 '}} font-medium">{{ __('News') }}</p>
                         </li>
                     </ul>
                </div>
@@ -182,13 +182,13 @@
                 <div class="flex justify-center">
                     <ul class="text-center flex flex-col items-center gap-2">
                         <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 {{ request()->is('media*') ? 'text-indigo-600 ' : 'text-slate-200 '}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 {{ request()->is('media*') ? 'text-amber-100 ' : 'text-slate-200 '}}">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
                               </svg>
                         </li>
                         <li>
-                            <p class="{{ request()->is('media*') ? 'text-indigo-600 ' : 'text-slate-200 '}} font-medium">{{ __('Media') }}</p>                         
+                            <p class="{{ request()->is('media*') ? 'text-amber-100 ' : 'text-slate-200 '}} font-medium">{{ __('Media') }}</p>
                         </li>
                     </ul>
                </div>

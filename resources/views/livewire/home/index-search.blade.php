@@ -1,11 +1,11 @@
 <div>
     <div class="flex relative">
         <div class="relative !w-full">
-            <x-input-text wire:model.live.debounce.100ms="globalSearch" placeholder="{{ __('Search here') }}.." class="!text-slate-200 bg-slate-700/[.50] !border-slate-800 focus:!ring-indigo-600 placeholder-slate-600 font-semibold"></x-input-text>
+            <x-input-text wire:model.live.debounce.100ms="globalSearch" placeholder="{{ __('Search here') }}.." class="!text-slate-200 bg-slate-700/[.50] !border-slate-800 focus:!ring-amber-100 placeholder-slate-600 font-semibold"></x-input-text>
             @if(strlen($globalSearch) >= 2)
                 <svg wire:click="resetSearch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6 text-slate-50 absolute right-0 top-0 mt-2 me-2">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z" clip-rule="evenodd" />
-                </svg>              
+                </svg>
             @else
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-slate-600 absolute right-0 top-0 mt-2 me-2">
                     <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />

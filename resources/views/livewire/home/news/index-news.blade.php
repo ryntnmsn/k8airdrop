@@ -66,7 +66,7 @@
                     </div>
                 </div>
             @endforeach
-            
+
         </div>
     </div>
 
@@ -93,7 +93,7 @@
                         </div>
                         <div>
                             <span class="text-sm text-slate-500">
-                                @if(app()->getLocale() == 'jp') 
+                                @if(app()->getLocale() == 'jp')
                                     {{ Carbon\Carbon::parse($news->updated_at->locale('ja-JP'))->diffForHumans() }}
                                 @else
                                     {{ Carbon\Carbon::parse($news->updated_at)->diffForHumans() }}
@@ -105,7 +105,7 @@
                     <p class="text-slate-400">
                         {{ Str::limit($news->short_description, 150) }}
                     </p>
-                    <a href="" class="text-indigo-600">{{ __('Read more') }}</a>
+                    <a href="" class="text-amber-100">{{ __('Read more') }}</a>
                 </div>
             </div>
             @endforeach
