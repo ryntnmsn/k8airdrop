@@ -1,6 +1,7 @@
 <div>
     {{-- Hero Banners --}}
 
+
     <div class="flex">
         <div class="w-full md:w-[72%]">
             <div wire:ignore id="banner" class="glide rounded-2xl overflow-hidden">

@@ -56,7 +56,6 @@
                                     <li><a class="text-slate-400 font-medium hover:text-amber-100 duration-300 ease" href="{{ route('enYoutube') }}" target="__blank">Youtube</a></li>
                                     <li><a wire:click="trackClick" class="text-slate-400 font-medium hover:text-amber-100 duration-300 ease" href="{{ route('enDiscord') }}" target="__blank">Discord</a></li>
                                     <li><a class="text-slate-400 font-medium hover:text-amber-100 duration-300 ease" href="{{ route('enTelegram') }}" target="__blank">Telegram</a></li>
-                                    <li><a class="text-slate-400 font-medium hover:text-amber-100 duration-300 ease" href="{{ route('enTiktok') }}" target="__blank">Tiktok</a></li>
                                 </ul>
                             @endif
                         </div>
