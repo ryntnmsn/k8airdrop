@@ -39,12 +39,11 @@ class IndexRegister extends Component
                 'password' => Hash::make($this->password),
             ]);
 
-
-            $this->redirectIntended(default: $this->coming_from, navigate: true);
-
             event(new Registered($user));
 
             Auth::login($user);
+
+            return redirect()->intended(default: $this->coming_from);
 
             // $this->redirectRoute('user.login');
 
