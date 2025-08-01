@@ -11,7 +11,7 @@ class TestGiveaways extends Component
 
     public function login() {
         Redirect::setIntendedUrl(url()->previous());
-        return view('auth.login');
+        return view('livewire.home.auth.index-login');
 
     }
 

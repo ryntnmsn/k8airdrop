@@ -15,7 +15,7 @@
 
                 <h1 class="text-slate-200 font-semibold text-2xl mb-10">{{ __('Please login to participate') }}.</h1>
                 <div class="flex space-x-5">
-                    <x-href wire.click="login" class="!float-none font-semibold">{{ __('Login here') }}</x-href>
+                    <x-href href="{{ route('user.login') }}" class="!float-none font-semibold">{{ __('Login here') }}</x-href>
                     <x-href href="{{ route('user.register') }}" class="border-2 !float-none font-semibold !bg-transparent !text-[#a38e5c] !border-[#a38e5c]">{{ __('Register here') }}</x-href>
                 </div>
             </div>
