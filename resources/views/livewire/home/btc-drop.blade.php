@@ -1,6 +1,6 @@
 @section('title') BTC Drop @stop
 @section('description') 【K8公式】仮想通貨アンケート｜総額$1,000相当のBTCがもらえる🎁 アンケートに答えてエアドロップコードをゲット！ @stop
-@section('image')  @stop
+@section('image') {{ url('storage/promo/1388x750_AirdropBonus.jpg') }} @stop
 
 <div>
     @if(auth()->user())
