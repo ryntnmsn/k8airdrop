@@ -1,3 +1,7 @@
+@section('title') BTC Drop @stop
+@section('description') 【K8公式】仮想通貨アンケート｜総額$1,000相当のBTCがもらえる🎁 アンケートに答えてエアドロップコードをゲット！ @stop
+@section('image')  @stop
+
 <div>
     @if(auth()->user())
         <div class="container-giveaways">
@@ -21,7 +25,5 @@
             </div>
         </div>
     @endif
-
-
 
 </div>
