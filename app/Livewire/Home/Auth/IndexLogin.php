@@ -37,7 +37,7 @@ class IndexLogin extends Component
                 Cookie::queue('password', '');
             }
 
-            return redirect()->intended();
+            return redirect()->intended("/user/dashboard");
 
         } else {
             session()->flash('error', 'Invalid credentials');
