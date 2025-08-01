@@ -237,6 +237,14 @@
 
 
 
+{{-- <script src="https://cdn.jsdelivr.net/npm/iframe-resizer/js/iframeResizer.min.js"></script>
+<script>
+  iFrameResize({
+    log: false,               // Enable if debugging
+    checkOrigin: false        // Required if cross-domain
+  }, '#my-iframe');
+</script> --}}
+
 
 </body>
 </html>

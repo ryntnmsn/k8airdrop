@@ -9,6 +9,7 @@ use Livewire\Component;
 class IndexLogin extends Component
 {
 
+    public $coming_from = null;
     public $k8_username, $password, $remember;
 
     protected $rules = [
@@ -27,8 +28,6 @@ class IndexLogin extends Component
         // dd($credentials);
         if(Auth::attempt($credentials)) {
 
-            session()->regenerate();
-
             if($this->remember == true) {
                 Cookie::queue('k8_username', $this->k8_username);
                 Cookie::queue('password', $this->password);
@@ -37,7 +36,7 @@ class IndexLogin extends Component
                 Cookie::queue('password', '');
             }
 
-            return redirect()->intended("/user/dashboard");
+            $this->redirectIntended(default: $this->coming_from, navigate: true);
 
         } else {
             session()->flash('error', 'Invalid credentials');
@@ -45,6 +44,9 @@ class IndexLogin extends Component
     }
 
     public function mount() {
+
+        $this->coming_from = url()->previous() ?: route('home', absolute: false);
+
         $this->k8_username = Cookie::get('k8_username');
         $this->password = Cookie::get('password');
         // dd($this->k8_username);

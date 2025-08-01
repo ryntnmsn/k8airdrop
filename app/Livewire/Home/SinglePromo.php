@@ -77,7 +77,7 @@ class SinglePromo extends Component
         }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function mount($slug) { 
+    public function mount($slug) {
         $lang = app()->getLocale();
         $promo = Promo::with('platforms')->where('slug', $slug)->first();
         $this->promo = $promo;
@@ -148,14 +148,14 @@ class SinglePromo extends Component
             $this->previous_record = $previousRecord->name;
         }
 
-        
+
         $userId = auth()->user()->id ?? '';
         $promoId = $this->promo_id;
         // $getPromoId = Participant::with('user')->where('promo_id', $promoId)
         //     ->whereHas('user', function ($query) use ($userId)  {
         //         return $query->where('id', $userId);
         //         })->value('promo_id');
-    
+
         $getPromoId = Participant::where('promo_id', $promoId)->where('user_id', $userId)->exists();
 
         //Check if user already joined promo
@@ -171,7 +171,7 @@ class SinglePromo extends Component
         //Get all paticipants of this promo
         // $promo = Promo::with('users')->where('id', $this->promo_id)->first();
         $this->participants = Participant::where('promo_id', $this->promo_id)->get();
-        
+
         views($promo)->record();
 
     }
@@ -189,7 +189,7 @@ class SinglePromo extends Component
         $userName = auth()->user()->name;
         $userEmail = auth()->user()->email;
         $user = User::where('id', $userID)->first();
-        
+
         $imageName = $this->userUploadImage->store('/', 'user');
         Participant::create([
             'user_id' => $userID,
@@ -200,11 +200,11 @@ class SinglePromo extends Component
             'image' => $imageName,
             'ip' => \Request::ip(),
         ]);
-        
+
         $user->promos()->attach($this->promo_id);
 
         $this->js('window.location.reload()');
-        
+
     }
 
 
@@ -223,7 +223,7 @@ class SinglePromo extends Component
             $validate_array = ['choices' => 'required', 'sns_id' => 'required'];
             if(count($questions) == 1 ) {
                 $validate_array = ['choices' => 'required','sns_id' => 'required'];
-            } else { 
+            } else {
                 for($x=0; $x<=1; $x++) {
                     $validate_array['choices.'. $x] = 'required';
                 }
@@ -237,12 +237,12 @@ class SinglePromo extends Component
         // dd($validate_array);
 
         $this->validate($validate_array);
-        
+
         $userID = auth()->user()->id;
         $userName = auth()->user()->name;
         $userEmail = auth()->user()->email;
         $user = User::where('id', $userID)->first();
-        
+
         $participant = Participant::create([
             'user_id' => auth()->user()->id,
             'promo_id' => $this->promo_id,
@@ -296,7 +296,7 @@ class SinglePromo extends Component
         $userEmail = auth()->user()->email;
 
         $user = User::where('id', $userID)->first();
-        
+
         Participant::create([
             'user_id' => auth()->user()->id,
             'promo_id' => $this->promo_id,

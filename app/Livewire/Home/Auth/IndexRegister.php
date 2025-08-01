@@ -3,6 +3,8 @@
 namespace App\Livewire\Home\Auth;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
@@ -10,6 +12,8 @@ class IndexRegister extends Component
 {
 
     public $name, $email, $k8_username, $password, $password_confirmation, $terms = true;
+
+    public $coming_from = null;
 
     protected $rules = [
         'name' => 'required|max:255',
@@ -25,24 +29,37 @@ class IndexRegister extends Component
 
     public function store() {
         $this->validate();
-        
+
         if($this->terms == true) {
-            User::create([
+            $user = User::create([
                 'name' => $this->name,
                 'email' => $this->email,
                 'k8_username' => $this->k8_username,
                 'role' => false,
                 'password' => Hash::make($this->password),
             ]);
-            
-            $this->reset();
-            $this->redirectRoute('user.login');
+
+
+            $this->redirectIntended(default: $this->coming_from, navigate: true);
+
+            event(new Registered($user));
+
+            Auth::login($user);
+
+            // $this->redirectRoute('user.login');
+
         } else {
             session()->flash('terms_message', 'Please confirm terms of service.');
         }
-     
+
     }
-    
+
+
+    public function mount() {
+        $this->coming_from = url()->previous() ?: route('home', absolute: false);
+    }
+
+
     public function render()
     {
         return view('livewire.home.auth.index-register')
