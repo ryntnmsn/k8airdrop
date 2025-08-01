@@ -57,7 +57,7 @@ use App\Livewire\Home\News\IndexNewsSubCategory;
 use App\Livewire\Home\News\IndexNewsTrending;
 use App\Livewire\Home\Promos\IndexPromos;
 use App\Livewire\Home\SinglePromo;
-use App\Livewire\Home\TestGiveaways;
+use App\Livewire\Home\BtcDrop;
 use App\Livewire\Home\Wheel\SpinWheel;
 use App\Livewire\Home\Wheel\SpinWheelDashboard;
 use App\Models\Subscription;
@@ -75,7 +75,7 @@ use Illuminate\Support\Facades\Session;
 
 
 //TestGiveaway
-Route::get('/testgiveaways', TestGiveaways::class)->name('testgiveaway');
+Route::get('/btcdrop', BtcDrop::class)->name('btcdrop');
 
 Route::get('/', IndexHome::class)->name('home.index');
 Route::get('/promo/{slug}', SinglePromo::class)->name('single.promo');

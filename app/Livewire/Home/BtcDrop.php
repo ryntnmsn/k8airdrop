@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Redirect;
 
 use Livewire\Component;
 
-class TestGiveaways extends Component
+class BtcDrop extends Component
 {
 
 
@@ -26,6 +26,6 @@ class TestGiveaways extends Component
     {
 
 
-        return view('livewire.home.test-giveaways',)->extends('layouts.home.app')->section('contents');
+        return view('livewire.home.btc-drop',)->extends('layouts.home.app')->section('contents');
     }
 }
