@@ -31,6 +31,8 @@
         }
     </script>
 
+
+
     <!-- Matomo -->
     <script>
         var _paq = window._paq = window._paq || [];
@@ -96,6 +98,11 @@
     </div>
 
     @livewireScripts
+
+
+
+
+
 
     <script>
         var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -227,6 +234,9 @@
         }
     });
 </script>
+
+
+
 
 </body>
 </html>

@@ -1,1 +1,1 @@
-<a {!! $attributes->merge(['class' => 'cursor-pointer border-2 border-amber-200 flex items-center space-x-1 bg-amber-100 text-slate-800 font-medium rounded-lg px-4 py-2 hover:bg-amber-100 float-right']) !!}>{{$slot}}</a>
+<a {!! $attributes->merge(['class' => 'cursor-pointer flex items-center space-x-1 bg-[#a38e5c] text-slate-100 font-medium rounded-full px-4 py-2 hover:bg-[#a38e5c] float-right']) !!}>{{$slot}}</a>

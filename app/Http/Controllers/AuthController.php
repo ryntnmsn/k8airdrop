@@ -13,13 +13,13 @@ class AuthController extends Controller
     }
 
     public function login(AuthUserRequest $request) {
-       
+
             if(auth()->attempt(\request()->only(['email', 'password']))) {
                 if(auth()->user()->role == '1') {
                     return redirect()->route('dashboard.index');
                 }
             }
-    
+
             return redirect()->back()->withErrors(['errorMsg' => 'Invalid credentials']);
     }
 

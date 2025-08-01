@@ -51,7 +51,7 @@
                         <div class="mt-2">
                             <label for="" class="text-sm ">
                                 <span class="text-slate-500">{{ __("Don't have a K8 account? Register now or use code") }}</span>
-                                <span><a href="https://playk8.io?invite=K8airdrops" class="text-amber-100">K8airdrops</a></span>
+                                <span><a href="https://playk8.io?invite=K8airdrops" class="text-[#a38e5c]">K8airdrops</a></span>
                                 <span class="text-slate-500">{{ __("for exclusive offers!") }}</span>
                             </label>
                         </div>
@@ -90,7 +90,7 @@
                     <div class="mb-8">
                         <div class="relative">
                             <div class="flex items-center space-x-4">
-                                <input wire:model="terms" checked id="checked-checkbox" type="checkbox" class="w-6 h-6 text-amber-100 bg-transparent border-2 border-amber-100 rounded-md focus:ring-amber-100 focus:ring-2">
+                                <input wire:model="terms" checked id="checked-checkbox" type="checkbox" class="w-6 h-6 text-[#a38e5c] bg-transparent border-2 border-amber-100 rounded-md focus:ring-amber-100 focus:ring-2">
                                 <label for="checked-checkbox" class="ms-2 text-sm font-medium text-slate-500">
                                     {{ __('I confirm that I am 18 years old and I have read the Terms of service') }}</a>.
                                 </label>
@@ -104,7 +104,7 @@
                     <div class="mb-8">
                         <div class="relative">
                             <p class="font-semibold text-slate-500">
-                                {{ __('Already have an account?') }} <a href="{{ route('user.login') }}" class="text-amber-100 hover:text-amber-100">{{ __('Login here') }}</a>.
+                                {{ __('Already have an account?') }} <a href="{{ route('user.login') }}" class="text-[#a38e5c] hover:text-[#a38e5c]">{{ __('Login here') }}</a>.
                             </p>
                         </div>
                     </div>

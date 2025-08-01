@@ -10,6 +10,18 @@ html, body {
     color:rgb(30 41 59);
     font-size:14px;
 }
+
+
+.container-giveaways {
+  width: 100%;
+}
+
+.responsive-iframe {
+   width: 100%;
+    height: 1850px;
+
+}
+
 .comments p {
   color:#f1f1f1!important
 }
@@ -388,4 +400,55 @@ body.swal2-height-auto {height: 100%!important;}
 .stb-item:hover {
     color: rgb(88 80 236);
     cursor: default;
+}
+
+
+@media only screen and (max-width: 560px) {
+    .responsive-iframe {
+        height:1910px!important;
+    }
+}
+
+@media only screen and (max-width: 542px) {
+    .responsive-iframe {
+        height:1980px!important;
+    }
+}
+
+
+@media only screen and (max-width: 482px) {
+    .responsive-iframe {
+        height:2050px!important;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    .responsive-iframe {
+        height:2100px!important;
+    }
+}
+
+
+@media only screen and (max-width: 450px) {
+    .responsive-iframe {
+        height:2150px!important;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .responsive-iframe {
+        height:2200px!important;
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    .responsive-iframe {
+        height:2250px!important;
+    }
+}
+
+@media only screen and (max-width: 365px) {
+    .responsive-iframe {
+        height:2300px!important;
+    }
 }

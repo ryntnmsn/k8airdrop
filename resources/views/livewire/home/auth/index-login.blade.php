@@ -45,7 +45,7 @@
                     <div class="mb-8">
                         <div class="relative">
                             <p class="font-semibold text-slate-500">
-                                {{ __('Dont have an account') }}? <a href="{{ route('user.register') }}" class="text-amber-100 hover:text-amber-100">{{ __('Register here') }}</a>.
+                                {{ __('Dont have an account') }}? <a href="{{ route('user.register') }}" class="text-[#a38e5c] hover:text-[#a38e5c]">{{ __('Register here') }}</a>.
                             </p>
                         </div>
                     </div>
@@ -55,13 +55,13 @@
                             <x-button type="submit" class="!float-none font-semibold px-12">{{ __('Sign in') }}</x-button>
                         </div>
                         <div>
-                            <input wire:model="remember" id="checked-checkbox" type="checkbox" class="w-6 h-6 text-amber-100 bg-transparent border-2 border-amber-100 rounded-md focus:ring-indigo-500 focus:ring-2">
+                            <input wire:model="remember" id="checked-checkbox" type="checkbox" class="w-6 h-6 text-[#a38e5c] bg-transparent border-2 border--[#a38e5c] rounded-md focus:ring-indigo-500 focus:ring-2">
                             <label for="checked-checkbox" class="ms-2 text-sm font-semibold text-slate-500">{{ __('Remember me') }}</label>
                         </div>
                     </div>
 
                     <div class="mb-8">
-                        <a href="{{ route('forgot.password') }}" class="text-amber-100 text-sm">{{ __('Forgot password') }}</a>
+                        <a href="{{ route('forgot.password') }}" class="text-[#a38e5c] text-sm">{{ __('Forgot password') }}</a>
                     </div>
 
                     <div>

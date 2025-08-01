@@ -16,7 +16,7 @@
                         <span class="text-green-200 font-semibold">{{ session('success') }}</span>
                     </div>
                 @endif
-                
+
                 <form wire:submit="updateUser">
                     <div class="flex flex-wrap gap-5 mb-10">
                         <div class="flex-1">
