@@ -29,14 +29,14 @@ class IndexNewsCategory extends Component
         $lang = app()->getLocale();
         $slug =  $this->slug;
 
-        $newsAll = Article::with('categories')->where('is_visible', '1')
+        $newsAll = Article::with('categories')->where('is_visible', '1')->orderBy('created_at', 'desc')
             ->whereHas('categories', function ($slugQuery) use ($slug) {
                 $slugQuery->where('slug', $slug);
             })
             ->whereHas('language', function ($langQuery) use ($lang) {
                 $langQuery->where('code', $lang);
             })->simplePaginate($this->pagination);
-        
+
         $subCategories = ArticleSubCategory::all();
 
         return view('livewire.home.news.index-news-category', [
